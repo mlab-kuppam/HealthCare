@@ -1,0 +1,968 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Health"
+    android:background="#FFFFFFFF">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ff91a8f9"
+        android:id="@+id/stud">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/health"
+            style="@style/sid"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="400dp"
+            android:text="1AXZ004"
+            style="@style/sid"
+            android:id="@+id/hlt_std_id"/>
+
+        <View
+            android:layout_marginTop="50dp"
+            style="@style/divider"></View>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/height"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/height"
+                    android:layout_marginLeft="350dp"
+                    android:textSize="20dp"
+                    android:hint="in cm"
+                    android:inputType="number"
+                    android:textStyle="italic"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/weight"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/weight"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="350dp"
+                    android:textSize="20dp"
+                    android:hint="in kg"
+                    android:inputType="number"
+                    android:textStyle="italic"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/waist"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/waist"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="350dp"
+                    android:textSize="20dp"
+                    android:hint="in cm"
+                    android:inputType="number"
+                    android:textStyle="italic"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/hip"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/hip"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="350dp"
+                    android:textSize="20dp"
+                    android:hint="in cm"
+                    android:inputType="number"
+                    android:textStyle="italic"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/pulse"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/pulse"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="350dp"
+                    android:textSize="20dp"
+                    android:hint="beats per minute"
+                    android:inputType="number"
+                    android:textStyle="italic"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/rrate"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/rrate"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="350dp"
+                    android:textSize="20dp"
+                    android:hint="breaths per minute"
+                    android:inputType="number"
+                    android:textStyle="italic"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/bp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/bp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="350dp"
+                    android:textSize="20dp"
+                    android:hint="mm Hg"
+                    android:inputType="number"
+                    android:textStyle="italic"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/persl"
+                    android:layout_marginTop="20dp"
+                    style="@style/head"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/nail"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/nail_trim"
+                        android:onClick="onRadioselect"
+                        android:text="Trimmed"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/nail_nottrim"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="42dp"
+                        android:text="Not Trimmed"/>
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/nail_text"
+                    android:layout_marginTop="10dp"
+                    android:inputType="text"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/bath"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/bath_reg"
+                        android:onClick="onRadioselect"
+                        android:text="Regular"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/bath_irr"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="50dp"
+                        android:text="Irregular"/>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/bath_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/groom"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/groom_good"
+                        android:onClick="onRadioselect"
+                        android:text="Good"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/groom_poor"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="64dp"
+                        android:text="Poor"/>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/groom_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/oral"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:onClick="onRadioselect"
+                        android:id="@+id/oral_good"
+                        android:text="Good"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:onClick="onRadioselect"
+                        android:id="@+id/oral_poor"
+                        android:layout_marginLeft="64dp"
+                        android:text="Poor"
+                        android:checked="false" />
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/oral_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/men"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/app"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="400dp"
+                    android:onClick="onCheckBoxclicked"
+                    android:text="Applicable"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notapp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="530dp"
+                    android:onClick="onCheckBoxclicked"
+                    android:text="Not Applicable"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/sanitary"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/san"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/san_yes"
+                        android:onClick="onRadioselect"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/san_no"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/san_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/Sys"
+                    android:layout_marginTop="30dp"
+                    style="@style/sid"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/anaemia"
+                    android:layout_marginTop="20dp"
+                    style="@style/head"/>
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:id="@+id/anaemia_drop"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="350dp"
+                    android:spinnerMode="dropdown">
+                </Spinner>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/oralexam"
+                    android:layout_marginTop="10dp"
+                    style="@style/head"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/dental"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/dental_yes"
+                        android:onClick="onRadioselect"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/dental_no"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/dental_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/fluoro"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/fluoro_yes"
+                        android:onClick="onRadioselect"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/fluoro_no"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/fluoro_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/gingi"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/gingi_yes"
+                        android:onClick="onRadioselect"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/gingi_no"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/gingi_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/oralulcer"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/oralul_yes"
+                        android:onClick="onRadioselect"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/oralul_no"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/oralul_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/add"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/sys_text"
+                    android:layout_marginTop="10dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/Resp"
+                    android:layout_marginTop="20dp"
+                    style="@style/head"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/ho"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/lung"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/lung_yes"
+                        android:onClick="onRadioselect"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/lung_no"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/lung_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/add"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/resp_text"
+                    android:layout_marginTop="10dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/cardio"
+                    android:layout_marginTop="20dp"
+                    style="@style/head"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/heart"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/heart_yes"
+                        android:onClick="onRadioselect"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/heart_no"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/heart_text"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

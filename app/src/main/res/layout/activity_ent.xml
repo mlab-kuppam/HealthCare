@@ -1,0 +1,934 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin">
+    android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff91a8f9"
+        android:id="@+id/stud">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/health"
+            style="@style/sid"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="400dp"
+            style="@style/sid"
+            android:id="@+id/ent_std_id"/>
+
+        <View
+            android:layout_marginTop="55dp"
+            style="@style/divider"></View>
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="55dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/oti"
+                    style="@style/h1"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/left"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/oti_left_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/oti_left_no"
+                        android:onClick="earClick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/oti_left_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+                <View
+                    style="@style/Delimiter"
+                    android:layout_marginLeft="365dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="530dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/right"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="420dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/oti_right_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/oti_right_no"
+                        android:layout_width="wrap_content"
+                        android:onClick="earClick"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/oti_right_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="430dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/asom"
+                    style="@style/h1"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/left"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/asom_left_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/asom_left_no"
+                        android:onClick="earClick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/asom_left_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+                <View
+                    style="@style/Delimiter"
+                    android:layout_marginLeft="365dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="530dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/right"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="420dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/asom_right_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/asom_right_no"
+                        android:layout_width="wrap_content"
+                        android:onClick="earClick"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/asom_right_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="430dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/csom"
+                    style="@style/h1"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/left"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/csom_left_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/csom_left_no"
+                        android:onClick="earClick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/csom_left_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+                <View
+                    style="@style/Delimiter"
+                    android:layout_marginLeft="365dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="530dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/right"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="420dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/csom_right_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/csom_right_no"
+                        android:layout_width="wrap_content"
+                        android:onClick="earClick"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/csom_right_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="430dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/impact"
+                    style="@style/h1"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/left"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/impact_left_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/impact_left_no"
+                        android:onClick="earClick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/impact_left_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+                <View
+                    style="@style/Delimiter"
+                    android:layout_marginLeft="365dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="530dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/right"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="420dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/impact_right_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/impact_right_no"
+                        android:layout_width="wrap_content"
+                        android:onClick="earClick"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/impact_right_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="430dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/impair"
+                    style="@style/h1"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/left"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/impair_left_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/impair_left_no"
+                        android:onClick="earClick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/impair_left_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+                <View
+                    style="@style/Delimiter"
+                    android:layout_marginLeft="365dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="530dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/right"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp" />
+
+                <RadioGroup
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="420dp"
+                    android:layout_marginTop="40dp"
+                    android:onClick="earClick"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/impair_right_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:layout_weight="1"
+                        android:onClick="earClick"
+                        android:text="Yes"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/impair_right_no"
+                        android:layout_width="wrap_content"
+                        android:onClick="earClick"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/impair_right_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="430dp"
+                    android:layout_marginTop="70dp"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/epi"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="460dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/epi_yes"
+                        android:onClick="earClick"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/epi_no"
+                        android:onClick="earClick"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="280dp"
+                    android:id="@+id/epi_text"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/adeno"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="460dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/adeno_yes"
+                        android:onClick="earClick"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/adeno_no"
+                        android:onClick="earClick"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="280dp"
+                    android:id="@+id/adeno_text"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/phary"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="460dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/phary_yes"
+                        android:onClick="earClick"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/phary_no"
+                        android:onClick="earClick"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="280dp"
+                    android:id="@+id/phary_text"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/aller"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="460dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/aller_yes"
+                        android:onClick="earClick"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/aller_no"
+                        android:onClick="earClick"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="280dp"
+                    android:id="@+id/aller_text"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/speech"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="460dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/speech_yes"
+                        android:onClick="earClick"
+                        android:text="Yes"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:id="@+id/speech_no"
+                        android:onClick="earClick"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"/>
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="280dp"
+                    android:id="@+id/speech_text"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="10dp"
+                style="@style/Differentiator"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/add"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter comment"
+                    android:id="@+id/add_text"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

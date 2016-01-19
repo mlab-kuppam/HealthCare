@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.mlab.pes.healthcare.UpdateActivity">
+
+    <Button
+        android:id="@+id/health"
+        style="@style/buttonstyle"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="80dp"
+        android:drawableLeft="@drawable/ic_add_box_black_36dp"
+        android:onClick="CHANGE"
+        android:text="Health"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/eye"
+        style="@style/buttonstyle"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/health"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:drawableLeft="@drawable/ic_remove_red_eye_black_36dp"
+        android:onClick="CHANGE"
+        android:text="EYE"/>
+
+    <Button
+        android:id="@+id/ent"
+        style="@style/buttonstyle"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/eye"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:drawableLeft="@drawable/ic_hearing_black_36dp"
+        android:onClick="CHANGE"
+        android:text="ENT"/>
+
+    <Button
+        android:id="@+id/skin"
+        style="@style/buttonstyle"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/ent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:drawableLeft="@drawable/ic_person_outline_black_36dp"
+        android:onClick="CHANGE"
+        android:text="SKIN" />
+
+</RelativeLayout>

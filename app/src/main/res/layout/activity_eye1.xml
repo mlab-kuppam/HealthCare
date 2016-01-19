@@ -1,0 +1,735 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.amogh.geospatialmapping.eye"
+    android:background="#ffffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff91a8f9"
+        android:id="@+id/stud">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/health"
+            style="@style/sid"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="400dp"
+            style="@style/sid"
+            android:id="@+id/skin_std_id"/>
+
+        <View
+            android:layout_marginTop="55dp"
+            style="@style/divider"></View>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="55dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Vision Testing"
+                    style="@style/h1"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="270dp"
+                    android:text="@string/right"
+                    style="@style/h1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="565dp"
+                    android:text="@string/left"
+                    style="@style/h1"/>
+
+            </RelativeLayout>
+
+            <View
+                style="@style/Divider"
+                android:layout_marginTop="16dp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View style="@style/Separator" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Distance"
+                    style="@style/h1" />
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="160dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="205dp"
+                    android:layout_marginTop="15dp"
+                    android:text="6"
+                    android:textSize="60dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="275dp"
+                    android:layout_marginTop="15dp"
+                    android:text="/"
+                    android:textSize="60dp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numb_dist_right"
+                    android:visibility="gone">
+
+                    <NumberPicker
+                        android:id="@+id/numberPicker1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_marginLeft="325dp"
+                        android:clickable="true"
+                        android:onClick="Num_Click"/>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/six_dist_right"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="335dp"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/text_dist_right"
+                        android:text="6"
+                        android:clickable="true"
+                        android:onClick="Switch_layout"
+                        android:textSize="60dp"
+                        style="@style/h4"
+                        android:autoText="true" />
+
+                </RelativeLayout>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="430dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="495dp"
+                    android:layout_marginTop="15dp"
+                    android:text="6"
+                    android:textSize="60dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="570dp"
+                    android:layout_marginTop="15dp"
+                    android:text="/"
+                    android:textSize="60dp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numb_dist_left"
+                    android:visibility="gone">
+
+                    <NumberPicker
+                        android:id="@+id/numberPicker2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_marginLeft="625dp"
+                        android:clickable="true"
+                        android:onClick="Num_Click" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/six_dist_left"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="635dp"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/text_dist_left"
+                        android:text="6"
+                        android:clickable="true"
+                        android:onClick="Switch_layout"
+                        android:textSize="60dp"
+                        style="@style/h4"
+                        android:autoText="true" />
+
+                </RelativeLayout>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="734dp" />
+
+            </RelativeLayout>
+
+            <View style="@style/Divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View style="@style/Separator" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Near"
+                    style="@style/h1"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="160dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="205dp"
+                    android:layout_marginTop="15dp"
+                    android:text="6"
+                    android:textSize="60dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="275dp"
+                    android:layout_marginTop="15dp"
+                    android:text="/"
+                    android:textSize="60dp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numb_near_right"
+                    android:visibility="gone">
+
+                    <NumberPicker
+                        android:id="@+id/numberPicker3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_marginLeft="325dp"
+                        android:clickable="true"
+                        android:onClick="Num_Click"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/six_near_right"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="335dp"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/text_near_right"
+                        android:text="6"
+                        android:clickable="true"
+                        android:onClick="Switch_layout"
+                        android:textSize="60dp"
+                        style="@style/h4"
+                        android:autoText="true" />
+
+                </RelativeLayout>
+
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="430dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="495dp"
+                    android:layout_marginTop="15dp"
+                    android:text="6"
+                    android:textSize="60dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="570dp"
+                    android:layout_marginTop="15dp"
+                    android:text="/"
+                    android:textSize="60dp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numb_near_left"
+                    android:visibility="gone">
+
+                    <NumberPicker
+                        android:id="@+id/numberPicker4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_marginLeft="625dp"
+                        android:clickable="true"
+                        android:onClick="Num_Click"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/six_near_left"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="635dp"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/text_near_left"
+                        android:text="6"
+                        android:clickable="true"
+                        android:onClick="Switch_layout"
+                        android:textSize="60dp"
+                        style="@style/h4"
+                        android:autoText="true" />
+
+                </RelativeLayout>
+
+
+
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="734dp" />
+
+            </RelativeLayout>
+
+
+            <View style="@style/Divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/refract"
+                    style="@style/h1"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="270dp"
+                    android:text="@string/right"
+                    style="@style/h1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="565dp"
+                    android:text="@string/left"
+                    style="@style/h1"/>
+
+            </RelativeLayout>
+
+            <View
+                style="@style/Divider"
+                android:layout_marginTop="16dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View style="@style/nexto" />
+
+                <View
+                    style="@style/nexto"
+                    android:layout_marginLeft="120dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/spherical"
+                    style="@style/h1" />
+
+                <View
+                    style="@style/nexto"
+                    android:layout_marginLeft="230dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="245dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/cylinder"
+                    style="@style/h1" />
+
+                <View
+                    style="@style/nexto"
+                    android:layout_marginLeft="340dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="360dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/axis"
+                    style="@style/h1" />
+
+                <View
+                    style="@style/nexto"
+                    android:layout_marginLeft="425dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="435dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/spherical"
+                    style="@style/h1" />
+
+                <View
+                    style="@style/nexto"
+                    android:layout_marginLeft="540dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="555dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/cylinder"
+                    style="@style/h1" />
+
+                <View
+                    style="@style/nexto"
+                    android:layout_marginLeft="650dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="670dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/axis"
+                    style="@style/h1" />
+
+                <View
+                    style="@style/nexto"
+                    android:layout_marginLeft="733dp" />
+
+
+            </RelativeLayout>
+
+            <View style="@style/Divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View style="@style/Separator" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Distance"
+                    style="@style/h1" />
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="120dp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="120dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/dist_plus"
+                        android:onClick="onRadioselect"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:text="+"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/dist_minus"
+                        android:onClick="onRadioselect"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:textStyle="bold"
+                        android:text="-"/>
+
+                </RadioGroup>
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="135dp"
+                    android:id="@+id/t1"
+                    android:layout_marginTop="60dp"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="230dp" />
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="245dp"
+                    android:id="@+id/t2"
+                    android:layout_marginTop="60dp"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="340dp" />
+
+                <EditText
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="352dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t3"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="425dp" />
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="445dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t4"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="540dp" />
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="555dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t5"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="650dp" />
+
+                <EditText
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="662dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t6"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="733dp" />
+
+            </RelativeLayout>
+
+            <View style="@style/Divider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View style="@style/Separator" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Near"
+                    style="@style/h1" />
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="120dp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="120dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/near_plus"
+                        android:onClick="onRadioselect"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:text="+"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/near_minus"
+                        android:onClick="onRadioselect"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:textStyle="bold"
+                        android:text="-"/>
+
+                </RadioGroup>
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="135dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t7"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="230dp" />
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="245dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t8"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="340dp" />
+
+                <EditText
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="352dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t9"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="425dp" />
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="445dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t10"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="540dp" />
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="555dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t11"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="650dp" />
+
+                <EditText
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="662dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/t12"
+                    android:inputType="numberDecimal"/>
+
+                <View
+                    style="@style/Separator"
+                    android:layout_marginLeft="733dp" />
+
+            </RelativeLayout>
+
+            <View style="@style/Divider" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

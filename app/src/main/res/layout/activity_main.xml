@@ -9,8 +9,42 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.mlab.pes.healthcare.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/add"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:drawableLeft="@drawable/ic_school_black_36dp"
+        android:onClick="ADD"
+        android:text="ADD"/>
+
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/update"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/add"
+        android:layout_alignStart="@+id/add"
+        android:layout_below="@+id/add"
+        android:layout_marginTop="50dp"
+        android:drawableLeft="@drawable/ic_system_update_alt_black_36dp"
+        android:onClick="UPDATE"
+        android:text="UPDATE"/>
+
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/sync"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/update"
+        android:layout_alignStart="@+id/update"
+        android:layout_below="@+id/update"
+        android:layout_marginTop="50dp"
+        android:drawableLeft="@drawable/ic_sync_black_36dp"
+        android:onClick="SYNC"
+        android:text="SYNC"/>
 </RelativeLayout>

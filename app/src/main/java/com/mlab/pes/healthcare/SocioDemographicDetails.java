@@ -21,15 +21,15 @@ import android.widget.TextView;
 public class SocioDemographicDetails extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
 
-    Spinner typeOfFamily,socioEconomicClass,typeOfHouse,flooring,waterSupply,garbageDisposal;
+    Spinner typeOfFamily,socioEconomicClass,typeOfHouse,flooring,waterSupply,garbageDisposal,overNight;
 
-    int familyType,socioEconomic,TypeOfHouse,Flooring,WaterSupply,GarbageDisposal;
+    int familyType,socioEconomic,TypeOfHouse,Flooring,WaterSupply,GarbageDisposal,OverNight;
 
     EditText address,landline,mobile,numberOfFamilyMembers,titleHOF,aadharHOF,educationHOF,occupationHOF,
-            educationFather,occupationFather,educationMother,occupationMother,totalIncome,numberOfRooms,numberOfHouseholds;
+            educationFather,occupationFather,educationMother,occupationMother,totalIncome,numberOfRooms,numberOfHouseholds,frequency;
 
     int overcrowding=2,separateRooms=2,crossVentilation=2,adequateLighting=2,kitchenWithSink=2,
-            hygenicSurroundings=2,sanitaryLatrine=2,cattleShed=2;
+            hygenicSurroundings=2,sanitaryLatrine=2,cattleShed=2,bothParents=2;
 
 
 
@@ -61,8 +61,9 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                     "  water INTEGER[1] ," +
                     "  hygenic_surroundings INTEGER[1] ," +
                     "  sanitary_latrine INTEGER[1] ," +
-                    "  garbage_disposal INTEGER[1] ";
-
+                    "  frequency INTEGER[1] ," +
+                    "  over_night_food INTEGER[1] ," +
+                    "  both_parents INTEGER[1] ";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +86,8 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         educationMother=(EditText) findViewById(R.id.motherEducation);
         occupationMother=(EditText) findViewById(R.id.motherOccupation);
         totalIncome=(EditText) findViewById(R.id.totalIncome);
-        numberOfRooms=(EditText) findViewById(R.id.numberOfRooms);
-        numberOfHouseholds=(EditText) findViewById(R.id.numberofHouselholds);
+        frequency=(EditText) findViewById(R.id.freq);
+
 
 
         typeOfFamily = (Spinner) findViewById(R.id.typeOfFamily);
@@ -124,6 +125,12 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         garbageDisposal.setAdapter(adapter);
         garbageDisposal.setOnItemSelectedListener(this);
+
+        overNight = (Spinner) findViewById(R.id.overNightFood);
+        adapter = ArrayAdapter.createFromResource(this, R.array.overNight, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        garbageDisposal.setAdapter(adapter);
+        garbageDisposal.setOnItemSelectedListener(this);
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //opening db
@@ -153,6 +160,9 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         else if (parent == garbageDisposal){
             GarbageDisposal=position -1;
         }
+        else if (parent == overNight){
+            OverNight=position -1;
+        }
 
     }
 
@@ -178,13 +188,6 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                 break;
             case R.id.overcrowdingNo :
                 overcrowding=0;
-                break;
-            //Separate Rooms
-            case R.id.separateYes :
-                separateRooms=1;
-                break;
-            case R.id.separateNo :
-                separateRooms=0;
                 break;
             //cross Ventilation
             case R.id.crossVentilationYes :
@@ -221,12 +224,12 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
             case R.id.sanitaryLatrinesNo :
                 sanitaryLatrine=0;
                 break;
-            //cattle shed
-            case R.id.cattleShedYes :
-                cattleShed=1;
+            //both parents
+            case R.id.bothParentsYes :
+                bothParents=1;
                 break;
-            case R.id.cattleShedNo :
-                cattleShed=0;
+            case R.id.bothParentsNo :
+                bothParents=0;
                 break;
         }
     }
@@ -371,6 +374,45 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         }else if (socioEconomic == -1) {
             showMessage("Error", "Please Select the Socio-Economic Class");
             return;
+        }else if (TypeOfHouse == -1) {
+            showMessage("Error", "Please Select the Type of House in Housing Standards");
+            return;
+        }else if (Flooring == -1) {
+            showMessage("Error", "Please Select the Type of Flooring in Housing Standards");
+            return;
+        }else if (overcrowding == 2) {
+            showMessage("Error", "Please Select an Option for Overcrowding in Housing Standards");
+            return;
+        }else if (crossVentilation == 2) {
+            showMessage("Error", "Please Select an Option for Cross Ventilation in Housing Standards");
+            return;
+        }else if ( adequateLighting  == 2) {
+            showMessage("Error", "Please Select an Option for Adequate Lighting in Housing Standards");
+            return;
+        }else if (kitchenWithSink ==2) {
+            showMessage("Error", "Please Select an Option for Kitchen with Sink in Housing Standards");
+            return;
+        }else if (WaterSupply == -1) {
+            showMessage("Error", "Please Select the Source of Water Supply in Housing Standards");
+            return;
+        }else if (hygenicSurroundings == 2) {
+            showMessage("Error", "Please Select an Option for Hygenic Surroundings in Housing Standards");
+            return;
+        }else if (sanitaryLatrine == 2) {
+            showMessage("Error", "Please Select an Option for Sanitary Latrine in Housing Standards");
+            return;
+        }else if (GarbageDisposal == -1) {
+            showMessage("Error", "Please Select an Option for Garbage Disposal in Housing Standards");
+            return;
+        }else if (frequency.getText().toString().trim().length()==0) {
+            showMessage("Error", "Please Enter Frequency of Skipping Breakfast/week in Dietary Pattern");
+            return;
+        }else if (OverNight == -1) {
+            showMessage("Error", "Please Select an Option for Children Havng Over-Night Food in the mornings in Dietary Pattern");
+            return;
+        }else if (bothParents == 2) {
+            showMessage("Error", "Please Select an Option for Both Parents Working in Dietary Pattern");
+            return;
         }
         else {
             //If the required fields are filled then the DB is updated
@@ -414,7 +456,9 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                         "'" + hygenicSurroundings + "'," +
                         "'" + sanitaryLatrine + "'," +
                         "'" + GarbageDisposal + "'," +
-                        "'" + cattleShed + "'";
+                        "'" + frequency.getText().toString().trim() + "',"+
+                        "'" + OverNight + "',"+
+                        "'" + bothParents + "'";
 
                 //inserting into database
                 database.execSQL("INSERT INTO socio_demographic VALUES (" + insert_query + ")");

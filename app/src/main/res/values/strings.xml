@@ -199,6 +199,8 @@
     <string name="frequencyOfSkipping">Frequency of Skipping the Breakfast/week : </string>
     <string name="OverNightFood">Children Having Over-Night Food in the Mornings : </string>
     <string name="bothParents">Both Parents Working : </string>
+    <string name="frequencyHint">Enter Frequency</string>
+
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string-array name="typeOfHouse_array">
@@ -231,6 +233,13 @@
         <item>B</item>
         <item>C</item>
     </string-array>
+    <string-array name="overNight">
+        <item>Select..</item>
+        <item>Never</item>
+        <item>Occasional</item>
+        <item>Frequent</item>
+    </string-array>
+
 
     <string name="numberOfRoomsHint">Enter Number of Rooms</string>
     <string name="numberOfHouseholdHint">Enter Number of Households</string>

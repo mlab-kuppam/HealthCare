@@ -194,7 +194,11 @@
     <string name="hygenicSurroundings">Hygenic Surroundings : </string>
     <string name="sanitaryLatrine">Sanitary Latrine : </string>
     <string name="garbageDisposal">Garbage Disposal : </string>
-    <string name="cattleShed">Cattle Shed at Safe Distance : </string>
+    <string name="healthCareServices">Availing Near-By Health Care Services : </string>
+    <string name="dietaryPattern">Dietary Pattern : </string>
+    <string name="frequencyOfSkipping">Frequency of Skipping the Breakfast/week : </string>
+    <string name="OverNightFood">Children Having Over-Night Food in the Mornings : </string>
+    <string name="bothParents">Both Parents Working : </string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string-array name="typeOfHouse_array">
@@ -218,6 +222,14 @@
         <item>Select..</item>
         <item>Open Land</item>
         <item>Multiple Dust Bins</item>
+    </string-array>
+    <string-array name="academicPerf">
+        <item>Select..</item>
+        <item>A+</item>
+        <item>A</item>
+        <item>B+</item>
+        <item>B</item>
+        <item>C</item>
     </string-array>
 
     <string name="numberOfRoomsHint">Enter Number of Rooms</string>

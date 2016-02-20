@@ -428,6 +428,8 @@ public class ENTActivity extends ActionBarActivity {
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView);
         final EditText studentID = (EditText) dialogView.findViewById(R.id.studid);
+        studentID.setText(UpdateActivity.schoolId);
+        studentID.setSelection(8);
         //Validating Student ID
         UpdateActivity.StudentIDValidation(dialogView);
 

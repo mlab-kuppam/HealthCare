@@ -38,8 +38,8 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
     String table_query=
             "  child_id VARCHAR[11] ," +
                     "  address VARCHAR[140] ," +
-                    "  landline INTEGER[11] ," +
-                    "  mobile INTEGER[10] ," +
+                    "  landline FLOAT[11] ," +
+                    "  mobile FLOAT[10] ," +
                     "  type INTEGER[1] ," +
                     "  number_members INTEGER[2] ," +
                     "  hf_title VARCHAR[20] ," +
@@ -54,18 +54,14 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                     "  socio_economic INTEGER[1] ," +
                     "  hs_type INTEGER[1] ," +
                     "  hs_flooring INTEGER[1] ," +
-                    "  r_number INTEGER[2] ," +
-                    "  r_households INTEGER[2] ," +
                     "  r_overcrowding INTEGER[1] ," +
-                    "  r_separate INTEGER[1] ," +
                     "  cross_ventilation INTEGER[1] ," +
                     "  lighting INTEGER[1] ," +
                     "  kitchen INTEGER[1] ," +
                     "  water INTEGER[1] ," +
                     "  hygenic_surroundings INTEGER[1] ," +
                     "  sanitary_latrine INTEGER[1] ," +
-                    "  garbage_disposal INTEGER[1] ," +
-                    "  cattle_shed INTEGER[1]";
+                    "  garbage_disposal INTEGER[1] ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -298,7 +294,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                 //If the required fields are filled then the DB is updated
                 //creating insertion query
                 String insert_query = "'" + StudentDetails.sid + "'," +
-                        "'" + StudentDetails.schoolID.getText().toString().trim() + "'," +
+                        "'" + StudentDetails.sid.substring(0,8) + "'," +
                         "'" + StudentDetails.name.getText().toString().trim() + "'," +
                         "'" + date + "'," +
                         "'" + g + "'," +
@@ -307,7 +303,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                         "'" + StudentDetails.mother_name.getText().toString().trim() + "'," +
                         "'" + StudentDetails.guardian_name.getText().toString().trim() + "'," +
                         "'" + Float.parseFloat(StudentDetails.attendance.getText().toString().trim()) + "'," +
-                        "'" + Float.parseFloat(StudentDetails.performance.getText().toString().trim()) + "'," +
+                        "'" + StudentDetails.acperf + "'," +
                         "'" + StudentDetails.aadhar.getText().toString().trim() + "'";
 
                 //inserting into database
@@ -381,7 +377,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
             //creating insertion query
 
             insert();
-
+/*
             int no_rooms=0;
             int no_households=0;
             if(isInteger(numberOfRooms.getText().toString().trim())){
@@ -390,7 +386,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
             if(isInteger(numberOfHouseholds.getText().toString().trim())){
                 no_households=Integer.parseInt(numberOfHouseholds.getText().toString().trim());
             }
-
+*/
             try {
                 String insert_query = "'" + StudentDetails.sid + "'," +
                         "'" + address.getText().toString().trim() + "'," +
@@ -410,10 +406,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                         "'" + socioEconomic + "'," +
                         "'" + TypeOfHouse + "'," +
                         "'" + Flooring + "'," +
-                        "'" + no_rooms + "'," +
-                        "'" + no_households+ "'," +
                         "'" + overcrowding + "'," +
-                        "'" + separateRooms + "'," +
                         "'" + crossVentilation + "'," +
                         "'" + adequateLighting + "'," +
                         "'" + kitchenWithSink + "'," +

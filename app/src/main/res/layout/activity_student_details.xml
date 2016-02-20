@@ -13,7 +13,12 @@
         style="@style/horizontal"
         android:id="@+id/StudentIDLayout"
         android:background="@drawable/shape"
-        android:layout_marginTop="0dp">
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -21,6 +26,7 @@
             android:layout_weight=".4"
             style="@style/studentID"
             android:id="@+id/siddisplay"
+            android:layout_gravity="center_vertical"
             />
         <TextView
             android:layout_width="0dp"
@@ -31,6 +37,32 @@
             android:layout_marginTop="5dp"
             android:layout_gravity="center_vertical"
             />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:text="@string/schoolId"
+                android:layout_weight=".4"
+                style="@style/studentID"
+                android:id="@+id/sciddisplay"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/studentID"
+                android:id="@+id/schoolID"
+                android:layout_weight=".4"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_vertical"
+                />
+        </LinearLayout>
+
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -47,19 +79,6 @@
             <LinearLayout
                 style="@style/container"
                 android:layout_marginTop="0dp">
-                <LinearLayout
-                    style="@style/horizontal"
-                    android:id="@+id/schoolLayout">
-                    <TextView
-                        style="@style/head"
-                        android:text="@string/schoolId"/>
-                    <EditText
-                        style="@style/entryBox"
-                        android:id="@+id/schoolID"
-                        android:inputType="number"
-                        android:maxLength="8"
-                        android:hint="@string/enterSchoolID"/>
-                </LinearLayout>
                 <LinearLayout
                     style="@style/horizontal"
                     android:id="@+id/nameLayout">
@@ -176,12 +195,17 @@
                     <TextView
                         style="@style/head"
                         android:text="@string/performance"/>
+                    <Spinner
+                        style="@style/entryBox"
+                        android:id="@+id/academicPerformance"
+                        ></Spinner>
+                    <!--
                     <EditText
                         style="@style/entryBox"
                         android:inputType="number"
                         android:maxLength="3"
                         android:id="@+id/performance"
-                        android:hint="@string/enterPerformance"/>
+                        android:hint="@string/enterPerformance"/>-->
                 </LinearLayout>
                 <LinearLayout
                     style="@style/horizontal"

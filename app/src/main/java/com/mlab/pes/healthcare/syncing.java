@@ -20,9 +20,6 @@ import java.util.concurrent.ExecutionException;
  * Created by Aamir on 07-02-2016.
  */
 public class syncing {
-
-
-
     //To Sync the details to the Cloud(Pushing Data to the Cloud)
     public void SYNC() {
 //10.3.32.56
@@ -85,8 +82,8 @@ public class syncing {
 
         if (!t.equals("{}")) {
             try {
-                GetXMLTask get = new GetXMLTask();
-                String output=get.execute(new LinkedHashMap[]{linkedHashMap,json_fin}).get();
+                GetXMLTask get = new GetXMLTask("Syncing Data");
+                String output=(String) get.execute(new LinkedHashMap[]{linkedHashMap,json_fin}).get();
 
                 if(output.contains("Sync Unsuccessful")){
                     MainActivity.showMessage("Failure", "Sync Unsuccessful",MainActivity.get());
@@ -118,7 +115,7 @@ public class syncing {
                         image.put("images", arrayList);
 
 
-                        GetXMLTask get_image = new GetXMLTask();
+                        GetXMLTask get_image = new GetXMLTask("Syncing Images");
                         image_output=get_image.execute(new LinkedHashMap[]{linkedHashMap,image}).get();
                     } while (c.moveToNext() && !image_output.contains("Sync Unsuccessful"));
                     c.close();
@@ -144,7 +141,6 @@ public class syncing {
            MainActivity.showMessage("Failure", "No Entries Found",MainActivity.get());
         }
     }
-
     static String child_table;
     public void retrieve_child_data(){
 
@@ -153,7 +149,7 @@ public class syncing {
         linkedHashMap.put("URL", "check_child_ids.php");
 
         try {
-            GetXMLTask retrieve = new GetXMLTask();
+            GetXMLTask retrieve = new GetXMLTask("Retrieving Child Table Data");
             child_table=retrieve.execute(new LinkedHashMap[]{linkedHashMap}).get();
 
 
@@ -209,7 +205,57 @@ public class syncing {
             e.printStackTrace();
         }
     }
+    static String school;
+    public void retrieve_school_data(){
+        LinkedHashMap linkedHashMap=new LinkedHashMap();
+        linkedHashMap.put("URL", "check_school_ids.php");
 
+        try {
+            GetXMLTask retrieve = new GetXMLTask("Retrieving School Table Data");
+            school=retrieve.execute(new LinkedHashMap[]{linkedHashMap}).get();
+
+
+            //System.out.println("Child Table "+child_table);
+            if(!(school.contains("Connection failed") || school.contains("No Entries"))){
+                JSONObject jsonObject = new JSONObject(school);
+
+                //System.out.println("Child Table "+jsonObject.toString());
+                MainActivity.db.execSQL("DROP TABLE IF EXISTS school_references" );
+                String school_table_query=
+                        "  school_id VARCHAR[10] ," +
+                                "  name VARCHAR[140] " ;
+                //creating image table
+                MainActivity.db.execSQL("CREATE TABLE IF NOT EXISTS school_references( " + school_table_query + " )");
+
+                Iterator<?> keys = jsonObject.keys();
+
+                while( keys.hasNext() ) {
+                    String key = (String)keys.next();
+                    if ( jsonObject.get(key) instanceof JSONObject ) {
+                        JSONObject obj=(JSONObject) jsonObject.get(key);
+                        String insert_query = "'" + obj.get("school_id").toString() + "'," +
+                                "'" + obj.get("name").toString() + "'";
+                        System.out.println(insert_query);
+                        //inserting into database
+                        MainActivity.db.execSQL("INSERT INTO school_references VALUES (" + insert_query + ")");
+                    }
+                }
+                MainActivity.showMessage("Success","Entries Retrieved!",MainActivity.get());
+            }
+            else
+                MainActivity.showMessage("Failure","Entries Could not be Retrieved!",MainActivity.get());
+        }
+        catch (InterruptedException e) {
+            System.out.println("Interupted Exception");
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            System.out.println("Execution Exception");
+            e.printStackTrace();
+        }catch (JSONException e) {
+            System.out.println("JSON Exception");
+            e.printStackTrace();
+        }
+    }
     public String encodeTobase64(Bitmap image) {
         System.gc();
         if (image == null) return null;

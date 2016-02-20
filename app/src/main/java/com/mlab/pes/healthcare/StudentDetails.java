@@ -30,11 +30,11 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
 
     static String sid;
 
-    TextView studentID;
+    TextView studentID,schoolID;
     static DatePicker dob;
-    static EditText schoolID,name,father_name,mother_name,guardian_name,attendance,performance,aadhar;
-    Spinner standard,gender;
-    static String gen,std;
+    static EditText name,father_name,mother_name,guardian_name,attendance,performance,aadhar;
+    Spinner standard,gender,academicPerformance;
+    static String gen,std,acperf;
 
     static SQLiteDatabase database;
 
@@ -54,7 +54,7 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
                     "  mother_name VARCHAR[140] ," +
                     "  guardian_name VARCHAR[140] ," +
                     "  attendance FLOAT ," +
-                    "  academic FLOAT,"+
+                    "  academic VARCHAR[2],"+
                     "  aadhar INTEGER[12]";
 
 
@@ -79,15 +79,17 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
         studentID= (TextView)findViewById(R.id.studentID);
         studentID.setText(sid);
         dob=(DatePicker) findViewById(R.id.age);
+        dob.updateDate(2000, 0, 1);
 
-        schoolID= (EditText) findViewById(R.id.schoolID);
-        schoolIdValidation();
+
+
+        schoolID= (TextView) findViewById(R.id.schoolID);
+        //schoolIdValidation();
         name= (EditText) findViewById(R.id.name);
         father_name = (EditText) findViewById(R.id.fatherName);
         mother_name = (EditText) findViewById(R.id.motherName);
         guardian_name = (EditText) findViewById(R.id.guardianName);
         attendance= (EditText) findViewById(R.id.attendance);
-        performance = (EditText) findViewById(R.id.performance);
         aadhar = (EditText) findViewById(R.id.aadhar);
 
         gender = (Spinner) findViewById(R.id.gender);
@@ -106,6 +108,12 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
         standard.setAdapter(adapter);
         standard.setOnItemSelectedListener(this);
 
+        academicPerformance = (Spinner) findViewById(R.id.academicPerformance);
+        adapter = ArrayAdapter.createFromResource(this, R.array.academicPerf, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        standard.setAdapter(adapter);
+        standard.setOnItemSelectedListener(this);
+
         //opening db
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
         //creating table if doesn't exist
@@ -114,40 +122,13 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
 
     }
 
-    static boolean checkSchool=false;
-    public void schoolIdValidation(){
-        TextWatcher inputTextWatcher = new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-                String school=schoolID.getText().toString();
-                if(school.length()==8){
-                    //change the parameters for checking
-                    boolean mandalCheck=Integer.parseInt(school.substring(0, 1))<=5 && Integer.parseInt(school.substring(0,1))>=0;
-                    boolean panchayatCheck=Integer.parseInt(school.substring(1,3))<=99 && Integer.parseInt(school.substring(1,3))>=0;
-                    boolean thirdCheck=Integer.parseInt(school.substring(3,5))<=99 && Integer.parseInt(school.substring(3,5))>=0;
-                    boolean schoolCheck=Integer.parseInt(school.substring(5))<=999 && Integer.parseInt(school.substring(5))>=0;
 
-                    if(mandalCheck && panchayatCheck && thirdCheck && schoolCheck){
-                        checkSchool= true;
-                    }
-                    else {
-                        checkSchool= false;
-                        showMessage("Error","Enter a valid School ID");
-                    }
-                }
-            }
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){
-            }
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-        };
-        schoolID.addTextChangedListener(inputTextWatcher);
-    }
     public boolean childIdValidation(String child_id){
 
         boolean valid=false;
 
         boolean len=child_id.length()==11;
-        boolean mandal_check=Integer.parseInt(child_id.substring(0,1))<=5 && Integer.parseInt(child_id.substring(0,1))>=0;
+        boolean mandal_check=Integer.parseInt(child_id.substring(0,1))<=5 && Integer.parseInt(child_id.substring(0,1))>0;
         boolean panchayat_check=Integer.parseInt(child_id.substring(1,3))<=99 && Integer.parseInt(child_id.substring(1,3))>=0;
         boolean village_check=Integer.parseInt(child_id.substring(3,5))<=99 && Integer.parseInt(child_id.substring(3,5))>=0;
         boolean school_check=Integer.parseInt(child_id.substring(5,8))<=999 && Integer.parseInt(child_id.substring(5,8))>=0;
@@ -169,10 +150,7 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
     //Adding details collected to SQLite
     public void ADD() {
         try {
-            if (schoolID.getText().toString().trim().length() != 8) {
-                showMessage("Error", "Please Enter a valid School ID");
-                return;
-            } else if (name.getText().toString().trim().length() == 0) {
+            if (name.getText().toString().trim().length() == 0) {
                 showMessage("Error", "Please Enter Student Name");
                 return;
             } else if (gen.equals("Select..")) {
@@ -187,8 +165,8 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
             } else if (Integer.parseInt(attendance.getText().toString().trim()) > 100 || Integer.parseInt(attendance.getText().toString().trim()) < 0) {
                 showMessage("Error", "Please Enter a Valid Percentage for Attendance");
                 return;
-            } else if (Integer.parseInt(performance.getText().toString().trim()) > 100 || Integer.parseInt(performance.getText().toString().trim()) < 0) {
-                showMessage("Error", "Please Enter a Valid Percentage for Academic Performance");
+            }else if (academicPerformance.equals("Select..")) {
+                showMessage("Error", "Please Select the Standard");
                 return;
             } else if (!(aadhar.getText().toString().trim().length() == 0 || aadhar.getText().toString().trim().length() == 12)) {
                 showMessage("Error", "Please Enter a Valid Aadhar Number");
@@ -203,8 +181,6 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
             e.printStackTrace();
         }
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -244,6 +220,33 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView);
         final EditText studentID = (EditText) dialogView.findViewById(R.id.studid);
+        final TextView errorMessage=(TextView) dialogView.findViewById(R.id.ErrorMessage);
+
+        TextWatcher inputTextWatcher = new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+
+                String sid=studentID.getText().toString().toUpperCase();
+
+                if(sid.length()==11)
+                {
+                    if(!childIdValidation(sid)) {
+                        errorMessage.setVisibility(View.VISIBLE);
+                        errorMessage.setText("Please Enter a Student ID which is Available");
+                    }
+                }
+                else if(sid.length()<11){
+                    errorMessage.setVisibility(View.GONE);
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){
+
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+        };
+
+        studentID.addTextChangedListener(inputTextWatcher);
         // Add action buttons
         builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
@@ -279,6 +282,7 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
     //Method to set studentID in the Activity
     public void setStudentID() {
         studentID.setText(StudentDetails.sid);
+        schoolID.setText(sid.substring(0,8));
     }
 
     public void Intent() {
@@ -333,6 +337,9 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
             std = parent.getItemAtPosition(position).toString();
         }else if(parent==gender){
             gen=parent.getItemAtPosition(position).toString();
+        }
+        else if(parent==academicPerformance){
+            acperf=parent.getItemAtPosition(position).toString();
         }
     }
 

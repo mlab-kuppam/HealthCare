@@ -352,6 +352,8 @@ public class SkinActivity extends ActionBarActivity {
         builder.setView(dialogView);
         final EditText studentID = (EditText) dialogView.findViewById(R.id.studid);
         //Validating Student ID
+        studentID.setText(UpdateActivity.schoolId);
+        studentID.setSelection(8);
         UpdateActivity.StudentIDValidation(dialogView);
 
         //Add action buttons

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class EyeActivity1 extends ActionBarActivity {
 
     NumberPicker dist_right,dist_left,near_right,near_left;
 
+    int refractCheck=0;
 
     int dist=10,near=10;
     //strings to store the complete values of vision testing
@@ -33,6 +35,7 @@ public class EyeActivity1 extends ActionBarActivity {
     //string to store the compltete values of spherical refraction and correction
     public static String spherical_dist_right,spherical_dist_left,spherical_near_right,spherical_near_left;
 
+    LinearLayout refract;
 
     TextView eyeStdId,txt_Rt_Dis,txt_Lt_Dis,txt_Rt_Ne,txt_Lt_Ne;
 
@@ -55,6 +58,8 @@ public class EyeActivity1 extends ActionBarActivity {
         setContentView(R.layout.activity_eye1);
 
         app=this;
+
+        refract = (LinearLayout)findViewById(R.id.refract_correct);
 
         //Invoking StudentID Dialog box
         studentidDialog();
@@ -368,6 +373,8 @@ public class EyeActivity1 extends ActionBarActivity {
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView);
         final EditText studentID = (EditText) dialogView.findViewById(R.id.studid);
+        studentID.setText(UpdateActivity.schoolId);
+        studentID.setSelection(8);
         //Validating Student ID
         UpdateActivity.StudentIDValidation(dialogView);
 
@@ -462,6 +469,20 @@ public class EyeActivity1 extends ActionBarActivity {
                 //System.out.println("***Deleted***"+del_image.toString());
                 del_image.delete();
             }
+        }
+    }
+
+    public void Refract(View v)
+    {
+
+        if(refractCheck==0)
+        {
+            refract.setVisibility(v.VISIBLE);
+            refractCheck++;
+        }
+        else{
+            refract.setVisibility(v.GONE);
+            refractCheck--;
         }
     }
 }

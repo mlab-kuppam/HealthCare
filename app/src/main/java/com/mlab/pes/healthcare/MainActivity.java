@@ -15,33 +15,20 @@ import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity{
-
     //Declaring Buttons
     Button add, update, sync;
-
     //Declaring variables
     public static boolean check_internet = true;
-
     static TextView syncStatus;
-
-
     //Declaring Database
     static SQLiteDatabase db;
-
     private static MainActivity app;
-
     static SharedPreferences mPrefs;
-
     static String url="http://10.3.32.56/";
-
-
     public static boolean connected=false;
-    public boolean threadStarted=false;
+    public static boolean threadStarted=false;
     public static ProgressDialog dialog;
-
     private Handler mHandler = new Handler();
-
-
     public static MainActivity get(){
         return app;
     }
@@ -78,6 +65,18 @@ public class MainActivity extends ActionBarActivity{
         //creating image table
         db.execSQL("CREATE TABLE IF NOT EXISTS child_references( " + child_table_query + " )");
 
+        String school_table_query=
+                "  school_id VARCHAR[10] ," +
+                        "  name VARCHAR[140] " ;
+        //creating image table
+        db.execSQL("CREATE TABLE IF NOT EXISTS school_references( " + school_table_query + " )");
+
+        String insert_query = "'" + "11111111" + "'," +
+                "'" + "School Name" + "'";
+        System.out.println(insert_query);
+        //inserting into database
+        MainActivity.db.execSQL("INSERT INTO school_references VALUES (" + insert_query + ")");
+
         syncStatus=(TextView) findViewById(R.id.syncStatus);
 
         String mString = mPrefs.getString("status", "Not Synced");
@@ -89,7 +88,6 @@ public class MainActivity extends ActionBarActivity{
         update = (Button) findViewById(R.id.update);
         sync = (Button) findViewById(R.id.sync);
     }
-
     //To Add Schools and Students(Changing Intent to SchoolAdd Activity)
     public void ADD(View view) {
 
@@ -99,15 +97,14 @@ public class MainActivity extends ActionBarActivity{
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
     }
-
     //To Update Health Details of particular student(Changing Intent to Update Activity
     public void UPDATE(View view) {
         Intent i = new Intent(this, UpdateActivity.class);
+        i.putExtra("caller", "MainActivity");
         startActivity(i);
         //Transition Animation
         overridePendingTransition(R.anim.push_left_in, R.anim.push_down_out);
     }
-
     public static void startProgressDialog(final String message){
 
         System.out.println("Started Progress dialog");
@@ -124,8 +121,6 @@ public class MainActivity extends ActionBarActivity{
     public static void stopProgressDialog(){
         MainActivity.dialog.dismiss();
     }
-
-
     Thread connection_checker=new Thread(new Runnable() {
         @Override
         public void run() {
@@ -141,10 +136,12 @@ public class MainActivity extends ActionBarActivity{
                 public void run() {
                     if(!threadStarted) {
 
-                        startProgressDialog("Connecting to Server");
-                        connection_checker.start();
-                        threadStarted=true;
-                        stopProgressDialog();
+                        //startProgressDialog("Connecting to Server");
+                        //stopProgressDialog();
+
+                        connectorCheck connectorCheck=new connectorCheck();
+
+                        connectorCheck.execute();
                     }
                     int timeout=5000;
                     if(connected){
@@ -153,10 +150,8 @@ public class MainActivity extends ActionBarActivity{
                     mHandler.postDelayed(new Runnable() {
                         public void run() {
                             if (connected) {
-                                startProgressDialog("Syncing Data");
                                 syncing a = new syncing();
                                 a.SYNC();
-                                stopProgressDialog();
                             } else {
                                 showMessage("Warning", "Please check if server is connected to the internet. \nRestart the App and try again", MainActivity.get());
                             }
@@ -176,10 +171,9 @@ public class MainActivity extends ActionBarActivity{
                 @Override
                 public void run() {
                     if(!threadStarted) {
-                        startProgressDialog("Connecting to Server");
-                        connection_checker.start();
-                        threadStarted=true;
-                        stopProgressDialog();
+                        connectorCheck connectorCheck=new connectorCheck();
+
+                        connectorCheck.execute();
                     }
                     int timeout=5000;
                     if(connected){
@@ -188,10 +182,9 @@ public class MainActivity extends ActionBarActivity{
                     mHandler.postDelayed(new Runnable() {
                         public void run() {
                             if (connected) {
-                                startProgressDialog("Retrieving Data");
                                 syncing a = new syncing();
                                 a.retrieve_child_data();
-                                stopProgressDialog();
+                                a.retrieve_school_data();
                             } else {
                                 showMessage("Warning", "Please check if server is connected to the internet. \nRestart the App and try again", MainActivity.get());
                             }
@@ -203,7 +196,6 @@ public class MainActivity extends ActionBarActivity{
             showMessage("Check Internet Connection", "Try again", get());
         }
     }
-
     //Method to check internet connection
     public boolean INTERNER_CHECK() {
         boolean isInternetPresent;
@@ -211,8 +203,6 @@ public class MainActivity extends ActionBarActivity{
         isInternetPresent = cd.isConnectingToInternet();
         return isInternetPresent;
     }
-
-
     //Method to create the dialog box
     //@params title and message
     public static void showMessage(String title, String message,Context context) {
@@ -223,7 +213,6 @@ public class MainActivity extends ActionBarActivity{
         builder.setCancelable(false);
         builder.show();
     }
-
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

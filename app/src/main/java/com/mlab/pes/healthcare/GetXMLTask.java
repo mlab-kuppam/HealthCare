@@ -1,6 +1,7 @@
 package com.mlab.pes.healthcare;
 
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
@@ -26,6 +27,20 @@ import java.util.List;
 class GetXMLTask extends AsyncTask<LinkedHashMap, Void, String> {
     String url;
 
+    public GetXMLTask(String message) {
+        super();
+        dialog.setTitle(message);
+        // do stuff
+    }
+
+    private ProgressDialog dialog;
+    protected void onPreExecute() {
+        dialog = new ProgressDialog(MainActivity.get());
+        dialog.setCancelable(false);
+        dialog.setMessage("Please Wait... Do not Close the App");
+        dialog.show();
+
+    }
     @Override
     protected String doInBackground(LinkedHashMap... params) {
 
@@ -108,6 +123,7 @@ class GetXMLTask extends AsyncTask<LinkedHashMap, Void, String> {
 
     @Override
     protected void onPostExecute(String output) {
+        dialog.dismiss();
 /*
         this.output = output;
 

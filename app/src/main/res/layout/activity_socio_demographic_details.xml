@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <!--
             <LinearLayout
                 style="@style/container"
                 android:layout_marginTop="0dp">
@@ -251,6 +252,7 @@
                     <EditText
                         style="@style/entryBox"
                         android:inputType="number"
+                        android:maxLength="7"
                         android:id="@+id/totalIncome"
                         android:hint="@string/totalIncomeOfTheFamilyHint"/>
                 </LinearLayout>
@@ -301,85 +303,22 @@
                 </LinearLayout>
                 <LinearLayout
                     style="@style/innershape"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+                    android:layout_marginTop="10dp">
                     <TextView
                         style="@style/head"
-                        android:text="@string/rooms"
-                        android:paddingLeft="15dp"
-                        android:layout_width="match_parent"
-                        android:textStyle="bold"/>
-                    <LinearLayout
-                        style="@style/horizontal"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="35dp">
-                        <TextView
-                            style="@style/head"
-                            android:text="@string/numberOfRooms"/>
-                        <EditText
-                            style="@style/entryBox"
-                            android:id="@+id/numberOfRooms"
-                            android:inputType="number"
-                            android:layout_weight=".5"
-                            android:hint="@string/numberOfRoomsHint"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        style="@style/horizontal"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="35dp">
-                        <TextView
-                            style="@style/head"
-                            android:text="@string/numberOfHouseholds"/>
-                        <EditText
-                            style="@style/entryBox"
-                            android:id="@+id/numberofHouselholds"
-                            android:inputType="number"
-                            android:layout_weight=".5"
-                            android:hint="@string/numberOfHouseholdHint"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        style="@style/horizontal"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="35dp">
-                        <TextView
-                            style="@style/head"
-                            android:text="@string/overcrowding"
-                            android:layout_marginTop="0dp"/>
-                        <RadioGroup
-                            style="@style/radioGroup"
-                            android:layout_weight=".5">
-                            <RadioButton
-                                style="@style/radioButton"
-                                android:text="@string/yes"
-                                android:id="@+id/overcrowdingYes"/>
-                            <RadioButton
-                                style="@style/radioButton"
-                                android:id="@+id/overcrowdingNo"
-                                android:text="@string/no"/>
-                        </RadioGroup>
-                    </LinearLayout>
-                    <LinearLayout
-                        style="@style/horizontal"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="35dp">
-                        <TextView
-                            style="@style/head"
-                            android:text="@string/separateRooms"
-                            android:layout_marginTop="0dp"/>
-                        <RadioGroup
-                            style="@style/radioGroup"
-                            android:layout_weight=".5">
-                            <RadioButton
-                                style="@style/radioButton"
-                                android:text="@string/yes"
-                                android:id="@+id/separateYes"/>
-                            <RadioButton
-                                style="@style/radioButton"
-                                android:id="@+id/separateNo"
-                                android:text="@string/no"/>
-                        </RadioGroup>
-                    </LinearLayout>
-
+                        android:text="@string/overcrowding"
+                        android:paddingLeft="15dp"/>
+                    <RadioGroup
+                        style="@style/radioGroup">
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:text="@string/yes"
+                            android:id="@+id/overcrowdingYes"/>
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:id="@+id/overcrowdingNo"
+                            android:text="@string/no"/>
+                    </RadioGroup>
                 </LinearLayout>
                 <LinearLayout
                     style="@style/innershape"
@@ -505,17 +444,184 @@
                     android:layout_marginTop="10dp">
                     <TextView
                         style="@style/head"
-                        android:text="@string/cattleShed"
+                        android:text="@string/healthCareServices"
                         android:paddingLeft="15dp"/>
                     <RadioGroup
                         style="@style/radioGroup">
                         <RadioButton
                             style="@style/radioButton"
                             android:text="@string/yes"
-                            android:id="@+id/cattleShedYes"/>
+                            android:id="@+id/healthCareYes"/>
                         <RadioButton
                             style="@style/radioButton"
-                            android:id="@+id/cattleShedNo"
+                            android:id="@+id/healthCareNo"
+                            android:text="@string/no"/>
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>-->
+            <LinearLayout
+                style="@style/container">
+                <TextView
+                    style="@style/head"
+                    android:layout_width="match_parent"
+                    android:text="@string/dietaryPattern"
+                    android:textStyle="bold"
+                    android:textSize="26dp"/>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/waterSupply"
+                        android:paddingLeft="15dp"/>
+                    <Spinner
+                        style="@style/entryBox"
+                        android:id="@+id/waterSupply"
+                        ></Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/overcrowding"
+                        android:paddingLeft="15dp"/>
+                    <RadioGroup
+                        style="@style/radioGroup">
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:text="@string/yes"
+                            android:id="@+id/overcrowdingYes"/>
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:id="@+id/overcrowdingNo"
+                            android:text="@string/no"/>
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/crossVentilation"
+                        android:paddingLeft="15dp"/>
+                    <RadioGroup
+                        style="@style/radioGroup">
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:text="@string/yes"
+                            android:id="@+id/crossVentilationYes"/>
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:id="@+id/crossVentilationNo"
+                            android:text="@string/no"/>
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/adequateLighting"
+                        android:paddingLeft="15dp"/>
+                    <RadioGroup
+                        style="@style/radioGroup">
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:text="@string/yes"
+                            android:id="@+id/adequateLightingYes"/>
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:id="@+id/adequateLightingNo"
+                            android:text="@string/no"/>
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/kitchenSink"
+                        android:paddingLeft="15dp"/>
+                    <RadioGroup
+                        style="@style/radioGroup">
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:text="@string/yes"
+                            android:id="@+id/kitchenSkinYes"/>
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:id="@+id/kitchenSkinNo"
+                            android:text="@string/no"/>
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/hygenicSurroundings"
+                        android:paddingLeft="15dp"/>
+                    <RadioGroup
+                        style="@style/radioGroup">
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:text="@string/yes"
+                            android:id="@+id/hygenicSurroundingsYes"/>
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:id="@+id/hygenicSurroundingsNo"
+                            android:text="@string/no"/>
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/sanitaryLatrine"
+                        android:paddingLeft="15dp"/>
+                    <RadioGroup
+                        style="@style/radioGroup">
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:text="@string/yes"
+                            android:id="@+id/sanitaryLatrinesYes"/>
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:id="@+id/sanitaryLatrinesNo"
+                            android:text="@string/no"/>
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/garbageDisposal"
+                        android:paddingLeft="15dp"/>
+                    <Spinner
+                        style="@style/entryBox"
+                        android:id="@+id/garbageDisposal"
+                        ></Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/healthCareServices"
+                        android:paddingLeft="15dp"/>
+                    <RadioGroup
+                        style="@style/radioGroup">
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:text="@string/yes"
+                            android:id="@+id/healthCareYes"/>
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:id="@+id/healthCareNo"
                             android:text="@string/no"/>
                     </RadioGroup>
                 </LinearLayout>

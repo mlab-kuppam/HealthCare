@@ -5,37 +5,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.amogh.geospatialmapping.eye"
-    android:background="#ffffffff">
+    android:background="#fff">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff91a8f9"
+        android:background="@drawable/shape"
         android:id="@+id/stud">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/health"
-            style="@style/sid"/>
+            android:layout_marginLeft="5dp"
+            style="@style/studentID"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="400dp"
-            style="@style/sid"
-            android:id="@+id/skin_std_id"/>
-
-        <View
-            android:layout_marginTop="55dp"
-            style="@style/divider"></View>
+            style="@style/studentID"
+            android:id="@+id/eye_std_id"/>
 
     </RelativeLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/stud">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <View style="@style/Separator" />
+                <View style="@style/Separatoreye" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -96,13 +95,13 @@
                     style="@style/h1" />
 
                 <View
-                    style="@style/Separator"
+                    style="@style/Separatoreye"
                     android:layout_marginLeft="160dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="205dp"
+                    android:layout_marginLeft="185dp"
                     android:layout_marginTop="15dp"
                     android:text="6"
                     android:textSize="60dp" />
@@ -111,7 +110,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="275dp"
+                    android:layout_marginLeft="255dp"
                     android:layout_marginTop="15dp"
                     android:text="/"
                     android:textSize="60dp" />
@@ -124,9 +123,9 @@
 
                     <NumberPicker
                         android:id="@+id/numberPicker1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="120dp"
-                        android:layout_marginLeft="325dp"
+                        android:layout_width="110dp"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="305dp"
                         android:clickable="true"
                         android:onClick="Num_Click"/>
 
@@ -155,13 +154,13 @@
                 </RelativeLayout>
 
                 <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="430dp" />
+                    style="@style/Separatoreye"
+                    android:layout_marginLeft="440dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="495dp"
+                    android:layout_marginLeft="475dp"
                     android:layout_marginTop="15dp"
                     android:text="6"
                     android:textSize="60dp" />
@@ -169,7 +168,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="570dp"
+                    android:layout_marginLeft="550dp"
                     android:layout_marginTop="15dp"
                     android:text="/"
                     android:textSize="60dp" />
@@ -182,9 +181,9 @@
 
                     <NumberPicker
                         android:id="@+id/numberPicker2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="120dp"
-                        android:layout_marginLeft="625dp"
+                        android:layout_width="110dp"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="605dp"
                         android:clickable="true"
                         android:onClick="Num_Click" />
 
@@ -212,7 +211,7 @@
                 </RelativeLayout>
 
                 <View
-                    style="@style/Separator"
+                    style="@style/Separatoreye"
                     android:layout_marginLeft="734dp" />
 
             </RelativeLayout>
@@ -223,7 +222,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <View style="@style/Separator" />
+                <View style="@style/Separatoreye" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -234,13 +233,13 @@
                     style="@style/h1"/>
 
                 <View
-                    style="@style/Separator"
+                    style="@style/Separatoreye"
                     android:layout_marginLeft="160dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="205dp"
+                    android:layout_marginLeft="185dp"
                     android:layout_marginTop="15dp"
                     android:text="6"
                     android:textSize="60dp" />
@@ -248,7 +247,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="275dp"
+                    android:layout_marginLeft="255dp"
                     android:layout_marginTop="15dp"
                     android:text="/"
                     android:textSize="60dp" />
@@ -261,9 +260,9 @@
 
                     <NumberPicker
                         android:id="@+id/numberPicker3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="120dp"
-                        android:layout_marginLeft="325dp"
+                        android:layout_width="110dp"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="305dp"
                         android:clickable="true"
                         android:onClick="Num_Click"/>
 
@@ -292,13 +291,13 @@
 
 
                 <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="430dp" />
+                    style="@style/Separatoreye"
+                    android:layout_marginLeft="440dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="495dp"
+                    android:layout_marginLeft="475dp"
                     android:layout_marginTop="15dp"
                     android:text="6"
                     android:textSize="60dp" />
@@ -306,7 +305,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="570dp"
+                    android:layout_marginLeft="550dp"
                     android:layout_marginTop="15dp"
                     android:text="/"
                     android:textSize="60dp" />
@@ -319,9 +318,9 @@
 
                     <NumberPicker
                         android:id="@+id/numberPicker4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="120dp"
-                        android:layout_marginLeft="625dp"
+                        android:layout_width="110dp"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="605dp"
                         android:clickable="true"
                         android:onClick="Num_Click"/>
 
@@ -348,17 +347,21 @@
 
                 </RelativeLayout>
 
-
-
-
                 <View
-                    style="@style/Separator"
+                    style="@style/Separatoreye"
                     android:layout_marginLeft="734dp" />
 
             </RelativeLayout>
 
 
             <View style="@style/Divider" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/uppertext"
+                android:hint="@string/eyehint"
+                android:layout_marginTop="10dp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -513,7 +516,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:id="@+id/dist_plus"
+                        android:id="@+id/dist_right_plus"
                         android:onClick="onRadioselect"
                         android:textSize="20dp"
                         android:textStyle="bold"
@@ -522,7 +525,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:id="@+id/dist_minus"
+                        android:id="@+id/dist_right_minus"
                         android:onClick="onRadioselect"
                         android:textSize="20dp"
                         android:layout_marginLeft="15dp"
@@ -537,6 +540,7 @@
                     android:layout_marginLeft="135dp"
                     android:id="@+id/t1"
                     android:layout_marginTop="60dp"
+                    android:maxLength="5"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -549,6 +553,7 @@
                     android:layout_marginLeft="245dp"
                     android:id="@+id/t2"
                     android:layout_marginTop="60dp"
+                    android:maxLength="5"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -558,6 +563,7 @@
                 <EditText
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
+                    android:maxLength="3"
                     android:layout_marginLeft="352dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t3"
@@ -567,12 +573,42 @@
                     style="@style/Separator"
                     android:layout_marginLeft="425dp" />
 
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="430dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/dist_left_plus"
+                        android:onClick="onRadioselect"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:text="+"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/dist_left_minus"
+                        android:onClick="onRadioselect"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:textStyle="bold"
+                        android:text="-"/>
+
+                </RadioGroup>
+
+
                 <EditText
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="445dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t4"
+                    android:maxLength="5"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -585,6 +621,7 @@
                     android:layout_marginLeft="555dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t5"
+                    android:maxLength="5"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -597,6 +634,7 @@
                     android:layout_marginLeft="662dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t6"
+                    android:maxLength="3"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -635,7 +673,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:id="@+id/near_plus"
+                        android:id="@+id/near_right_plus"
                         android:onClick="onRadioselect"
                         android:textSize="20dp"
                         android:textStyle="bold"
@@ -644,7 +682,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:id="@+id/near_minus"
+                        android:id="@+id/near_right_minus"
                         android:onClick="onRadioselect"
                         android:textSize="20dp"
                         android:layout_marginLeft="15dp"
@@ -659,6 +697,7 @@
                     android:layout_marginLeft="135dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t7"
+                    android:maxLength="5"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -671,6 +710,7 @@
                     android:layout_marginLeft="245dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t8"
+                    android:maxLength="5"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -683,11 +723,40 @@
                     android:layout_marginLeft="352dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t9"
+                    android:maxLength="3"
                     android:inputType="numberDecimal"/>
 
                 <View
                     style="@style/Separator"
                     android:layout_marginLeft="425dp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="430dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/near_left_plus"
+                        android:onClick="onRadioselect"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:text="+"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:id="@+id/near_left_minus"
+                        android:onClick="onRadioselect"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="15dp"
+                        android:textStyle="bold"
+                        android:text="-"/>
+
+                </RadioGroup>
 
                 <EditText
                     android:layout_width="80dp"
@@ -695,6 +764,7 @@
                     android:layout_marginLeft="445dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t10"
+                    android:maxLength="5"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -707,6 +777,7 @@
                     android:layout_marginLeft="555dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t11"
+                    android:maxLength="5"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -719,6 +790,7 @@
                     android:layout_marginLeft="662dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t12"
+                    android:maxLength="3"
                     android:inputType="numberDecimal"/>
 
                 <View
@@ -728,6 +800,13 @@
             </RelativeLayout>
 
             <View style="@style/Divider" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/lowertext"
+                android:hint="@string/eyehint"
+                android:layout_marginTop="10dp"/>
 
         </LinearLayout>
 

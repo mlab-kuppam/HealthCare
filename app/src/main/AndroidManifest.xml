@@ -3,6 +3,7 @@
     package="com.mlab.pes.healthcare">
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -17,24 +18,50 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".StudentAddActivity" />
-        <activity android:name=".UpdateActivity" />
-        <activity android:name=".ENTActivity" />
-        <activity android:name=".SkinActivity" />
-        <activity android:name=".HealthActivity1" />
-        <activity android:name=".HealthActivity2" />
-        <activity android:name=".EyeActivity1" />
-        <activity android:name=".EyeActivity2" />
-
+        <activity
+            android:name=".UpdateActivity"
+            android:screenOrientation="portrait"
+            android:label="Update Health Details"/>
+        <activity
+            android:name=".ENTActivity"
+            android:screenOrientation="portrait"
+            android:label="ENT"/>
+        <activity
+            android:name=".SkinActivity"
+            android:screenOrientation="portrait"
+            android:label="Skin"/>
+        <activity
+            android:name=".HealthActivity1"
+            android:screenOrientation="portrait"
+            android:label="Health"/>
+        <activity
+            android:name=".HealthActivity2"
+            android:screenOrientation="portrait"
+            android:label="Health"/>
+        <activity
+            android:name=".EyeActivity1"
+            android:screenOrientation="portrait"
+            android:label="Eye"/>
+        <activity
+            android:name=".EyeActivity2"
+            android:screenOrientation="portrait"
+            android:label="Eye"/>
+        <activity
+            android:name=".StudentDetails"
+            android:label="@string/title_activity_student_details"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SocioDemographicDetails"
+            android:label="@string/title_activity_socio_demographic_details"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

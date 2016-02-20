@@ -1,7 +1,8 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/action_next"
-        android:icon="@drawable/ic_navigate_next_white_36dp"
-        android:title="Next" />
+        android:title="Next"
+        app:showAsAction="ifRoom"/>
 
 </menu>

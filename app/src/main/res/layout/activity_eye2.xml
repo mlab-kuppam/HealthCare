@@ -1,33 +1,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent" android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.amogh.geospatialmapping.Eye1">
+    tools:context="com.example.amogh.geospatialmapping.Eye1"
+    android:background="#FFF">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff91a8f9"
+        android:background="@drawable/shape"
         android:id="@+id/stud">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/health"
-            style="@style/sid"/>
+            android:layout_marginLeft="5dp"
+            style="@style/studentID"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="400dp"
-            style="@style/sid"
-            android:id="@+id/ent_std_id"/>
-
-        <View
-            android:layout_marginTop="55dp"
-            style="@style/divider"></View>
+            style="@style/studentID"
+            android:id="@+id/eye1_std_id"/>
 
     </RelativeLayout>
 
@@ -35,7 +33,8 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/stud">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -45,18 +44,19 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cvis"
-                    style="@style/h1"/>
+                    style="@style/h5"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,13 +65,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/left"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -83,7 +83,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig"/>
 
                     <RadioButton
                         android:id="@+id/cvis_left_no"
@@ -92,17 +92,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/cvis_left_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
                 <View
@@ -116,13 +117,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/right"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -134,7 +135,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/cvis_right_no"
@@ -143,17 +144,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/cvis_right_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="430dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -165,19 +167,22 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/bitot"
-                    style="@style/h1"/>
+                    style="@style/h5"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
 
                 <TextView
@@ -187,13 +192,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/left"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -205,7 +210,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/bitot_left_no"
@@ -214,17 +219,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/bitot_left_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
                 <View
@@ -238,13 +244,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/right"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -256,7 +262,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/bitot_right_no"
@@ -265,17 +271,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/bitot_right_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="430dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -286,17 +293,20 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/allconj"
-                    style="@style/h1"/>
+                    style="@style/h5"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -305,13 +315,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/left"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -323,7 +333,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/allconj_left_no"
@@ -332,17 +342,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/allconj_left_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
                 <View
@@ -356,13 +367,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/right"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -374,7 +385,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/allconj_right_no"
@@ -383,17 +394,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/allconj_right_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="430dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -404,17 +416,20 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/night"
-                    style="@style/h1"/>
+                    style="@style/h5"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -423,13 +438,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/left"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -441,7 +456,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/night_left_no"
@@ -450,17 +465,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/night_left_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
                 <View
@@ -474,13 +490,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/right"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -492,7 +508,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/night_right_no"
@@ -501,17 +517,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/night_right_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="430dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -523,17 +540,20 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/congp"
-                    style="@style/h1"/>
+                    style="@style/h5"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -542,13 +562,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/left"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -560,7 +580,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/congp_left_no"
@@ -569,17 +589,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/congp_left_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
                 <View
@@ -593,13 +614,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/right"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -611,7 +632,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/congp_right_no"
@@ -620,17 +641,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/congp_right_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="430dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -642,17 +664,20 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/congd"
-                    style="@style/h1"/>
+                    style="@style/h5"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -661,13 +686,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/left"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -679,7 +704,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/congd_left_no"
@@ -688,17 +713,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/congd_left_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
                 <View
@@ -712,13 +738,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/right"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -730,7 +756,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/congd_right_no"
@@ -739,17 +765,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/congd_right_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="430dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -761,17 +788,20 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/amb"
-                    style="@style/h1"/>
+                    style="@style/h5"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -780,13 +810,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/left"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -798,7 +828,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/amb_left_no"
@@ -807,17 +837,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/amb_left_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
                 <View
@@ -831,13 +862,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/right"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -849,7 +880,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/amb_right_no"
@@ -858,17 +889,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/amb_right_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="430dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -880,17 +912,20 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/nys"
-                    style="@style/h1"/>
+                    style="@style/h5"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -899,13 +934,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/left"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -917,7 +952,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/nys_left_no"
@@ -926,17 +961,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/nys_left_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
                 <View
@@ -950,13 +986,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/right"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -968,7 +1004,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/nys_right_no"
@@ -977,17 +1013,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/nys_right_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="430dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -998,17 +1035,20 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/fund"
-                    style="@style/h1"/>
+                    style="@style/h5"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -1017,13 +1057,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/left"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -1035,7 +1075,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/fund_left_no"
@@ -1044,17 +1084,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/fund_left_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
                 <View
@@ -1068,13 +1109,13 @@
                     android:layout_marginTop="18dp"
                     android:text="@string/right"
                     android:textColor="#ff000000"
-                    android:textSize="17dp" />
+                    style="@style/biig1" />
 
                 <RadioGroup
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="420dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
 
@@ -1086,7 +1127,7 @@
                         android:layout_weight="1"
                         android:onClick="eyeClick"
                         android:text="Yes"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                     <RadioButton
                         android:id="@+id/fund_right_no"
@@ -1095,17 +1136,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="No"
-                        android:textSize="16dp" />
+                        style="@style/biig" />
 
                 </RadioGroup>
 
                 <EditText
                     android:id="@+id/fund_right_text"
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="430dp"
-                    android:layout_marginTop="70dp"
-                    android:textSize="16dp"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -1117,24 +1159,22 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/add"
                     android:layout_marginTop="20dp"
-                    style="@style/h1"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                    style="@style/h5"/>
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:hint="Enter comment"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="300dp"
                     android:id="@+id/add_text"/>
             </RelativeLayout>
 

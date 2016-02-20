@@ -10,8 +10,74 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:maxLength="11"
         android:hint="Enter ID"
-        android:textSize="16dp"
+        android:inputType="number"
+        android:longClickable="false"
+        android:singleLine="true"
+        android:textSize="20dp"
         android:textStyle="italic" />
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:textColor="@color/text"
+        android:layout_below="@id/studid"
+        android:id="@+id/ErrorMessage"/>
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:id="@+id/studentDetails"
+        android:layout_below="@id/studid"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Name : "
+                android:textColor="@color/text"/>
+            <TextView
+                android:id="@+id/studentDetailsName"
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/text"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Gender : "
+                android:textColor="@color/text"/>
+            <TextView
+                android:id="@+id/studentDetailsGender"
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/text"/>
+        </LinearLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>

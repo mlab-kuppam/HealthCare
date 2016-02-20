@@ -1,20 +1,20 @@
 package com.mlab.pes.healthcare;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity{
 
     //Declaring Buttons
     Button add, update, sync;
@@ -22,22 +22,68 @@ public class MainActivity extends Activity {
     //Declaring variables
     public static boolean check_internet = true;
 
-    //Declaring Database
-    SQLiteDatabase db;
+    static TextView syncStatus;
 
+
+    //Declaring Database
+    static SQLiteDatabase db;
+
+    private static MainActivity app;
+
+    static SharedPreferences mPrefs;
+
+    static String url="http://10.3.32.56/";
+
+
+    public static boolean connected=false;
+    public boolean threadStarted=false;
+    public static ProgressDialog dialog;
+
+    private Handler mHandler = new Handler();
+
+
+    public static MainActivity get(){
+        return app;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        app=this;
+
+        mPrefs=getSharedPreferences("label", 0);
+
         //Checking if Internet is available
         if (check_internet && INTERNER_CHECK()) {
-            showMessage("You have Internet Connection", "Please Sync now");
+            showMessage("You have an Internet Connection", "Please Sync now",get());
         }
         //Making sure that it appears only once when the app is opened.
         check_internet = false;
         //Creating DB
         db = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE, null);
+
+
+        String image_table_query=
+                "  child_id VARCHAR[10] ," +
+                        "  photo_id VARCHAR[20] ," +
+                        "  image TEXT" ;
+        //creating image table
+        db.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
+
+        String child_table_query=
+                "  child_id VARCHAR[10] ," +
+                        "  name VARCHAR[140] ," +
+                        "  gender VARCHAR[10]" ;
+        //creating image table
+        db.execSQL("CREATE TABLE IF NOT EXISTS child_references( " + child_table_query + " )");
+
+        syncStatus=(TextView) findViewById(R.id.syncStatus);
+
+        String mString = mPrefs.getString("status", "Not Synced");
+        syncStatus.setText(mString);
+
+
         //Button initialization
         add = (Button) findViewById(R.id.add);
         update = (Button) findViewById(R.id.update);
@@ -46,10 +92,12 @@ public class MainActivity extends Activity {
 
     //To Add Schools and Students(Changing Intent to SchoolAdd Activity)
     public void ADD(View view) {
-        Intent intent = new Intent(this, StudentAddActivity.class);
+
+        Intent intent = new Intent(this, StudentDetails.class);
         startActivity(intent);
         //Transition Animation
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
     }
 
     //To Update Health Details of particular student(Changing Intent to Update Activity
@@ -60,75 +108,99 @@ public class MainActivity extends Activity {
         overridePendingTransition(R.anim.push_left_in, R.anim.push_down_out);
     }
 
+    public static void startProgressDialog(final String message){
+
+        System.out.println("Started Progress dialog");
+
+        MainActivity.get().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity.dialog = ProgressDialog.show(MainActivity.get(), message, "Please Wait... Do not Close the App");
+                System.out.println("PROGRESS DIALOG INITIATED");
+            }
+        });
+
+    }
+    public static void stopProgressDialog(){
+        MainActivity.dialog.dismiss();
+    }
+
+
+    Thread connection_checker=new Thread(new Runnable() {
+        @Override
+        public void run() {
+            connected=UpdateActivity.isConnectedToServer(url);
+        }
+    });
     //To Sync the details to the Cloud(Pushing Data to the Cloud)
     public void SYNC(View view) {
         boolean check = INTERNER_CHECK();
         if (check) {
-            String t = "";
-            ArrayList<String> tablenames = new ArrayList<String>();
-            LinkedHashMap json_fin = new LinkedHashMap();
-            try {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(!threadStarted) {
 
-                Cursor r = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
-
-                if (r.moveToFirst()) {
-                    while (!r.isAfterLast()) {
-                        tablenames.add(r.getString(r.getColumnIndex("name")));
-                        r.moveToNext();
+                        startProgressDialog("Connecting to Server");
+                        connection_checker.start();
+                        threadStarted=true;
+                        stopProgressDialog();
                     }
-                }
-                r.close();
-
-                for (int i = 1; i < tablenames.size(); i++) {
-                    String q = "SELECT * FROM " + tablenames.get(i);
-                    Cursor c = db.rawQuery(q, null);
-                    c.moveToFirst();
-                    if (c != null) {
-                        ArrayList array = new ArrayList();
-                        do {
-                            LinkedHashMap rows = new LinkedHashMap();
-
-                            for (int l = 0; l < c.getColumnCount(); l++) {
-                                String name = c.getColumnName(l);
-                                switch (c.getType(l)) {
-                                    case Cursor.FIELD_TYPE_STRING:
-                                        rows.put(name, c.getString(l));
-                                        break;
-                                    case Cursor.FIELD_TYPE_INTEGER:
-                                        rows.put(name, c.getInt(l));
-                                        break;
-                                    case Cursor.FIELD_TYPE_FLOAT:
-                                        rows.put(name, c.getFloat(l));
-                                        break;
-                                    case Cursor.FIELD_TYPE_BLOB:
-                                        rows.put(name, c.getBlob(l));
-                                        break;
-                                }
+                    int timeout=5000;
+                    if(connected){
+                        timeout=0;
+                    }
+                    mHandler.postDelayed(new Runnable() {
+                        public void run() {
+                            if (connected) {
+                                startProgressDialog("Syncing Data");
+                                syncing a = new syncing();
+                                a.SYNC();
+                                stopProgressDialog();
+                            } else {
+                                showMessage("Warning", "Please check if server is connected to the internet. \nRestart the App and try again", MainActivity.get());
                             }
-                            array.add(rows);
-                        } while (c.moveToNext());
-                        c.close();
-                        json_fin.put(tablenames.get(i), array);
-                    }
-                }
+                        }
+                    }, timeout);
 
-                t = json_fin.toString();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (!t.equals("{}")) {
-                GetXMLTask get = new GetXMLTask();
-                get.execute(new LinkedHashMap[]{json_fin});
-                for (int i = 0; i < tablenames.size(); i++) {
-                    db.execSQL("DROP TABLE IF EXISTS " + tablenames.get(i));
                 }
-            } else {
-                Toast.makeText(getApplicationContext(), "No Entries found", Toast.LENGTH_LONG).show();
-            }
+            });
         } else {
-            showMessage("Check Internet Connection", "Try again");
+            showMessage("Check Internet Connection", "Try again", get());
+        }
+    }
+    public void RETRIEVE(View view) {
+        boolean check = INTERNER_CHECK();
+        if (check) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(!threadStarted) {
+                        startProgressDialog("Connecting to Server");
+                        connection_checker.start();
+                        threadStarted=true;
+                        stopProgressDialog();
+                    }
+                    int timeout=5000;
+                    if(connected){
+                        timeout=0;
+                    }
+                    mHandler.postDelayed(new Runnable() {
+                        public void run() {
+                            if (connected) {
+                                startProgressDialog("Retrieving Data");
+                                syncing a = new syncing();
+                                a.retrieve_child_data();
+                                stopProgressDialog();
+                            } else {
+                                showMessage("Warning", "Please check if server is connected to the internet. \nRestart the App and try again", MainActivity.get());
+                            }
+                        }
+                    }, timeout);
+                }
+            });
+        } else {
+            showMessage("Check Internet Connection", "Try again", get());
         }
     }
 
@@ -140,13 +212,20 @@ public class MainActivity extends Activity {
         return isInternetPresent;
     }
 
+
     //Method to create the dialog box
     //@params title and message
-    public void showMessage(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
+    public static void showMessage(String title, String message,Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(message);
+        builder.setPositiveButton("OK", null);
+        builder.setCancelable(false);
         builder.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }

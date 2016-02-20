@@ -3,37 +3,38 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#fff"
+    tools:context="com.example.amogh.geospatialmapping.Skin">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff91a8f9"
+        android:background="@drawable/shape"
         android:id="@+id/stud">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/health"
-            style="@style/sid"/>
+            android:layout_marginLeft="5dp"
+            style="@style/studentID"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="400dp"
-            style="@style/sid"
+            style="@style/studentID"
             android:id="@+id/skin_std_id"/>
 
-        <View
-            android:layout_marginTop="55dp"
-            style="@style/divider"></View>
-
     </RelativeLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/stud">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,13 +43,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/scab"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -60,49 +63,48 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/scab_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/scab_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
                     android:layout_marginLeft="300dp"
                     android:id="@+id/scab_text"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone"/>
 
             </RelativeLayout>
 
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/pityal"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -114,47 +116,47 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/pityalb_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/pityalb_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="300dp"
+                    android:layout_marginTop="60dp"
                     android:id="@+id/pityalb_text"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone"/>
 
             </RelativeLayout>
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/phry"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -166,48 +168,47 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/phry_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/phry_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="300dp"
                     android:id="@+id/phry_text"
-                    android:visibility="gone"/>
+                    android:layout_marginTop="60dp"
+                    android:visibility="gone"
+                    android:hint="@string/hint"
+                    style="@style/biig"/>
 
             </RelativeLayout>
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/pedi"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -219,47 +220,47 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/pedicule_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/pedicule_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="300dp"
+                    android:layout_marginTop="60dp"
                     android:id="@+id/pedi_text"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone"/>
 
             </RelativeLayout>
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/pityver"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -271,47 +272,47 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/pityver_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/pityver_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="300dp"
+                    android:layout_marginTop="60dp"
                     android:id="@+id/pityver_text"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone"/>
 
             </RelativeLayout>
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/imp"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -323,47 +324,47 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/imp_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/imp_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="300dp"
+                    android:layout_marginTop="60dp"
                     android:id="@+id/imp_text"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone"/>
 
             </RelativeLayout>
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/papu"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -375,47 +376,47 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/papu_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/papu_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="300dp"
+                    android:layout_marginTop="60dp"
                     android:id="@+id/papu_text"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone"/>
 
             </RelativeLayout>
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/tin"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -427,47 +428,47 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/tin_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/tin_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="300dp"
+                    android:layout_marginTop="60dp"
                     android:id="@+id/tin_text"
+                    style="@style/biig"
+                    android:hint="@string/hint"
                     android:visibility="gone"/>
 
             </RelativeLayout>
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/mil"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -479,47 +480,47 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/mil_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/mil_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="300dp"
+                    android:layout_marginTop="60dp"
                     android:id="@+id/mil_text"
-                    android:visibility="gone"/>
+                    android:hint="@string/hint"
+                    android:visibility="gone"
+                    style="@style/biig" />
 
             </RelativeLayout>
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/viral"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
                 <RadioGroup
@@ -531,41 +532,40 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/viral_yes"
                         android:onClick="onRadioselect"
-                        android:text="Yes"/>
+                        android:text="Yes"
+                        style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/viral_no"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
-                        android:text="No"/>
+                        android:text="No"
+                        style="@style/biig" />
 
                 </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="300dp"
+                    android:layout_marginTop="60dp"
                     android:id="@+id/viral_text"
-                    android:visibility="gone"/>
+                    android:hint="@string/hint"
+                    android:visibility="gone"
+                    style="@style/biig" />
 
             </RelativeLayout>
-            <View
-                android:layout_marginTop="10dp"
-                style="@style/Differentiator"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -579,7 +579,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="300dp"
-                    android:id="@+id/add_text"/>
+                    android:id="@+id/add_text"
+                    android:hint="@string/hint"
+                    style="@style/biig" />
 
 
             </RelativeLayout>

@@ -1,43 +1,82 @@
 package com.mlab.pes.healthcare;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Base64;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class SkinActivity extends Activity {
+public class SkinActivity extends ActionBarActivity {
 
     //Declaring sid -> studentID(must)
-    String sid;
+    static String skin_sid;
 
     EditText Scabtext, Pityaltext, Phrynotext, Pedicultext, Pityvertext, Imptext, Paputext, Tintext, Miltext, Viraltext, Other;
 
+	TextView skinStdId;
+	
     int scab=10,pital=10,phry=10,pedi=10,pitver=10,imp=10,papu=10,tin=10,mil=10,vir=10;
+
+    SQLiteDatabase database;
+
+    //creating table query
+
+
+    private static SkinActivity app;
+    public static SkinActivity get(){
+        return app;
+    }
+
+    public String table_query=
+            "  child_id VARCHAR[11]," +
+            "  sc INTEGER[1]," +
+            "  sc_com VARCHAR[140]," +
+            "  pi INTEGER[1]," +
+            "  pi_com VARCHAR[140]," +
+            "  ph INTEGER[1]," +
+            "  ph_com VARCHAR[140]," +
+            "  pe INTEGER[1]," +
+            "  pe_com VARCHAR[140]," +
+            "  im INTEGER[1]," +
+            "  im_com VARCHAR[140]," +
+            "  pap INTEGER[1]," +
+            "  pap_com VARCHAR[140]," +
+            "  tc INTEGER[1]," +
+            "  tc_com VARCHAR[140]," +
+            "  mi INTEGER[1]," +
+            "  mi_com VARCHAR[140]," +
+            "  vi INTEGER[1]," +
+            "  vi_com VARCHAR[140]," +
+            "  others VARCHAR[140]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin);
 
+        app=this;
+
         //Re-Initializing pid_count for every new student
         pic_count_skin = 0;
         //Invoking StudentID Dialog box
         studentidDialog();
+
+		
+		skinStdId = (TextView)findViewById(R.id.skin_std_id);
+        skinStdId.setText(skin_sid);
 
         Scabtext = (EditText) findViewById(R.id.scab_text);
         Pityaltext = (EditText) findViewById(R.id.pityalb_text);
@@ -50,6 +89,20 @@ public class SkinActivity extends Activity {
         Miltext = (EditText) findViewById(R.id.mil_text);
         Viraltext = (EditText) findViewById(R.id.viral_text);
         Other = (EditText) findViewById(R.id.add_text);
+
+
+        //opening db
+        database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
+        //creating table if doesn't exist
+        database.execSQL("CREATE TABLE IF NOT EXISTS skin(" + table_query + ")");
+
+        String image_table_query=
+                "  child_id VARCHAR[10] ," +
+                        "  photo_id VARCHAR[20] ," +
+                        "  image TEXT" ;
+        //creating image table
+        database.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
+
     }
 
     @Override
@@ -137,6 +190,7 @@ public class SkinActivity extends Activity {
                 papu=1;
                 break;
             case R.id.papu_no:
+                Paputext.setVisibility(v.GONE);
                 papu=0;
                 break;
 
@@ -172,26 +226,117 @@ public class SkinActivity extends Activity {
         }
     }
 
-    public void Next()
-    {
-        if (scab==10 || pital==10 || phry==10 || pedi==10 || pitver==10 || imp==10 || papu==10 || tin==10 || mil==10 || vir==10 )
-        {
-            showMessage("Warning", "Please enter all values");
-            return;
-        }
+    public void Next() {
+            if (scab == 10) {
+                showMessage("Warning", "Please select an option for Scabies");
+                return;
+            }
+            else if ( pital == 10) {
+                showMessage("Warning", "Please select an option for PityriasisAlba");
+                return;
+            }
+            else if ( phry == 10) {
+                showMessage("Warning", "Please select an option for Phrynoderma");
+                return;
+            }
+            else if ( pedi == 10 ) {
+                showMessage("Warning", "Please select an option for Pediculosis");
+                return;
+            }
+            else if ( pitver == 10 ) {
+                showMessage("Warning", "Please select an option for Pityriasis Vrsicolor");
+                return;
+            }
+            else if (imp == 10) {
+                showMessage("Warning", "Please select an option for Impetigo");
+                return;
+            }
+            else if ( papu == 10 ) {
+                showMessage("Warning", "Please select an option for Papular urticaria");
+                return;
+            }
+            else if (tin == 10 ) {
+                showMessage("Warning", "Please select an option for Tinea Cruis/Corporis");
+                return;
+            }
+            else if (mil == 10 ) {
+                showMessage("Warning", "Please select an option for Miliaria");
+                return;
+            }
+            else if (vir == 10 ) {
+                showMessage("Warning", "Please select an option for Viral Warts");
+                return;
+            }else {
 
-        Intent intent = new Intent(this,SkinActivity.class);
-        startActivity(intent);
+                try {
+                String insert_query = "'" + skin_sid + "'," +
+                        "'" + scab + "'," +
+                        "'" + Scabtext.getText().toString().trim() + "'," +
+                        "'" + pital + "'," +
+                        "'" + Pityaltext.getText().toString().trim() + "'," +
+                        "'" + phry + "'," +
+                        "'" + Phrynotext.getText().toString().trim() + "'," +
+                        "'" + pedi + "'," +
+                        "'" + Pedicultext.getText().toString().trim() + "'," +
+                        "'" + imp + "'," +
+                        "'" + Imptext.getText().toString().trim() + "'," +
+                        "'" + papu + "'," +
+                        "'" + Paputext.getText().toString().trim() + "'," +
+                        "'" + tin + "'," +
+                        "'" + Tintext.getText().toString().trim() + "'," +
+                        "'" + mil + "'," +
+                        "'" + Miltext.getText().toString().trim() + "'," +
+                        "'" + vir + "'," +
+                        "'" + Viraltext.getText().toString().trim() + "'," +
+                        "'" + Other.getText().toString().trim() + "'";
+
+                //inserting into database
+                database.execSQL("INSERT INTO skin VALUES (" + insert_query + ")");
+
+                for(int x = 0; x < pic_count_skin; x++)
+                {
+                    String insert_image_query = "'" + skin_sid + "'," +
+                            "'" + skin_sid+"_skin_"+x+ "',"+
+                            "'" + Environment.getExternalStorageDirectory()+"/Images/"+skin_sid+"_skin_"+x+".jpg" + "'" ;
+
+                    database.execSQL("INSERT INTO images VALUES (" + insert_image_query+")");
+                }
+
+
+                    //sending confirmation that data is inserted
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Success");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Getback();
+                        }
+                    });
+                    builder.setCancelable(false);
+                    builder.setMessage("Entry Successfully Added!");
+                    builder.show();
+
+                    skin_sid="";
+            }catch (Exception e){
+                    System.out.println("ERROR IN DB");
+                    e.printStackTrace();
+                }
+                finally {
+                    database.close();
+                }
+        }
     }
 
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
         builder.setTitle(title);
+        builder.setPositiveButton("OK", null);
+        builder.setCancelable(false);
         builder.setMessage(message);
         builder.show();
 
     }
+
 
     //Method to create studentId dialog box
     public void studentidDialog() {
@@ -206,24 +351,27 @@ public class SkinActivity extends Activity {
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView);
         final EditText studentID = (EditText) dialogView.findViewById(R.id.studid);
-        // Add action buttons
+        //Validating Student ID
+        UpdateActivity.StudentIDValidation(dialogView);
 
+        //Add action buttons
         builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
 
-                sid = studentID.getText().toString();
-                //System.out.println(sid);
-                if (sid.length() <= 1) {
+                skin_sid = studentID.getText().toString().toUpperCase();
+                //System.out.println(skin_sid);
+                if (!UpdateActivity.isStudentID(skin_sid)) {
                     showError();
                     studentidDialog();
                 } else {
                     setStudentID();
                     dialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "Student ID: " + sid, Toast.LENGTH_SHORT).show();
-                }
+                    skinStdId.setText(skin_sid);
+                //Toast.makeText(getApplicationContext(), "Student ID: " + sid, Toast.LENGTH_SHORT).show();
             }
-        });
+        }
+    });
 
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -238,7 +386,7 @@ public class SkinActivity extends Activity {
     }
 
     public void showError() {
-        Toast.makeText(this, "Enter Student ID", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Enter a Valid Student ID", Toast.LENGTH_LONG).show();
     }
 
     public void setStudentID() {
@@ -290,7 +438,7 @@ public class SkinActivity extends Activity {
     //Method -> Camera Functions
     public void capture() {
         //PhotoId declaration
-        String pid = sid+"_skin_"+pic_count_skin;
+        String pid = skin_sid+"_skin_"+pic_count_skin;
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // start the image capture Intent
@@ -301,7 +449,7 @@ public class SkinActivity extends Activity {
         Uri uriSavedImage = Uri.fromFile(image);
         //PhotoId counter being incremented for new photo
         pic_count_skin++;
-        //System.out.println("****pic_count***"+pic_count);
+        //System.out.println("****pic_count***"+pic_count_skin);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
     }
@@ -312,9 +460,10 @@ public class SkinActivity extends Activity {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             // Image captured and saved to fileUri specified in the Intent
 
-            File imgFile = new File(Environment.getExternalStorageDirectory()+"/Images/" + sid+ ".jpg");
+            File imgFile = new File(Environment.getExternalStorageDirectory()+"/Images/" + skin_sid+"_skin_"+(pic_count_skin-1)+ ".jpg");
             if (imgFile.exists()) {
                 //image = encodeTobase64(myBitmap);
+
             }
         } else if (resultCode == RESULT_CANCELED) {
             // User cancelled the image capture
@@ -325,7 +474,7 @@ public class SkinActivity extends Activity {
         }
     }
 
-    public void deletePicture(){
+   public void deletePicture(){
         //If the entry is cancelled, this code will delete the images of the session
         File file = new File(Environment.getExternalStorageDirectory(), "Images");
         if(file.exists())
@@ -334,21 +483,10 @@ public class SkinActivity extends Activity {
             //loop will delete all photos taken during the cancelled session
             for(x = 0; x < pic_count_skin; x++)
             {
-                File del_image = new File(Environment.getExternalStorageDirectory()+"/Images/"+sid+"_skin_"+x+".jpg");
-                //System.out.println("***Deleted***"+del_image.toString());
+                File del_image = new File(Environment.getExternalStorageDirectory()+"/Images/"+skin_sid+"_skin_"+x+".jpg");
+                System.out.println("***Deleted***"+del_image.toString());
                 del_image.delete();
             }
         }
-    }
-
-    //Method to encode to image to base 64 string for syncing
-    public String encodeTobase64(Bitmap image) {
-        System.gc();
-        if (image == null) return null;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-        return imageEncoded;
     }
 }

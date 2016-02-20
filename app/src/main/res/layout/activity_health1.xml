@@ -4,39 +4,36 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Health"
-    android:background="#FFFFFFFF">
+    android:background="#FFF">
 
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff91a8f9"
+        android:background="@drawable/shape"
         android:id="@+id/stud">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/health"
-            style="@style/sid"/>
+            android:layout_marginLeft="5dp"
+            style="@style/studentID"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="400dp"
-            android:text="1AXZ004"
-            style="@style/sid"
+            style="@style/studentID"
             android:id="@+id/hlt_std_id"/>
-
-        <View
-            android:layout_marginTop="50dp"
-            style="@style/divider"></View>
 
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="50dp">
+        android:layout_below="@id/stud"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,7 +42,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -62,14 +60,15 @@
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="in cm"
-                    android:inputType="number"
-                    android:textStyle="italic"/>
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -86,14 +85,15 @@
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="in kg"
-                    android:inputType="number"
-                    android:textStyle="italic"/>
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -110,13 +110,14 @@
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="in cm"
-                    android:inputType="number"
-                    android:textStyle="italic"/>
+                    android:maxLength="2"
+                    android:inputType="number"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -133,14 +134,15 @@
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="in cm"
-                    android:inputType="number"
-                    android:textStyle="italic"/>
+                    android:maxLength="2"
+                    android:inputType="number"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -156,15 +158,16 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
+                    android:maxLength="3"
                     android:hint="beats per minute"
-                    android:inputType="number"
-                    android:textStyle="italic"/>
+                    android:inputType="number"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -180,15 +183,16 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
+                    android:maxLength="2"
                     android:hint="breaths per minute"
-                    android:inputType="number"
-                    android:textStyle="italic"/>
+                    android:inputType="number"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -205,28 +209,33 @@
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="mm Hg"
-                    android:inputType="number"
-                    android:textStyle="italic"/>
+                    android:maxLength="3"
+                    android:inputType="number"/>
 
             </RelativeLayout>
+
+
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:background="@drawable/headershape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/persl"
                     android:layout_marginTop="20dp"
-                    style="@style/head"/>
+                    style="@style/head1"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -248,6 +257,7 @@
                         android:layout_height="45dp"
                         android:id="@+id/nail_trim"
                         android:onClick="onRadioselect"
+                        android:textSize="20dp"
                         android:text="Trimmed"/>
 
                     <RadioButton
@@ -256,14 +266,16 @@
                         android:id="@+id/nail_nottrim"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="42dp"
-                        android:text="Not Trimmed"/>
+                        android:text="Not Trimmed"
+                        android:textSize="20dp"/>
 
                 </RadioGroup>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
@@ -271,6 +283,7 @@
                     android:layout_marginLeft="350dp"
                     android:id="@+id/nail_text"
                     android:layout_marginTop="10dp"
+                    android:hint="@string/hint"
                     android:inputType="text"
                     android:visibility="gone"/>
 
@@ -278,7 +291,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -300,14 +314,16 @@
                         android:layout_height="45dp"
                         android:id="@+id/bath_reg"
                         android:onClick="onRadioselect"
-                        android:text="Regular"/>
+                        android:text="Regular"
+                        android:textSize="20dp"/>
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:id="@+id/bath_irr"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="54dp"
+                        android:textSize="20dp"
                         android:text="Irregular"/>
 
                 </RadioGroup>
@@ -316,13 +332,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/bath_text"
+                    android:hint="@string/hint"
                     android:layout_marginTop="10dp"
                     android:visibility="gone"/>
 
@@ -330,7 +348,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -352,6 +371,7 @@
                         android:layout_height="45dp"
                         android:id="@+id/groom_good"
                         android:onClick="onRadioselect"
+                        android:textSize="20dp"
                         android:text="Good"/>
 
                     <RadioButton
@@ -359,7 +379,8 @@
                         android:layout_height="45dp"
                         android:id="@+id/groom_poor"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="64dp"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="74dp"
                         android:text="Poor"/>
 
                 </RadioGroup>
@@ -368,12 +389,14 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
+                    android:hint="@string/hint"
                     android:id="@+id/groom_text"
                     android:layout_marginTop="10dp"
                     android:visibility="gone"/>
@@ -382,7 +405,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -404,6 +428,7 @@
                         android:layout_height="45dp"
                         android:onClick="onRadioselect"
                         android:id="@+id/oral_good"
+                        android:textSize="20dp"
                         android:text="Good"/>
 
                     <RadioButton
@@ -411,8 +436,9 @@
                         android:layout_height="45dp"
                         android:onClick="onRadioselect"
                         android:id="@+id/oral_poor"
-                        android:layout_marginLeft="64dp"
+                        android:layout_marginLeft="74dp"
                         android:text="Poor"
+                        android:textSize="20dp"
                         android:checked="false" />
 
                 </RadioGroup>
@@ -421,12 +447,14 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
+                    android:hint="@string/hint"
                     android:id="@+id/oral_text"
                     android:layout_marginTop="10dp"
                     android:visibility="gone"/>
@@ -435,7 +463,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -445,23 +474,33 @@
                     android:layout_marginTop="20dp"
                     style="@style/h1"/>
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/app"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="400dp"
-                    android:onClick="onCheckBoxclicked"
-                    android:text="Applicable"/>
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/notapp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="530dp"
-                    android:onClick="onCheckBoxclicked"
-                    android:text="Not Applicable"/>
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/app"
+                        android:onClick="onRadioselect"
+                        android:textSize="20dp"
+                        android:text="Applicable"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        android:id="@+id/notapp"
+                        android:layout_weight="1"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="30dp"
+                        android:textSize="20dp"
+                        android:text="Not Applicable"/>
+
+                </RadioGroup>
 
             </RelativeLayout>
 
@@ -469,7 +508,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/sanitary"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -491,6 +531,7 @@
                         android:layout_height="45dp"
                         android:id="@+id/san_yes"
                         android:onClick="onRadioselect"
+                        android:textSize="20dp"
                         android:text="Yes"/>
 
                     <RadioButton
@@ -498,7 +539,8 @@
                         android:layout_height="45dp"
                         android:id="@+id/san_no"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="90dp"
+                        android:textSize="20dp"
                         android:text="No"/>
 
                 </RadioGroup>
@@ -506,19 +548,42 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
+                    android:hint="@string/hint"
                     android:id="@+id/san_text"
                     android:layout_marginTop="10dp"
                     android:visibility="gone"/>
 
             </RelativeLayout>
-
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/add"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="40dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:hint="@string/hint"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/health_text"
+                    android:layout_marginTop="10dp"/>
+
+            </RelativeLayout>
+            <!--<RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -526,26 +591,29 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/Sys"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     style="@style/sid"/>
 
-            </RelativeLayout>
+            </RelativeLayout>-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/headershape"
+                android:layout_marginTop="20dp"
+                >
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/anaemia"
                     android:layout_marginTop="20dp"
-                    style="@style/head"/>
+                    style="@style/head1"/>
 
                 <Spinner
-                    android:layout_width="wrap_content"
                     android:id="@+id/anaemia_drop"
-                    android:layout_height="60dp"
+                    android:layout_width="400dp"
+                    android:layout_height="80dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="350dp"
                     android:spinnerMode="dropdown">
@@ -555,20 +623,46 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/add"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="40dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:id="@+id/anaemia_text"
+                    android:hint="@string/hint"
+                    android:layout_marginTop="10dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/headershape"
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/oralexam"
                     android:layout_marginTop="10dp"
-                    style="@style/head"/>
+                    style="@style/head1"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -590,6 +684,7 @@
                         android:layout_height="45dp"
                         android:id="@+id/dental_yes"
                         android:onClick="onRadioselect"
+                        android:textSize="20dp"
                         android:text="Yes"/>
 
                     <RadioButton
@@ -597,7 +692,8 @@
                         android:layout_height="45dp"
                         android:id="@+id/dental_no"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="90dp"
+                        android:textSize="20dp"
                         android:text="No"/>
 
                 </RadioGroup>
@@ -606,7 +702,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
@@ -614,13 +711,15 @@
                     android:layout_marginLeft="350dp"
                     android:id="@+id/dental_text"
                     android:layout_marginTop="10dp"
+                    android:hint="@string/hint"
                     android:visibility="gone"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -642,6 +741,7 @@
                         android:layout_height="45dp"
                         android:id="@+id/fluoro_yes"
                         android:onClick="onRadioselect"
+                        android:textSize="20dp"
                         android:text="Yes"/>
 
                     <RadioButton
@@ -649,7 +749,8 @@
                         android:layout_height="45dp"
                         android:id="@+id/fluoro_no"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="90dp"
+                        android:textSize="20dp"
                         android:text="No"/>
 
                 </RadioGroup>
@@ -658,13 +759,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/fluoro_text"
+                    android:hint="@string/hint"
                     android:layout_marginTop="10dp"
                     android:visibility="gone"/>
 
@@ -672,7 +775,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -694,6 +798,7 @@
                         android:layout_height="45dp"
                         android:id="@+id/gingi_yes"
                         android:onClick="onRadioselect"
+                        android:textSize="20dp"
                         android:text="Yes"/>
 
                     <RadioButton
@@ -701,7 +806,8 @@
                         android:layout_height="45dp"
                         android:id="@+id/gingi_no"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="90dp"
+                        android:textSize="20dp"
                         android:text="No"/>
 
                 </RadioGroup>
@@ -710,13 +816,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/gingi_text"
+                    android:hint="@string/hint"
                     android:layout_marginTop="10dp"
                     android:visibility="gone"/>
 
@@ -724,7 +832,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -746,6 +855,7 @@
                         android:layout_height="45dp"
                         android:id="@+id/oralul_yes"
                         android:onClick="onRadioselect"
+                        android:textSize="20dp"
                         android:text="Yes"/>
 
                     <RadioButton
@@ -753,7 +863,8 @@
                         android:layout_height="45dp"
                         android:id="@+id/oralul_no"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="90dp"
+                        android:textSize="20dp"
                         android:text="No"/>
 
                 </RadioGroup>
@@ -762,13 +873,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/oralul_text"
+                    android:hint="@string/hint"
                     android:layout_marginTop="10dp"
                     android:visibility="gone"/>
 
@@ -776,7 +889,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -786,31 +900,44 @@
                     android:layout_marginTop="20dp"
                     style="@style/h1"/>
 
+                <!--<Spinner
+                    android:layout_width="190dp"
+                    android:id="@+id/dentalProb"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="350dp"
+                    android:spinnerMode="dropdown">
+                </Spinner>-->
+
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/sys_text"
-                    android:layout_marginTop="10dp"/>
+                    android:hint="@string/hint"
+                    android:layout_marginTop="20dp"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/headershape"
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/Resp"
                     android:layout_marginTop="20dp"
-                    style="@style/head"/>
+                    style="@style/head1"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -820,11 +947,20 @@
                     android:layout_marginTop="20dp"
                     style="@style/h1"/>
 
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:hint="@string/hint"
+                    android:id="@+id/historyOf_text"
+                    android:layout_marginTop="10dp"/>
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -846,6 +982,7 @@
                         android:layout_height="45dp"
                         android:id="@+id/lung_yes"
                         android:onClick="onRadioselect"
+                        android:textSize="20dp"
                         android:text="Yes"/>
 
                     <RadioButton
@@ -853,7 +990,8 @@
                         android:layout_height="45dp"
                         android:id="@+id/lung_no"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="90dp"
+                        android:textSize="20dp"
                         android:text="No"/>
 
                 </RadioGroup>
@@ -862,7 +1000,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
@@ -870,13 +1009,15 @@
                     android:layout_marginLeft="350dp"
                     android:id="@+id/lung_text"
                     android:layout_marginTop="10dp"
+                    android:hint="@string/hint"
                     android:visibility="gone"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -890,6 +1031,7 @@
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
+                    android:hint="@string/hint"
                     android:id="@+id/resp_text"
                     android:layout_marginTop="10dp"/>
 
@@ -897,20 +1039,23 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/headershape"
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/cardio"
                     android:layout_marginTop="20dp"
-                    style="@style/head"/>
+                    style="@style/head1"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -932,6 +1077,7 @@
                         android:layout_height="45dp"
                         android:id="@+id/heart_yes"
                         android:onClick="onRadioselect"
+                        android:textSize="20dp"
                         android:text="Yes"/>
 
                     <RadioButton
@@ -939,7 +1085,8 @@
                         android:layout_height="45dp"
                         android:id="@+id/heart_no"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="90dp"
+                        android:textSize="20dp"
                         android:text="No"/>
 
                 </RadioGroup>
@@ -948,15 +1095,40 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/heart_text"
+                    android:hint="@string/hint"
                     android:layout_marginTop="10dp"
                     android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bodyshape">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/add"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="350dp"
+                    android:hint="@string/hint"
+                    android:id="@+id/cardio_text"
+                    android:layout_marginTop="10dp"/>
 
             </RelativeLayout>
 

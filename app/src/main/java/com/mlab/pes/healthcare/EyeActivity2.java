@@ -1,32 +1,92 @@
 package com.mlab.pes.healthcare;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Base64;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class EyeActivity2 extends Activity {
+public class EyeActivity2 extends ActionBarActivity {
 
     EditText Cvis_left,Cvis_right,Bitot_left,Bitot_right,Allerconj_left,Allerconj_right,Night_left,Night_right,Congp_left,Congp_right,Congd_left,Congd_right,Amb_left,Amb_right,
             Nys_left,Nys_right,Fund_left,Fund_right,Other;
+			
+	TextView eye1StdId;
 
     int cvis_left=10,cvis_right=10,bitot_left=10,bitot_right=10,allconj_left=10,allconj_right=10,night_left=1,night_right=10,congp_left=10,congp_right=10,congd_left=10,congd_right=10,
             amb_left=10,amb_right=10,nys_left=10,nys_right=10,fund_left=10,fund_right=10;
+
+    SQLiteDatabase database;
+
+    public String table_query=
+            "  child_id VARCHAR[11]," +
+            "  vt_r_d VARCHAR[5]," +
+            "  vt_r_n VARCHAR[5]," +
+            "  vt_l_d VARCHAR[5]," +
+            "  vt_l_n VARCHAR[5]," +
+            "  vt_com VARCHAR[140]," +
+            "  rc_r_s_d VARCHAR[5]," +
+            "  rc_r_s_n VARCHAR[5]," +
+            "  rc_r_c_d VARCHAR[5]," +
+            "  rc_r_c_n VARCHAR[5]," +
+            "  rc_r_a_d VARCHAR[5]," +
+            "  rc_r_a_n VARCHAR[5]," +
+            "  rc_l_s_d VARCHAR[5]," +
+            "  rc_l_s_n VARCHAR[5]," +
+            "  rc_l_c_d VARCHAR[5]," +
+            "  rc_l_c_n VARCHAR[5]," +
+            "  rc_l_a_d VARCHAR[5]," +
+            "  rc_l_a_n VARCHAR[5]," +
+            "  rc_com VARCHAR[140]," +
+            "  cv_r INTEGER[1]," +
+            "  cv_r_com VARCHAR[140]," +
+            "  cv_l INTEGER[1]," +
+            "  cv_l_com VARCHAR[140]," +
+            "  bs_r INTEGER[1]," +
+            "  bs_r_com VARCHAR[140]," +
+            "  bs_l INTEGER[1]," +
+            "  bs_l_com VARCHAR[140]," +
+            "  ac_r INTEGER[1]," +
+            "  ac_r_com VARCHAR[140]," +
+            "  ac_l INTEGER[1]," +
+            "  ac_l_com VARCHAR[140]," +
+            "  nb_r INTEGER[1]," +
+            "  nb_r_com VARCHAR[140]," +
+            "  nb_l INTEGER[1]," +
+            "  nb_l_com VARCHAR[140]," +
+            "  cp_r INTEGER[1]," +
+            "  cp_r_com VARCHAR[140]," +
+            "  cp_l INTEGER[1]," +
+            "  cp_l_com VARCHAR[140]," +
+            "  cdc_r INTEGER[1]," +
+            "  cdc_r_com VARCHAR[140]," +
+            "  cdc_l INTEGER[1]," +
+            "  cdc_l_com VARCHAR[140]," +
+            "  am_r INTEGER[1]," +
+            "  am_r_com VARCHAR[140]," +
+            "  am_l INTEGER[1]," +
+            "  am_l_com VARCHAR[140]," +
+            "  ny_r INTEGER[1]," +
+            "  ny_r_com VARCHAR[140]," +
+            "  ny_l INTEGER[1]," +
+            "  ny_l_com VARCHAR[140]," +
+            "  fe_r INTEGER[1]," +
+            "  fe_r_com VARCHAR[140]," +
+            "  fe_l INTEGER[1]," +
+            "  fe_l_com VARCHAR[140]," +
+            "  others VARCHAR[140]";
 
 
     @Override
@@ -36,6 +96,9 @@ public class EyeActivity2 extends Activity {
 
         //Re-Initializing pid_count for every new student
         pic_count_eye = 0;
+		
+		eye1StdId = (TextView)findViewById(R.id.eye1_std_id);
+        eye1StdId.setText(EyeActivity1.eye_sid);
 
         Cvis_left = (EditText) findViewById(R.id.cvis_left_text);
         Cvis_right = (EditText) findViewById(R.id.cvis_right_text);
@@ -56,12 +119,26 @@ public class EyeActivity2 extends Activity {
         Fund_left = (EditText) findViewById(R.id.fund_left_text);
         Fund_right = (EditText) findViewById(R.id.fund_right_text);
         Other = (EditText) findViewById(R.id.add_text);
+
+        //opening db
+        database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
+        //creating table if doesn't exist
+        database.execSQL("CREATE TABLE IF NOT EXISTS eye(" + table_query + ")");
+
+        String image_table_query=
+                "  child_id VARCHAR[10] ," +
+                        "  photo_id VARCHAR[20] ," +
+                        "  image TEXT" ;
+        //creating image table
+        database.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_eye1, menu);
+        getMenuInflater().inflate(R.menu.menu_eye2, menu);
         return true;
     }
 
@@ -86,19 +163,19 @@ public class EyeActivity2 extends Activity {
     public void eyeClick(View view) {
         switch (view.getId()) {
             case R.id.cvis_left_yes:
-                Cvis_left.setVisibility(view.VISIBLE);
+                Cvis_left.setVisibility(view.GONE);
                 cvis_left = 1;
                 break;
             case R.id.cvis_right_yes:
-                Cvis_right.setVisibility(view.VISIBLE);
+                Cvis_right.setVisibility(view.GONE);
                 cvis_right = 1;
                 break;
             case R.id.cvis_left_no:
-                Cvis_left.setVisibility(view.GONE);
+                Cvis_left.setVisibility(view.VISIBLE);
                 cvis_left = 0;
                 break;
             case R.id.cvis_right_no:
-                Cvis_right.setVisibility(view.GONE);
+                Cvis_right.setVisibility(view.VISIBLE);
                 cvis_right = 0;
                 break;
 
@@ -241,29 +318,199 @@ public class EyeActivity2 extends Activity {
         }
     }
 
-    public void Next()
-    {
-        if(cvis_left==10 || cvis_right==10 || bitot_left==10 || bitot_right==10 || allconj_left==10 || allconj_right==10 || night_left==10 || night_right==10 || congp_left==10 ||
-                congp_right==10 || congd_left==10 || congd_right==10 || amb_left==10 || amb_right==10 || nys_left==10 || nys_right==10 || fund_left==10 || fund_right==10)
-        {
-            showMessage("Warning","Please enter all values");
+    public void Next() {
+
+        if (cvis_left == 10 ) {
+            showMessage("Warning", "Please select an option for Colour Vision - Left Eye");
             return;
         }
+        else if (cvis_right == 10) {
+            showMessage("Warning", "Please select an option for Colour Vision - Right Eye");
+            return;
+        }
+        else if ( bitot_left == 10) {
+            showMessage("Warning", "Please select an option for Bitot\'s Spots - Left Eye");
+            return;
+        }
+        else if (bitot_right == 10) {
+            showMessage("Warning", "Please select an option for Bitot\'s Spots - Right Eye");
+            return;
+        }
+        else if (allconj_left == 10 ) {
+            showMessage("Warning", "Please select an option for Allergy Conjunctivitis - Left Eye");
+            return;
+        }
+        else if (allconj_right == 10) {
+            showMessage("Warning", "Please select an option for Allergy Conjunctivitis - Right Eye");
+            return;
+        }
+        else if (night_left == 10) {
+            showMessage("Warning", "Please select an option for Night Blindness - Left Eye");
+            return;
+        }
+        else if (night_right == 10) {
+            showMessage("Warning", "Please select an option for Night Blindness - Right Eye");
+            return;
+        }
+        else if (congp_left == 10) {
+            showMessage("Warning", "Please select an option for Congenital Ptosis - Left Eye");
+            return;
+        }
+        else if (congp_right == 10) {
+            showMessage("Warning", "Please select an option for Congenital Ptosis - Right Eye");
+            return;
+        }
+        else if (congd_left == 10) {
+            showMessage("Warning", "Please select an option for Congenital Developmental Cataract - Left Eye");
+            return;
+        }
+        else if (congd_right == 10) {
+            showMessage("Warning", "Please select an option for Congenital Developmental Cataract - Right Eye");
+            return;
+        }
+        else if (amb_left == 10) {
+            showMessage("Warning", "Please select an option for Amblyopia - Left Eye");
+            return;
+        }
+        else if (amb_right == 10) {
+            showMessage("Warning", "Please select an option for Amblyopia - Right Eye");
+            return;
+        }
+        else if (nys_left == 10) {
+            showMessage("Warning", "Please select an option for Nystagmus - Left Eye");
+            return;
+        }
+        else if (nys_right == 10) {
+            showMessage("Warning", "Please select an option for Nystagmus - Right Eye");
+            return;
+        }
+        else if (fund_left == 10) {
+            showMessage("Warning", "Please select an option for Fundus Examination - Left Eye");
+            return;
+        }
+        else if (fund_right == 10) {
+            showMessage("Warning", "Please select an option for Fundus Examination - Right Eye");
+            return;
+        }
+        else {
 
-        Intent intent = new Intent(this,EyeActivity1.class);
-        startActivity(intent);
+
+            try{
+            //creating insertion query
+            String insert_query = "'" + EyeActivity1.eye_sid + "'," +
+                    "'" + EyeActivity1.vt_d_r + "'," +
+                    "'" + EyeActivity1.vt_n_r + "'," +
+                    "'" + EyeActivity1.vt_d_l + "'," +
+                    "'" + EyeActivity1.vt_n_l + "'," +
+                    "'" + EyeActivity1.upper.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.spherical_dist_right+EyeActivity1.Spherical_rt_dist.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.spherical_near_right+EyeActivity1.Spherical_rt_near.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.Cylinder_rt_dist.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.Cylinder_rt_near.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.Axis_rt_dist.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.Axis_rt_near.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.spherical_dist_left+EyeActivity1.Spherical_lt_dist.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.spherical_near_left+EyeActivity1.Spherical_lt_near.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.Cylinder_lt_dist.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.Cylinder_lt_near.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.Axis_lt_dist.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.Axis_lt_near.getText().toString().trim() + "'," +
+                    "'" + EyeActivity1.lower.getText().toString().trim()+ "'," +
+                    "'" + cvis_right + "'," +
+                    "'" + Cvis_right.getText().toString().trim() + "'," +
+                    "'" + cvis_left + "'," +
+                    "'" + Cvis_left.getText().toString().trim() + "'," +
+                    "'" + bitot_right + "'," +
+                    "'" + Bitot_right.getText().toString().trim() + "'," +
+                    "'" + bitot_left + "'," +
+                    "'" + Bitot_left.getText().toString().trim() + "'," +
+                    "'" + allconj_right + "'," +
+                    "'" + Allerconj_right.getText().toString().trim() + "'," +
+                    "'" + allconj_left + "'," +
+                    "'" + Allerconj_left.getText().toString().trim() + "'," +
+                    "'" + night_right + "'," +
+                    "'" + Night_right.getText().toString().trim() + "'," +
+                    "'" + night_left + "'," +
+                    "'" + Night_left.getText().toString().trim() + "'," +
+                    "'" + congp_right + "'," +
+                    "'" + Congp_right.getText().toString().trim() + "'," +
+                    "'" + congp_left + "'," +
+                    "'" + Congp_left.getText().toString().trim() + "'," +
+                    "'" + congd_right + "'," +
+                    "'" + Congd_right.getText().toString().trim() + "'," +
+                    "'" + congd_left + "'," +
+                    "'" + Congd_left.getText().toString().trim() + "'," +
+                    "'" + amb_right + "'," +
+                    "'" + Amb_right.getText().toString().trim() + "'," +
+                    "'" + amb_left + "'," +
+                    "'" + Amb_left.getText().toString().trim() + "'," +
+                    "'" + nys_right + "'," +
+                    "'" + Nys_right.getText().toString().trim() + "'," +
+                    "'" + nys_left + "'," +
+                    "'" + Nys_left.getText().toString().trim() + "'," +
+                    "'" + fund_right + "'," +
+                    "'" + Fund_right.getText().toString().trim() + "'," +
+                    "'" + fund_left + "'," +
+                    "'" + Fund_left.getText().toString().trim() + "'," +
+                    "'" + Other.getText().toString() + "'";
+                System.out.println("EYE " + insert_query);
+
+            //inserting into database
+            database.execSQL("INSERT INTO eye VALUES (" + insert_query + ")");
+
+            for(int x = 0; x < pic_count_eye; x++)
+            {
+                String insert_image_query = "'" + EyeActivity1.eye_sid + "'," +
+                        "'" + EyeActivity1.eye_sid+"_eye_"+x + "',"+
+                        "'" + Environment.getExternalStorageDirectory()+"/Images/"+EyeActivity1.eye_sid+"_eye_"+x+".jpg" + "'";
+
+                database.execSQL("INSERT INTO images VALUES(" + insert_image_query + ")");
+            }
+
+                //sending confirmation that data is inserted
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Success");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getBack();
+                    }
+                });
+                builder.setCancelable(false);
+                builder.setMessage("Entry Successfully Added!");
+                builder.show();
+
+                EyeActivity1.eye_sid="";
+
+        }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            finally {
+                database.close();
+
+            }
+    }
     }
 
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
         builder.setTitle(title);
+        builder.setPositiveButton("OK",null);
+        builder.setCancelable(false);
         builder.setMessage(message);
         builder.show();
 
     }
 
+    public void getBack(){
+
+        Intent intent = new Intent(this, UpdateActivity.class);
+        startActivity(intent);
+
+    }
     public void Getback() {
+
         Intent i = new Intent(this, EyeActivity1.class);
         startActivity(i);
     }
@@ -280,7 +527,7 @@ public class EyeActivity2 extends Activity {
     //Method -> Camera Functions
     public void capture() {
         //PhotoId declaration
-        String pid = HealthActivity1.health_sid+"_eye_"+pic_count_eye;
+        String pid = EyeActivity1.eye_sid+"_eye_"+pic_count_eye;
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // start the image capture Intent
@@ -313,19 +560,6 @@ public class EyeActivity2 extends Activity {
             // Image capture failed, advise user
             Toast.makeText(this, "Photo Capture Failed", Toast.LENGTH_SHORT).show();
         }
-    }
-
-
-
-    //Method to encode to image to base 64 string for syncing
-    public String encodeTobase64(Bitmap image) {
-        System.gc();
-        if (image == null) return null;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-        return imageEncoded;
     }
 
 

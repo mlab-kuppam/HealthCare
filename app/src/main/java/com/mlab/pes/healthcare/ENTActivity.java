@@ -1,47 +1,92 @@
 package com.mlab.pes.healthcare;
 
-import android.app.Activity;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
-import android.util.Base64;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class ENTActivity extends Activity {
+public class ENTActivity extends ActionBarActivity {
 
     //Declaring sid -> studentID(must)
     String sid;
+	
+	TextView entStdId;
 
     EditText Otisleft,Otisright,Asomleft,Asomright,Csomleft,Csomright,Impactleft,Impactright,Impairleft,Impairright,Epi,
-            Adeno,Phary,Aller,Speech;
+            Adeno,Phary,Aller,Speech,Others;
 
     int oti_left=10,oti_right=10,asom_left=10,asom_right=10,csom_left=10,csom_right=10,impact_left=10,impact_right=10,impair_left=10,impair_right=10,
-            epi=10,adeno=10,phary=10,aller=10,speech=0;
+            epi=10,adeno=10,phary=10,aller=10,speech=10;
+
+    SQLiteDatabase database;
+
+    private static ENTActivity app;
+    public static ENTActivity get(){
+        return app;
+    }
+
+    public String table_query="  child_id VARCHAR[11]," +
+            "  oe_r INTEGER[1], " +
+            "  oe_r_com VARCHAR[140]," +
+            "  oe_l INTEGER[1]," +
+            "  oe_l_com VARCHAR[140]," +
+            "  as_r INTEGER[1]," +
+            "  as_r_com VARCHAR[140]," +
+            "  as_l INTEGER[1]," +
+            "  as_l_com VARCHAR[140]," +
+            "  cs_r INTEGER[1]," +
+            "  cs_r_com VARCHAR[140]," +
+            "  cs_l INTEGER[1]," +
+            "  cs_l_com VARCHAR[140]," +
+            "  iw_r INTEGER[1]," +
+            "  iw_r_com VARCHAR[140]," +
+            "  iw_l INTEGER[1]," +
+            "  iw_l_com VARCHAR[140]," +
+            "  ih_r INTEGER[1]," +
+            "  ih_r_com VARCHAR[140]," +
+            "  ih_l INTEGER[1]," +
+            "  ih_l_com VARCHAR[140]," +
+            "  ep INTEGER[1]," +
+            "  ep_com VARCHAR[140]," +
+            "  ad INTEGER[1]," +
+            "  ad_com VARCHAR[140]," +
+            "  ph INTEGER[1]," +
+            "  ph_com VARCHAR[140]," +
+            "  ar INTEGER[1]," +
+            "  ar_com VARCHAR[140]," +
+            "  sd INTEGER[1]," +
+            "  sd_com VARCHAR[140]," +
+            "  others VARCHAR[140]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ent);
 
+        app=this;
+
         //Re-Initializing pid_count for every new student
         pic_count_ent = 0;
         //Invoking StudentID Dialog box
         studentidDialog();
+		
+		entStdId = (TextView)findViewById(R.id.ent_std_id);
+        entStdId.setText(sid);
 
         Otisleft = (EditText)findViewById(R.id.oti_left_text);
         Otisright = (EditText)findViewById(R.id.oti_right_text);
@@ -64,6 +109,20 @@ public class ENTActivity extends Activity {
         Phary = (EditText)findViewById(R.id.phary_text);
         Aller = (EditText)findViewById(R.id.aller_text);
         Speech = (EditText)findViewById(R.id.speech_text);
+        Others = (EditText)findViewById(R.id.add_text);
+
+        //opening db
+        database = openOrCreateDatabase("healthcare",Context.MODE_PRIVATE,null);
+        //creating table if doesn't exist
+        database.execSQL("CREATE TABLE IF NOT EXISTS ent(" + table_query + ")");
+
+        String image_table_query=
+                "  child_id VARCHAR[10] ," +
+                        "  photo_id VARCHAR[20] ," +
+                        "  image TEXT" ;
+        //creating image table
+        database.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
+
     }
 
     @Override
@@ -225,27 +284,136 @@ public class ENTActivity extends Activity {
         }
     }
 
-    public void Next()
-    {
-        if(oti_left == 10 || oti_right == 10 || asom_left == 10 || asom_right == 10 || csom_left == 10 || csom_right == 10 || impact_left == 10 ||
-                impact_right == 10 || impair_left == 10 || impair_right == 10 || epi==10 || adeno == 10 || phary == 10 || aller == 10 || speech == 10)
-        {
-            showMessage("Warning", "Please enter all values");
-            return;
-        }
+    public void Next() {
 
-        Intent intent = new Intent(this,ENTActivity.class);
-        startActivity(intent);
+            if (oti_left == 10 ) {
+                showMessage("Warning", "Please select an option for Otitis Externa - Left Ear");
+                return;
+            }
+            else if (oti_right == 10 ) {
+                showMessage("Warning", "Please select an option for Otitis Externa - Right Ear");
+                return;
+            }
+            else if (asom_left == 10 ) {
+                showMessage("Warning", "Please select an option for ASOM - Left Ear");
+                return;
+            }
+            else if (asom_right == 10 ) {
+                showMessage("Warning", "Please select an option for ASOM - Right Ear");
+                return;
+            }
+            else if (csom_left == 10 ) {
+                showMessage("Warning", "Please select an option for CSOM - Left Ear");
+                return;
+            }
+            else if (csom_right == 10 ) {
+                showMessage("Warning", "Please select an option for CSOM - Right Ear");
+                return;
+            }
+            else if ( impact_left == 10 ) {
+                showMessage("Warning", "Please select an option for Imapacted Wax - Left Ear");
+                return;
+            }
+            else if (impact_right == 10 ) {
+                showMessage("Warning", "Please select an option for Imapacted Wax - Right Ear");
+                return;
+            }
+            else if (impair_left == 10  ) {
+                showMessage("Warning", "Please select an option for Impaired Hearing - Left Ear");
+                return;
+            }
+            else if (impair_right == 10  ) {
+                showMessage("Warning", "Please select an option for Impaired Hearing - Right Ear");
+                return;
+            }
+            else if (epi == 10  ) {
+                showMessage("Warning", "Please select an option for H/O Epistaxis");
+                return;
+            }
+            else if (adeno == 10 ) {
+                showMessage("Warning", "Please select an option for Adenotonsilitis");
+                return;
+            }
+            else if (phary == 10 ) {
+                showMessage("Warning", "Please select an option for Pharyngitis");
+                return;
+            }
+            else if (aller == 10 ) {
+                showMessage("Warning", "Please select an option for Allergic Rhinitis");
+                return;
+            }
+            else if (speech == 10 ) {
+                showMessage("Warning", "Please select an option for Speech Defects");
+                return;
+            }else
+             {
+                try {
+                //creating insertion query
+                String insert_query = "'" + sid + "'," +
+                        "'" + oti_right + "','" + Otisright.getText().toString().trim() + "'," +
+                        "'" + oti_left + "','" + Otisleft.getText().toString().trim() + "'," +
+                        "'" + asom_right + "','" + Asomright.getText().toString().trim() + "'," +
+                        "'" + asom_left + "','" + Asomleft.getText().toString().trim() + "'," +
+                        "'" + csom_right + "','" + Csomright.getText().toString().trim() + "'," +
+                        "'" + csom_left + "','" + Csomleft.getText().toString().trim() + "'," +
+                        "'" + impact_right + "','" + Impactright.getText().toString().trim() + "'," +
+                        "'" + impact_left + "','" + Impactleft.getText().toString().trim() + "'," +
+                        "'" + impair_right + "','" + Impairright.getText().toString().trim() + "'," +
+                        "'" + impair_left + "','" + Impairleft.getText().toString().trim() + "'," +
+                        "'" + epi + "','" + Epi.getText().toString().trim() + "'," +
+                        "'" + adeno + "','" + Adeno.getText().toString().trim() + "'," +
+                        "'" + phary + "','" + Phary.getText().toString().trim() + "'," +
+                        "'" + aller + "','" + Aller.getText().toString().trim() + "'," +
+                        "'" + speech + "','" + Speech.getText().toString().trim() + "'," +
+                        "'" + Others.getText().toString().trim() + "'";
+
+                //inserting into database
+                database.execSQL("INSERT INTO ent VALUES (" + insert_query + ")");
+                for (int x = 0; x < pic_count_ent; x++) {
+
+                    String insert_image_query = "'" + sid + "'," +
+                            "'" + sid+"_ent_"+x + "',"+
+                            "'" + Environment.getExternalStorageDirectory() + "/Images/" + sid + "_ent_" + x + ".jpg" + "'";
+
+                    database.execSQL("INSERT INTO images VALUES(" + insert_image_query+")");
+                }
+                    //sending confirmation that data is inserted
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Success");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Getback();
+                        }
+                    });
+                    builder.setCancelable(false);
+                    builder.setMessage("Entry Successfully Added!");
+                    builder.show();
+
+
+
+                    sid="";
+            }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                finally {
+                    database.close();
+
+                }
+        }
     }
 
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
         builder.setTitle(title);
+        builder.setPositiveButton("OK", null);
         builder.setMessage(message);
+        builder.setCancelable(false);
         builder.show();
 
     }
+
 
     //Method to create studentId dialog box
     public void studentidDialog() {
@@ -260,21 +428,24 @@ public class ENTActivity extends Activity {
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView);
         final EditText studentID = (EditText) dialogView.findViewById(R.id.studid);
-        // Add action buttons
+        //Validating Student ID
+        UpdateActivity.StudentIDValidation(dialogView);
 
+        //Add action buttons
         builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
 
-                sid = studentID.getText().toString();
-                //System.out.println(sid);
-                if (sid.length() <= 1) {
+                sid = studentID.getText().toString().toUpperCase();
+                //System.out.println(skin_sid);
+                if (!UpdateActivity.isStudentID(sid)) {
                     showError();
                     studentidDialog();
                 } else {
                     setStudentID();
                     dialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "Student ID: " + sid, Toast.LENGTH_SHORT).show();
+                    entStdId.setText(sid);
+                    //Toast.makeText(getApplicationContext(), "Student ID: " + sid, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -292,7 +463,7 @@ public class ENTActivity extends Activity {
     }
 
     public void showError() {
-        Toast.makeText(this, "Enter Student ID", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Enter a Valid Student ID", Toast.LENGTH_LONG).show();
     }
 
     public void setStudentID() {
@@ -394,14 +565,4 @@ public class ENTActivity extends Activity {
         }
     }
 
-    //Method to encode to image to base 64 string for syncing
-    public String encodeTobase64(Bitmap image) {
-        System.gc();
-        if (image == null) return null;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-        return imageEncoded;
-    }
 }

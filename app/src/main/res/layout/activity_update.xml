@@ -15,7 +15,7 @@
         android:layout_width="220dp"
         android:layout_height="80dp"
         android:layout_marginTop="80dp"
-        android:drawableLeft="@drawable/ic_add_box_black_36dp"
+        android:drawableLeft="@drawable/ic_add_box_white_36dp"
         android:onClick="CHANGE"
         android:text="Health"
         android:layout_alignParentTop="true"
@@ -28,7 +28,7 @@
         android:layout_below="@+id/health"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:drawableLeft="@drawable/ic_remove_red_eye_black_36dp"
+        android:drawableLeft="@drawable/ic_visibility_white_36dp"
         android:onClick="CHANGE"
         android:text="EYE"/>
 
@@ -40,7 +40,7 @@
         android:layout_below="@+id/eye"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:drawableLeft="@drawable/ic_hearing_black_36dp"
+        android:drawableLeft="@drawable/ic_hearing_white_36dp"
         android:onClick="CHANGE"
         android:text="ENT"/>
 
@@ -52,7 +52,7 @@
         android:layout_below="@+id/ent"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:drawableLeft="@drawable/ic_person_outline_black_36dp"
+        android:drawableLeft="@drawable/ic_perm_identity_white_36dp"
         android:onClick="CHANGE"
         android:text="SKIN" />
 

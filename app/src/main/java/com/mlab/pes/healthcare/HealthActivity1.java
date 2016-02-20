@@ -1,31 +1,32 @@
 package com.mlab.pes.healthcare;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Environment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 
-public class HealthActivity1 extends Activity {
+public class HealthActivity1 extends ActionBarActivity {
 
     //Declaring sid -> studentID(must)
     static String health_sid;
 
-    EditText Height, Weight, Waist, Hip, Pulse_Rate, Resp_Rate, Bp, Nail, Bath, Groom, Oral, Sanitary, Dental, Fluorosis, Gingi, ulcer, Oral_Other, Lung, Resp_other, Heart;
+    EditText historyOfRS,cardio,anaemia_others,health_others,Height, Weight, Waist, Hip, Pulse_Rate, Resp_Rate, Bp, Nail, Bath, Groom, Oral, Sanitary, Dental, Fluorosis, Gingi, ulcer, Oral_Other, Lung, Resp_other, Heart;
 
     RelativeLayout San;
 
@@ -33,22 +34,80 @@ public class HealthActivity1 extends Activity {
 
     String age;
 
-    int nails = 10, bath = 10, groom = 10, oral = 10, men = 10, san = 10, dent = 10, flu = 10, ging = 10, ulc = 10, lung = 10, heart = 10, check = 10;
+    int anaemia, nails = 10, bath = 10, groom = 10, oral = 10, men = 10, san = 10, dent = 10, flu = 10, ging = 10, ulc = 10, lung = 10, heart = 10, check = 10;
 
-    TextView Std_id;
+    TextView hltStdId;
 
-    CheckBox Applicable, NotApplicable;
+    RadioButton Applicable, NotApplicable;
 
-    Spinner Anaemia_drop;
+    Spinner Anaemia_drop,dental_others;
+
+    SQLiteDatabase database;
+
+    private static HealthActivity1 app;
+    public static HealthActivity1 get(){
+        return app;
+    }
+
+    //creating query for declaration of tables
+    public String table_query=
+            "  child_id VARCHAR[11]," +
+            "  height INTEGER[3]," +
+            "  weight INTEGER[3]," +
+            "  wc INTEGER[3]," +
+            "  hc INTEGER[3]," +
+            "  pr INTEGER[3]," +
+            "  pr_com VARCHAR[140]," +
+            "  rr INTEGER[3]," +
+            "  bp varchar(7)," +
+            "  ph_n INTEGER[1]," +
+            "  ph_n_com VARCHAR[140]," +
+            "  ph_b INTEGER[1]," +
+            "  ph_b_com VARCHAR[140]," +
+            "  ph_g INTEGER[1]," +
+            "  ph_g_com VARCHAR[140]," +
+            "  ph_oc INTEGER[1]," +
+            "  ph_oc_com VARCHAR[140]," +
+            "  ph_am INTEGER[1]," +
+            "  ph_am_sn INTEGER[1]," +
+            "  ph_am_sn_com VARCHAR[140]," +
+            "  health_others VARCHAR[140]," +
+            "  ca INTEGER[1]," +
+            "  ca_com VARCHAR[140]," +
+            "  oe_dc INTEGER[1]," +
+            "  oe_dc_com VARCHAR[140]," +
+            "  oe_f INTEGER[1]," +
+            "  oe_f_com VARCHAR[140]," +
+            "  oe_g INTEGER[1]," +
+            "  oe_g_com VARCHAR[140]," +
+            "  oe_ou INTEGER[1]," +
+            "  oe_ou_com VARCHAR[140]," +
+            "  oe_others VARCHAR[140]," +
+            "  rs_ho INTEGER[1]," +
+            "  rs_ho_com VARCHAR[140]," +
+            "  rs_clf INTEGER[1]," +
+            "  rs_clf_com VARCHAR[140]," +
+            "  rs_others VARCHAR[140]," +
+            "  cvs_ahs INTEGER[1]," +
+            "  cvs_ahs_com VARCHAR[140]," +
+            "  cvs_others VARCHAR[140]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health1);
 
+        app=this;
+
         //Invoking StudentID Dialog box
         studentidDialog();
+		
+		hltStdId = (TextView)findViewById(R.id.hlt_std_id);
 
+        historyOfRS = (EditText) findViewById(R.id.historyOf_text);
+        cardio = (EditText) findViewById(R.id.cardio_text);
+        anaemia_others = (EditText) findViewById(R.id.anaemia_text);
+        health_others = (EditText) findViewById(R.id.health_text);
         Height = (EditText) findViewById(R.id.height);
         Weight = (EditText) findViewById(R.id.weight);
         Waist = (EditText) findViewById(R.id.waist);
@@ -70,10 +129,8 @@ public class HealthActivity1 extends Activity {
         Resp_other = (EditText) findViewById(R.id.resp_text);
         Heart = (EditText) findViewById(R.id.heart_text);
 
-        Std_id = (TextView)findViewById(R.id.hlt_std_id);
-
-        Applicable = (CheckBox) findViewById(R.id.app);
-        NotApplicable = (CheckBox) findViewById(R.id.notapp);
+        Applicable = (RadioButton) findViewById(R.id.app);
+        NotApplicable = (RadioButton) findViewById(R.id.notapp);
 
 
         San = (RelativeLayout) findViewById(R.id.sanitary);
@@ -81,9 +138,18 @@ public class HealthActivity1 extends Activity {
 
         Anaemia_drop = (Spinner) findViewById(R.id.anaemia_drop);
 
-        String[] symp = new String[]{"Mild", "Moderate", "Severe"};
+        String[] symp = new String[]{"No Anaemia","Mild", "Moderate", "Severe"};
+        String[] dental = {"Pre-Shedding mobility","Trauma of tooth","Spacing/Crowding","Developmental Abnormailty"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, symp);
         Anaemia_drop.setAdapter(adapter);
+
+
+
+        //opening db
+        database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
+        //creating table if doesn't exist
+        database.execSQL("CREATE TABLE IF NOT EXISTS health1(" + table_query + ")");
+
     }
 
     @Override
@@ -209,41 +275,181 @@ public class HealthActivity1 extends Activity {
                 Heart.setVisibility(v.GONE);
                 break;
 
-        }
-    }
-
-    public void onCheckBoxclicked(View v) {
-        switch (v.getId()) {
             case R.id.app:
                 check = 1;
                 age = checkboxitem[0];
                 San.setVisibility(v.VISIBLE);
-                NotApplicable.setChecked(false);
+                //NotApplicable.setChecked(false);
                 //Applicable.setChecked(true);
                 break;
             case R.id.notapp:
                 check = 0;
                 age = checkboxitem[1];
                 San.setVisibility(v.GONE);
-                Applicable.setChecked(false);
+                //Applicable.setChecked(false);
                 //NotApplicable.setChecked(true);
                 break;
         }
     }
 
     public void Next() {
-        if (nails == 10 || bath == 10 || groom == 10 || oral == 10 || check == 10 || (check ==10 && san == 10) || dent == 10 || flu == 10 ||
-                ging == 10 || ulc == 10 || lung == 10 || heart == 10 ||
-                Height.getText().toString().length()==0 || Weight.getText().toString().length()==0 || Waist.getText().toString().length()==0 ||
-                Hip.getText().toString().length()==0 ||Pulse_Rate.getText().toString().length()==0 ||Resp_Rate.getText().toString().length()==0 ||
-                Bp.getText().toString().length()==0 ) {
 
-            showMessage("Warning", "Please enter all values");
-            return;
-        }
+            if (Height.getText().toString().length() == 0 ) {
+                showMessage("Warning", "Please enter the Height");
+                return;
+            }
+            else if ( Weight.getText().toString().length() == 0) {
+                showMessage("Warning", "Please enter the Weight");
+                return;
+            }
+            else if (Waist.getText().toString().length() == 0) {
+                showMessage("Warning", "Please enter the Waist Circumference");
+                return;
+            }
+            else if (Hip.getText().toString().length() == 0 ) {
+                showMessage("Warning", "Please enter the Hip Circumference");
+                return;
+            }
+            else if (Pulse_Rate.getText().toString().length() == 0 ) {
+                showMessage("Warning", "Please enter the Pulse Rate");
+                return;
+            }
+            else if (Resp_Rate.getText().toString().length() == 0 ) {
+                showMessage("Warning", "Please enter the Respiratory Rate");
+                return;
+            }
+            else if (Bp.getText().toString().length() == 0) {
+                showMessage("Warning", "Please enter the Blood Pressure");
+                return;
+            }
+            else if (nails == 10) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Nails");
+                return;
+            }
+            else if (bath == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Bathing");
+                return;
+            }
+            else if (groom == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Gromming");
+                return;
+            }
+            else if (oral == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Care");
+                return;
+            }
+            else if (check == 10) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Age of Menarche");
+                return;
+            }
+            else if (check != 10 && san == 10) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Age of Menarche - Sanitary Napkin");
+                return;
+            }
+            else if (dent == 10) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Dental Caries");
+                return;
+            }
+            else if (flu == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Fluorosis");
+                return;
+            }
+            else if (ging == 10) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Gingivitis");
+                return;
+            }
+            else if ( ulc == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Oral Ulcers & Periapical Abscess");
+                return;
+            }
+            else if (lung == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Clear Lung Fields");
+                return;
+            }
+            else if (heart == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Cardio-Vascular System - Abnormal Heart Sounds");
+                return;
+            }
+            else {
 
-        Intent b = new Intent(this, HealthActivity2.class);
-        startActivity(b);
+                    switch (Anaemia_drop.getSelectedItemPosition()) {
+                        case 0:
+                            anaemia = 1;
+                            break;
+                        case 1:
+                            anaemia = 2;
+                            break;
+                        case 2:
+                            anaemia = 3;
+                            break;
+                        default:
+                            anaemia = 0;
+                    }
+
+
+                    try {
+                    String insert_query = "'" + health_sid + "'," +
+                            "'" + Integer.parseInt(Height.getText().toString().trim()) + "'," +
+                            "'" + Integer.parseInt(Weight.getText().toString().trim()) + "'," +
+                            "'" + Integer.parseInt(Waist.getText().toString().trim()) + "'," +
+                            "'" + Integer.parseInt(Hip.getText().toString().trim()) + "'," +
+                            "'" + Integer.parseInt(Pulse_Rate.getText().toString().trim()) + "'," +
+                            "'" + "pulse rate others" + "'," +
+                            "'" + Integer.parseInt(Resp_Rate.getText().toString().trim()) + "'," +
+                            "'" + Bp.getText().toString().trim() + "'," +
+                            "'" + nails + "'," +
+                            "'" + Nail.getText().toString().trim() + "'," +
+                            "'" + bath + "'," +
+                            "'" + Bath.getText().toString().trim() + "'," +
+                            "'" + groom + "'," +
+                            "'" + Groom.getText().toString().trim() + "'," +
+                            "'" + oral + "'," +
+                            "'" + Oral.getText().toString().trim() + "'," +
+                            "'" + check + "'," +
+                            "'" + san + "'," +
+                            "'" + Sanitary.getText().toString().trim() + "'," +
+                            "'" + health_others.getText().toString().trim() + "'," +
+                            "'" + anaemia + "'," +
+                            "'" + anaemia_others.getText().toString().trim() + "'," +
+                            "'" + dent + "'," +
+                            "'" + Dental.getText().toString().trim() + "'," +
+                            "'" + flu + "'," +
+                            "'" + Fluorosis.getText().toString().trim() + "'," +
+                            "'" + ging + "'," +
+                            "'" + Gingi.getText().toString().trim() + "'," +
+                            "'" + ulc + "'," +
+                            "'" + ulcer.getText().toString().trim() + "'," +
+                            "'" + Oral_Other.getText().toString().trim() + "'," +
+                            "'" + "0" + "'," +//History of Wheezing etc
+                            "'" + historyOfRS.getText().toString().trim() + "'," +//H/o comments
+                            "'" + lung + "'," +
+                            "'" + Lung.getText().toString().trim() + "'," +
+                            "'" + Resp_other.getText().toString().trim() + "'," +
+                            "'" + heart + "'," +
+                            "'" + Heart.getText().toString().trim() + "'"
+                            + ",'" + cardio.getText().toString().trim() + "'";
+
+                    //inserting into database
+                    database.execSQL("INSERT INTO health1 VALUES (" + insert_query + ")");
+                    //sending confirmation that data is inserted
+                    showMessage("Success", "Entry Successfully Added!");
+
+
+                        Intent b = new Intent(this, HealthActivity2.class);
+                        startActivity(b);
+
+                        hltStdId.setText("");
+
+                }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    finally {
+                        //database.close();
+
+
+                    }
+            }
     }
 
     //Method to create studentId dialog box
@@ -259,21 +465,25 @@ public class HealthActivity1 extends Activity {
         // Pass null as the parent view because its going in the dialog layout
         builder.setView(dialogView);
         final EditText studentID = (EditText) dialogView.findViewById(R.id.studid);
-        // Add action buttons
+        //Validating Student ID
+        UpdateActivity.StudentIDValidation(dialogView);
+
+        //Add action buttons
 
         builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
 
-                health_sid = studentID.getText().toString();
-                //System.out.println(sid);
-                if (health_sid.length() <= 1) {
+                health_sid = studentID.getText().toString().toUpperCase();
+                //System.out.println(skin_sid);
+                if (!UpdateActivity.isStudentID(health_sid)) {
                     showError();
                     studentidDialog();
                 } else {
                     setStudentID();
                     dialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "Student ID: " + health_sid, Toast.LENGTH_SHORT).show();
+                    hltStdId.setText(health_sid);
+                    //Toast.makeText(getApplicationContext(), "Student ID: " + sid, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -291,7 +501,7 @@ public class HealthActivity1 extends Activity {
     }
 
     public void showError() {
-        Toast.makeText(this, "Enter Student ID", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Enter a Valid Student ID", Toast.LENGTH_LONG).show();
     }
 
     public void setStudentID() {
@@ -328,9 +538,10 @@ public class HealthActivity1 extends Activity {
 
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK",null);
         builder.show();
 
     }

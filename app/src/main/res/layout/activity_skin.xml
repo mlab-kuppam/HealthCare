@@ -570,6 +570,58 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:text="@string/xerosis"
+                    android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/xerosis_yes"
+                        android:onClick="onRadioselect"
+                        android:text="Yes"
+                        style="@style/biig" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/xerosis_no"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="40dp"
+                        android:text="No"
+                        style="@style/biig" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="300dp"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/xerosis_text"
+                    android:hint="@string/hint"
+                    android:visibility="gone"
+                    style="@style/biig" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:text="@string/add"
                     android:layout_marginTop="20dp"
                     style="@style/h1"/>
@@ -583,6 +635,46 @@
                     android:hint="@string/hint"
                     style="@style/biig" />
 
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/referal"
+                    android:layout_marginTop="20dp"
+                    android:paddingBottom="20dp"
+                    style="@style/h1"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="400dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/required"
+                        android:onClick="onRadioselect"
+                        android:text="@string/required"
+                        style="@style/biig" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/notRequired"
+                        android:onClick="onRadioselect"
+                        android:layout_marginLeft="40dp"
+                        android:text="@string/notRequired"
+                        style="@style/biig" />
+
+                </RadioGroup>
 
             </RelativeLayout>
 

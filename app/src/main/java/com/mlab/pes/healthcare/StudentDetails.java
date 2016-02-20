@@ -111,8 +111,8 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
         academicPerformance = (Spinner) findViewById(R.id.academicPerformance);
         adapter = ArrayAdapter.createFromResource(this, R.array.academicPerf, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        standard.setAdapter(adapter);
-        standard.setOnItemSelectedListener(this);
+        academicPerformance.setAdapter(adapter);
+        academicPerformance.setOnItemSelectedListener(this);
 
         //opening db
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);

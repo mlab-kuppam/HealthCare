@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +23,12 @@ import java.io.File;
 
 public class HealthActivity2 extends ActionBarActivity {
 
-    EditText vit_b_com,vit_c_com,vit_others,gs_others,gsdeform,uti_com,siez_com,muc_others,worm_infest,Acute,gastro_other,nerve_other,behav_other,Other,MSDeform,ADHD,Bedwetting,Other_disease,injury;
+    EditText vit_b_com,vit_c_com,vit_others,gs_others,gsdeform,uti_com,siez_com,muc_others,worm_infest,Acute
+            ,gastro_other,nerve_other,behav_other,Other,MSDeform,ADHD,Bedwetting,Other_disease,injury,deformitiesT;
 
-    int ac=10,wo=10,msdef=10,se=10,ad=10,uti=10,bed=10,gsdef=10,vitc=10,vitb=10,oth=10,ho=10;
+    int ac=10,wo=10,msdef=10,se=10,ad=10,uti=10,bed=10,gsdef=10,vitc=10,vitb=10,oth=10,ho=10,referal=10,treatment=10;
 
-    RelativeLayout Worm,Seizure,UTI,GSDeform,VitC,VitB;
+    RelativeLayout Worm,Seizure,UTI,GSDeform,VitC,VitB,deformities,seizureL;
 
     CheckBox Pass,Pan,Pab,Skles,Pasthis,Drug,Drib,Freq,Burn,Phim,Undestes,Hypo,Cong_her,Bleed,Pete,Angular,Geo;
 
@@ -34,7 +36,8 @@ public class HealthActivity2 extends ActionBarActivity {
 
     //String worm_pass,pruritis_ani,pain_abd,skin_les,past_history,antiepi_drug,dribling,inc_freq,burn_mict,phim,undestes,hypo,congher,bleed,pete,angular,geotong;
     //Amogh! Wouldn't it be better if we stored the value as 1 when the check box is checked rather than storing the string
-    int worm_pass=0,pruritis_ani=0,pain_abd=0,skin_les=0,past_history=0,antiepi_drug=0,dribling=0,inc_freq=0,burn_mict=0,phim=0,undestes=0,hypo=0,congher=0,bleed=0,pete=0,angular=0,geotong=0;
+    int worm_pass=0,pruritis_ani=0,pain_abd=0,skin_les=0,past_history=0,antiepi_drug=0,dribling=0,inc_freq=0,burn_mict=0,phim=0,
+            undestes=0,hypo=0,congher=0,bleed=0,pete=0,angular=0,geotong=0,bowlegs=0,knockedKnees=0,injuryMal=0;
 
     String[] checkboxnames = new String[]{"Passing worms","Pruritis ani","Pain abdomen","Skin lesions","Past history","On antiepileptic drug","Dribbling","Increased frequency","H/O burning micturation","Phimosis","Undescended testes","Hypospadiasis","Congenital hernias","Bleeding gums","Petechial haemorrhages","Angular chelitis","Geographical tongue"};
 
@@ -52,12 +55,13 @@ public class HealthActivity2 extends ActionBarActivity {
             "  gs_wi_com VARCHAR[140]," +
             "  gs_others VARCHAR[140]," +
             "  ms_d INTEGER[1]," +
+            "  ms_d_bl INTEGER[1] ," +
+            "  ms_d_kk INTEGER[1] ," +
+            "  ms_d_irm INTEGER[1] ," +
             "  ms_d_com VARCHAR[140]," +
             "  ms_others VARCHAR[140]," +
             "  ns_s INTEGER[1]," +
-            "  ns_s_ph INTEGER[1] ," +
-            "  ns_s_ad INTEGER[1] ," +
-            "  ns_s_com VARCHAR[140]," +
+            "  ns_s_tt INTEGER[1] ," +
             "  ns_others VARCHAR[140]," +
             "  bp_adhd INTEGER[1]," +
             "  bp_adhd_com VARCHAR[140]," +
@@ -89,7 +93,8 @@ public class HealthActivity2 extends ActionBarActivity {
             "  oid_com VARCHAR[140]," +
             "  hoin INTEGER[1]," +
             "  hoin_com VARCHAR[140]," +
-            "  others VARCHAR[140]";
+            "  others VARCHAR[140],"+
+                    "  referal INTEGER[1]";
 
 
     @Override
@@ -109,7 +114,6 @@ public class HealthActivity2 extends ActionBarActivity {
         gs_others=(EditText)findViewById(R.id.gs_text);
         gsdeform=(EditText)findViewById(R.id.gsdeform_text);
         uti_com=(EditText)findViewById(R.id.uti_text);
-        siez_com=(EditText)findViewById(R.id.seiz_text);
         muc_others=(EditText)findViewById(R.id.musculo_text);
         worm_infest=(EditText)findViewById(R.id.worm_text);
         Acute = (EditText)findViewById(R.id.acute_text);
@@ -122,22 +126,22 @@ public class HealthActivity2 extends ActionBarActivity {
         Other_disease = (EditText)findViewById(R.id.other_text);
         injury = (EditText)findViewById(R.id.injury_text);
         Other = (EditText)findViewById(R.id.end_text);
+        deformitiesT=(EditText)findViewById(R.id.deform_text);
 
 
 
         Worm = (RelativeLayout)findViewById(R.id.worm);
-        Seizure = (RelativeLayout)findViewById(R.id.seizure);
         UTI = (RelativeLayout)findViewById(R.id.uti);
         GSDeform = (RelativeLayout)findViewById(R.id.GSdeform);
         VitC = (RelativeLayout)findViewById(R.id.vitc);
         VitB = (RelativeLayout)findViewById(R.id.vitb);
+        deformities=(RelativeLayout)findViewById(R.id.deformitiesMus);
+        seizureL=(RelativeLayout)findViewById(R.id.seizureL);
 
         Pass = (CheckBox)findViewById(R.id.pass);
         Pan = (CheckBox)findViewById(R.id.pruri);
         Pab = (CheckBox)findViewById(R.id.abd);
         Skles = (CheckBox)findViewById(R.id.skinles);
-        Pasthis = (CheckBox)findViewById(R.id.past_hist);
-        Drug = (CheckBox)findViewById(R.id.anti_drug);
         Drib = (CheckBox)findViewById(R.id.drib);
         Freq = (CheckBox)findViewById(R.id.freq);
         Burn = (CheckBox)findViewById(R.id.burn);
@@ -200,14 +204,19 @@ public class HealthActivity2 extends ActionBarActivity {
             case R.id.worm_no: Worm.setVisibility(v.GONE);wo=0;
                 break;
 
-            case R.id.deform_yes: MSDeform.setVisibility(v.VISIBLE);msdef=1;
+            case R.id.deform_yes: deformities.setVisibility(v.VISIBLE);msdef=1;
                 break;
-            case R.id.deform_no: MSDeform.setVisibility(v.GONE);msdef=0;
+            case R.id.deform_no: deformities.setVisibility(v.GONE);msdef=0;
                 break;
 
-            case R.id.seiz_yes: Seizure.setVisibility(v.VISIBLE);se=1;
+            case R.id.seiz_yes: seizureL.setVisibility(v.VISIBLE);se=1;
                 break;
-            case R.id.seiz_no: Seizure.setVisibility(v.GONE);se=0;
+            case R.id.seiz_no: seizureL.setVisibility(v.GONE);se=0;
+                break;
+
+            case R.id.treatment_yes: treatment=1;
+                break;
+            case R.id.treatment_no: treatment=0;
                 break;
 
             case R.id.adhd_yes: ADHD.setVisibility(v.VISIBLE);ad=1;
@@ -250,6 +259,15 @@ public class HealthActivity2 extends ActionBarActivity {
             case R.id.injury_no: injury.setVisibility(v.GONE);ho=0;
                 break;
 
+
+
+            case R.id.required:
+                referal=1;
+                break;
+            case R.id.notRequired:
+                referal=0;
+                break;
+
         }
     }
 
@@ -270,12 +288,6 @@ public class HealthActivity2 extends ActionBarActivity {
                 skin_les=1;
                 break;
 
-            case R.id.past_hist: //past_history=checkboxnames[4];
-                past_history=1;
-                break;
-            case R.id.anti_drug:// antiepi_drug=checkboxnames[5];
-                antiepi_drug=1;
-                break;
 
             case R.id.drib: //dribling=checkboxnames[6];
                 dribling=1;
@@ -313,6 +325,16 @@ public class HealthActivity2 extends ActionBarActivity {
             case R.id.geo_tong: //geotong=checkboxnames[16];
                 geotong=1;
                 break;
+            case R.id.bowlegs:
+                bowlegs=1;
+                break;
+            case R.id.knockedknees:
+                knockedKnees=1;
+                break;
+            case R.id.injuryMal:
+                injuryMal=1;
+                break;
+
 
         }
     }
@@ -333,6 +355,10 @@ public class HealthActivity2 extends ActionBarActivity {
         }
         else if (se == 10 ) {
             showMessage("Warning", "Please select an option for Nervous System - Seizures");
+            return;
+        }
+        else if (se == 1 && treatment==10) {
+            showMessage("Warning", "Please select an option for Nervous System - Seizures - Treatment Taken");
             return;
         }
         else if (ad == 10 ) {
@@ -381,12 +407,13 @@ public class HealthActivity2 extends ActionBarActivity {
                     "'" + worm_infest.getText().toString().trim() + "'," +
                     "'" + gastro_other.getText().toString().trim() + "'," +
                     "'" + msdef + "'," +
+                    "'" + bowlegs + "'," +
+                    "'" + knockedKnees + "'," +
+                    "'" + injuryMal + "'," +
                     "'" + MSDeform.getText().toString().trim() + "'," +
                     "'" + muc_others.getText().toString().trim() + "'," +
                     "'" + se + "'," +
-                    "'" + past_history + "'," +
-                    "'" + antiepi_drug + "'," +
-                    "'" + siez_com.getText().toString().trim() + "'," +
+                    "'" + treatment + "'," +
                     "'" + nerve_other.getText().toString().trim() + "'," +
                     "'" + ad + "'," +
                     "'" + ADHD.getText().toString().trim() + "'," +
@@ -418,7 +445,8 @@ public class HealthActivity2 extends ActionBarActivity {
                     "'" + Other_disease.getText().toString().trim() + "'," +
                     "'" + ho + "'," +
                     "'" + injury.getText().toString().trim() + "'," +
-                    "'" + Other.getText().toString().trim() + "'";
+                    "'" + Other.getText().toString().trim() + "',"+
+                    "'" + referal + "'";
 
             //inserting into database
             database.execSQL("INSERT INTO health2 VALUES (" + insert_query + ")");
@@ -494,7 +522,45 @@ public class HealthActivity2 extends ActionBarActivity {
 
     public void onBackPressed()
     {
-        Getback();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Warning");
+        builder.setMessage("Current Data Will be Lost");
+        // Get the layout inflater
+        builder.setCancelable(false);
+        LayoutInflater inflater = this.getLayoutInflater();
+        // Add action buttons
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //If the entry is cancelled, this code will delete the images of the session
+                deletePicture();
+                Getback();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                return;
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    public void deletePicture(){
+        //If the entry is cancelled, this code will delete the images of the session
+        File file = new File(Environment.getExternalStorageDirectory(), "Images");
+        if(file.exists())
+        {
+            int x;
+            //loop will delete all photos taken during the cancelled session
+            for(x = 0; x < pic_count_health; x++)
+            {
+                File del_image = new File(Environment.getExternalStorageDirectory()+"/Images/"+HealthActivity1.health_sid+"_health_"+x+".jpg");
+                //System.out.println("***Deleted***"+del_image.toString());
+                del_image.delete();
+            }
+        }
     }
 
     //Declaration of variables only for Camera function

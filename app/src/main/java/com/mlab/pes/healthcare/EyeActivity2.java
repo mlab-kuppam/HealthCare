@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,7 @@ public class EyeActivity2 extends ActionBarActivity {
 	TextView eye1StdId;
 
     int cvis_left=10,cvis_right=10,bitot_left=10,bitot_right=10,allconj_left=10,allconj_right=10,night_left=1,night_right=10,congp_left=10,congp_right=10,congd_left=10,congd_right=10,
-            amb_left=10,amb_right=10,nys_left=10,nys_right=10,fund_left=10,fund_right=10;
+            amb_left=10,amb_right=10,nys_left=10,nys_right=10,fund_left=10,fund_right=10,referal=10;
 
     SQLiteDatabase database;
 
@@ -82,11 +83,10 @@ public class EyeActivity2 extends ActionBarActivity {
             "  ny_r_com VARCHAR[140]," +
             "  ny_l INTEGER[1]," +
             "  ny_l_com VARCHAR[140]," +
-            "  fe_r INTEGER[1]," +
             "  fe_r_com VARCHAR[140]," +
-            "  fe_l INTEGER[1]," +
             "  fe_l_com VARCHAR[140]," +
-            "  others VARCHAR[140]";
+            "  others VARCHAR[140],"+
+                    "  referal INTEGER[1]";
 
 
     @Override
@@ -298,23 +298,17 @@ public class EyeActivity2 extends ActionBarActivity {
                 nys_right=0;
                 break;
 
-            case R.id.fund_left_yes:
-                Fund_left.setVisibility(view.VISIBLE);
-                fund_left=1;
-                break;
-            case R.id.fund_right_yes:
-                Fund_right.setVisibility(view.VISIBLE);
-                fund_right=1;
-                break;
-            case R.id.fund_left_no:
-                Fund_left.setVisibility(view.GONE);
-                fund_left=0;
-                break;
-            case R.id.fund_right_no:
-                Fund_right.setVisibility(view.GONE);
-                fund_right=0;
-                break;
+        }
+    }
 
+    public void onRadioselect(View v) {
+        switch (v.getId()) {
+            case R.id.required:
+                referal = 1;
+                break;
+            case R.id.notRequired:
+                referal = 0;
+                break;
         }
     }
 
@@ -384,11 +378,11 @@ public class EyeActivity2 extends ActionBarActivity {
             showMessage("Warning", "Please select an option for Nystagmus - Right Eye");
             return;
         }
-        else if (fund_left == 10) {
+        else if (Fund_left.getText().toString().trim().length() == 10) {
             showMessage("Warning", "Please select an option for Fundus Examination - Left Eye");
             return;
         }
-        else if (fund_right == 10) {
+        else if (Fund_right.getText().toString().trim().length() == 10) {
             showMessage("Warning", "Please select an option for Fundus Examination - Right Eye");
             return;
         }
@@ -448,11 +442,10 @@ public class EyeActivity2 extends ActionBarActivity {
                     "'" + Nys_right.getText().toString().trim() + "'," +
                     "'" + nys_left + "'," +
                     "'" + Nys_left.getText().toString().trim() + "'," +
-                    "'" + fund_right + "'," +
                     "'" + Fund_right.getText().toString().trim() + "'," +
-                    "'" + fund_left + "'," +
                     "'" + Fund_left.getText().toString().trim() + "'," +
-                    "'" + Other.getText().toString() + "'";
+                    "'" + Other.getText().toString() + "',"+
+                    "'" + referal + "'";
                 System.out.println("EYE " + insert_query);
 
             //inserting into database
@@ -511,13 +504,37 @@ public class EyeActivity2 extends ActionBarActivity {
     }
     public void Getback() {
 
-        Intent i = new Intent(this, EyeActivity1.class);
+        Intent i = new Intent(this, UpdateActivity.class);
         startActivity(i);
     }
 
     @Override
     public void onBackPressed() {
-        Getback();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Warning");
+        builder.setMessage("Current Data Will be Lost");
+        // Get the layout inflater
+        builder.setCancelable(false);
+        LayoutInflater inflater = this.getLayoutInflater();
+        // Add action buttons
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //If the entry is cancelled, this code will delete the images of the session
+                deletePicture();
+                Getback();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                return;
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     //Declaration of variables only for Camera function
@@ -559,6 +576,21 @@ public class EyeActivity2 extends ActionBarActivity {
         } else {
             // Image capture failed, advise user
             Toast.makeText(this, "Photo Capture Failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void deletePicture(){
+        //If the entry is cancelled, this code will delete the images of the session
+        File file = new File(Environment.getExternalStorageDirectory(), "Images");
+        if(file.exists())
+        {
+            int x;
+            //loop will delete all photos taken during the cancelled session
+            for(x = 0; x < pic_count_eye; x++)
+            {
+                File del_image = new File(Environment.getExternalStorageDirectory()+"/Images/" + EyeActivity1.eye_sid+ ".jpg");
+                //System.out.println("***Deleted***"+del_image.toString());
+                del_image.delete();
+            }
         }
     }
 

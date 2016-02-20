@@ -28,10 +28,10 @@ public class ENTActivity extends ActionBarActivity {
 	TextView entStdId;
 
     EditText Otisleft,Otisright,Asomleft,Asomright,Csomleft,Csomright,Impactleft,Impactright,Impairleft,Impairright,Epi,
-            Adeno,Phary,Aller,Speech,Others;
+            Adeno,Phary,Aller,Speech,Others,urti;
 
     int oti_left=10,oti_right=10,asom_left=10,asom_right=10,csom_left=10,csom_right=10,impact_left=10,impact_right=10,impair_left=10,impair_right=10,
-            epi=10,adeno=10,phary=10,aller=10,speech=10;
+            epi=10,adeno=10,phary=10,aller=10,speech=10,referal=10,URTI=10;
 
     SQLiteDatabase database;
 
@@ -71,7 +71,10 @@ public class ENTActivity extends ActionBarActivity {
             "  ar_com VARCHAR[140]," +
             "  sd INTEGER[1]," +
             "  sd_com VARCHAR[140]," +
-            "  others VARCHAR[140]";
+            "  urti INTEGER[1]," +
+            "  urti_com VARCHAR[140]," +
+            "  others VARCHAR[140],"+
+            "  referal INTEGER[1]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +113,7 @@ public class ENTActivity extends ActionBarActivity {
         Aller = (EditText)findViewById(R.id.aller_text);
         Speech = (EditText)findViewById(R.id.speech_text);
         Others = (EditText)findViewById(R.id.add_text);
+        urti = (EditText)findViewById(R.id.urti_text);
 
         //opening db
         database = openOrCreateDatabase("healthcare",Context.MODE_PRIVATE,null);
@@ -281,9 +285,28 @@ public class ENTActivity extends ActionBarActivity {
                 speech=0;
                 break;
 
+            case R.id.urti_yes:
+                urti.setVisibility(view.VISIBLE);
+                URTI=1;
+                break;
+            case R.id.urti_no:
+                urti.setVisibility(view.GONE);
+                URTI=0;
+                break;
+
         }
     }
 
+    public void onRadioselect(View v) {
+        switch (v.getId()) {
+            case R.id.required:
+                referal = 1;
+                break;
+            case R.id.notRequired:
+                referal = 0;
+                break;
+        }
+    }
     public void Next() {
 
             if (oti_left == 10 ) {
@@ -345,6 +368,10 @@ public class ENTActivity extends ActionBarActivity {
             else if (speech == 10 ) {
                 showMessage("Warning", "Please select an option for Speech Defects");
                 return;
+            }
+            else if (URTI == 10 ) {
+                showMessage("Warning", "Please select an option for URTI");
+                return;
             }else
              {
                 try {
@@ -365,7 +392,9 @@ public class ENTActivity extends ActionBarActivity {
                         "'" + phary + "','" + Phary.getText().toString().trim() + "'," +
                         "'" + aller + "','" + Aller.getText().toString().trim() + "'," +
                         "'" + speech + "','" + Speech.getText().toString().trim() + "'," +
-                        "'" + Others.getText().toString().trim() + "'";
+                        "'" + URTI + "','" + urti.getText().toString().trim() + "'," +
+                        "'" + Others.getText().toString().trim() +"',"+
+                        "'" + referal + "'";
 
                 //inserting into database
                 database.execSQL("INSERT INTO ent VALUES (" + insert_query + ")");

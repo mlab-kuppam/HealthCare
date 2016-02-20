@@ -24,11 +24,11 @@ public class SkinActivity extends ActionBarActivity {
     //Declaring sid -> studentID(must)
     static String skin_sid;
 
-    EditText Scabtext, Pityaltext, Phrynotext, Pedicultext, Pityvertext, Imptext, Paputext, Tintext, Miltext, Viraltext, Other;
+    EditText Scabtext, Pityaltext, Phrynotext, Pedicultext, Pityvertext, Imptext, Paputext, Tintext, Miltext, Viraltext, Other, Xerosis;
 
 	TextView skinStdId;
 	
-    int scab=10,pital=10,phry=10,pedi=10,pitver=10,imp=10,papu=10,tin=10,mil=10,vir=10;
+    int scab=10,pital=10,phry=10,pedi=10,pitver=10,imp=10,papu=10,tin=10,mil=10,vir=10,referal=10,xerosis=10;
 
     SQLiteDatabase database;
 
@@ -60,7 +60,11 @@ public class SkinActivity extends ActionBarActivity {
             "  mi_com VARCHAR[140]," +
             "  vi INTEGER[1]," +
             "  vi_com VARCHAR[140]," +
-            "  others VARCHAR[140]";
+            "  xerosis INTEGER[1]," +
+            "  xerosis_com VARCHAR[140]," +
+            "  others VARCHAR[140],"+
+            "  referal INTEGER[1]";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,7 @@ public class SkinActivity extends ActionBarActivity {
         Tintext = (EditText) findViewById(R.id.tin_text);
         Miltext = (EditText) findViewById(R.id.mil_text);
         Viraltext = (EditText) findViewById(R.id.viral_text);
+        Xerosis=(EditText) findViewById(R.id.xerosis_text);
         Other = (EditText) findViewById(R.id.add_text);
 
 
@@ -223,6 +228,22 @@ public class SkinActivity extends ActionBarActivity {
                 vir=0;
                 break;
 
+            case R.id.xerosis_yes:
+                Xerosis.setVisibility(v.VISIBLE);
+                xerosis=1;
+                break;
+            case R.id.xerosis_no:
+                Xerosis.setVisibility(v.GONE);
+                xerosis=0;
+                break;
+
+            case R.id.required:
+                referal=1;
+                break;
+            case R.id.notRequired:
+                referal=0;
+                break;
+
         }
     }
 
@@ -266,6 +287,10 @@ public class SkinActivity extends ActionBarActivity {
             else if (vir == 10 ) {
                 showMessage("Warning", "Please select an option for Viral Warts");
                 return;
+            }
+            else if (xerosis == 10 ) {
+                showMessage("Warning", "Please select an option for Xerosis");
+                return;
             }else {
 
                 try {
@@ -288,7 +313,10 @@ public class SkinActivity extends ActionBarActivity {
                         "'" + Miltext.getText().toString().trim() + "'," +
                         "'" + vir + "'," +
                         "'" + Viraltext.getText().toString().trim() + "'," +
-                        "'" + Other.getText().toString().trim() + "'";
+                        "'" + xerosis + "'," +
+                        "'" + Xerosis.getText().toString().trim() + "'," +
+                        "'" + Other.getText().toString().trim() + "',"+
+                        "'" + referal + "'";
 
                 //inserting into database
                 database.execSQL("INSERT INTO skin VALUES (" + insert_query + ")");

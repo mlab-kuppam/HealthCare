@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -21,26 +22,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
 
-public class HealthActivity1 extends ActionBarActivity {
+public class HealthActivity1 extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
     //Declaring sid -> studentID(must)
     static String health_sid;
 
-    EditText historyOfRS,cardio,anaemia_others,health_others,Height, Weight, Waist, Hip, Pulse_Rate, Resp_Rate, Bp, Nail, Bath, Groom, Oral, Sanitary, Dental, Fluorosis, Gingi, ulcer, Oral_Other, Lung, Resp_other, Heart;
+    EditText historyOfRS,cardio,anaemia_others,health_others,Height, Weight, Waist, Hip, Pulse_Rate, Bp, Nail, Bath, Groom, Oral, Sanitary, Dental, Fluorosis, Gingi, ulcer, Oral_Other, Lung, Resp_other, Heart
+            ,traumaT,spacingT,crowdingT,cleftT,chronicT,soundsT;
 
-    RelativeLayout San;
+    RelativeLayout San,operated,bronchialL;
 
     String[] checkboxitem = new String[]{"Applicable", "Not Applicable"};
 
     String age;
 
-    int anaemia, nails = 10, bath = 10, groom = 10, oral = 10, men = 10, san = 10, dent = 10, flu = 10, ging = 10, ulc = 10, lung = 10, heart = 10, check = 10;
+    int anaemia, nails = 10, bath = 10, groom = 10, oral = 10, men = 10, san = 10, dent = 10, flu = 10, ging = 10, ulc = 10, lung = 10, heart = 10, check = 10,trauma=10,spacing=10,
+    crowding=10,cleft=10,operatedOn=10,chronic=10,bronchial=10,sounds=10,bronchialAst;
 
     TextView hltStdId;
 
     RadioButton Applicable, NotApplicable;
 
-    Spinner Anaemia_drop,dental_others;
+    Spinner Anaemia_drop,dental_others,bronchialAsthma;
 
     SQLiteDatabase database;
 
@@ -57,8 +60,6 @@ public class HealthActivity1 extends ActionBarActivity {
             "  wc INTEGER[3]," +
             "  hc INTEGER[3]," +
             "  pr INTEGER[3]," +
-            "  pr_com VARCHAR[140]," +
-            "  rr INTEGER[3]," +
             "  bp varchar(7)," +
             "  ph_n INTEGER[1]," +
             "  ph_n_com VARCHAR[140]," +
@@ -82,11 +83,22 @@ public class HealthActivity1 extends ActionBarActivity {
             "  oe_g_com VARCHAR[140]," +
             "  oe_ou INTEGER[1]," +
             "  oe_ou_com VARCHAR[140]," +
+            "  oe_trauma INTEGER[1]," +
+            "  oe_trauma_com VARCHAR[140]," +
+            "  oe_spacing INTEGER[1]," +
+            "  oe_spacing_com VARCHAR[140]," +
+            "  oe_crowding INTEGER[1]," +
+            "  oe_crowding_com VARCHAR[140]," +
+            "  oe_cleft INTEGER[1]," +
+            "  oe_cleft_operated INTEGER[1]," +
+            "  oe_cleft_com VARCHAR[140]," +
             "  oe_others VARCHAR[140]," +
-            "  rs_ho INTEGER[1]," +
-            "  rs_ho_com VARCHAR[140]," +
-            "  rs_clf INTEGER[1]," +
-            "  rs_clf_com VARCHAR[140]," +
+            "  rs_chronic INTEGER[1]," +
+            "  rs_chronic_com VARCHAR[140]," +
+            "  rs_bronchial INTEGER[1]," +
+            "  oe_bronchial_medication VARCHAR[140]," +
+            "  rs_sounds INTEGER[1]," +
+            "  rs_sounds_com VARCHAR[140]," +
             "  rs_others VARCHAR[140]," +
             "  cvs_ahs INTEGER[1]," +
             "  cvs_ahs_com VARCHAR[140]," +
@@ -104,7 +116,6 @@ public class HealthActivity1 extends ActionBarActivity {
 		
 		hltStdId = (TextView)findViewById(R.id.hlt_std_id);
 
-        historyOfRS = (EditText) findViewById(R.id.historyOf_text);
         cardio = (EditText) findViewById(R.id.cardio_text);
         anaemia_others = (EditText) findViewById(R.id.anaemia_text);
         health_others = (EditText) findViewById(R.id.health_text);
@@ -113,7 +124,6 @@ public class HealthActivity1 extends ActionBarActivity {
         Waist = (EditText) findViewById(R.id.waist);
         Hip = (EditText) findViewById(R.id.hip);
         Pulse_Rate = (EditText) findViewById(R.id.pulse);
-        Resp_Rate = (EditText) findViewById(R.id.rrate);
         Bp = (EditText) findViewById(R.id.bp);
         Nail = (EditText) findViewById(R.id.nail_text);
         Bath = (EditText) findViewById(R.id.bath_text);
@@ -125,15 +135,23 @@ public class HealthActivity1 extends ActionBarActivity {
         Gingi = (EditText) findViewById(R.id.gingi_text);
         ulcer = (EditText) findViewById(R.id.oralul_text);
         Oral_Other = (EditText) findViewById(R.id.sys_text);
-        Lung = (EditText) findViewById(R.id.lung_text);
         Resp_other = (EditText) findViewById(R.id.resp_text);
         Heart = (EditText) findViewById(R.id.heart_text);
+        traumaT=(EditText) findViewById(R.id.trauma_text);
+        spacingT=(EditText) findViewById(R.id.spacing_text);
+        crowdingT=(EditText) findViewById(R.id.crowding_text);
+        cleftT=(EditText) findViewById(R.id.cleft_text);
+        chronicT = (EditText) findViewById(R.id.chronic_text);
+        soundsT = (EditText) findViewById(R.id.sounds_text);
 
         Applicable = (RadioButton) findViewById(R.id.app);
         NotApplicable = (RadioButton) findViewById(R.id.notapp);
 
 
         San = (RelativeLayout) findViewById(R.id.sanitary);
+        operated = (RelativeLayout) findViewById(R.id.operatedLayout);
+        bronchialL = (RelativeLayout) findViewById(R.id.bronchial_layout);
+
 
 
         Anaemia_drop = (Spinner) findViewById(R.id.anaemia_drop);
@@ -143,12 +161,32 @@ public class HealthActivity1 extends ActionBarActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, symp);
         Anaemia_drop.setAdapter(adapter);
 
+        bronchialAsthma = (Spinner) findViewById(R.id.bronchial_spinner);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.bronchinal_array, R.layout.spinner_item);
+        adapter1.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        bronchialAsthma.setAdapter(adapter1);
+        bronchialAsthma.setOnItemSelectedListener(this);
 
 
         //opening db
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
         //creating table if doesn't exist
         database.execSQL("CREATE TABLE IF NOT EXISTS health1(" + table_query + ")");
+
+    }
+
+    //Method to get selected item in the dropdown
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (parent == bronchialAsthma) {
+            bronchialAst = position - 1;
+        }
+
+    }
+
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
@@ -257,15 +295,6 @@ public class HealthActivity1 extends ActionBarActivity {
                 ulcer.setVisibility(v.GONE);
                 break;
 
-            case R.id.lung_yes:
-                lung = 1;
-                Lung.setVisibility(v.GONE);
-                break;
-            case R.id.lung_no:
-                lung = 0;
-                Lung.setVisibility(v.VISIBLE);
-                break;
-
             case R.id.heart_yes:
                 heart = 1;
                 Heart.setVisibility(v.VISIBLE);
@@ -273,6 +302,60 @@ public class HealthActivity1 extends ActionBarActivity {
             case R.id.heart_no:
                 heart = 0;
                 Heart.setVisibility(v.GONE);
+                break;
+
+            case R.id.trauma_yes:
+                trauma = 1;
+                traumaT.setVisibility(v.VISIBLE);
+                break;
+            case R.id.trauma_no:
+                trauma = 0;
+                traumaT.setVisibility(v.GONE);
+                break;
+
+            case R.id.spacing_yes:
+                spacing = 1;
+                spacingT.setVisibility(v.VISIBLE);
+                break;
+            case R.id.spacing_no:
+                spacing = 0;
+                spacingT.setVisibility(v.GONE);
+                break;
+
+            case R.id.crowding_yes:
+                crowding = 1;
+                crowdingT.setVisibility(v.VISIBLE);
+                break;
+            case R.id.crowding_no:
+                crowding = 0;
+                crowdingT.setVisibility(v.GONE);
+                break;
+
+            case R.id.chronic_yes:
+                chronic=1;
+                chronicT.setVisibility(View.VISIBLE);
+                break;
+            case R.id.chronic_no:
+                chronicT.setVisibility(View.GONE);
+                chronic=0;
+                break;
+
+            case R.id.bronchial_yes:
+                bronchial=1;
+                bronchialL.setVisibility(View.VISIBLE);
+                break;
+            case R.id.bronchial_no:
+                bronchial=0;
+                bronchialL.setVisibility(View.GONE);
+                break;
+
+            case R.id.sounds_yes:
+                sounds=1;
+                soundsT.setVisibility(View.VISIBLE);
+                break;
+            case R.id.sounds_no:
+                sounds=0;
+                soundsT.setVisibility(View.GONE);
                 break;
 
             case R.id.app:
@@ -286,6 +369,19 @@ public class HealthActivity1 extends ActionBarActivity {
                 check = 0;
                 age = checkboxitem[1];
                 San.setVisibility(v.GONE);
+                //Applicable.setChecked(false);
+                //NotApplicable.setChecked(true);
+                break;
+
+            case R.id.cleft_yes:
+                cleft=1;
+                operated.setVisibility(v.VISIBLE);
+                //NotApplicable.setChecked(false);
+                //Applicable.setChecked(true);
+                break;
+            case R.id.cleft_no:
+                cleft=0;
+                operated.setVisibility(v.GONE);
                 //Applicable.setChecked(false);
                 //NotApplicable.setChecked(true);
                 break;
@@ -314,10 +410,6 @@ public class HealthActivity1 extends ActionBarActivity {
                 showMessage("Warning", "Please enter the Pulse Rate");
                 return;
             }
-            else if (Resp_Rate.getText().toString().length() == 0 ) {
-                showMessage("Warning", "Please enter the Respiratory Rate");
-                return;
-            }
             else if (Bp.getText().toString().length() == 0) {
                 showMessage("Warning", "Please enter the Blood Pressure");
                 return;
@@ -342,7 +434,7 @@ public class HealthActivity1 extends ActionBarActivity {
                 showMessage("Warning", "Please select an option for Personal Hygiene - Age of Menarche");
                 return;
             }
-            else if (check != 10 && san == 10) {
+            else if ( check ==1 && san == 10) {
                 showMessage("Warning", "Please select an option for Personal Hygiene - Age of Menarche - Sanitary Napkin");
                 return;
             }
@@ -362,8 +454,40 @@ public class HealthActivity1 extends ActionBarActivity {
                 showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Oral Ulcers & Periapical Abscess");
                 return;
             }
-            else if (lung == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Clear Lung Fields");
+            else if (trauma == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Trauma of Tooth");
+                return;
+            }
+            else if (spacing == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Spacing");
+                return;
+            }
+            else if (crowding == 10 ) {
+                showMessage("Warning","Please select an option for Personal Hygiene - Oral Examination - Crowding");
+                return;
+            }
+            else if (cleft == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Cleft Lip/ Cleft Palate");
+                return;
+            }
+            else if (cleft == 1 && operatedOn==10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Cleft Lip/ Cleft Palate - Operated");
+                return;
+            }
+            else if (chronic == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Chronic Cough");
+                return;
+            }
+            else if (bronchial == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Bronchial Asthma");
+                return;
+            }
+            else if (bronchial == 1 && bronchialAst==-1 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Bronchial Asthma - Medication");
+                return;
+            }
+            else if (sounds == 10 ) {
+                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Adventitious Sounds");
                 return;
             }
             else if (heart == 10 ) {
@@ -394,8 +518,6 @@ public class HealthActivity1 extends ActionBarActivity {
                             "'" + Integer.parseInt(Waist.getText().toString().trim()) + "'," +
                             "'" + Integer.parseInt(Hip.getText().toString().trim()) + "'," +
                             "'" + Integer.parseInt(Pulse_Rate.getText().toString().trim()) + "'," +
-                            "'" + "pulse rate others" + "'," +
-                            "'" + Integer.parseInt(Resp_Rate.getText().toString().trim()) + "'," +
                             "'" + Bp.getText().toString().trim() + "'," +
                             "'" + nails + "'," +
                             "'" + Nail.getText().toString().trim() + "'," +
@@ -419,11 +541,22 @@ public class HealthActivity1 extends ActionBarActivity {
                             "'" + Gingi.getText().toString().trim() + "'," +
                             "'" + ulc + "'," +
                             "'" + ulcer.getText().toString().trim() + "'," +
+                            "'" + trauma + "'," +
+                            "'" + traumaT.getText().toString().trim() + "'," +
+                            "'" + spacing + "'," +
+                            "'" + spacingT.getText().toString().trim() + "'," +
+                            "'" + crowding + "'," +
+                            "'" + crowdingT.getText().toString().trim() + "'," +
+                            "'" + cleft + "'," +
+                            "'" + operatedOn + "'," +
+                            "'" + cleftT.getText().toString().trim() + "'," +
                             "'" + Oral_Other.getText().toString().trim() + "'," +
-                            "'" + "0" + "'," +//History of Wheezing etc
-                            "'" + historyOfRS.getText().toString().trim() + "'," +//H/o comments
-                            "'" + lung + "'," +
-                            "'" + Lung.getText().toString().trim() + "'," +
+                            "'" + chronic + "'," +
+                            "'" + chronicT.getText().toString().trim() + "'," +
+                            "'" + bronchial + "'," +
+                            "'" + bronchialAst + "'," +
+                            "'" + sounds + "'," +
+                            "'" + soundsT.getText().toString().trim() + "'," +
                             "'" + Resp_other.getText().toString().trim() + "'," +
                             "'" + heart + "'," +
                             "'" + Heart.getText().toString().trim() + "'"
@@ -445,7 +578,7 @@ public class HealthActivity1 extends ActionBarActivity {
                         e.printStackTrace();
                     }
                     finally {
-                        //database.close();
+                        database.close();
 
 
                     }

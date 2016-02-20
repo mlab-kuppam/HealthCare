@@ -249,6 +249,7 @@ public class EyeActivity1 extends ActionBarActivity {
 
     public void Next()
     {
+        if(refractCheck==1){
         if(Spherical_rt_dist.getText().toString().length()==0)
         {
             showMessage("Warning", "Please enter a value for Refraction & Correction: Spherical - Distance - Right Eye");
@@ -337,6 +338,7 @@ public class EyeActivity1 extends ActionBarActivity {
         {
             showMessage("Warning", "Please enter a valid value for Refraction & Correction: Axis - Near - Left Eye");
             return;
+        }
         }
         else {
 

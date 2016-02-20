@@ -26,10 +26,10 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
     int familyType,socioEconomic,TypeOfHouse,Flooring,WaterSupply,GarbageDisposal,OverNight;
 
     EditText address,landline,mobile,numberOfFamilyMembers,titleHOF,aadharHOF,educationHOF,occupationHOF,
-            educationFather,occupationFather,educationMother,occupationMother,totalIncome,numberOfRooms,numberOfHouseholds,frequency;
+            educationFather,occupationFather,educationMother,occupationMother,totalIncome,frequency;
 
-    int overcrowding=2,separateRooms=2,crossVentilation=2,adequateLighting=2,kitchenWithSink=2,
-            hygenicSurroundings=2,sanitaryLatrine=2,cattleShed=2,bothParents=2;
+    int overcrowding=2,crossVentilation=2,adequateLighting=2,kitchenWithSink=2,
+            hygenicSurroundings=2,sanitaryLatrine=2,bothParents=2;
 
 
 
@@ -61,6 +61,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                     "  water INTEGER[1] ," +
                     "  hygenic_surroundings INTEGER[1] ," +
                     "  sanitary_latrine INTEGER[1] ," +
+                    "  garbage_disposal INTEGER[1] ," +
                     "  frequency INTEGER[1] ," +
                     "  over_night_food INTEGER[1] ," +
                     "  both_parents INTEGER[1] ";
@@ -86,7 +87,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         educationMother=(EditText) findViewById(R.id.motherEducation);
         occupationMother=(EditText) findViewById(R.id.motherOccupation);
         totalIncome=(EditText) findViewById(R.id.totalIncome);
-        frequency=(EditText) findViewById(R.id.freq);
+        frequency=(EditText) findViewById(R.id.frequency);
 
 
 
@@ -129,8 +130,8 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         overNight = (Spinner) findViewById(R.id.overNightFood);
         adapter = ArrayAdapter.createFromResource(this, R.array.overNight, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        garbageDisposal.setAdapter(adapter);
-        garbageDisposal.setOnItemSelectedListener(this);
+        overNight.setAdapter(adapter);
+        overNight.setOnItemSelectedListener(this);
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //opening db
@@ -317,10 +318,6 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                     "'" + StudentDetails.gen + "'";
                 database.execSQL("INSERT INTO child_references VALUES (" + insert_query + ")");
 
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -484,7 +481,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
             }
             finally {
                 //closing database
-               database.close();
+              // database.close();
 
             }
 
@@ -574,7 +571,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                 }
                 finally
                 {
-                    database.close();
+                    //database.close();
                 }
                 backIntent();
             }

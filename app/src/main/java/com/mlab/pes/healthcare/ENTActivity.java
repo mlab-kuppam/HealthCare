@@ -23,12 +23,12 @@ import java.io.File;
 public class ENTActivity extends ActionBarActivity {
 
     //Declaring sid -> studentID(must)
-    String sid;
+    String sid,treatment;
 	
 	TextView entStdId;
 
     EditText Otisleft,Otisright,Asomleft,Asomright,Csomleft,Csomright,Impactleft,Impactright,Impairleft,Impairright,Epi,
-            Adeno,Phary,Aller,Speech,Others,urti;
+            Adeno,Phary,Aller,Speech,Others,urti,impression;
 
     int oti_left=10,oti_right=10,asom_left=10,asom_right=10,csom_left=10,csom_right=10,impact_left=10,impact_right=10,impair_left=10,impair_right=10,
             epi=10,adeno=10,phary=10,aller=10,speech=10,referal=10,URTI=10;
@@ -74,6 +74,8 @@ public class ENTActivity extends ActionBarActivity {
             "  urti INTEGER[1]," +
             "  urti_com VARCHAR[140]," +
             "  others VARCHAR[140],"+
+            "  impression VARCHAR[140],"+
+            "  treatment VARCHAR[1000],"+
             "  referal INTEGER[1]";
 
     @Override
@@ -114,7 +116,7 @@ public class ENTActivity extends ActionBarActivity {
         Speech = (EditText)findViewById(R.id.speech_text);
         Others = (EditText)findViewById(R.id.add_text);
         urti = (EditText)findViewById(R.id.urti_text);
-
+        impression=(EditText)findViewById(R.id.impression);
         //opening db
         database = openOrCreateDatabase("healthcare",Context.MODE_PRIVATE,null);
         //creating table if doesn't exist
@@ -372,6 +374,10 @@ public class ENTActivity extends ActionBarActivity {
             else if (URTI == 10 ) {
                 showMessage("Warning", "Please select an option for URTI");
                 return;
+            }
+            else if (referal == 10 ) {
+                showMessage("Warning", "Please select an option for Referal");
+                return;
             }else
              {
                 try {
@@ -394,6 +400,8 @@ public class ENTActivity extends ActionBarActivity {
                         "'" + speech + "','" + Speech.getText().toString().trim() + "'," +
                         "'" + URTI + "','" + urti.getText().toString().trim() + "'," +
                         "'" + Others.getText().toString().trim() +"',"+
+                        "'" + impression.getText().toString().trim() + "',"+
+                        "'" + treatment + "',"+
                         "'" + referal + "'";
 
                 //inserting into database

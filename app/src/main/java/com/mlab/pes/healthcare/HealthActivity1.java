@@ -28,7 +28,7 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
     static String health_sid;
 
     EditText historyOfRS,cardio,anaemia_others,health_others,Height, Weight, Waist, Hip, Pulse_Rate, Bp, Nail, Bath, Groom, Oral, Sanitary, Dental, Fluorosis, Gingi, ulcer, Oral_Other, Lung, Resp_other, Heart
-            ,traumaT,spacingT,crowdingT,cleftT,chronicT,soundsT;
+            ,traumaT,spacingT,crowdingT,cleftT,chronicT,soundsT,frequency,frequencyFood;
 
     RelativeLayout San,operated,bronchialL;
 
@@ -37,13 +37,13 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
     String age;
 
     int anaemia, nails = 10, bath = 10, groom = 10, oral = 10, men = 10, san = 10, dent = 10, flu = 10, ging = 10, ulc = 10, lung = 10, heart = 10, check = 10,trauma=10,spacing=10,
-    crowding=10,cleft=10,operatedOn=10,chronic=10,bronchial=10,sounds=10,bronchialAst;
+    crowding=10,cleft=10,operatedOn=10,chronic=10,bronchial=10,sounds=10,bronchialAst,bothParents=2,OverNight;
 
     TextView hltStdId;
 
     RadioButton Applicable, NotApplicable;
 
-    Spinner Anaemia_drop,dental_others,bronchialAsthma;
+    Spinner Anaemia_drop,dental_others,bronchialAsthma,overNight;
 
     SQLiteDatabase database;
 
@@ -55,6 +55,10 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
     //creating query for declaration of tables
     public String table_query=
             "  child_id VARCHAR[11]," +
+            "  frequency INTEGER[1]," +
+            "  frequencyFood INTEGER[1]," +
+            "  over_night_food INTEGER[1]," +
+            "  both_parents INTEGER[1]," +
             "  height INTEGER[3]," +
             "  weight INTEGER[3]," +
             "  wc INTEGER[3]," +
@@ -91,7 +95,6 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
             "  oe_crowding_com VARCHAR[140]," +
             "  oe_cleft INTEGER[1]," +
             "  oe_cleft_operated INTEGER[1]," +
-            "  oe_cleft_com VARCHAR[140]," +
             "  oe_others VARCHAR[140]," +
             "  rs_chronic INTEGER[1]," +
             "  rs_chronic_com VARCHAR[140]," +
@@ -116,6 +119,7 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
 		
 		hltStdId = (TextView)findViewById(R.id.hlt_std_id);
 
+        frequency=(EditText) findViewById(R.id.frequency);
         cardio = (EditText) findViewById(R.id.cardio_text);
         anaemia_others = (EditText) findViewById(R.id.anaemia_text);
         health_others = (EditText) findViewById(R.id.health_text);
@@ -140,9 +144,9 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
         traumaT=(EditText) findViewById(R.id.trauma_text);
         spacingT=(EditText) findViewById(R.id.spacing_text);
         crowdingT=(EditText) findViewById(R.id.crowding_text);
-        cleftT=(EditText) findViewById(R.id.cleft_text);
         chronicT = (EditText) findViewById(R.id.chronic_text);
         soundsT = (EditText) findViewById(R.id.sounds_text);
+        frequencyFood = (EditText) findViewById(R.id.frequencyFood);
 
         Applicable = (RadioButton) findViewById(R.id.app);
         NotApplicable = (RadioButton) findViewById(R.id.notapp);
@@ -155,16 +159,22 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
 
 
         Anaemia_drop = (Spinner) findViewById(R.id.anaemia_drop);
+        overNight = (Spinner) findViewById(R.id.overNightFood);
 
         String[] symp = new String[]{"No Anaemia","Mild", "Moderate", "Severe"};
         String[] dental = {"Pre-Shedding mobility","Trauma of tooth","Spacing/Crowding","Developmental Abnormailty"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, symp);
         Anaemia_drop.setAdapter(adapter);
 
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.overNight, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        overNight.setAdapter(adapter1);
+        overNight.setOnItemSelectedListener(this);
+
         bronchialAsthma = (Spinner) findViewById(R.id.bronchial_spinner);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.bronchinal_array, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.bronchinal_array, R.layout.spinner_item);
         adapter1.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        bronchialAsthma.setAdapter(adapter1);
+        bronchialAsthma.setAdapter(adapter2);
         bronchialAsthma.setOnItemSelectedListener(this);
 
 
@@ -180,6 +190,10 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent == bronchialAsthma) {
             bronchialAst = position - 1;
+        }
+
+        else if (parent == overNight){
+            OverNight=position -1;
         }
 
     }
@@ -214,6 +228,13 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
 
     public void onRadioselect(View v) {
         switch (v.getId()) {
+
+            case R.id.bothParentsYes :
+                bothParents=1;
+                break;
+            case R.id.bothParentsNo :
+                bothParents=0;
+                break;
             case R.id.nail_trim:
                 nails = 1;
                 Nail.setVisibility(v.GONE);
@@ -358,6 +379,15 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                 soundsT.setVisibility(View.GONE);
                 break;
 
+
+            case R.id.operated:
+                operatedOn=1;
+                break;
+            case R.id.notOperated:
+                operatedOn=0;
+                break;
+
+
             case R.id.app:
                 check = 1;
                 age = checkboxitem[0];
@@ -390,7 +420,20 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
 
     public void Next() {
 
-            if (Height.getText().toString().length() == 0 ) {
+            if (frequency.getText().toString().trim().length()==0) {
+                showMessage("Error", "Please Enter Frequency of Skipping Breakfast/week in Dietary Pattern");
+                return;
+            }else if (OverNight == -1) {
+                showMessage("Error", "Please Select an Option for Children Having Over-Night Food in the mornings in Dietary Pattern");
+                return;
+            }else if (frequencyFood.getText().toString().trim().length()==0) {
+                showMessage("Error", "Please Enter Frequency of Food Intake/Day");
+                return;
+            }else if (bothParents == 2) {
+                showMessage("Error", "Please Select an Option for Both Parents Working in Dietary Pattern");
+                return;
+            }
+            else if (Height.getText().toString().length() == 0 ) {
                 showMessage("Warning", "Please enter the Height");
                 return;
             }
@@ -513,6 +556,10 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
 
                     try {
                     String insert_query = "'" + health_sid + "'," +
+                            "'" + frequency.getText().toString().trim() + "',"+
+                            "'" + frequencyFood.getText().toString().trim() + "',"+
+                            "'" + OverNight + "',"+
+                            "'" + bothParents + "',"+
                             "'" + Integer.parseInt(Height.getText().toString().trim()) + "'," +
                             "'" + Integer.parseInt(Weight.getText().toString().trim()) + "'," +
                             "'" + Integer.parseInt(Waist.getText().toString().trim()) + "'," +
@@ -549,7 +596,6 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                             "'" + crowdingT.getText().toString().trim() + "'," +
                             "'" + cleft + "'," +
                             "'" + operatedOn + "'," +
-                            "'" + cleftT.getText().toString().trim() + "'," +
                             "'" + Oral_Other.getText().toString().trim() + "'," +
                             "'" + chronic + "'," +
                             "'" + chronicT.getText().toString().trim() + "'," +

@@ -554,6 +554,7 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="135dp"
+                    android:longClickable="false"
                     android:id="@+id/t1"
                     android:layout_marginTop="60dp"
                     android:maxLength="5"
@@ -565,6 +566,7 @@
 
                 <EditText
                     android:layout_width="80dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="245dp"
                     android:id="@+id/t2"
@@ -578,6 +580,7 @@
 
                 <EditText
                     android:layout_width="60dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:maxLength="3"
                     android:layout_marginLeft="352dp"
@@ -620,6 +623,7 @@
 
                 <EditText
                     android:layout_width="80dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="445dp"
                     android:layout_marginTop="60dp"
@@ -633,6 +637,7 @@
 
                 <EditText
                     android:layout_width="80dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="555dp"
                     android:layout_marginTop="60dp"
@@ -646,6 +651,7 @@
 
                 <EditText
                     android:layout_width="60dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="662dp"
                     android:layout_marginTop="60dp"
@@ -710,6 +716,7 @@
                 <EditText
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
+                    android:longClickable="false"
                     android:layout_marginLeft="135dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t7"
@@ -723,6 +730,7 @@
                 <EditText
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
+                    android:longClickable="false"
                     android:layout_marginLeft="245dp"
                     android:layout_marginTop="60dp"
                     android:id="@+id/t8"
@@ -735,6 +743,8 @@
 
                 <EditText
                     android:layout_width="60dp"
+
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="352dp"
                     android:layout_marginTop="60dp"
@@ -775,6 +785,7 @@
                 </RadioGroup>
 
                 <EditText
+                    android:longClickable="false"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="445dp"
@@ -788,6 +799,8 @@
                     android:layout_marginLeft="540dp" />
 
                 <EditText
+
+                    android:longClickable="false"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="555dp"
@@ -801,6 +814,8 @@
                     android:layout_marginLeft="650dp" />
 
                 <EditText
+
+                    android:longClickable="false"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="662dp"
@@ -818,6 +833,7 @@
             <View style="@style/Divider" />
 
             <EditText
+                android:longClickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/lowertext"

@@ -13,7 +13,7 @@
     <string name="hip">Hip Circumference :</string>
     <string name="pulse">Pulse Rate :</string>
     <string name="rrate">Respiratory Rate :</string>
-    <string name="bp">Blood Presure :</string>
+    <string name="bp">Blood Pressure :</string>
     <string name="persl">Personal Hygiene :</string>
     <string name="nail">Nails -</string>
     <string name="bath">Bathing -</string>
@@ -59,7 +59,7 @@
     <string name="pityal">PityriasisAlba</string>
     <string name="phry">Phrynoderma</string>
     <string name="pedi">Pediculosis</string>
-    <string name="pityver">Pityriasis Vrsicolor</string>
+    <string name="pityver">Pityriasis Versicolor</string>
     <string name="imp">Impetigo</string>
     <string name="papu">Papularurticaria</string>
     <string name="tin">Tinea Cruris / Corporis</string>
@@ -244,12 +244,12 @@
     <string name="notRequired">Not Required</string>
     <string name="truama">Trauma of Tooth : </string>
     <string name="spacing">Spacing : </string>
-    <string name="crowding">Corwding : </string>
-    <string name="cleft">Cleft Lip/ \nCleft Palate : </string>
+    <string name="crowding">Crowding : </string>
+    <string name="cleft">Cleft Lip/ Cleft Palate : </string>
     <string name="operated">Operated</string>
     <string name="notOperated">Not Operated</string>
     <string name="chronic">Chronic Cough\n(>2 weeks) : </string>
-    <string name="bronchial">Bronchial Asthama : </string>
+    <string name="bronchial">Bronchial Asthma : </string>
     <string name="sounds">Adventitious Sounds : </string>
     <string-array name="bronchinal_array">
         <item>None</item>
@@ -262,6 +262,48 @@
     <string name="injuryr">Injury Related Mal-union</string>
     <string name="treatment">Treatment Taken</string>
     <string name="URTI">URTI : </string>
+    <string name="frequencyFood">Frequency of Food Intake/Day</string>
+    <string name="impression">Advice : </string>
+
+    <string name="sl.no">#</string>
+    <string name="drug">Drug</string>
+    <string name="dur">Duration</string>
+    <string name="days">Frequency</string>
+    <string name="dos">Dosage</string>
+
+
+    <string-array name="Treatment">
+        <item>Paracetamol 500mg</item>
+        <item>Chlor Pheniramine Maleate 4mg</item>
+        <item>Cetirizine/Levo ceterizine 5mg</item>
+        <item>Multivitamin</item>
+        <item>Iron &amp; folic acid 100mg</item>
+        <item>Vitamin C</item>
+        <item>Vit A &amp; D</item>
+        <item>Amoxycillin + Cloxacillin 250mg/Cap Amoxcillin 250mg</item>
+        <item>Cap Amoxycillin + Cloxacillin 500 mg</item>
+        <item>Azithromycin 250 mg</item>
+        <item>Metrogyl 400mg</item>
+        <item>Cough syrup (Salbutamol/terbutaline +Bromhexine and/or Dextromethophan combination)</item>
+        <item>Ciprofloxacin Eye/Ear drops</item>
+        <item>Paradichloro Benzene Ear drops (DEWAX or equivalent)</item>
+        <item>Chloromycetin applicaps</item>
+        <item>Andriplus eyedrops</item>
+        <item>Acurest eye drops</item>
+        <item>Acurest AH eye drops</item>
+        <item>Winolap Eye drops</item>
+        <item>IF2 Eye drops</item>
+        <item>FML Eye drops</item>
+        <item>Accusol Eye drops </item>
+        <item>Liquid Paraffin Bottles</item>
+        <item>Biolene Jelly</item>
+        <item>Permethrin cream 5%</item>
+        <item>Fusidic acid cream</item>
+        <item>Ketoconazole/Miconazole cream</item>
+        <item>AP Gel or Tretinoin cream 0.025/0.05 %</item>
+        <item>Steroid cream (Betamethasone Propionate/Momatasone/Fluticasone</item>
+
+    </string-array>
 
 
 

@@ -25,7 +25,6 @@ import android.os.AsyncTask;
         protected Void doInBackground(Void... params) {
 
             MainActivity.connected=UpdateActivity.isConnectedToServer(MainActivity.url);
-            MainActivity.threadStarted=true;
             return null;
         }
 

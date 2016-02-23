@@ -125,14 +125,15 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
 
     public boolean childIdValidation(String child_id){
 
-        boolean valid=false;
+        boolean valid=false, mandal_check=false,panchayat_check=false,village_check=false,school_check=false;
 
         boolean len=child_id.length()==11;
-        boolean mandal_check=Integer.parseInt(child_id.substring(0,1))<=5 && Integer.parseInt(child_id.substring(0,1))>0;
-        boolean panchayat_check=Integer.parseInt(child_id.substring(1,3))<=99 && Integer.parseInt(child_id.substring(1,3))>=0;
-        boolean village_check=Integer.parseInt(child_id.substring(3,5))<=99 && Integer.parseInt(child_id.substring(3,5))>=0;
-        boolean school_check=Integer.parseInt(child_id.substring(5,8))<=999 && Integer.parseInt(child_id.substring(5,8))>=0;
-
+        if(len) {
+            mandal_check = Integer.parseInt(child_id.substring(0, 1)) <= 5 && Integer.parseInt(child_id.substring(0, 1)) > 0;
+            panchayat_check = Integer.parseInt(child_id.substring(1, 3)) <= 99 && Integer.parseInt(child_id.substring(1, 3)) >= 0;
+            village_check = Integer.parseInt(child_id.substring(3, 5)) <= 99 && Integer.parseInt(child_id.substring(3, 5)) >= 0;
+            school_check = Integer.parseInt(child_id.substring(5, 8)) <= 999 && Integer.parseInt(child_id.substring(5, 8)) >= 0;
+        }
 
         valid=len && mandal_check && panchayat_check && village_check && school_check;
 
@@ -231,7 +232,7 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
                 {
                     if(!childIdValidation(sid)) {
                         errorMessage.setVisibility(View.VISIBLE);
-                        errorMessage.setText("Please Enter a Student ID which is Available");
+                        errorMessage.setText("Please Enter a Student ID which is Valid");
                     }
                 }
                 else if(sid.length()<11){

@@ -40,9 +40,83 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+           <LinearLayout
+                style="@style/container">
+                <TextView
+                    style="@style/head"
+                    android:layout_width="match_parent"
+                    android:text="@string/dietaryPattern"
+                    android:textStyle="bold"
+                    android:textSize="26dp"/>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/frequencyFood"
+                        android:paddingLeft="15dp"/>
+                    <EditText
+                        android:longClickable="false"
+                        style="@style/entryBox"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:id="@+id/frequencyFood"
+                        android:hint="@string/frequencyHint"/>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/frequencyOfSkipping"
+                        android:paddingLeft="15dp"/>
+                    <EditText
+                        style="@style/entryBox"
+                        android:longClickable="false"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:id="@+id/frequency"
+                        android:hint="@string/frequencyHint"/>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/OverNightFood"
+                        android:paddingLeft="15dp"/>
+                    <Spinner
+                        style="@style/entryBox"
+                        android:id="@+id/overNightFood"
+                        ></Spinner>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/innershape"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        style="@style/head"
+                        android:text="@string/bothParents"
+                        android:paddingLeft="15dp"/>
+                    <RadioGroup
+                        style="@style/radioGroup">
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:text="@string/yes"
+                            android:id="@+id/bothParentsYes"
+                            android:onClick="onRadioselect"/>
+                        <RadioButton
+                            style="@style/radioButton"
+                            android:id="@+id/bothParentsNo"
+                            android:onClick="onRadioselect"
+                            android:text="@string/no"/>
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/headershape">
 
                 <TextView
@@ -54,6 +128,7 @@
 
                 <EditText
                     android:layout_width="fill_parent"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:id="@+id/height"
@@ -79,6 +154,7 @@
 
                 <EditText
                     android:layout_width="fill_parent"
+                    android:longClickable="false"
                     android:layout_height="fill_parent"
                     android:id="@+id/weight"
                     android:layout_marginTop="10dp"
@@ -104,6 +180,7 @@
 
                 <EditText
                     android:layout_width="fill_parent"
+                    android:longClickable="false"
                     android:layout_height="fill_parent"
                     android:id="@+id/waist"
                     android:layout_marginTop="10dp"
@@ -128,6 +205,7 @@
 
                 <EditText
                     android:layout_width="fill_parent"
+                    android:longClickable="false"
                     android:layout_height="fill_parent"
                     android:id="@+id/hip"
                     android:layout_marginTop="10dp"
@@ -154,6 +232,7 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:longClickable="false"
                     android:id="@+id/pulse"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="350dp"
@@ -180,13 +259,14 @@
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:longClickable="false"
                     android:id="@+id/bp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="mm Hg"
-                    android:maxLength="3"
-                    android:inputType="number"/>
+                    android:maxLength="7"
+                    android:inputType="number|text"/>
 
             </RelativeLayout>
 
@@ -255,6 +335,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/nail_text"
@@ -313,6 +394,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/bath_text"
@@ -370,6 +452,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:hint="@string/hint"
@@ -428,6 +511,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:hint="@string/hint"
@@ -529,6 +613,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:hint="@string/hint"
@@ -552,6 +637,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:hint="@string/hint"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
@@ -559,18 +645,6 @@
                     android:layout_marginTop="10dp"/>
 
             </RelativeLayout>
-            <!--<RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="@string/Sys"
-                    android:layout_marginTop="20dp"
-                    style="@style/sid"/>
-
-            </RelativeLayout>-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -612,6 +686,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/anaemia_text"
@@ -683,6 +758,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/dental_text"
@@ -740,6 +816,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/fluoro_text"
@@ -797,6 +874,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/gingi_text"
@@ -854,6 +932,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/oralul_text"
@@ -910,6 +989,7 @@
             <EditText
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
+                android:longClickable="false"
                 android:layout_marginLeft="350dp"
                 android:id="@+id/trauma_text"
                 android:hint="@string/hint"
@@ -966,6 +1046,7 @@
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
+                    android:longClickable="false"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/spacing_text"
                     android:hint="@string/hint"
@@ -1022,6 +1103,7 @@
                 <EditText
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
+                    android:longClickable="false"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/crowding_text"
                     android:hint="@string/hint"
@@ -1057,45 +1139,25 @@
                         android:id="@+id/cleft_yes"
                         android:onClick="onRadioselect"
                         android:textSize="20dp"
-                        android:text="Applicable"/>
+                        android:text="Yes"/>
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:id="@+id/cleft_no"
-                        android:layout_weight="1"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="90dp"
                         android:textSize="20dp"
-                        android:text="Not Applicable"/>
-
+                        android:text="No"/>
                 </RadioGroup>
 
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/layoutshape">
-
-                <EditText
-                    android:layout_width="400dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="350dp"
-                    android:id="@+id/cleft_text"
-                    android:hint="@string/hint"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/operatedLayout"
                 android:visibility="gone"
                 android:background="@drawable/layoutshape">
-
-
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -1106,7 +1168,7 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:id="@+id/operated"
                         android:onClick="onRadioselect"
                         android:textSize="20dp"
@@ -1114,13 +1176,12 @@
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:id="@+id/notOperated"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="90dp"
+                        android:layout_marginLeft="47dp"
                         android:textSize="20dp"
                         android:text="@string/notOperated"/>
-
                 </RadioGroup>
             </RelativeLayout>
 
@@ -1151,6 +1212,7 @@
                     android:layout_width="400dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
+                    android:longClickable="false"
                     android:id="@+id/sys_text"
                     android:hint="@string/hint"
                     android:layout_marginTop="20dp"/>
@@ -1221,6 +1283,7 @@
             <EditText
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
+                android:longClickable="false"
                 android:layout_marginLeft="350dp"
                 android:id="@+id/chronic_text"
                 android:layout_marginTop="10dp"
@@ -1343,6 +1406,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/sounds_text"
@@ -1367,6 +1431,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:hint="@string/hint"
@@ -1438,6 +1503,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:id="@+id/heart_text"
@@ -1462,6 +1528,7 @@
 
                 <EditText
                     android:layout_width="400dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="350dp"
                     android:hint="@string/hint"

@@ -7,11 +7,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity{
@@ -24,9 +32,8 @@ public class MainActivity extends ActionBarActivity{
     static SQLiteDatabase db;
     private static MainActivity app;
     static SharedPreferences mPrefs;
-    static String url="http://10.3.32.56/";
+    static String url="http://192.168.43.22/";
     public static boolean connected=false;
-    public static boolean threadStarted=false;
     public static ProgressDialog dialog;
     private Handler mHandler = new Handler();
     public static MainActivity get(){
@@ -76,6 +83,13 @@ public class MainActivity extends ActionBarActivity{
         System.out.println(insert_query);
         //inserting into database
         MainActivity.db.execSQL("INSERT INTO school_references VALUES (" + insert_query + ")");
+
+        String insert_query_child = "'" + "11111111111" + "'," +
+                "'" + "Name" + "',"+
+                "'" + "Male" + "'";
+        System.out.println(insert_query);
+        //inserting into database
+        MainActivity.db.execSQL("INSERT INTO child_references VALUES (" + insert_query_child + ")");
 
         syncStatus=(TextView) findViewById(R.id.syncStatus);
 
@@ -134,7 +148,6 @@ public class MainActivity extends ActionBarActivity{
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(!threadStarted) {
 
                         //startProgressDialog("Connecting to Server");
                         //stopProgressDialog();
@@ -142,7 +155,7 @@ public class MainActivity extends ActionBarActivity{
                         connectorCheck connectorCheck=new connectorCheck();
 
                         connectorCheck.execute();
-                    }
+
                     int timeout=5000;
                     if(connected){
                         timeout=0;
@@ -170,11 +183,9 @@ public class MainActivity extends ActionBarActivity{
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(!threadStarted) {
                         connectorCheck connectorCheck=new connectorCheck();
 
                         connectorCheck.execute();
-                    }
                     int timeout=5000;
                     if(connected){
                         timeout=0;
@@ -194,6 +205,30 @@ public class MainActivity extends ActionBarActivity{
             });
         } else {
             showMessage("Check Internet Connection", "Try again", get());
+        }
+    }
+    public void emergency(View view) {
+        BufferedReader reader=null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(getAssets().open("faulty.csv")));
+            String line;
+            while((line = reader.readLine())!= null){
+                db.execSQL("INSERT INTO images VALUES (" + line+")");
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        finally {
+            if (reader!=null){
+                try{
+                    reader.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
         }
     }
     //Method to check internet connection

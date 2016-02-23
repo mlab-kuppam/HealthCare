@@ -25,11 +25,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 class GetXMLTask extends AsyncTask<LinkedHashMap, Void, String> {
-    String url;
+    String message;
 
     public GetXMLTask(String message) {
         super();
-        dialog.setTitle(message);
+        this.message=message;
         // do stuff
     }
 
@@ -37,6 +37,7 @@ class GetXMLTask extends AsyncTask<LinkedHashMap, Void, String> {
     protected void onPreExecute() {
         dialog = new ProgressDialog(MainActivity.get());
         dialog.setCancelable(false);
+        dialog.setTitle(message);
         dialog.setMessage("Please Wait... Do not Close the App");
         dialog.show();
 

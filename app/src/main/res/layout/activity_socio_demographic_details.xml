@@ -458,60 +458,7 @@
                     </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                style="@style/container">
-                <TextView
-                    style="@style/head"
-                    android:layout_width="match_parent"
-                    android:text="@string/dietaryPattern"
-                    android:textStyle="bold"
-                    android:textSize="26dp"/>
-                <LinearLayout
-                    style="@style/innershape"
-                    android:layout_marginTop="10dp">
-                    <TextView
-                        style="@style/head"
-                        android:text="@string/frequencyOfSkipping"
-                        android:paddingLeft="15dp"/>
-                    <EditText
-                        style="@style/entryBox"
-                        android:inputType="number"
-                        android:maxLength="2"
-                        android:id="@+id/frequency"
-                        android:hint="@string/frequencyHint"/>
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/innershape"
-                    android:layout_marginTop="10dp">
-                    <TextView
-                        style="@style/head"
-                        android:text="@string/OverNightFood"
-                        android:paddingLeft="15dp"/>
-                    <Spinner
-                        style="@style/entryBox"
-                        android:id="@+id/overNightFood"
-                        ></Spinner>
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/innershape"
-                    android:layout_marginTop="10dp">
-                    <TextView
-                        style="@style/head"
-                        android:text="@string/bothParents"
-                        android:paddingLeft="15dp"/>
-                    <RadioGroup
-                        style="@style/radioGroup">
-                        <RadioButton
-                            style="@style/radioButton"
-                            android:text="@string/yes"
-                            android:id="@+id/bothParentsYes"/>
-                        <RadioButton
-                            style="@style/radioButton"
-                            android:id="@+id/bothParentsNo"
-                            android:text="@string/no"/>
-                    </RadioGroup>
-                </LinearLayout>
-            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

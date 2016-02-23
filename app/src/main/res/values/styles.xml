@@ -239,4 +239,39 @@
     <item name="android:orientation">horizontal</item>
     <item name="android:paddingLeft">15dp</item>
     </style>
+
+
+    <style name="column_name" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="Divider1">
+        <item name="android:layout_width">3dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:background">#000000</item>
+
+    </style>
+
+    <style name="row_name" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">#FF817D7B</item>
+
+    </style>
+
+    <style name="Separator2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:background">#000000</item>
+
+    </style>
+
+
+    <style name="Dialogtext" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">30dp</item>
+
+    </style>
+
 </resources>

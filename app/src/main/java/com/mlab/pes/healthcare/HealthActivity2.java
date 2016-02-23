@@ -24,9 +24,11 @@ import java.io.File;
 public class HealthActivity2 extends ActionBarActivity {
 
     EditText vit_b_com,vit_c_com,vit_others,gs_others,gsdeform,uti_com,siez_com,muc_others,worm_infest,Acute
-            ,gastro_other,nerve_other,behav_other,Other,MSDeform,ADHD,Bedwetting,Other_disease,injury,deformitiesT;
+            ,gastro_other,nerve_other,behav_other,Other,MSDeform,ADHD,Bedwetting,Other_disease,injury,deformitiesT,impression;
 
     int ac=10,wo=10,msdef=10,se=10,ad=10,uti=10,bed=10,gsdef=10,vitc=10,vitb=10,oth=10,ho=10,referal=10,treatment=10;
+
+    String Treatment;
 
     RelativeLayout Worm,Seizure,UTI,GSDeform,VitC,VitB,deformities,seizureL;
 
@@ -94,7 +96,9 @@ public class HealthActivity2 extends ActionBarActivity {
             "  hoin INTEGER[1]," +
             "  hoin_com VARCHAR[140]," +
             "  others VARCHAR[140],"+
-                    "  referal INTEGER[1]";
+            "  impression VARCHAR[140],"+
+            "  treatment VARCHAR[1000],"+
+            "  referal INTEGER[1]";
 
 
     @Override
@@ -104,7 +108,8 @@ public class HealthActivity2 extends ActionBarActivity {
 
         //Re-Initializing pid_count for every new student
         pic_count_health = 0;
-		
+
+        impression=(EditText)findViewById(R.id.impression);
 		hlt2StdId = (TextView)findViewById(R.id.hlt1_std_id);
 		hlt2StdId.setText(HealthActivity1.health_sid);
 
@@ -393,6 +398,10 @@ public class HealthActivity2 extends ActionBarActivity {
             showMessage("Warning", "Please select an option for H/O Injuries");
             return;
         }
+        else if (referal == 10 ) {
+            showMessage("Warning", "Please select an option for Referal");
+            return;
+        }
         else {
 
             try{
@@ -446,6 +455,8 @@ public class HealthActivity2 extends ActionBarActivity {
                     "'" + ho + "'," +
                     "'" + injury.getText().toString().trim() + "'," +
                     "'" + Other.getText().toString().trim() + "',"+
+                    "'" + impression.getText().toString().trim() + "',"+
+                    "'" + Treatment + "',"+
                     "'" + referal + "'";
 
             //inserting into database
@@ -456,7 +467,6 @@ public class HealthActivity2 extends ActionBarActivity {
                 String insert_image_query = "'" + HealthActivity1.health_sid + "'," +
                         "'" +  HealthActivity1.health_sid+"_health_"+x + "'," +
                         "'" +  Environment.getExternalStorageDirectory() + "/Images/" + HealthActivity1.health_sid + "_health_" + x + ".jpg" + "'";
-
                 database.execSQL("INSERT INTO images VALUES(" + insert_image_query + ")");
             }
 

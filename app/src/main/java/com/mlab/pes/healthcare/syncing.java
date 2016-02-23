@@ -47,7 +47,7 @@ public class syncing {
                 String q = "SELECT * FROM " + tablenames.get(i);
                 Cursor c = MainActivity.db.rawQuery(q, null);
                 c.moveToFirst();
-                if (c != null && c.getCount() > 0 && !tablenames.get(i).equals("images") && !tablenames.get(i).equals("child_references")&& !tablenames.get(i).equals("android_metadata")) {
+                if (c != null && c.getCount() > 0 && !tablenames.get(i).equals("images") && !tablenames.get(i).equals("child_references")&&!tablenames.get(i).equals("school_references")&& !tablenames.get(i).equals("android_metadata")) {
                     ArrayList array = new ArrayList();
                     do {
                         LinkedHashMap rows = new LinkedHashMap();
@@ -83,16 +83,19 @@ public class syncing {
         if (!t.equals("{}")) {
             try {
                 GetXMLTask get = new GetXMLTask("Syncing Data");
-                String output=(String) get.execute(new LinkedHashMap[]{linkedHashMap,json_fin}).get();
+                String output= get.execute(new LinkedHashMap[]{linkedHashMap,json_fin}).get();
 
-                if(output.contains("Sync Unsuccessful")){
-                    MainActivity.showMessage("Failure", "Sync Unsuccessful",MainActivity.get());
-                    return;
-                }
-                if (output.startsWith("Sync Status")) {
-                    MainActivity.syncStatus.setText(output.substring(13,35).replaceFirst(":", "at"));
-                    SharedPreferences.Editor mEditor = MainActivity.mPrefs.edit();
-                    mEditor.putString("status", output.substring(13,35).replaceFirst(":", "at")).commit();
+                if(output!=null) {
+
+                    if (output.contains("Sync Unsuccessful")) {
+                        MainActivity.showMessage("Failure", "Sync Unsuccessful", MainActivity.get());
+                        return;
+                    }
+                    if (output.startsWith("Sync Status")) {
+                        MainActivity.syncStatus.setText(output.substring(13, 35).replaceFirst(":", "at"));
+                        SharedPreferences.Editor mEditor = MainActivity.mPrefs.edit();
+                        mEditor.putString("status", output.substring(13, 35).replaceFirst(":", "at")).commit();
+                    }
                 }
 
                 String image_output="";
@@ -117,14 +120,15 @@ public class syncing {
 
                         GetXMLTask get_image = new GetXMLTask("Syncing Images");
                         image_output=get_image.execute(new LinkedHashMap[]{linkedHashMap,image}).get();
-                    } while (c.moveToNext() && !image_output.contains("Sync Unsuccessful"));
+                    } while (c.moveToNext() && image_output!=null && !image_output.contains("Sync Unsuccessful"));
                     c.close();
                 }
 
 
-            if (!output.contains("Sync Unsuccessful")) {
+            if (!output.contains("Sync Unsuccessful") && !image_output.contains("Sync Unsuccessful")) {
+
                 for (int i = 0; i < tablenames.size(); i++) {
-                    if(!tablenames.get(i).equals("child_references"))
+                    if(!tablenames.get(i).equals("child_references") || !tablenames.get(i).equals("school_references"))
                     MainActivity.db.execSQL("DROP TABLE IF EXISTS " + tablenames.get(i));
                 }
                 MainActivity.showMessage("Success!", output.substring(35),MainActivity.get());

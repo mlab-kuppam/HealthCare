@@ -1,6 +1,7 @@
 package com.mlab.pes.healthcare;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,11 +11,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
@@ -23,8 +31,9 @@ public class SkinActivity extends ActionBarActivity {
 
     //Declaring sid -> studentID(must)
     static String skin_sid;
+    String treatment="";
 
-    EditText Scabtext, Pityaltext, Phrynotext, Pedicultext, Pityvertext, Imptext, Paputext, Tintext, Miltext, Viraltext, Other, Xerosis;
+    EditText impression,Scabtext, Pityaltext, Phrynotext, Pedicultext, Pityvertext, Imptext, Paputext, Tintext, Miltext, Viraltext, Other, Xerosis;
 
 	TextView skinStdId;
 	
@@ -33,6 +42,20 @@ public class SkinActivity extends ActionBarActivity {
     SQLiteDatabase database;
 
     //creating table query
+    RelativeLayout layout1;
+    int index;
+
+    LinearLayout layout2,layout3,layout4,layout5,layout6;
+    int i=-1,check=0;
+
+    String treat_text;
+
+    EditText Text2,Text3,Text4;
+    TextView UnitText,no1,no2,no3,no4,no5;
+    AutoCompleteTextView Text1;
+    String Dialogarr[]= new String[4];
+    Button BTN1,BTN2;
+    TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20;
 
 
     private static SkinActivity app;
@@ -50,6 +73,8 @@ public class SkinActivity extends ActionBarActivity {
             "  ph_com VARCHAR[140]," +
             "  pe INTEGER[1]," +
             "  pe_com VARCHAR[140]," +
+            "  pity INTEGER[1]," +
+            "  pity_com VARCHAR[140]," +
             "  im INTEGER[1]," +
             "  im_com VARCHAR[140]," +
             "  pap INTEGER[1]," +
@@ -63,6 +88,8 @@ public class SkinActivity extends ActionBarActivity {
             "  xerosis INTEGER[1]," +
             "  xerosis_com VARCHAR[140]," +
             "  others VARCHAR[140],"+
+            "  impression VARCHAR[140],"+
+            "  treatment VARCHAR[1000],"+
             "  referal INTEGER[1]";
 
 
@@ -78,7 +105,8 @@ public class SkinActivity extends ActionBarActivity {
         //Invoking StudentID Dialog box
         studentidDialog();
 
-		
+
+        impression=(EditText)findViewById(R.id.impression);
 		skinStdId = (TextView)findViewById(R.id.skin_std_id);
         skinStdId.setText(skin_sid);
 
@@ -96,6 +124,36 @@ public class SkinActivity extends ActionBarActivity {
         Other = (EditText) findViewById(R.id.add_text);
 
 
+        layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        layout2 = (LinearLayout) findViewById(R.id.layout2);
+        layout3 = (LinearLayout) findViewById(R.id.layout3);
+        layout4 = (LinearLayout) findViewById(R.id.layout4);
+        layout5 = (LinearLayout) findViewById(R.id.layout5);
+        layout6 = (LinearLayout) findViewById(R.id.layout6);
+
+        text1 = (TextView)findViewById(R.id.text11);
+        text3 = (TextView)findViewById(R.id.text31);
+        text4 = (TextView)findViewById(R.id.text41);
+        text5 = (TextView)findViewById(R.id.text12);
+        text7 = (TextView)findViewById(R.id.text32);
+        text8 = (TextView)findViewById(R.id.text42);
+        text9 = (TextView)findViewById(R.id.text13);
+        text11 = (TextView)findViewById(R.id.text33);
+        text12 = (TextView)findViewById(R.id.text43);
+        text13 = (TextView)findViewById(R.id.text14);
+        text15 = (TextView)findViewById(R.id.text34);
+        text16 = (TextView)findViewById(R.id.text44);
+        text17 = (TextView)findViewById(R.id.text15);
+        text19 = (TextView)findViewById(R.id.text35);
+        text20 = (TextView)findViewById(R.id.text45);
+
+        no1 = (TextView)findViewById(R.id.text01);
+        no2 = (TextView)findViewById(R.id.text02);
+        no3 = (TextView)findViewById(R.id.text03);
+        no4 = (TextView)findViewById(R.id.text04);
+        no5 = (TextView)findViewById(R.id.text05);
+
+
         //opening db
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
         //creating table if doesn't exist
@@ -108,6 +166,161 @@ public class SkinActivity extends ActionBarActivity {
         //creating image table
         database.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
 
+    }
+
+
+    /*private void AddTextLayout(TextView textView1,TextView textView2,TextView textView3,TextView textView4, int marginLeft, int marginTop, int marginRight, int marginBottom,int size, String dialogarr) {
+        check++;
+        System.out.println("checkinnnnnnng" + check);
+        LinearLayout.LayoutParams textLayoutParameters = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+        textLayoutParameters.setMargins(marginLeft, marginTop, marginRight, marginBottom);
+        textView1.setTextSize(size);
+        textView1.setText(dialogarr);
+        textView1.setLayoutParams(textLayoutParameters);
+        textView2.setTextSize(size);
+        textView2.setText(dialogarr);
+        textView2.setLayoutParams(textLayoutParameters);
+        textView3.setTextSize(size);
+        textView3.setText(dialogarr);
+        textView3.setLayoutParams(textLayoutParameters);
+        textView4.setTextSize(size);
+        textView4.setText(dialogarr);
+        textView4.setLayoutParams(textLayoutParameters);
+
+
+    }*/
+
+
+
+    public void PLUS(View v) {
+        final Dialog dialog = new Dialog(this);
+        dialog.setTitle("Treatment");
+        dialog.setContentView(R.layout.treat_dialog);
+        dialog.setCancelable(false);
+
+        final String[] auto= getResources().getStringArray(R.array.Treatment);
+        Text1 = (AutoCompleteTextView) dialog.findViewById(R.id.text1);
+        ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, auto  );
+        Text1.setAdapter(adapter);
+
+        TextWatcher textWatcher= new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                for(int p=0;p<11;p++)
+                {
+                    if(Text1.getText().toString().equals(auto[p]))
+                    {
+                        check=1;
+                        break;
+                    }
+                }
+                for(int p=12;p<21;p++)
+                {
+                    if(Text1.getText().toString().equals(auto[p]))
+                    {
+                        check=2;
+                        UnitText.setText("*");
+                        break;
+                    }
+
+                }
+                for(int p=22;p<29;p++)
+                {
+                    if(Text1.getText().toString().equals(auto[p]))
+                    {
+                        check=3;
+
+                        break;
+                    }
+                }
+                if(Text1.getText().toString().equals(auto[11]))
+                {
+                    check=4;
+                    UnitText.setText("ml");
+                }
+                for(int l=0;l<auto.length;l++)
+                    if(Text1.getText().toString().equals(auto[l]))
+                    {
+                        index =l;
+                        break;
+                    }
+
+                System.out.println("cooool" + index);
+            }
+        };
+
+        Text1.addTextChangedListener(textWatcher);
+
+
+
+
+        Text2 = (EditText) dialog.findViewById(R.id.text2);
+        Text3 = (EditText) dialog.findViewById(R.id.text3);
+
+        BTN1 = (Button) dialog.findViewById(R.id.addButton1);
+        BTN2 = (Button) dialog.findViewById(R.id.addButton2);
+
+        UnitText = (TextView)dialog.findViewById(R.id.unit);
+        dialog.show();
+        BTN1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validate(Text1, Text2, Text3);
+                dialog.dismiss();
+            }
+        });
+
+        BTN2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i++;
+                dialog.dismiss();
+            }
+        });
+       /*SETVALUES(dialog);*/
+    }
+
+    public void validate(AutoCompleteTextView Text1, EditText Text2,EditText Text3)
+    {
+        if(Text1.length()==0)
+        {
+
+        }
+        else if(Text2.length()==0)
+        {
+
+        }
+        else if (Text3.length()==0)
+        {
+
+        }
+
+        switch(i)
+        {
+            case 0: layout2.setVisibility(View.VISIBLE);text1.setText(Text1.getText().toString());text3.setText(Text2.getText().toString()+UnitText.getText());text4.setText(Text3.getText().toString());
+                treat_text=""+no1.getText().toString()+"@"+text1.getText()+"@"+text3.getText().toString()+"@"+text4.getText().toString()+"days$";break;
+            case 1:layout3.setVisibility(View.VISIBLE);text5.setText(Text1.getText().toString());text7.setText(Text2.getText().toString()+UnitText.getText());text8.setText(Text3.getText().toString());
+                treat_text=""+no2.getText().toString()+"@"+text5.getText()+"@"+text7.getText().toString()+"@"+text8.getText().toString()+"days$";break;
+            case 2:layout4.setVisibility(View.VISIBLE);text9.setText(Text1.getText().toString());text11.setText(Text2.getText().toString()+UnitText.getText());text12.setText(Text3.getText().toString());
+                treat_text=""+no3.getText().toString()+"@"+text9.getText()+"@"+text11.getText().toString()+"@"+text12.getText().toString()+"days$";break;
+            case 3:layout5.setVisibility(View.VISIBLE);text13.setText(Text1.getText().toString());text15.setText(Text2.getText().toString()+UnitText.getText());text16.setText(Text3.getText().toString());
+                treat_text=""+no4.getText().toString()+"@"+text13.getText()+"@"+text15.getText().toString()+"@"+text16.getText().toString()+"days$";break;
+            case 4:layout6.setVisibility(View.VISIBLE);text17.setText(Text1.getText().toString());text19.setText(Text2.getText().toString()+ UnitText.getText());text20.setText(Text3.getText().toString());
+                treat_text=""+no5.getText().toString()+"@"+text17.getText()+"@"+text19.getText().toString()+"@"+text20.getText().toString()+"days$";break;
+
+        }
+        treatment=treatment+treat_text;
     }
 
     @Override
@@ -248,7 +461,11 @@ public class SkinActivity extends ActionBarActivity {
     }
 
     public void Next() {
-            if (scab == 10) {
+            if (pic_count_skin ==0) {
+                showMessage("Warning", "Please Take a picture of the Student");
+                return;
+            }
+            else if (scab == 10) {
                 showMessage("Warning", "Please select an option for Scabies");
                 return;
             }
@@ -291,6 +508,10 @@ public class SkinActivity extends ActionBarActivity {
             else if (xerosis == 10 ) {
                 showMessage("Warning", "Please select an option for Xerosis");
                 return;
+            }
+            else if (referal == 10 ) {
+                showMessage("Warning", "Please select an option for Referral");
+                return;
             }else {
 
                 try {
@@ -303,6 +524,8 @@ public class SkinActivity extends ActionBarActivity {
                         "'" + Phrynotext.getText().toString().trim() + "'," +
                         "'" + pedi + "'," +
                         "'" + Pedicultext.getText().toString().trim() + "'," +
+                        "'" + pitver + "'," +
+                        "'" + Pityvertext.getText().toString().trim() + "'," +
                         "'" + imp + "'," +
                         "'" + Imptext.getText().toString().trim() + "'," +
                         "'" + papu + "'," +
@@ -316,6 +539,8 @@ public class SkinActivity extends ActionBarActivity {
                         "'" + xerosis + "'," +
                         "'" + Xerosis.getText().toString().trim() + "'," +
                         "'" + Other.getText().toString().trim() + "',"+
+                        "'" + impression.getText().toString().trim() + "',"+
+                        "'" + treatment + "',"+
                         "'" + referal + "'";
 
                 //inserting into database

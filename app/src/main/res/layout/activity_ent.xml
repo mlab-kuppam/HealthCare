@@ -103,6 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="80dp"
+                    android:longClickable="false"
                     style="@style/biig"
                     android:hint="@string/hint"
                     android:visibility="gone" />
@@ -152,6 +153,7 @@
                 <EditText
                     android:id="@+id/oti_right_text"
                     android:layout_width="350dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="375dp"
                     android:layout_marginTop="80dp"
@@ -223,6 +225,7 @@
                 <EditText
                     android:id="@+id/asom_left_text"
                     android:layout_width="350dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="80dp"
@@ -275,6 +278,7 @@
                 <EditText
                     android:id="@+id/asom_right_text"
                     android:layout_width="350dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="375dp"
                     android:layout_marginTop="80dp"
@@ -343,6 +347,7 @@
                 <EditText
                     android:id="@+id/csom_left_text"
                     android:layout_width="350dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="80dp"
@@ -395,6 +400,7 @@
                 <EditText
                     android:id="@+id/csom_right_text"
                     android:layout_width="350dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="375dp"
                     android:layout_marginTop="80dp"
@@ -463,6 +469,7 @@
                 <EditText
                     android:id="@+id/impact_left_text"
                     android:layout_width="350dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="80dp"
@@ -515,6 +522,7 @@
                 <EditText
                     android:id="@+id/impact_right_text"
                     android:layout_width="350dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="375dp"
                     android:layout_marginTop="80dp"
@@ -583,6 +591,7 @@
                 <EditText
                     android:id="@+id/impair_left_text"
                     android:layout_width="350dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="80dp"
@@ -635,6 +644,7 @@
                 <EditText
                     android:id="@+id/impair_right_text"
                     android:layout_width="350dp"
+                    android:longClickable="false"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="375dp"
                     android:layout_marginTop="80dp"
@@ -695,6 +705,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="260dp"
+                    android:longClickable="false"
                     android:id="@+id/epi_text"
                     style="@style/biig"
                     android:hint="@string/hint"
@@ -753,6 +764,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="260dp"
+                    android:longClickable="false"
                     android:id="@+id/adeno_text"
                     style="@style/biig"
                     android:hint="@string/hint"
@@ -809,6 +821,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="260dp"
+                    android:longClickable="false"
                     android:id="@+id/phary_text"
                     style="@style/biig"
                     android:hint="@string/hint"
@@ -866,6 +879,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="260dp"
+                    android:longClickable="false"
                     android:id="@+id/aller_text"
                     style="@style/biig"
                     android:hint="@string/hint"
@@ -922,6 +936,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="260dp"
+                    android:longClickable="false"
                     android:id="@+id/speech_text"
                     style="@style/biig"
                     android:hint="@string/hint"
@@ -979,6 +994,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="260dp"
+                    android:longClickable="false"
                     android:id="@+id/urti_text"
                     style="@style/biig"
                     android:hint="@string/hint"
@@ -1002,6 +1018,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:longClickable="false"
                     android:layout_marginLeft="300dp"
                     android:id="@+id/add_text"
                     android:hint="@string/hint"
@@ -1012,12 +1029,39 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/impression"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:longClickable="false"
+                    android:layout_marginLeft="300dp"
+                    android:id="@+id/impression"
+                    android:hint="@string/hint"
+                    style="@style/biig" />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/shape">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/referal"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginTop="20dp"
                     android:paddingBottom="20dp"
                     style="@style/h1"/>
@@ -1025,7 +1069,7 @@
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="400dp"
+                    android:layout_marginLeft="350dp"
                     android:orientation="horizontal"
                     android:layout_marginTop="20dp">
 
@@ -1035,12 +1079,14 @@
                         android:id="@+id/required"
                         android:onClick="onRadioselect"
                         android:text="@string/required"
+                        android:layout_gravity="center_vertical"
                         style="@style/biig" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/notRequired"
+                        android:layout_gravity="center_vertical"
                         android:onClick="onRadioselect"
                         android:layout_marginLeft="40dp"
                         android:text="@string/notRequired"

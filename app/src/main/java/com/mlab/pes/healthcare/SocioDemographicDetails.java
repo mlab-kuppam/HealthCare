@@ -21,15 +21,15 @@ import android.widget.TextView;
 public class SocioDemographicDetails extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
 
-    Spinner typeOfFamily,socioEconomicClass,typeOfHouse,flooring,waterSupply,garbageDisposal,overNight;
+    Spinner typeOfFamily,socioEconomicClass,typeOfHouse,flooring,waterSupply,garbageDisposal;
 
     int familyType,socioEconomic,TypeOfHouse,Flooring,WaterSupply,GarbageDisposal,OverNight;
 
     EditText address,landline,mobile,numberOfFamilyMembers,titleHOF,aadharHOF,educationHOF,occupationHOF,
-            educationFather,occupationFather,educationMother,occupationMother,totalIncome,frequency;
+            educationFather,occupationFather,educationMother,occupationMother,totalIncome;
 
     int overcrowding=2,crossVentilation=2,adequateLighting=2,kitchenWithSink=2,
-            hygenicSurroundings=2,sanitaryLatrine=2,bothParents=2;
+            hygenicSurroundings=2,sanitaryLatrine=2;
 
 
 
@@ -61,10 +61,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                     "  water INTEGER[1] ," +
                     "  hygenic_surroundings INTEGER[1] ," +
                     "  sanitary_latrine INTEGER[1] ," +
-                    "  garbage_disposal INTEGER[1] ," +
-                    "  frequency INTEGER[1] ," +
-                    "  over_night_food INTEGER[1] ," +
-                    "  both_parents INTEGER[1] ";
+                    "  garbage_disposal INTEGER[1] " ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +84,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         educationMother=(EditText) findViewById(R.id.motherEducation);
         occupationMother=(EditText) findViewById(R.id.motherOccupation);
         totalIncome=(EditText) findViewById(R.id.totalIncome);
-        frequency=(EditText) findViewById(R.id.frequency);
+
 
 
 
@@ -127,11 +124,6 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         garbageDisposal.setAdapter(adapter);
         garbageDisposal.setOnItemSelectedListener(this);
 
-        overNight = (Spinner) findViewById(R.id.overNightFood);
-        adapter = ArrayAdapter.createFromResource(this, R.array.overNight, R.layout.spinner_item);
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        overNight.setAdapter(adapter);
-        overNight.setOnItemSelectedListener(this);
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //opening db
@@ -160,9 +152,6 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         }
         else if (parent == garbageDisposal){
             GarbageDisposal=position -1;
-        }
-        else if (parent == overNight){
-            OverNight=position -1;
         }
 
     }
@@ -226,12 +215,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                 sanitaryLatrine=0;
                 break;
             //both parents
-            case R.id.bothParentsYes :
-                bothParents=1;
-                break;
-            case R.id.bothParentsNo :
-                bothParents=0;
-                break;
+
         }
     }
 
@@ -401,15 +385,6 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         }else if (GarbageDisposal == -1) {
             showMessage("Error", "Please Select an Option for Garbage Disposal in Housing Standards");
             return;
-        }else if (frequency.getText().toString().trim().length()==0) {
-            showMessage("Error", "Please Enter Frequency of Skipping Breakfast/week in Dietary Pattern");
-            return;
-        }else if (OverNight == -1) {
-            showMessage("Error", "Please Select an Option for Children Havng Over-Night Food in the mornings in Dietary Pattern");
-            return;
-        }else if (bothParents == 2) {
-            showMessage("Error", "Please Select an Option for Both Parents Working in Dietary Pattern");
-            return;
         }
         else {
             //If the required fields are filled then the DB is updated
@@ -452,10 +427,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                         "'" + WaterSupply + "'," +
                         "'" + hygenicSurroundings + "'," +
                         "'" + sanitaryLatrine + "'," +
-                        "'" + GarbageDisposal + "'," +
-                        "'" + frequency.getText().toString().trim() + "',"+
-                        "'" + OverNight + "',"+
-                        "'" + bothParents + "'";
+                        "'" + GarbageDisposal + "'";
 
                 //inserting into database
                 database.execSQL("INSERT INTO socio_demographic VALUES (" + insert_query + ")");

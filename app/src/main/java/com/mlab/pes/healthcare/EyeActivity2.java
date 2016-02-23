@@ -20,9 +20,10 @@ import android.widget.Toast;
 import java.io.File;
 
 public class EyeActivity2 extends ActionBarActivity {
+    String treatment;
 
     EditText Cvis_left,Cvis_right,Bitot_left,Bitot_right,Allerconj_left,Allerconj_right,Night_left,Night_right,Congp_left,Congp_right,Congd_left,Congd_right,Amb_left,Amb_right,
-            Nys_left,Nys_right,Fund_left,Fund_right,Other;
+            Nys_left,Nys_right,Fund_left,Fund_right,Other,impression;
 			
 	TextView eye1StdId;
 
@@ -86,8 +87,9 @@ public class EyeActivity2 extends ActionBarActivity {
             "  fe_r_com VARCHAR[140]," +
             "  fe_l_com VARCHAR[140]," +
             "  others VARCHAR[140],"+
-                    "  referal INTEGER[1]";
-
+            "  impression VARCHAR[140],"+
+            "  treatment VARCHAR[1000],"+
+            "  referal INTEGER[1]";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,8 @@ public class EyeActivity2 extends ActionBarActivity {
 		
 		eye1StdId = (TextView)findViewById(R.id.eye1_std_id);
         eye1StdId.setText(EyeActivity1.eye_sid);
+
+        impression=(EditText)findViewById(R.id.impression);
 
         Cvis_left = (EditText) findViewById(R.id.cvis_left_text);
         Cvis_right = (EditText) findViewById(R.id.cvis_right_text);
@@ -377,13 +381,17 @@ public class EyeActivity2 extends ActionBarActivity {
         else if (nys_right == 10) {
             showMessage("Warning", "Please select an option for Nystagmus - Right Eye");
             return;
-        }
+        }/*
         else if (Fund_left.getText().toString().trim().length() == 10) {
             showMessage("Warning", "Please select an option for Fundus Examination - Left Eye");
             return;
         }
         else if (Fund_right.getText().toString().trim().length() == 10) {
             showMessage("Warning", "Please select an option for Fundus Examination - Right Eye");
+            return;
+        }*/
+        else if (referal == 10 ) {
+            showMessage("Warning", "Please select an option for Referal");
             return;
         }
         else {
@@ -445,6 +453,8 @@ public class EyeActivity2 extends ActionBarActivity {
                     "'" + Fund_right.getText().toString().trim() + "'," +
                     "'" + Fund_left.getText().toString().trim() + "'," +
                     "'" + Other.getText().toString() + "',"+
+                    "'" + impression.getText().toString().trim() + "',"+
+                    "'" + treatment + "',"+
                     "'" + referal + "'";
                 System.out.println("EYE " + insert_query);
 

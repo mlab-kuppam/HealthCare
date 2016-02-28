@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +23,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class HealthActivity1 extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
@@ -37,9 +41,9 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
     String age;
 
     int anaemia, nails = 10, bath = 10, groom = 10, oral = 10, men = 10, san = 10, dent = 10, flu = 10, ging = 10, ulc = 10, lung = 10, heart = 10, check = 10,trauma=10,spacing=10,
-    crowding=10,cleft=10,operatedOn=10,chronic=10,bronchial=10,sounds=10,bronchialAst,bothParents=2,OverNight;
+    crowding=10,cleft=10,operatedOn=10,chronic=10,bronchial=10,sounds=10,bronchialAst,bothParents=2,OverNight,oral_referal=10;
 
-    TextView hltStdId;
+    TextView hltStdId,bmi,whratio;
 
     RadioButton Applicable, NotApplicable;
 
@@ -59,10 +63,10 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
             "  frequencyFood INTEGER[1]," +
             "  over_night_food INTEGER[1]," +
             "  both_parents INTEGER[1]," +
-            "  height INTEGER[3]," +
-            "  weight INTEGER[3]," +
-            "  wc INTEGER[3]," +
-            "  hc INTEGER[3]," +
+            "  height FLOAT[5]," +
+            "  weight FLOAT[5]," +
+            "  wc FLOAT[5]," +
+            "  hc FLOAT[5]," +
             "  pr INTEGER[3]," +
             "  bp varchar(7)," +
             "  ph_n INTEGER[1]," +
@@ -93,8 +97,6 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
             "  oe_spacing_com VARCHAR[140]," +
             "  oe_crowding INTEGER[1]," +
             "  oe_crowding_com VARCHAR[140]," +
-            "  oe_cleft INTEGER[1]," +
-            "  oe_cleft_operated INTEGER[1]," +
             "  oe_others VARCHAR[140]," +
             "  rs_chronic INTEGER[1]," +
             "  rs_chronic_com VARCHAR[140]," +
@@ -148,12 +150,16 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
         soundsT = (EditText) findViewById(R.id.sounds_text);
         frequencyFood = (EditText) findViewById(R.id.frequencyFood);
 
+        bmi=(TextView) findViewById(R.id.bmi);
+        whratio=(TextView) findViewById(R.id.whratio);
+
+
         Applicable = (RadioButton) findViewById(R.id.app);
         NotApplicable = (RadioButton) findViewById(R.id.notapp);
 
+        Bp.setText("/");
 
         San = (RelativeLayout) findViewById(R.id.sanitary);
-        operated = (RelativeLayout) findViewById(R.id.operatedLayout);
         bronchialL = (RelativeLayout) findViewById(R.id.bronchial_layout);
 
 
@@ -178,11 +184,62 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
         bronchialAsthma.setOnItemSelectedListener(this);
 
 
+
         //opening db
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
         //creating table if doesn't exist
         database.execSQL("CREATE TABLE IF NOT EXISTS health1(" + table_query + ")");
 
+        //Validating School ID
+        TextWatcher inputTextWatcher = new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+                final DecimalFormat df = new DecimalFormat("##.##");
+                df.setRoundingMode(RoundingMode.CEILING);
+                if(Weight.getText().toString().trim().length()>0 && Height.getText().toString().trim().length()>0)
+                {
+                    float weight=Float.parseFloat(Weight.getText().toString().trim());
+                    float height=Float.parseFloat(Height.getText().toString().trim());
+                    if(weight>0 & height>0)
+                    {
+                        double BMI=weight/Math.pow(height,2);
+                        BMI=BMI*Math.pow(10,4);
+                        bmi.setText(df.format(BMI));
+                    }
+                }
+                else
+                    bmi.setText("");
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        };
+        Weight.addTextChangedListener(inputTextWatcher);
+        Height.addTextChangedListener(inputTextWatcher);
+        inputTextWatcher = new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+                final DecimalFormat df = new DecimalFormat("##.##");
+                df.setRoundingMode(RoundingMode.CEILING);
+                if(Waist.getText().toString().trim().length()>0 && Hip.getText().toString().trim().length()>0)
+                {
+                    float waist=Float.parseFloat(Waist.getText().toString().trim());
+                    float hip=Float.parseFloat(Hip.getText().toString().trim());
+                    if(waist>0 & hip>0)
+                    {
+                        double wh=waist/hip;
+                        whratio.setText(df.format(wh));
+                    }
+                }
+                else
+                    whratio.setText("");
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        };
+        Hip.addTextChangedListener(inputTextWatcher);
+        Waist.addTextChangedListener(inputTextWatcher);
     }
 
     //Method to get selected item in the dropdown
@@ -380,13 +437,6 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                 break;
 
 
-            case R.id.operated:
-                operatedOn=1;
-                break;
-            case R.id.notOperated:
-                operatedOn=0;
-                break;
-
 
             case R.id.app:
                 check = 1;
@@ -403,18 +453,15 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                 //NotApplicable.setChecked(true);
                 break;
 
-            case R.id.cleft_yes:
-                cleft=1;
-                operated.setVisibility(v.VISIBLE);
-                //NotApplicable.setChecked(false);
-                //Applicable.setChecked(true);
+
+            case R.id.oral_required:
+                oral_referal=1;
                 break;
-            case R.id.cleft_no:
-                cleft=0;
-                operated.setVisibility(v.GONE);
-                //Applicable.setChecked(false);
-                //NotApplicable.setChecked(true);
+            case R.id.oral_notRequired:
+                oral_referal=0;
                 break;
+
+
         }
     }
 
@@ -509,12 +556,8 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                 showMessage("Warning","Please select an option for Personal Hygiene - Oral Examination - Crowding");
                 return;
             }
-            else if (cleft == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Cleft Lip/ Cleft Palate");
-                return;
-            }
-            else if (cleft == 1 && operatedOn==10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Cleft Lip/ Cleft Palate - Operated");
+            else if (oral_referal == 10 ) {
+                showMessage("Warning","Please select an option for Personal Hygiene - Oral Examination - Referal");
                 return;
             }
             else if (chronic == 10 ) {
@@ -560,10 +603,10 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                             "'" + frequencyFood.getText().toString().trim() + "',"+
                             "'" + OverNight + "',"+
                             "'" + bothParents + "',"+
-                            "'" + Integer.parseInt(Height.getText().toString().trim()) + "'," +
-                            "'" + Integer.parseInt(Weight.getText().toString().trim()) + "'," +
-                            "'" + Integer.parseInt(Waist.getText().toString().trim()) + "'," +
-                            "'" + Integer.parseInt(Hip.getText().toString().trim()) + "'," +
+                            "'" + Float.parseFloat(Height.getText().toString().trim()) + "'," +
+                            "'" + Float.parseFloat(Weight.getText().toString().trim()) + "'," +
+                            "'" + Float.parseFloat(Waist.getText().toString().trim()) + "'," +
+                            "'" + Float.parseFloat(Hip.getText().toString().trim()) + "'," +
                             "'" + Integer.parseInt(Pulse_Rate.getText().toString().trim()) + "'," +
                             "'" + Bp.getText().toString().trim() + "'," +
                             "'" + nails + "'," +
@@ -594,8 +637,7 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                             "'" + spacingT.getText().toString().trim() + "'," +
                             "'" + crowding + "'," +
                             "'" + crowdingT.getText().toString().trim() + "'," +
-                            "'" + cleft + "'," +
-                            "'" + operatedOn + "'," +
+                            "'" + oral_referal + "'," +
                             "'" + Oral_Other.getText().toString().trim() + "'," +
                             "'" + chronic + "'," +
                             "'" + chronicT.getText().toString().trim() + "'," +

@@ -75,8 +75,6 @@
         android:drawableLeft="@drawable/ic_cloud_upload_white_36dp"
         android:onClick="SYNC"
         android:text="Sync Data"/>
-<!--
-'21301049112','21301049112_skin_0.jpeg','/storage/emulated/0/Images/21301049112_skin_0.jpg'-->
     <Button
         style="@style/buttonstyle"
         android:id="@+id/retrieve"
@@ -90,6 +88,7 @@
         android:onClick="RETRIEVE"
         android:text="Retrieve Data"/>
 
+    <!--
     <Button
         style="@style/buttonstyle"
         android:id="@+id/emergency"
@@ -101,5 +100,5 @@
         android:layout_marginTop="35dp"
         android:drawableLeft="@drawable/ic_system_update_alt_white_36dp"
         android:onClick="emergency"
-        android:text="EMERGENCY!"/>
+        android:text="EMERGENCY!"/>-->
 </RelativeLayout>

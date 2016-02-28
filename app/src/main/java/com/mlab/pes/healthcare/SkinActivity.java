@@ -17,23 +17,25 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
 
-public class SkinActivity extends ActionBarActivity {
+public class SkinActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
     //Declaring sid -> studentID(must)
     static String skin_sid;
-    String treatment="";
+    String treatment="",impression;
 
-    EditText impression,Scabtext, Pityaltext, Phrynotext, Pedicultext, Pityvertext, Imptext, Paputext, Tintext, Miltext, Viraltext, Other, Xerosis;
+    EditText Scabtext, Pityaltext, Phrynotext, Pedicultext, Pityvertext, Imptext, Paputext, Tintext, Miltext, Viraltext, Other, Xerosis;
 
 	TextView skinStdId;
 	
@@ -41,27 +43,31 @@ public class SkinActivity extends ActionBarActivity {
 
     SQLiteDatabase database;
 
-    //creating table query
     RelativeLayout layout1;
-    int index;
+    int index,valid=10;
 
     LinearLayout layout2,layout3,layout4,layout5,layout6;
-    int i=-1,check=0;
+    int i=-1,j=10,check=0;
 
     String treat_text;
+    StringBuffer dos_text;
 
     EditText Text2,Text3,Text4;
     TextView UnitText,no1,no2,no3,no4,no5;
     AutoCompleteTextView Text1;
-    String Dialogarr[]= new String[4];
     Button BTN1,BTN2;
     TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20;
 
+
+
+    Spinner advice;
 
     private static SkinActivity app;
     public static SkinActivity get(){
         return app;
     }
+
+    //creating table query
 
     public String table_query=
             "  child_id VARCHAR[11]," +
@@ -106,7 +112,6 @@ public class SkinActivity extends ActionBarActivity {
         studentidDialog();
 
 
-        impression=(EditText)findViewById(R.id.impression);
 		skinStdId = (TextView)findViewById(R.id.skin_std_id);
         skinStdId.setText(skin_sid);
 
@@ -122,7 +127,6 @@ public class SkinActivity extends ActionBarActivity {
         Viraltext = (EditText) findViewById(R.id.viral_text);
         Xerosis=(EditText) findViewById(R.id.xerosis_text);
         Other = (EditText) findViewById(R.id.add_text);
-
 
         layout1 = (RelativeLayout) findViewById(R.id.layout1);
         layout2 = (LinearLayout) findViewById(R.id.layout2);
@@ -153,6 +157,19 @@ public class SkinActivity extends ActionBarActivity {
         no4 = (TextView)findViewById(R.id.text04);
         no5 = (TextView)findViewById(R.id.text05);
 
+        dos_text= new StringBuffer();
+
+
+        advice = (Spinner) findViewById(R.id.advice_drop);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.advice_array, R.layout.spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        advice.setAdapter(adapter);
+        advice.setOnItemSelectedListener(this);
+
 
         //opening db
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
@@ -161,7 +178,7 @@ public class SkinActivity extends ActionBarActivity {
 
         String image_table_query=
                 "  child_id VARCHAR[10] ," +
-                        "  photo_id VARCHAR[20] ," +
+                        "  photo_id VARCHAR[30] ," +
                         "  image TEXT" ;
         //creating image table
         database.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
@@ -169,38 +186,34 @@ public class SkinActivity extends ActionBarActivity {
     }
 
 
-    /*private void AddTextLayout(TextView textView1,TextView textView2,TextView textView3,TextView textView4, int marginLeft, int marginTop, int marginRight, int marginBottom,int size, String dialogarr) {
-        check++;
-        System.out.println("checkinnnnnnng" + check);
-        LinearLayout.LayoutParams textLayoutParameters = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-        textLayoutParameters.setMargins(marginLeft, marginTop, marginRight, marginBottom);
-        textView1.setTextSize(size);
-        textView1.setText(dialogarr);
-        textView1.setLayoutParams(textLayoutParameters);
-        textView2.setTextSize(size);
-        textView2.setText(dialogarr);
-        textView2.setLayoutParams(textLayoutParameters);
-        textView3.setTextSize(size);
-        textView3.setText(dialogarr);
-        textView3.setLayoutParams(textLayoutParameters);
-        textView4.setTextSize(size);
-        textView4.setText(dialogarr);
-        textView4.setLayoutParams(textLayoutParameters);
+    //Method to get selected item in the dropdown
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(parent==advice)
+        {
+            impression=parent.getItemAtPosition(position).toString();
+        }
+    }
 
 
-    }*/
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
+    }
 
-
+    //Methods for treatment page
     public void PLUS(View v) {
+        i++;
         final Dialog dialog = new Dialog(this);
-        dialog.setTitle("Treatment");
+        dialog.setTitle("PESIMSR Medical Store");
         dialog.setContentView(R.layout.treat_dialog);
         dialog.setCancelable(false);
 
         final String[] auto= getResources().getStringArray(R.array.Treatment);
+
         Text1 = (AutoCompleteTextView) dialog.findViewById(R.id.text1);
+        Text2 = (EditText) dialog.findViewById(R.id.text2);
+
         ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, auto  );
         Text1.setAdapter(adapter);
 
@@ -217,111 +230,222 @@ public class SkinActivity extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                for(int p=0;p<11;p++)
-                {
-                    if(Text1.getText().toString().equals(auto[p]))
-                    {
-                        check=1;
-                        break;
-                    }
-                }
-                for(int p=12;p<21;p++)
-                {
-                    if(Text1.getText().toString().equals(auto[p]))
-                    {
-                        check=2;
-                        UnitText.setText("*");
+                for (int p = 0; p < 18; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("");
                         break;
                     }
 
                 }
-                for(int p=22;p<29;p++)
-                {
-                    if(Text1.getText().toString().equals(auto[p]))
-                    {
-                        check=3;
-
-                        break;
-                    }
-                }
-                if(Text1.getText().toString().equals(auto[11]))
-                {
-                    check=4;
-                    UnitText.setText("ml");
-                }
-                for(int l=0;l<auto.length;l++)
-                    if(Text1.getText().toString().equals(auto[l]))
-                    {
-                        index =l;
+                for (int p = 19; p < 22; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("ml");
                         break;
                     }
 
-                System.out.println("cooool" + index);
+                }
+                for (int p = 23; p < 37; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("\u00b0");
+                        break;
+                    }
+
+                }
+
+                for (int p = 38; p < 45; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("");
+                        break;
+                    }
+
+                }
             }
         };
 
         Text1.addTextChangedListener(textWatcher);
 
-
-
-
-        Text2 = (EditText) dialog.findViewById(R.id.text2);
         Text3 = (EditText) dialog.findViewById(R.id.text3);
 
         BTN1 = (Button) dialog.findViewById(R.id.addButton1);
         BTN2 = (Button) dialog.findViewById(R.id.addButton2);
 
         UnitText = (TextView)dialog.findViewById(R.id.unit);
-        dialog.show();
         BTN1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate(Text1, Text2, Text3);
-                dialog.dismiss();
+                if(Text1.length()==0)
+                {
+                    showMessage("Warning","Please enter the Drug name",dialog);
+                    valid=0;
+                    Text2.append("-");
+                    return;
+                }
+                else if(Text2.length()==0)
+                {
+                    showMessage("Warning","Please enter the Dosage",dialog);
+                    valid=0;
+                    return;
+                }
+                else if (Text3.length()==0)
+                {
+                    showMessage("Warning","Please enter the Duration",dialog);
+                    valid=0;
+                    return;
+                }
+
+
+                validate(Text1, Text2, Text3, Text4, UnitText, dialog);
+
             }
         });
 
         BTN2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i++;
+                i--;
                 dialog.dismiss();
             }
         });
-       /*SETVALUES(dialog);*/
+
+        dialog.show();
+
     }
 
-    public void validate(AutoCompleteTextView Text1, EditText Text2,EditText Text3)
+    public void validate(AutoCompleteTextView Text1, EditText Text2,EditText Text3,EditText Text4, TextView UnitText,Dialog dialog)
     {
-        if(Text1.length()==0)
+
+        if(j!=10)
         {
-
+            switch (j)
+            {
+                case 1:
+                    layout2.setVisibility(View.VISIBLE);
+                    text1.setText(Text1.getText().toString());
+                    text3.setText(Text2.getText().toString() + UnitText.getText());
+                    text4.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 2:
+                    layout3.setVisibility(View.VISIBLE);
+                    text5.setText(Text1.getText().toString());
+                    text7.setText(Text2.getText().toString() + UnitText.getText());
+                    text8.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 3:
+                    layout4.setVisibility(View.VISIBLE);
+                    text9.setText(Text1.getText().toString());
+                    text11.setText(Text2.getText().toString() + UnitText.getText());
+                    text12.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 4:
+                    layout5.setVisibility(View.VISIBLE);
+                    text13.setText(Text1.getText().toString());
+                    text15.setText(Text2.getText().toString() + UnitText.getText());
+                    text16.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 5:
+                    layout6.setVisibility(View.VISIBLE);
+                    text17.setText(Text1.getText().toString());
+                    text19.setText(Text2.getText().toString() + UnitText.getText());
+                    text20.setText(Text3.getText().toString());
+                    j = 10;
+                    break;
+            }
         }
-        else if(Text2.length()==0)
-        {
-
+        else {
+            switch (i) {
+                case 0:
+                    layout2.setVisibility(View.VISIBLE);
+                    text1.setText(Text1.getText().toString());
+                    text3.setText(Text2.getText().toString() + UnitText.getText());
+                    text4.setText(Text3.getText().toString());
+                    break;
+                case 1:
+                    layout3.setVisibility(View.VISIBLE);
+                    text5.setText(Text1.getText().toString());
+                    text7.setText(Text2.getText().toString() + UnitText.getText());
+                    text8.setText(Text3.getText().toString());
+                    break;
+                case 2:
+                    layout4.setVisibility(View.VISIBLE);
+                    text9.setText(Text1.getText().toString());
+                    text11.setText(Text2.getText().toString() + UnitText.getText());
+                    text12.setText(Text3.getText().toString());
+                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+                case 3:
+                    layout5.setVisibility(View.VISIBLE);
+                    text13.setText(Text1.getText().toString());
+                    text15.setText(Text2.getText().toString() + UnitText.getText());
+                    text16.setText(Text3.getText().toString());
+                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+                case 4:
+                    layout6.setVisibility(View.VISIBLE);
+                    text17.setText(Text1.getText().toString());
+                    text19.setText(Text2.getText().toString() + UnitText.getText());
+                    text20.setText(Text3.getText().toString());
+                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
-        else if (Text3.length()==0)
-        {
 
-        }
 
-        switch(i)
-        {
-            case 0: layout2.setVisibility(View.VISIBLE);text1.setText(Text1.getText().toString());text3.setText(Text2.getText().toString()+UnitText.getText());text4.setText(Text3.getText().toString());
-                treat_text=""+no1.getText().toString()+"@"+text1.getText()+"@"+text3.getText().toString()+"@"+text4.getText().toString()+"days$";break;
-            case 1:layout3.setVisibility(View.VISIBLE);text5.setText(Text1.getText().toString());text7.setText(Text2.getText().toString()+UnitText.getText());text8.setText(Text3.getText().toString());
-                treat_text=""+no2.getText().toString()+"@"+text5.getText()+"@"+text7.getText().toString()+"@"+text8.getText().toString()+"days$";break;
-            case 2:layout4.setVisibility(View.VISIBLE);text9.setText(Text1.getText().toString());text11.setText(Text2.getText().toString()+UnitText.getText());text12.setText(Text3.getText().toString());
-                treat_text=""+no3.getText().toString()+"@"+text9.getText()+"@"+text11.getText().toString()+"@"+text12.getText().toString()+"days$";break;
-            case 3:layout5.setVisibility(View.VISIBLE);text13.setText(Text1.getText().toString());text15.setText(Text2.getText().toString()+UnitText.getText());text16.setText(Text3.getText().toString());
-                treat_text=""+no4.getText().toString()+"@"+text13.getText()+"@"+text15.getText().toString()+"@"+text16.getText().toString()+"days$";break;
-            case 4:layout6.setVisibility(View.VISIBLE);text17.setText(Text1.getText().toString());text19.setText(Text2.getText().toString()+ UnitText.getText());text20.setText(Text3.getText().toString());
-                treat_text=""+no5.getText().toString()+"@"+text17.getText()+"@"+text19.getText().toString()+"@"+text20.getText().toString()+"days$";break;
+        dialog.dismiss();
 
-        }
-        treatment=treatment+treat_text;
     }
+
+    public void showMessage(String title,String message,Dialog dialog)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        builder.show();
+
+    }
+
+    public void CANCEL(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.del1:
+                layout2.setVisibility(View.GONE);
+                text1.setText("");
+                text3.setText("");
+                text4.setText("");j=1;break;
+            case R.id.del2:
+                layout3.setVisibility(View.GONE);
+                text5.setText("");
+                text7.setText("");
+                text8.setText("");j=2;break;
+            case R.id.del3:
+                layout4.setVisibility(View.GONE);
+                text9.setText("");
+                text11.setText("");
+                text12.setText("");j=3;break;
+            case R.id.del4:
+                layout5.setVisibility(View.GONE);
+                text13.setText("");
+                text15.setText("");
+                text16.setText("");j=4;break;
+            case R.id.del5:
+                layout6.setVisibility(View.GONE);
+                text17.setText("");
+                text19.setText("");
+                text20.setText("");j=5;break;
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -461,6 +585,33 @@ public class SkinActivity extends ActionBarActivity {
     }
 
     public void Next() {
+
+        if (text1.getText().length() != 0 && text5.getText().length() != 0 && text9.getText().length() != 0 && text13.getText().length() != 0 && text17.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$"
+                    + "" + no3.getText().toString() + "@" + text9.getText() + "@" + text11.getText().toString() + "@" + text12.getText().toString() + "days$"
+                    + "" + no4.getText().toString() + "@" + text13.getText() + "@" + text15.getText().toString() + "@" + text16.getText().toString() + "days$"
+                    + "" + no5.getText().toString() + "@" + text17.getText() + "@" + text19.getText().toString() + "@" + text20.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0 && text5.getText().length() != 0 && text9.getText().length() != 0 && text13.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$"
+                    + "" + no3.getText().toString() + "@" + text9.getText() + "@" + text11.getText().toString() + "@" + text12.getText().toString() + "days$"
+                    + "" + no4.getText().toString() + "@" + text13.getText() + "@" + text15.getText().toString() + "@" + text16.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0 && text5.getText().length() != 0 && text9.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$"
+                    + "" + no3.getText().toString() + "@" + text9.getText() + "@" + text11.getText().toString() + "@" + text12.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0 && text5.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$";
+        }
+        treatment=treat_text;
             if (pic_count_skin ==0) {
                 showMessage("Warning", "Please Take a picture of the Student");
                 return;
@@ -539,7 +690,7 @@ public class SkinActivity extends ActionBarActivity {
                         "'" + xerosis + "'," +
                         "'" + Xerosis.getText().toString().trim() + "'," +
                         "'" + Other.getText().toString().trim() + "',"+
-                        "'" + impression.getText().toString().trim() + "',"+
+                        "'" + impression + "',"+
                         "'" + treatment + "',"+
                         "'" + referal + "'";
 

@@ -1,6 +1,7 @@
 package com.mlab.pes.healthcare;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,11 +11,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
@@ -22,13 +30,29 @@ import java.io.File;
 public class EyeActivity2 extends ActionBarActivity {
     String treatment;
 
-    EditText Cvis_left,Cvis_right,Bitot_left,Bitot_right,Allerconj_left,Allerconj_right,Night_left,Night_right,Congp_left,Congp_right,Congd_left,Congd_right,Amb_left,Amb_right,
+    EditText Cvis_left,Cvis_right,Bitot_left,Bitot_right,Allerconj_left,Allerconj_right,Night,Congp_left,Congp_right,Congd_left,Congd_right,Amb_left,Amb_right,
             Nys_left,Nys_right,Fund_left,Fund_right,Other,impression;
 			
 	TextView eye1StdId;
 
-    int cvis_left=10,cvis_right=10,bitot_left=10,bitot_right=10,allconj_left=10,allconj_right=10,night_left=1,night_right=10,congp_left=10,congp_right=10,congd_left=10,congd_right=10,
+    int cvis_left=10,cvis_right=10,bitot_left=10,bitot_right=10,allconj_left=10,allconj_right=10,night=10,congp_left=10,congp_right=10,congd_left=10,congd_right=10,
             amb_left=10,amb_right=10,nys_left=10,nys_right=10,fund_left=10,fund_right=10,referal=10;
+
+    RelativeLayout layout1;
+    int index,valid=10;
+
+    LinearLayout layout2,layout3,layout4,layout5,layout6;
+    int i=-1,j=10,check=0;
+
+    String treat_text;
+    StringBuffer dos_text;
+
+    EditText Text2,Text3,Text4;
+    TextView UnitText,no1,no2,no3,no4,no5;
+    AutoCompleteTextView Text1;
+    Button BTN1,BTN2;
+    TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20;
+
 
     SQLiteDatabase database;
 
@@ -64,10 +88,8 @@ public class EyeActivity2 extends ActionBarActivity {
             "  ac_r_com VARCHAR[140]," +
             "  ac_l INTEGER[1]," +
             "  ac_l_com VARCHAR[140]," +
-            "  nb_r INTEGER[1]," +
-            "  nb_r_com VARCHAR[140]," +
-            "  nb_l INTEGER[1]," +
-            "  nb_l_com VARCHAR[140]," +
+            "  nb INTEGER[1]," +
+            "  nb_com VARCHAR[140]," +
             "  cp_r INTEGER[1]," +
             "  cp_r_com VARCHAR[140]," +
             "  cp_l INTEGER[1]," +
@@ -84,8 +106,8 @@ public class EyeActivity2 extends ActionBarActivity {
             "  ny_r_com VARCHAR[140]," +
             "  ny_l INTEGER[1]," +
             "  ny_l_com VARCHAR[140]," +
-            "  fe_r_com VARCHAR[140]," +
-            "  fe_l_com VARCHAR[140]," +
+            "  fe_r INTEGER[1]," +
+            "  fe_l INTEGER[1]," +
             "  others VARCHAR[140],"+
             "  impression VARCHAR[140],"+
             "  treatment VARCHAR[1000],"+
@@ -110,8 +132,7 @@ public class EyeActivity2 extends ActionBarActivity {
         Bitot_right = (EditText) findViewById(R.id.bitot_right_text);
         Allerconj_left = (EditText) findViewById(R.id.allconj_left_text);
         Allerconj_right = (EditText) findViewById(R.id.allconj_right_text);
-        Night_left = (EditText) findViewById(R.id.night_left_text);
-        Night_right = (EditText) findViewById(R.id.night_right_text);
+        Night = (EditText) findViewById(R.id.night_right_text);
         Congp_left = (EditText) findViewById(R.id.congp_left_text);
         Congp_right = (EditText) findViewById(R.id.congp_right_text);
         Congd_left = (EditText) findViewById(R.id.congd_left_text);
@@ -120,9 +141,39 @@ public class EyeActivity2 extends ActionBarActivity {
         Amb_right = (EditText) findViewById(R.id.amb_right_text);
         Nys_left = (EditText) findViewById(R.id.nys_left_text);
         Nys_right = (EditText) findViewById(R.id.nys_right_text);
-        Fund_left = (EditText) findViewById(R.id.fund_left_text);
-        Fund_right = (EditText) findViewById(R.id.fund_right_text);
         Other = (EditText) findViewById(R.id.add_text);
+
+        layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        layout2 = (LinearLayout) findViewById(R.id.layout2);
+        layout3 = (LinearLayout) findViewById(R.id.layout3);
+        layout4 = (LinearLayout) findViewById(R.id.layout4);
+        layout5 = (LinearLayout) findViewById(R.id.layout5);
+        layout6 = (LinearLayout) findViewById(R.id.layout6);
+
+        text1 = (TextView)findViewById(R.id.text11);
+        text3 = (TextView)findViewById(R.id.text31);
+        text4 = (TextView)findViewById(R.id.text41);
+        text5 = (TextView)findViewById(R.id.text12);
+        text7 = (TextView)findViewById(R.id.text32);
+        text8 = (TextView)findViewById(R.id.text42);
+        text9 = (TextView)findViewById(R.id.text13);
+        text11 = (TextView)findViewById(R.id.text33);
+        text12 = (TextView)findViewById(R.id.text43);
+        text13 = (TextView)findViewById(R.id.text14);
+        text15 = (TextView)findViewById(R.id.text34);
+        text16 = (TextView)findViewById(R.id.text44);
+        text17 = (TextView)findViewById(R.id.text15);
+        text19 = (TextView)findViewById(R.id.text35);
+        text20 = (TextView)findViewById(R.id.text45);
+
+        no1 = (TextView)findViewById(R.id.text01);
+        no2 = (TextView)findViewById(R.id.text02);
+        no3 = (TextView)findViewById(R.id.text03);
+        no4 = (TextView)findViewById(R.id.text04);
+        no5 = (TextView)findViewById(R.id.text05);
+
+        dos_text= new StringBuffer();
+
 
         //opening db
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
@@ -131,7 +182,7 @@ public class EyeActivity2 extends ActionBarActivity {
 
         String image_table_query=
                 "  child_id VARCHAR[10] ," +
-                        "  photo_id VARCHAR[20] ," +
+                        "  photo_id VARCHAR[30] ," +
                         "  image TEXT" ;
         //creating image table
         database.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
@@ -163,6 +214,252 @@ public class EyeActivity2 extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    //Methods for treatment page
+    public void PLUS(View v) {
+        i++;
+        final Dialog dialog = new Dialog(this);
+        dialog.setTitle("PESIMSR Medical Store");
+        dialog.setContentView(R.layout.treat_dialog);
+        dialog.setCancelable(false);
+
+        final String[] auto= getResources().getStringArray(R.array.Treatment);
+
+        Text1 = (AutoCompleteTextView) dialog.findViewById(R.id.text1);
+        Text2 = (EditText) dialog.findViewById(R.id.text2);
+
+        ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, auto  );
+        Text1.setAdapter(adapter);
+
+        TextWatcher textWatcher= new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                for (int p = 0; p < 18; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("");
+                        break;
+                    }
+
+                }
+                for (int p = 19; p < 22; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("ml");
+                        break;
+                    }
+
+                }
+                for (int p = 23; p < 37; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("\u00b0");
+                        break;
+                    }
+
+                }
+
+                for (int p = 38; p < 45; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("");
+                        break;
+                    }
+
+                }
+            }
+        };
+
+        Text1.addTextChangedListener(textWatcher);
+
+        Text3 = (EditText) dialog.findViewById(R.id.text3);
+
+        BTN1 = (Button) dialog.findViewById(R.id.addButton1);
+        BTN2 = (Button) dialog.findViewById(R.id.addButton2);
+
+        UnitText = (TextView)dialog.findViewById(R.id.unit);
+        BTN1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Text1.length()==0)
+                {
+                    showMessage("Warning","Please enter the Drug name",dialog);
+                    valid=0;
+                    Text2.append("-");
+                    return;
+                }
+                else if(Text2.length()==0)
+                {
+                    showMessage("Warning","Please enter the Dosage",dialog);
+                    valid=0;
+                    return;
+                }
+                else if (Text3.length()==0)
+                {
+                    showMessage("Warning","Please enter the Duration",dialog);
+                    valid=0;
+                    return;
+                }
+
+
+                validate(Text1, Text2, Text3, Text4, UnitText, dialog);
+
+            }
+        });
+
+        BTN2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i--;
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    public void validate(AutoCompleteTextView Text1, EditText Text2,EditText Text3,EditText Text4, TextView UnitText,Dialog dialog)
+    {
+
+        if(j!=10)
+        {
+            switch (j)
+            {
+                case 1:
+                    layout2.setVisibility(View.VISIBLE);
+                    text1.setText(Text1.getText().toString());
+                    text3.setText(Text2.getText().toString() + UnitText.getText());
+                    text4.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 2:
+                    layout3.setVisibility(View.VISIBLE);
+                    text5.setText(Text1.getText().toString());
+                    text7.setText(Text2.getText().toString() + UnitText.getText());
+                    text8.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 3:
+                    layout4.setVisibility(View.VISIBLE);
+                    text9.setText(Text1.getText().toString());
+                    text11.setText(Text2.getText().toString() + UnitText.getText());
+                    text12.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 4:
+                    layout5.setVisibility(View.VISIBLE);
+                    text13.setText(Text1.getText().toString());
+                    text15.setText(Text2.getText().toString() + UnitText.getText());
+                    text16.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 5:
+                    layout6.setVisibility(View.VISIBLE);
+                    text17.setText(Text1.getText().toString());
+                    text19.setText(Text2.getText().toString() + UnitText.getText());
+                    text20.setText(Text3.getText().toString());
+                    j = 10;
+                    break;
+            }
+        }
+        else {
+            switch (i) {
+                case 0:
+                    layout2.setVisibility(View.VISIBLE);
+                    text1.setText(Text1.getText().toString());
+                    text3.setText(Text2.getText().toString() + UnitText.getText());
+                    text4.setText(Text3.getText().toString());
+                    break;
+                case 1:
+                    layout3.setVisibility(View.VISIBLE);
+                    text5.setText(Text1.getText().toString());
+                    text7.setText(Text2.getText().toString() + UnitText.getText());
+                    text8.setText(Text3.getText().toString());
+                    break;
+                case 2:
+                    layout4.setVisibility(View.VISIBLE);
+                    text9.setText(Text1.getText().toString());
+                    text11.setText(Text2.getText().toString() + UnitText.getText());
+                    text12.setText(Text3.getText().toString());
+                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+                case 3:
+                    layout5.setVisibility(View.VISIBLE);
+                    text13.setText(Text1.getText().toString());
+                    text15.setText(Text2.getText().toString() + UnitText.getText());
+                    text16.setText(Text3.getText().toString());
+                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+                case 4:
+                    layout6.setVisibility(View.VISIBLE);
+                    text17.setText(Text1.getText().toString());
+                    text19.setText(Text2.getText().toString() + UnitText.getText());
+                    text20.setText(Text3.getText().toString());
+                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+
+
+        dialog.dismiss();
+
+    }
+
+    public void showMessage(String title,String message,Dialog dialog)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        builder.show();
+
+    }
+
+    public void CANCEL(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.del1:
+                layout2.setVisibility(View.GONE);
+                text1.setText("");
+                text3.setText("");
+                text4.setText("");j=1;break;
+            case R.id.del2:
+                layout3.setVisibility(View.GONE);
+                text5.setText("");
+                text7.setText("");
+                text8.setText("");j=2;break;
+            case R.id.del3:
+                layout4.setVisibility(View.GONE);
+                text9.setText("");
+                text11.setText("");
+                text12.setText("");j=3;break;
+            case R.id.del4:
+                layout5.setVisibility(View.GONE);
+                text13.setText("");
+                text15.setText("");
+                text16.setText("");j=4;break;
+            case R.id.del5:
+                layout6.setVisibility(View.GONE);
+                text17.setText("");
+                text19.setText("");
+                text20.setText("");j=5;break;
+        }
+    }
+
 
     public void eyeClick(View view) {
         switch (view.getId()) {
@@ -217,21 +514,13 @@ public class EyeActivity2 extends ActionBarActivity {
                 allconj_right = 0;
                 break;
 
-            case R.id.night_left_yes:
-                Night_left.setVisibility(view.VISIBLE);
-                night_left = 1;
-                break;
             case R.id.night_right_yes:
-                Night_right.setVisibility(view.VISIBLE);
-                night_right = 1;
-                break;
-            case R.id.night_left_no:
-                Night_left.setVisibility(view.GONE);
-                night_left = 0;
+                Night.setVisibility(view.VISIBLE);
+                night = 1;
                 break;
             case R.id.night_right_no:
-                Night_right.setVisibility(view.GONE);
-                night_right = 0;
+                Night.setVisibility(view.GONE);
+                night = 0;
                 break;
 
             case R.id.congp_left_yes:
@@ -302,6 +591,19 @@ public class EyeActivity2 extends ActionBarActivity {
                 nys_right=0;
                 break;
 
+            case R.id.fund_left_yes:
+                fund_left=1;
+                break;
+            case R.id.fund_right_yes:
+                fund_right=1;
+                break;
+            case R.id.fund_left_no:
+                fund_left=0;
+                break;
+            case R.id.fund_right_no:
+                fund_right=0;
+                break;
+
         }
     }
 
@@ -317,6 +619,34 @@ public class EyeActivity2 extends ActionBarActivity {
     }
 
     public void Next() {
+
+        if (text1.getText().length() != 0 && text5.getText().length() != 0 && text9.getText().length() != 0 && text13.getText().length() != 0 && text17.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$"
+                    + "" + no3.getText().toString() + "@" + text9.getText() + "@" + text11.getText().toString() + "@" + text12.getText().toString() + "days$"
+                    + "" + no4.getText().toString() + "@" + text13.getText() + "@" + text15.getText().toString() + "@" + text16.getText().toString() + "days$"
+                    + "" + no5.getText().toString() + "@" + text17.getText() + "@" + text19.getText().toString() + "@" + text20.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0 && text5.getText().length() != 0 && text9.getText().length() != 0 && text13.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$"
+                    + "" + no3.getText().toString() + "@" + text9.getText() + "@" + text11.getText().toString() + "@" + text12.getText().toString() + "days$"
+                    + "" + no4.getText().toString() + "@" + text13.getText() + "@" + text15.getText().toString() + "@" + text16.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0 && text5.getText().length() != 0 && text9.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$"
+                    + "" + no3.getText().toString() + "@" + text9.getText() + "@" + text11.getText().toString() + "@" + text12.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0 && text5.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$";
+        }
+        treatment=treat_text;
+
 
         if (cvis_left == 10 ) {
             showMessage("Warning", "Please select an option for Colour Vision - Left Eye");
@@ -342,12 +672,8 @@ public class EyeActivity2 extends ActionBarActivity {
             showMessage("Warning", "Please select an option for Allergy Conjunctivitis - Right Eye");
             return;
         }
-        else if (night_left == 10) {
-            showMessage("Warning", "Please select an option for Night Blindness - Left Eye");
-            return;
-        }
-        else if (night_right == 10) {
-            showMessage("Warning", "Please select an option for Night Blindness - Right Eye");
+        else if (night == 10) {
+            showMessage("Warning", "Please select an option for Night Blindness");
             return;
         }
         else if (congp_left == 10) {
@@ -381,15 +707,15 @@ public class EyeActivity2 extends ActionBarActivity {
         else if (nys_right == 10) {
             showMessage("Warning", "Please select an option for Nystagmus - Right Eye");
             return;
-        }/*
-        else if (Fund_left.getText().toString().trim().length() == 10) {
+        }
+        else if (fund_left == 10) {
             showMessage("Warning", "Please select an option for Fundus Examination - Left Eye");
             return;
         }
-        else if (Fund_right.getText().toString().trim().length() == 10) {
+        else if (fund_right == 10) {
             showMessage("Warning", "Please select an option for Fundus Examination - Right Eye");
             return;
-        }*/
+        }
         else if (referal == 10 ) {
             showMessage("Warning", "Please select an option for Referal");
             return;
@@ -430,10 +756,8 @@ public class EyeActivity2 extends ActionBarActivity {
                     "'" + Allerconj_right.getText().toString().trim() + "'," +
                     "'" + allconj_left + "'," +
                     "'" + Allerconj_left.getText().toString().trim() + "'," +
-                    "'" + night_right + "'," +
-                    "'" + Night_right.getText().toString().trim() + "'," +
-                    "'" + night_left + "'," +
-                    "'" + Night_left.getText().toString().trim() + "'," +
+                    "'" + night + "'," +
+                    "'" + Night.getText().toString().trim() + "'," +
                     "'" + congp_right + "'," +
                     "'" + Congp_right.getText().toString().trim() + "'," +
                     "'" + congp_left + "'," +
@@ -450,8 +774,8 @@ public class EyeActivity2 extends ActionBarActivity {
                     "'" + Nys_right.getText().toString().trim() + "'," +
                     "'" + nys_left + "'," +
                     "'" + Nys_left.getText().toString().trim() + "'," +
-                    "'" + Fund_right.getText().toString().trim() + "'," +
-                    "'" + Fund_left.getText().toString().trim() + "'," +
+                    "'" + fund_right + "'," +
+                    "'" + fund_left + "'," +
                     "'" + Other.getText().toString() + "',"+
                     "'" + impression.getText().toString().trim() + "',"+
                     "'" + treatment + "',"+

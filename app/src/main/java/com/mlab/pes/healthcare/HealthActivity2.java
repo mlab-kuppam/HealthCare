@@ -1,6 +1,7 @@
 package com.mlab.pes.healthcare;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,12 +11,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +31,7 @@ import java.io.File;
 public class HealthActivity2 extends ActionBarActivity {
 
     EditText vit_b_com,vit_c_com,vit_others,gs_others,gsdeform,uti_com,siez_com,muc_others,worm_infest,Acute
-            ,gastro_other,nerve_other,behav_other,Other,MSDeform,ADHD,Bedwetting,Other_disease,injury,deformitiesT,impression;
+            ,gastro_other,nerve_other,behav_other,Other,MSDeform,ADHD,Bedwetting,impression;
 
     int ac=10,wo=10,msdef=10,se=10,ad=10,uti=10,bed=10,gsdef=10,vitc=10,vitb=10,oth=10,ho=10,referal=10,treatment=10;
 
@@ -41,7 +48,20 @@ public class HealthActivity2 extends ActionBarActivity {
     int worm_pass=0,pruritis_ani=0,pain_abd=0,skin_les=0,past_history=0,antiepi_drug=0,dribling=0,inc_freq=0,burn_mict=0,phim=0,
             undestes=0,hypo=0,congher=0,bleed=0,pete=0,angular=0,geotong=0,bowlegs=0,knockedKnees=0,injuryMal=0;
 
-    String[] checkboxnames = new String[]{"Passing worms","Pruritis ani","Pain abdomen","Skin lesions","Past history","On antiepileptic drug","Dribbling","Increased frequency","H/O burning micturation","Phimosis","Undescended testes","Hypospadiasis","Congenital hernias","Bleeding gums","Petechial haemorrhages","Angular chelitis","Geographical tongue"};
+    RelativeLayout layout1;
+    int index,valid=10;
+
+    LinearLayout layout2,layout3,layout4,layout5,layout6;
+    int i=-1,j=10,check=0;
+
+    String treat_text;
+    StringBuffer dos_text;
+
+    EditText Text2,Text3,Text4;
+    TextView UnitText,no1,no2,no3,no4,no5;
+    AutoCompleteTextView Text1;
+    Button BTN1,BTN2;
+    TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20;
 
     SQLiteDatabase database;
 
@@ -91,10 +111,6 @@ public class HealthActivity2 extends ActionBarActivity {
             "  vt_b_gt INTEGER[1] ," +
             "  vt_b_com VARCHAR[140]," +
             "  vt_others VARCHAR[140]," +
-            "  oid INTEGER[1]," +
-            "  oid_com VARCHAR[140]," +
-            "  hoin INTEGER[1]," +
-            "  hoin_com VARCHAR[140]," +
             "  others VARCHAR[140],"+
             "  impression VARCHAR[140],"+
             "  treatment VARCHAR[1000],"+
@@ -128,10 +144,38 @@ public class HealthActivity2 extends ActionBarActivity {
         behav_other = (EditText)findViewById(R.id.behave_text);
         ADHD = (EditText)findViewById(R.id.adhd_text);
         Bedwetting = (EditText)findViewById(R.id.bed_text);
-        Other_disease = (EditText)findViewById(R.id.other_text);
-        injury = (EditText)findViewById(R.id.injury_text);
         Other = (EditText)findViewById(R.id.end_text);
-        deformitiesT=(EditText)findViewById(R.id.deform_text);
+
+        layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        layout2 = (LinearLayout) findViewById(R.id.layout2);
+        layout3 = (LinearLayout) findViewById(R.id.layout3);
+        layout4 = (LinearLayout) findViewById(R.id.layout4);
+        layout5 = (LinearLayout) findViewById(R.id.layout5);
+        layout6 = (LinearLayout) findViewById(R.id.layout6);
+
+        text1 = (TextView)findViewById(R.id.text11);
+        text3 = (TextView)findViewById(R.id.text31);
+        text4 = (TextView)findViewById(R.id.text41);
+        text5 = (TextView)findViewById(R.id.text12);
+        text7 = (TextView)findViewById(R.id.text32);
+        text8 = (TextView)findViewById(R.id.text42);
+        text9 = (TextView)findViewById(R.id.text13);
+        text11 = (TextView)findViewById(R.id.text33);
+        text12 = (TextView)findViewById(R.id.text43);
+        text13 = (TextView)findViewById(R.id.text14);
+        text15 = (TextView)findViewById(R.id.text34);
+        text16 = (TextView)findViewById(R.id.text44);
+        text17 = (TextView)findViewById(R.id.text15);
+        text19 = (TextView)findViewById(R.id.text35);
+        text20 = (TextView)findViewById(R.id.text45);
+
+        no1 = (TextView)findViewById(R.id.text01);
+        no2 = (TextView)findViewById(R.id.text02);
+        no3 = (TextView)findViewById(R.id.text03);
+        no4 = (TextView)findViewById(R.id.text04);
+        no5 = (TextView)findViewById(R.id.text05);
+
+        dos_text= new StringBuffer();
 
 
 
@@ -162,7 +206,7 @@ public class HealthActivity2 extends ActionBarActivity {
 
         String image_table_query=
                 "  child_id VARCHAR[10] ," +
-                        "  photo_id VARCHAR[20] ," +
+                        "  photo_id VARCHAR[30] ," +
                         "  image TEXT" ;
         //creating image table
         database.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
@@ -194,6 +238,252 @@ public class HealthActivity2 extends ActionBarActivity {
         }
 
     }
+
+    //Methods for treatment page
+    public void PLUS(View v) {
+        i++;
+        final Dialog dialog = new Dialog(this);
+        dialog.setTitle("PESIMSR Medical Store");
+        dialog.setContentView(R.layout.treat_dialog);
+        dialog.setCancelable(false);
+
+        final String[] auto= getResources().getStringArray(R.array.Treatment);
+
+        Text1 = (AutoCompleteTextView) dialog.findViewById(R.id.text1);
+        Text2 = (EditText) dialog.findViewById(R.id.text2);
+
+        ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, auto  );
+        Text1.setAdapter(adapter);
+
+        TextWatcher textWatcher= new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                for (int p = 0; p < 18; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("");
+                        break;
+                    }
+
+                }
+                for (int p = 19; p < 22; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("ml");
+                        break;
+                    }
+
+                }
+                for (int p = 23; p < 37; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("\u00b0");
+                        break;
+                    }
+
+                }
+
+                for (int p = 38; p < 45; p++) {
+                    if (Text1.getText().toString().equals(auto[p])) {
+                        UnitText.setText("");
+                        break;
+                    }
+
+                }
+            }
+        };
+
+        Text1.addTextChangedListener(textWatcher);
+
+        Text3 = (EditText) dialog.findViewById(R.id.text3);
+
+        BTN1 = (Button) dialog.findViewById(R.id.addButton1);
+        BTN2 = (Button) dialog.findViewById(R.id.addButton2);
+
+        UnitText = (TextView)dialog.findViewById(R.id.unit);
+        BTN1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Text1.length()==0)
+                {
+                    showMessage("Warning","Please enter the Drug name",dialog);
+                    valid=0;
+                    Text2.append("-");
+                    return;
+                }
+                else if(Text2.length()==0)
+                {
+                    showMessage("Warning","Please enter the Dosage",dialog);
+                    valid=0;
+                    return;
+                }
+                else if (Text3.length()==0)
+                {
+                    showMessage("Warning","Please enter the Duration",dialog);
+                    valid=0;
+                    return;
+                }
+
+
+                validate(Text1, Text2, Text3, Text4, UnitText, dialog);
+
+            }
+        });
+
+        BTN2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i--;
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    public void validate(AutoCompleteTextView Text1, EditText Text2,EditText Text3,EditText Text4, TextView UnitText,Dialog dialog)
+    {
+
+        if(j!=10)
+        {
+            switch (j)
+            {
+                case 1:
+                    layout2.setVisibility(View.VISIBLE);
+                    text1.setText(Text1.getText().toString());
+                    text3.setText(Text2.getText().toString() + UnitText.getText());
+                    text4.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 2:
+                    layout3.setVisibility(View.VISIBLE);
+                    text5.setText(Text1.getText().toString());
+                    text7.setText(Text2.getText().toString() + UnitText.getText());
+                    text8.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 3:
+                    layout4.setVisibility(View.VISIBLE);
+                    text9.setText(Text1.getText().toString());
+                    text11.setText(Text2.getText().toString() + UnitText.getText());
+                    text12.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 4:
+                    layout5.setVisibility(View.VISIBLE);
+                    text13.setText(Text1.getText().toString());
+                    text15.setText(Text2.getText().toString() + UnitText.getText());
+                    text16.setText(Text3.getText().toString());
+                    j=10;
+                    break;
+                case 5:
+                    layout6.setVisibility(View.VISIBLE);
+                    text17.setText(Text1.getText().toString());
+                    text19.setText(Text2.getText().toString() + UnitText.getText());
+                    text20.setText(Text3.getText().toString());
+                    j = 10;
+                    break;
+            }
+        }
+        else {
+            switch (i) {
+                case 0:
+                    layout2.setVisibility(View.VISIBLE);
+                    text1.setText(Text1.getText().toString());
+                    text3.setText(Text2.getText().toString() + UnitText.getText());
+                    text4.setText(Text3.getText().toString());
+                    break;
+                case 1:
+                    layout3.setVisibility(View.VISIBLE);
+                    text5.setText(Text1.getText().toString());
+                    text7.setText(Text2.getText().toString() + UnitText.getText());
+                    text8.setText(Text3.getText().toString());
+                    break;
+                case 2:
+                    layout4.setVisibility(View.VISIBLE);
+                    text9.setText(Text1.getText().toString());
+                    text11.setText(Text2.getText().toString() + UnitText.getText());
+                    text12.setText(Text3.getText().toString());
+                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+                case 3:
+                    layout5.setVisibility(View.VISIBLE);
+                    text13.setText(Text1.getText().toString());
+                    text15.setText(Text2.getText().toString() + UnitText.getText());
+                    text16.setText(Text3.getText().toString());
+                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+                case 4:
+                    layout6.setVisibility(View.VISIBLE);
+                    text17.setText(Text1.getText().toString());
+                    text19.setText(Text2.getText().toString() + UnitText.getText());
+                    text20.setText(Text3.getText().toString());
+                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+
+
+        dialog.dismiss();
+
+    }
+
+    public void showMessage(String title,String message,Dialog dialog)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        builder.show();
+
+    }
+
+    public void CANCEL(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.del1:
+                layout2.setVisibility(View.GONE);
+                text1.setText("");
+                text3.setText("");
+                text4.setText("");j=1;break;
+            case R.id.del2:
+                layout3.setVisibility(View.GONE);
+                text5.setText("");
+                text7.setText("");
+                text8.setText("");j=2;break;
+            case R.id.del3:
+                layout4.setVisibility(View.GONE);
+                text9.setText("");
+                text11.setText("");
+                text12.setText("");j=3;break;
+            case R.id.del4:
+                layout5.setVisibility(View.GONE);
+                text13.setText("");
+                text15.setText("");
+                text16.setText("");j=4;break;
+            case R.id.del5:
+                layout6.setVisibility(View.GONE);
+                text17.setText("");
+                text19.setText("");
+                text20.setText("");j=5;break;
+        }
+    }
+
 
     public void onRadioselect(View v)
     {
@@ -254,15 +544,6 @@ public class HealthActivity2 extends ActionBarActivity {
             case R.id.vitb_no: VitB.setVisibility(v.GONE);vitb=0;
                 break;
 
-            case R.id.other_yes: Other_disease.setVisibility(v.VISIBLE);oth=1;
-                break;
-            case R.id.other_no: Other_disease.setVisibility(v.GONE);oth=0;
-                break;
-
-            case R.id.injury_yes: injury.setVisibility(v.VISIBLE);ho=1;
-               break;
-            case R.id.injury_no: injury.setVisibility(v.GONE);ho=0;
-                break;
 
 
 
@@ -346,6 +627,33 @@ public class HealthActivity2 extends ActionBarActivity {
 
     public void Next() {
 
+        if (text1.getText().length() != 0 && text5.getText().length() != 0 && text9.getText().length() != 0 && text13.getText().length() != 0 && text17.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$"
+                    + "" + no3.getText().toString() + "@" + text9.getText() + "@" + text11.getText().toString() + "@" + text12.getText().toString() + "days$"
+                    + "" + no4.getText().toString() + "@" + text13.getText() + "@" + text15.getText().toString() + "@" + text16.getText().toString() + "days$"
+                    + "" + no5.getText().toString() + "@" + text17.getText() + "@" + text19.getText().toString() + "@" + text20.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0 && text5.getText().length() != 0 && text9.getText().length() != 0 && text13.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$"
+                    + "" + no3.getText().toString() + "@" + text9.getText() + "@" + text11.getText().toString() + "@" + text12.getText().toString() + "days$"
+                    + "" + no4.getText().toString() + "@" + text13.getText() + "@" + text15.getText().toString() + "@" + text16.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0 && text5.getText().length() != 0 && text9.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$"
+                    + "" + no3.getText().toString() + "@" + text9.getText() + "@" + text11.getText().toString() + "@" + text12.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0 && text5.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$" + ""
+                    + no2.getText().toString() + "@" + text5.getText() + "@" + text7.getText().toString() + "@" + text8.getText().toString() + "days$";
+        }
+        else if (text1.getText().length() != 0) {
+            treat_text ="" + no1.getText().toString() + "@" + text1.getText() + "@" + text3.getText().toString() + "@" + text4.getText().toString() + "days$";
+        }
+        Treatment=treat_text;
+
         if (ac == 10 ) {
             showMessage("Error", "Please select an option for Gastro-Intestinal System - Acute Gastro-Enteritis");
             return;
@@ -388,14 +696,6 @@ public class HealthActivity2 extends ActionBarActivity {
         }
         else if (vitb == 10 ) {
             showMessage("Warning", "Please select an option for Vitamin Deficiency - Vitamin B Complex Deficiency");
-            return;
-        }
-        else if (oth == 10 ) {
-            showMessage("Warning", "Please select an option for Other Infectious Diseases");
-            return;
-        }
-        else if (ho == 10 ) {
-            showMessage("Warning", "Please select an option for H/O Injuries");
             return;
         }
         else if (referal == 10 ) {
@@ -450,10 +750,6 @@ public class HealthActivity2 extends ActionBarActivity {
                     "'" + geotong + "'," +
                     "'" + vit_b_com.getText().toString().trim() + "'," +
                     "'" + vit_others.getText().toString().trim() + "'," +
-                    "'" + oth + "'," +
-                    "'" + Other_disease.getText().toString().trim() + "'," +
-                    "'" + ho + "'," +
-                    "'" + injury.getText().toString().trim() + "'," +
                     "'" + Other.getText().toString().trim() + "',"+
                     "'" + impression.getText().toString().trim() + "',"+
                     "'" + Treatment + "',"+

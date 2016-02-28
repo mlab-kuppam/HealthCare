@@ -135,8 +135,8 @@
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="in cm"
-                    android:maxLength="3"
-                    android:inputType="number"/>
+                    android:maxLength="5"
+                    android:inputType="numberDecimal"/>
 
             </RelativeLayout>
 
@@ -161,8 +161,30 @@
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="in kg"
-                    android:maxLength="3"
-                    android:inputType="number"/>
+                    android:maxLength="5"
+                    android:inputType="numberDecimal"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/bmi"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"
+                    android:id="@+id/bmi"
+                    android:layout_marginLeft="350dp"
+                    android:textSize="20dp"/>
 
             </RelativeLayout>
 
@@ -187,8 +209,8 @@
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="in cm"
-                    android:maxLength="2"
-                    android:inputType="number"/>
+                    android:maxLength="5"
+                    android:inputType="numberDecimal"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -212,11 +234,32 @@
                     android:layout_marginLeft="350dp"
                     android:textSize="20dp"
                     android:hint="in cm"
-                    android:maxLength="2"
-                    android:inputType="number"/>
+                    android:maxLength="5"
+                    android:inputType="numberDecimal"/>
 
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layoutshape">
 
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/whratio"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"/>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="20dp"
+                    style="@style/h1"
+                    android:id="@+id/whratio"
+                    android:layout_marginLeft="350dp"
+                    android:textSize="20dp"/>
+
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -488,22 +531,20 @@
                         android:onClick="onRadioselect"
                         android:id="@+id/oral_good"
                         android:textSize="20dp"
-                        android:text="Good"/>
+                        android:text="Yes"/>
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
                         android:onClick="onRadioselect"
                         android:id="@+id/oral_poor"
-                        android:layout_marginLeft="74dp"
-                        android:text="Poor"
-                        android:textSize="20dp"
-                        android:checked="false" />
+                        android:layout_marginLeft="94dp"
+                        android:text="No"
+                        android:textSize="20dp" />
 
                 </RadioGroup>
 
             </RelativeLayout>
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1112,6 +1153,7 @@
 
             </RelativeLayout>
 
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1120,70 +1162,45 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="@string/cleft"
-                    android:layout_marginLeft="40dp"
+                    android:text="@string/referal"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginTop="20dp"
+                    android:layout_marginLeft="40dp"
+                    android:paddingBottom="20dp"
                     style="@style/h1"/>
 
-
                 <RadioGroup
-                    android:layout_width="match_parent"
+                    android:layout_width="350dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="400dp"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="20dp">
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="45dp"
-                        android:id="@+id/cleft_yes"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/oral_required"
                         android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:text="Yes"/>
+                        android:text="@string/required"
+                        android:layout_gravity="center_vertical"
+                        style="@style/biig"
+                        android:textSize="20dp"/>
 
                     <RadioButton
                         android:layout_width="wrap_content"
-                        android:layout_height="45dp"
-                        android:id="@+id/cleft_no"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/oral_notRequired"
+                        android:layout_gravity="center_vertical"
                         android:onClick="onRadioselect"
-                        android:layout_marginLeft="90dp"
-                        android:textSize="20dp"
-                        android:text="No"/>
+                        android:layout_marginLeft="36dp"
+                        android:text="@string/notRequired"
+                        style="@style/biig"
+                        android:textSize="20dp"/>
+
                 </RadioGroup>
 
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/operatedLayout"
-                android:visibility="gone"
-                android:background="@drawable/layoutshape">
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="400dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="60dp"
-                        android:id="@+id/operated"
-                        android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:text="@string/operated"/>
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="60dp"
-                        android:id="@+id/notOperated"
-                        android:onClick="onRadioselect"
-                        android:layout_marginLeft="47dp"
-                        android:textSize="20dp"
-                        android:text="@string/notOperated"/>
-                </RadioGroup>
-            </RelativeLayout>
 
 
             <RelativeLayout

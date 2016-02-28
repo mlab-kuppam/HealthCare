@@ -112,10 +112,16 @@ class GetXMLTask extends AsyncTask<LinkedHashMap, Void, String> {
                 System.out.println("Second Exception because of HttpResponse :" + ioe);
                 ioe.printStackTrace();
             }
+            catch (Exception e){
+                e.printStackTrace();
+            }
 
         } catch (UnsupportedEncodingException uee) {
             System.out.println("An Exception given because of UrlEncodedFormEntity argument :" + uee);
             uee.printStackTrace();
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
 
         return null;

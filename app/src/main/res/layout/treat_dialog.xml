@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/pesimsr">
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape"
+    android:layout_marginTop="30dp"
+    android:id="@+id/dia_lyt1">
     <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Drug :"
-        android:layout_marginTop="50dp"
+        android:textStyle="bold"
         style="@style/Dialogtext"/>
 
 
@@ -18,20 +22,23 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:id="@+id/text1"
-        android:layout_marginTop="50dp"
+        android:layout_marginLeft="150dp"
         style="@style/Dialogtext"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:id="@+id/dia_lyt2"
+        android:layout_marginTop="80dp"
+        android:layout_below="@id/dia_lyt1"
+        android:background="@drawable/shape">
     <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Dosage :"
-        android:layout_marginTop="250dp"
+        android:textStyle="bold"
         style="@style/Dialogtext"/>
 
 
@@ -39,45 +46,58 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/text2"
+        android:maxLength="3"
+        android:layout_marginLeft="150dp"
         android:inputType="number"
-        android:layout_marginTop="250dp"
         style="@style/Dialogtext"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/unit"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="380dp"
             style="@style/Dialogtext"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+<RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    android:layout_below="@id/dia_lyt2"
+    android:layout_marginTop="80dp"
+    android:id="@+id/dia_lyt3"
+    android:background="@drawable/shape">
     <TextView
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:text="Duration :"
-        android:layout_marginTop="450dp"
+        android:textStyle="bold"
         style="@style/Dialogtext"/>
 
     <EditText
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/text3"
+        android:maxLength="2"
+        android:layout_marginLeft="150dp"
         android:inputType="number"
-        android:layout_marginTop="450dp"
         style="@style/Dialogtext"/>
-    </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:layout_marginTop="210dp"
+        android:layout_below="@id/dia_lyt3"
+        android:id="@+id/dia_lyt4">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
         android:layout_marginLeft="328dp"
-        android:layout_marginTop="600dp"
         android:id="@+id/addButton1"/>
 
     <Button
@@ -85,6 +105,7 @@
         android:layout_height="wrap_content"
         android:text="Cancel"
         android:layout_marginLeft="128dp"
-        android:layout_marginTop="600dp"
         android:id="@+id/addButton2"/>
+
+        </RelativeLayout>
 </RelativeLayout>

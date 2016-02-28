@@ -660,22 +660,24 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="@string/impression"
+                    android:layout_centerVertical="true"
                     android:layout_marginTop="20dp"
                     style="@style/h1"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:longClickable="false"
+                <Spinner
+                    android:id="@+id/advice_drop"
+                    style="@style/entryBox"
+                    android:layout_width="400dp"
+                    android:layout_height="80dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="300dp"
-                    android:id="@+id/impression"
-                    android:hint="@string/hint"
-                    style="@style/biig" />
+                    android:spinnerMode="dropdown">
+                </Spinner>
+
 
 
             </RelativeLayout>
-
+<!--
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1015,8 +1017,390 @@
                 </LinearLayout>
 
 
-            </RelativeLayout>
+            </RelativeLayout>-->
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/treat"
+                    android:id="@+id/treat"
+                    style="@style/h1"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layout1"
+                    android:layout_below="@id/treat">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:text="@string/sl.no"
+                            style="@style/column_name"/>
+
+                        <View style="@style/Divider2"
+                              android:layout_marginLeft="30dp"
+                              android:layout_marginTop="4dp"></View>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="50dp"
+                            android:text="@string/drug"
+                            style="@style/column_name"/>
+
+                        <View style="@style/Divider2"
+                              android:layout_marginLeft="355dp"
+                              android:layout_marginTop="4dp"></View>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="388dp"
+                            android:text="@string/dos"
+                            style="@style/column_name"/>
+
+                        <View style="@style/Divider2"
+                              android:layout_marginLeft="515dp"
+                              android:layout_marginTop="4dp"></View>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="540dp"
+                            android:text="@string/dur"
+                            style="@style/column_name"/>
+
+
+                        <Button
+                            android:layout_width="55dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/addimage"
+                            android:layout_marginLeft="692dp"
+                            android:id="@+id/plusButton"
+                            android:onClick="PLUS"/>
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:id="@+id/layout2">
+
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text01"
+                            android:textSize="30dp"
+                            android:text="1"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="315dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text11"
+                            android:textSize="24dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+                        <TextView
+                            android:layout_width="107dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text31"
+                            android:textSize="30dp"
+
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text41"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <Button
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="30dp"
+                            android:id="@+id/del1"
+                            android:background="@drawable/deleteimage"
+                            android:onClick="CANCEL"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:layout_below="@id/layout2"
+                        android:id="@+id/layout3">
+
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text02"
+                            android:textSize="30dp"
+                            android:text="2"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="315dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text12"
+                            android:textSize="24dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+                        <TextView
+                            android:layout_width="107dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text32"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text42"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <Button
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="30dp"
+                            android:id="@+id/del2"
+                            android:background="@drawable/deleteimage"
+                            android:onClick="CANCEL"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:layout_below="@id/layout3"
+                        android:id="@+id/layout4">
+
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text03"
+                            android:textSize="30dp"
+                            android:text="3"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="315dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text13"
+                            android:textSize="24dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="107dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text33"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text43"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+                        <Button
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/del3"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/deleteimage"
+                            android:onClick="CANCEL"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:layout_below="@id/layout4"
+                        android:id="@+id/layout5">
+
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text04"
+                            android:textSize="30dp"
+                            android:text="4"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="315dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text14"
+                            android:textSize="24dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="107dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text34"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text44"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <Button
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/del4"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/deleteimage"
+                            android:onClick="CANCEL"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:layout_below="@id/layout5"
+                        android:id="@+id/layout6">
+
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text05"
+                            android:textSize="30dp"
+                            android:text="5"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="315dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text15"
+                            android:textSize="24dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="107dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text35"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text45"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <Button
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/del5"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/deleteimage"
+                            android:onClick="CANCEL"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

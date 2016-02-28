@@ -57,7 +57,7 @@ public class UpdateActivity extends ActionBarActivity {
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
         String image_table_query=
                 "  child_id VARCHAR[10] ," +
-                        "  photo_id VARCHAR[20] ," +
+                        "  photo_id VARCHAR[30] ," +
                         "  image TEXT" ;
         //creating image table
         database.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
@@ -73,7 +73,7 @@ public class UpdateActivity extends ActionBarActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.school_id_dialog, null);
         // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
+        // Pass null as the parent1 view because its going in the dialog layout
         builder.setView(dialogView);
         final EditText schoolID = (EditText) dialogView.findViewById(R.id.schoolId);
         final TextView errorMessage=(TextView) dialogView.findViewById(R.id.ErrorMessage);
@@ -263,6 +263,7 @@ public class UpdateActivity extends ActionBarActivity {
                 //showMessage("Student Found!", "Student Name: " + rows.get("name") + "\nGender: " + rows.get("gender"));
                 child_id[1]=rows.get("name").toString();
                 child_id[2]=rows.get("gender").toString();
+                child_id[3]=rows.get("father_name").toString();
 
                 return child_id;
             }
@@ -317,6 +318,7 @@ public class UpdateActivity extends ActionBarActivity {
         final LinearLayout studentDetails=(LinearLayout) dialogView.findViewById(R.id.studentDetails);
         final TextView studentDetailsName=(TextView) dialogView.findViewById(R.id.studentDetailsName);
         final TextView studentDetailsGender=(TextView) dialogView.findViewById(R.id.studentDetailsGender);
+        final TextView studentDetailsFatherName=(TextView) dialogView.findViewById(R.id.studentDetailsFatherName);
         final TextView errorMessage=(TextView) dialogView.findViewById(R.id.ErrorMessage);
 
 
@@ -334,6 +336,8 @@ public class UpdateActivity extends ActionBarActivity {
                         values=displayStudentDetails(values);
                         studentDetailsName.setText(values[1]);
                         studentDetailsGender.setText(values[2]);
+                        studentDetailsFatherName.setText(values[3]);
+
 
                     }
                     else{

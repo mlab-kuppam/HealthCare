@@ -18,7 +18,7 @@
     <string name="nail">Nails -</string>
     <string name="bath">Bathing -</string>
     <string name="groom">Grooming -</string>
-    <string name="oral">Oral Care -</string>
+    <string name="oral">Regular Brushing -</string>
     <string name="men">Age of Menarche -</string>
     <string name="san">Sanitary Napkin -</string>
     <string name="anaemia">Clinical Anaemia :</string>
@@ -66,18 +66,18 @@
     <string name="mil">Miliaria</string>
     <string name="viral">Viral Warts</string>
     <string name="oti">Otitis Externa</string>
-    <string name="asom">ASOM</string>
+    <string name="asom">AOM</string>
     <string name="csom">CSOM</string>
-    <string name="impact">Impacted Wax</string>
+    <string name="impact">Wax</string>
     <string name="impair">Impaired Hearing</string>
     <string name="epi">H/o Epistaxis</string>
-    <string name="adeno">Adenotonsilitis</string>
+    <string name="adeno">Tonsilitis</string>
     <string name="phary">Pharyngitis</string>
-    <string name="aller">Allergic Rhinitis</string>
+    <string name="aller">Rhinitis</string>
     <string name="speech">Speech Defects</string>
     <string name="cvis">Colour Vision</string>
     <string name="bitot">Bitot\'s Spots</string>
-    <string name="allconj">Allergy Conjunctivitis</string>
+    <string name="allconj">Allergic Conjunctivitis</string>
     <string name="night">Night Blindness</string>
     <string name="congp">Congenital Ptosis</string>
     <string name="congd">Congenital Developmental Cataract</string>
@@ -88,6 +88,14 @@
     <string name="cylinder">Cylinder</string>
     <string name="axis">Axis</string>
     <string name="refract">Refraction &amp; Correction</string>
+
+    <string name="Acute">Acute</string>
+    <string name="Chronic">Chronic</string>
+    <string name="allergic">Allergic</string>
+    <string name="Infective">Infective</string>
+
+    <string name="impacted">Impacted</string>
+    <string name="unimpacted">Unimpacted</string>
 
     <string name="hint"><i>Enter comment</i></string>
 
@@ -124,6 +132,27 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="advice_array">
+        <item>Nil</item>
+        <item>Avoid Nose pricking</item>
+        <item>Salt water gargling</item>
+        <item>Keep Ears dry</item>
+        <item>Avoid Ice creams/ Cool drinks</item>
+        <item>Cycloplegic Refraction</item>
+        <item>Vit – A rich foods</item>
+        <item>Hot Fomentation</item>
+        <item>Regular Bathing</item>
+        <item>Clipping of Nails</item>
+        <item>Proper brushing technique</item>
+        <item>Vit – C rich foods</item>
+        <item>Vit – B rich foods</item>
+        <item>Iron rich food</item>
+        <item>Apply coconut oil after bath</item>
+        <item>Avoid scrubbing while bath</item>
+        <item>Use mild soaps like Dove</item>
+        <item>Use of Mosquito nets</item>
+        <item>Wear full sleeves while sleeping</item>
+    </string-array>
     <string name="standard">Standard : </string>
     <string-array name="standard_array">
         <item>Select..</item>
@@ -271,39 +300,60 @@
     <string name="days">Frequency</string>
     <string name="dos">Dosage</string>
 
-
     <string-array name="Treatment">
-        <item>Paracetamol 500mg</item>
-        <item>Chlor Pheniramine Maleate 4mg</item>
-        <item>Cetirizine/Levo ceterizine 5mg</item>
-        <item>Multivitamin</item>
-        <item>Iron &amp; folic acid 100mg</item>
-        <item>Vitamin C</item>
-        <item>Vit A &amp; D</item>
-        <item>Amoxycillin + Cloxacillin 250mg/Cap Amoxcillin 250mg</item>
-        <item>Cap Amoxycillin + Cloxacillin 500 mg</item>
-        <item>Azithromycin 250 mg</item>
-        <item>Metrogyl 400mg</item>
-        <item>Cough syrup (Salbutamol/terbutaline +Bromhexine and/or Dextromethophan combination)</item>
-        <item>Ciprofloxacin Eye/Ear drops</item>
-        <item>Paradichloro Benzene Ear drops (DEWAX or equivalent)</item>
-        <item>Chloromycetin applicaps</item>
-        <item>Andriplus eyedrops</item>
-        <item>Acurest eye drops</item>
-        <item>Acurest AH eye drops</item>
-        <item>Winolap Eye drops</item>
-        <item>IF2 Eye drops</item>
-        <item>FML Eye drops</item>
-        <item>Accusol Eye drops </item>
-        <item>Liquid Paraffin Bottles</item>
-        <item>Biolene Jelly</item>
-        <item>Permethrin cream 5%</item>
-        <item>Fusidic acid cream</item>
-        <item>Ketoconazole/Miconazole cream</item>
-        <item>AP Gel or Tretinoin cream 0.025/0.05 %</item>
-        <item>Steroid cream (Betamethasone Propionate/Momatasone/Fluticasone</item>
+    <item>Paracetamol 500mg</item>
+    <item>Chlor Pheniramine Maleate 4mg</item>
+    <item>Cetirizine</item>
+    <item>Multivitamin</item>
+    <item>Iron &amp; folic acid 100mg</item>
+    <item>Vitamin C</item>
+    <item>Vit A &amp; D</item>
+    <item>Amoxycillin + Cloxacillin 250mg/Cap Amoxcillin 250mg</item>
+    <item>Cap Amoxycillin + Cloxacillin 500 mg</item>
+    <item>Azithromycin 250 mg</item>
+    <item>Metrogyl 400mg</item>
+    <item>Taxim 100 mg</item>
+    <item>Taxim - O 100 mg</item>
+    <item>Ciplox 500 mg/ 250 mg</item>
+    <item>Levo cetrizine 5 mg</item>
+    <item>Montek LC</item>
+    <item>Sinarest</item>
+    <item>Hatric â€“ 3</item>
+    <item>Rantac 150 mg</item>
+    <item>Cough syrup (Salbutamol/terbutaline +Bromhexine and/or Dextromethophan combination)</item>
+    <item>Syrup Asthalin</item>
+    <item>Syrup Ascoril</item>
+    <item>Syrup Abroxyl â€“ S</item>
+    <item>Ciprofloxacin Eye/Ear drops</item>
+    <item>Paradichloro Benzene Ear drops (DEWAX or equivalent)</item>
+    <item>Chloromycetin applicaps</item>
+    <item>Andriplus eyedrops</item>
+    <item>Acurest eye drops</item>
+    <item>Acurest AH eye drops</item>
+    <item>Winolap Eye drops</item>
+    <item>IF2 Eye drops</item>
+    <item>FML Eye drops</item>
+    <item>Accusol Eye drops </item>
+    <item>Otrivin Nasal drops</item>
+    <item>Candibiotic Ear drops</item>
+    <item>Candid Ear drops</item>
+    <item>Tobramycin Eye drops</item>
+    <item>CIPLOX Eye drops</item>
+    <item>Eye ointment OCCUPOL</item>
+    <item>Liquid Paraffin Bottles</item>
+    <item>Biolene Jelly</item>
+    <item>Permethrin cream 5%</item>
+    <item>Fusidic acid cream</item>
+    <item>Ketoconazole/Miconazole cream</item>
+    <item>AP Gel or Tretinoin cream 0.025/0.05 %</item>
+    <item>Steroid cream (Betamethasone Propionate/Momatasone/Fluticasone</item>
+ </string-array>
+    <string name="abnormal">Abnormal</string>
+    <string name="normal">Normal</string>
+    <string name="bmi">BMI :</string>
+    <string name="whratio">W/H Ratio :</string>
 
-    </string-array>
+    <string name="treat">Treatment : </string>
 
 
 

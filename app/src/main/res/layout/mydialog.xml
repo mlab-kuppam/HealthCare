@@ -77,6 +77,28 @@
                 android:textSize="20dp"
                 android:textColor="@color/text"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Father's Name : "
+                android:textColor="@color/text"/>
+            <TextView
+                android:id="@+id/studentDetailsFatherName"
+                android:layout_width="0dp"
+                android:layout_weight=".6"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/text"/>
+        </LinearLayout>
     </LinearLayout>
 
 

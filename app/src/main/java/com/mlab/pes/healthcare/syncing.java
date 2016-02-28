@@ -82,19 +82,14 @@ public class syncing {
 
         if (!t.equals("{}")) {
             try {
+
                 GetXMLTask get = new GetXMLTask("Syncing Data");
                 String output= get.execute(new LinkedHashMap[]{linkedHashMap,json_fin}).get();
 
                 if(output!=null) {
-
                     if (output.contains("Sync Unsuccessful")) {
                         MainActivity.showMessage("Failure", "Sync Unsuccessful", MainActivity.get());
                         return;
-                    }
-                    if (output.startsWith("Sync Status")) {
-                        MainActivity.syncStatus.setText(output.substring(13, 35).replaceFirst(":", "at"));
-                        SharedPreferences.Editor mEditor = MainActivity.mPrefs.edit();
-                        mEditor.putString("status", output.substring(13, 35).replaceFirst(":", "at")).commit();
                     }
                 }
 
@@ -102,7 +97,7 @@ public class syncing {
                 String q = "SELECT * FROM images";
                 Cursor c = MainActivity.db.rawQuery(q, null);
                 c.moveToFirst();
-                if (c != null && c.getCount() > 0 ) {
+                if (c != null && c.getCount() > 0 && !output.contains("Sync Unsuccessful")) {
                     do {
                         LinkedHashMap image = new LinkedHashMap();
                         ArrayList arrayList=new ArrayList();
@@ -113,7 +108,6 @@ public class syncing {
                         Bitmap bitmap = BitmapFactory.decodeFile(c.getString(c.getColumnIndex("image")));
                         String image_text = encodeTobase64(bitmap);
                         rows.put("image", image_text);
-
                         arrayList.add(rows);
                         image.put("images", arrayList);
 
@@ -125,12 +119,13 @@ public class syncing {
                 }
 
 
-            if (!output.contains("Sync Unsuccessful") && !image_output.contains("Sync Unsuccessful")) {
 
+            if (!output.contains("Sync Unsuccessful") && !image_output.contains("Sync Unsuccessful")) {
+/*
                 for (int i = 0; i < tablenames.size(); i++) {
                     if(!tablenames.get(i).equals("child_references") || !tablenames.get(i).equals("school_references"))
                     MainActivity.db.execSQL("DROP TABLE IF EXISTS " + tablenames.get(i));
-                }
+                }*/
                 MainActivity.showMessage("Success!", output.substring(35),MainActivity.get());
             } else {
                 MainActivity.showMessage("Failure!", output + ". Try again Later!",MainActivity.get());

@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity{
     static SQLiteDatabase db;
     private static MainActivity app;
     static SharedPreferences mPrefs;
-    static String url="http://192.168.43.22/";
+    static String url="http://10.3.32.59/";
     public static boolean connected=false;
     public static ProgressDialog dialog;
     private Handler mHandler = new Handler();
@@ -57,10 +57,9 @@ public class MainActivity extends ActionBarActivity{
         //Creating DB
         db = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE, null);
 
-
         String image_table_query=
                 "  child_id VARCHAR[10] ," +
-                        "  photo_id VARCHAR[20] ," +
+                        "  photo_id VARCHAR[30] ," +
                         "  image TEXT" ;
         //creating image table
         db.execSQL("CREATE TABLE IF NOT EXISTS images( " + image_table_query + " )");
@@ -207,6 +206,7 @@ public class MainActivity extends ActionBarActivity{
             showMessage("Check Internet Connection", "Try again", get());
         }
     }
+    /*
     public void emergency(View view) {
         BufferedReader reader=null;
         try {
@@ -230,7 +230,7 @@ public class MainActivity extends ActionBarActivity{
                 }
             }
         }
-    }
+    }*/
     //Method to check internet connection
     public boolean INTERNER_CHECK() {
         boolean isInternetPresent;

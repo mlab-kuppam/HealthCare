@@ -11,7 +11,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT child_id,name,gender FROM child";
+$sql = "SELECT child_id,name,gender,father_name FROM child";
 $result = mysqli_query($conn, $sql);
 
 $all=array();

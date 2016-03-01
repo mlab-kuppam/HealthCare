@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SkinActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
@@ -58,7 +61,7 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
     Button BTN1,BTN2;
     TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20;
 
-
+    MultiSpinner multiSpinner;
 
     Spinner advice;
 
@@ -128,6 +131,21 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
         Xerosis=(EditText) findViewById(R.id.xerosis_text);
         Other = (EditText) findViewById(R.id.add_text);
 
+
+        impression="";
+        multiSpinner = (MultiSpinner) findViewById(R.id.multi_spinner);
+        multiSpinner.setItems(UpdateActivity.list, "Select..", new MultiSpinner.MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(boolean[] selected) {
+                for(int i=0;i<selected.length;i++){
+                    if(selected[i])
+                    {
+                      impression=impression+","+i;
+                    }
+                }
+            }
+        });
+
         layout1 = (RelativeLayout) findViewById(R.id.layout1);
         layout2 = (LinearLayout) findViewById(R.id.layout2);
         layout3 = (LinearLayout) findViewById(R.id.layout3);
@@ -158,17 +176,6 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
         no5 = (TextView)findViewById(R.id.text05);
 
         dos_text= new StringBuffer();
-
-
-        advice = (Spinner) findViewById(R.id.advice_drop);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.advice_array, R.layout.spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        advice.setAdapter(adapter);
-        advice.setOnItemSelectedListener(this);
 
 
         //opening db
@@ -663,7 +670,12 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
             else if (referal == 10 ) {
                 showMessage("Warning", "Please select an option for Referral");
                 return;
-            }else {
+            }
+            else if(impression.equals("")){
+                showMessage("Warning", "Please select an option for Advice");
+                return;
+            }
+            else {
 
                 try {
                 String insert_query = "'" + skin_sid + "'," +

@@ -67,7 +67,8 @@ public class MainActivity extends ActionBarActivity{
         String child_table_query=
                 "  child_id VARCHAR[10] ," +
                         "  name VARCHAR[140] ," +
-                        "  gender VARCHAR[10]" ;
+                        "  gender VARCHAR[10]," +
+                        "  father_name VARCHAR[140]";
         //creating image table
         db.execSQL("CREATE TABLE IF NOT EXISTS child_references( " + child_table_query + " )");
 
@@ -85,7 +86,8 @@ public class MainActivity extends ActionBarActivity{
 
         String insert_query_child = "'" + "11111111111" + "'," +
                 "'" + "Name" + "',"+
-                "'" + "Male" + "'";
+                "'" + "Male" + "',"+
+                "'" + "Father Name" + "'";
         System.out.println(insert_query);
         //inserting into database
         MainActivity.db.execSQL("INSERT INTO child_references VALUES (" + insert_query_child + ")");

@@ -1107,15 +1107,13 @@
                     android:layout_marginTop="20dp"
                     style="@style/h1"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:longClickable="false"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="300dp"
-                    android:id="@+id/impression"
-                    android:hint="@string/hint"
-                    style="@style/biig" />
+
+                <com.mlab.pes.healthcare.MultiSpinner android:id="@+id/multi_spinner"
+                                                      style="@style/entryBox"
+                                                      android:layout_width="400dp"
+                                                      android:layout_height="wrap_content"
+                                                      android:layout_marginTop="20dp"
+                                                      android:layout_marginLeft="300dp" />
 
 
             </RelativeLayout>

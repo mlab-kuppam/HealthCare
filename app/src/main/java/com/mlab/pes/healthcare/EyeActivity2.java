@@ -28,7 +28,7 @@ import android.widget.Toast;
 import java.io.File;
 
 public class EyeActivity2 extends ActionBarActivity {
-    String treatment;
+    String treatment,Impression;
 
     EditText Cvis_left,Cvis_right,Bitot_left,Bitot_right,Allerconj_left,Allerconj_right,Night,Congp_left,Congp_right,Congd_left,Congd_right,Amb_left,Amb_right,
             Nys_left,Nys_right,Fund_left,Fund_right,Other,impression;
@@ -53,6 +53,7 @@ public class EyeActivity2 extends ActionBarActivity {
     Button BTN1,BTN2;
     TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20;
 
+    MultiSpinner multiSpinner;
 
     SQLiteDatabase database;
 
@@ -124,8 +125,6 @@ public class EyeActivity2 extends ActionBarActivity {
 		eye1StdId = (TextView)findViewById(R.id.eye1_std_id);
         eye1StdId.setText(EyeActivity1.eye_sid);
 
-        impression=(EditText)findViewById(R.id.impression);
-
         Cvis_left = (EditText) findViewById(R.id.cvis_left_text);
         Cvis_right = (EditText) findViewById(R.id.cvis_right_text);
         Bitot_left = (EditText) findViewById(R.id.bitot_left_text);
@@ -143,6 +142,20 @@ public class EyeActivity2 extends ActionBarActivity {
         Nys_right = (EditText) findViewById(R.id.nys_right_text);
         Other = (EditText) findViewById(R.id.add_text);
 
+
+        Impression="";
+        multiSpinner = (MultiSpinner) findViewById(R.id.multi_spinner);
+        multiSpinner.setItems(UpdateActivity.list, "Select..", new MultiSpinner.MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(boolean[] selected) {
+                for(int i=0;i<selected.length;i++){
+                    if(selected[i])
+                    {
+                        Impression=Impression+","+i;
+                    }
+                }
+            }
+        });
         layout1 = (RelativeLayout) findViewById(R.id.layout1);
         layout2 = (LinearLayout) findViewById(R.id.layout2);
         layout3 = (LinearLayout) findViewById(R.id.layout3);
@@ -720,6 +733,10 @@ public class EyeActivity2 extends ActionBarActivity {
             showMessage("Warning", "Please select an option for Referal");
             return;
         }
+        else if(Impression.equals("")){
+            showMessage("Warning", "Please select an option for Advice");
+            return;
+        }
         else {
 
 
@@ -777,7 +794,7 @@ public class EyeActivity2 extends ActionBarActivity {
                     "'" + fund_right + "'," +
                     "'" + fund_left + "'," +
                     "'" + Other.getText().toString() + "',"+
-                    "'" + impression.getText().toString().trim() + "',"+
+                    "'" + Impression + "',"+
                     "'" + treatment + "',"+
                     "'" + referal + "'";
                 System.out.println("EYE " + insert_query);

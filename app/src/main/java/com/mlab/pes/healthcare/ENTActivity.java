@@ -42,7 +42,7 @@ public class ENTActivity extends ActionBarActivity {
     LinearLayout layout2,layout3,layout4,layout5,layout6;
     int i=-1,j=10,check=0;
 
-    String treat_text;
+    String treat_text,Impression;
     StringBuffer dos_text;
 
     EditText Text2,Text3,Text4;
@@ -51,6 +51,8 @@ public class ENTActivity extends ActionBarActivity {
     Button BTN1,BTN2;
     TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20;
 
+
+    MultiSpinner multiSpinner;
 
     RadioGroup wax_right,wax_left,tonsilitis,rhinitis,operated;
 
@@ -141,8 +143,21 @@ public class ENTActivity extends ActionBarActivity {
         Speech = (EditText)findViewById(R.id.speech_text);
         Others = (EditText)findViewById(R.id.add_text);
         urti = (EditText)findViewById(R.id.urti_text);
-        impression=(EditText)findViewById(R.id.impression);
 
+
+        Impression="";
+        multiSpinner = (MultiSpinner) findViewById(R.id.multi_spinner);
+        multiSpinner.setItems(UpdateActivity.list, "Select..", new MultiSpinner.MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(boolean[] selected) {
+                for(int i=0;i<selected.length;i++){
+                    if(selected[i])
+                    {
+                        Impression=Impression+","+i;
+                    }
+                }
+            }
+        });
 
         operated = (RadioGroup) findViewById(R.id.operatedLayout);
 
@@ -789,8 +804,13 @@ public class ENTActivity extends ActionBarActivity {
             else if (referal == 10 ) {
                 showMessage("Warning", "Please select an option for Referal");
                 return;
-            }else
-             {
+            }
+            else if(Impression.equals("")){
+                showMessage("Warning", "Please select an option for Advice");
+                return;
+            }
+            else
+            {
                 try {
                 //creating insertion query
                 String insert_query = "'" + sid + "'," +
@@ -813,7 +833,7 @@ public class ENTActivity extends ActionBarActivity {
                         "'" + cleft + "'," +
                         "'" + operatedOn + "'," +
                         "'" + Others.getText().toString().trim() +"',"+
-                        "'" + impression.getText().toString().trim() + "',"+
+                        "'" + Impression + "',"+
                         "'" + treatment + "',"+
                         "'" + referal + "'";
 

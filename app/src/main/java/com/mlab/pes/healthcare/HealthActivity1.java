@@ -97,6 +97,7 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
             "  oe_spacing_com VARCHAR[140]," +
             "  oe_crowding INTEGER[1]," +
             "  oe_crowding_com VARCHAR[140]," +
+            "  oe_referal INTEGER[1]," +
             "  oe_others VARCHAR[140]," +
             "  rs_chronic INTEGER[1]," +
             "  rs_chronic_com VARCHAR[140]," +
@@ -592,6 +593,10 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                         case 2:
                             anaemia = 3;
                             break;
+                        case 3:
+                            anaemia = 4;
+                            break;
+
                         default:
                             anaemia = 0;
                     }

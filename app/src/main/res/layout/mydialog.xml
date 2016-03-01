@@ -88,6 +88,7 @@
                 android:layout_width="0dp"
                 android:layout_weight=".4"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:textSize="20dp"
                 android:text="Father's Name : "
                 android:textColor="@color/text"/>
@@ -95,6 +96,7 @@
                 android:id="@+id/studentDetailsFatherName"
                 android:layout_width="0dp"
                 android:layout_weight=".6"
+                android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:textColor="@color/text"/>

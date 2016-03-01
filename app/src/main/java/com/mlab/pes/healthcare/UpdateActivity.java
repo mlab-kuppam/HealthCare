@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,7 +22,9 @@ import android.widget.Toast;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class UpdateActivity extends ActionBarActivity {
 
@@ -32,9 +35,9 @@ public class UpdateActivity extends ActionBarActivity {
     TextView schoolID,schoolName;
     String[] valuesSchool;
 
-
     static SharedPreferences mPrefs;
 
+    static List<String> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,12 @@ public class UpdateActivity extends ActionBarActivity {
             schoolID.setText(mPrefs.getString("school_id", ""));
             schoolName.setText(mPrefs.getString("school_name",""));
         }
+
+        Resources res= getResources();
+        String[] items=res.getStringArray(R.array.advice_array);
+        list = new ArrayList<String>();
+        for(int i=0;i<items.length;i++)
+            list.add(items[i]);
 
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
         String image_table_query=
@@ -331,7 +340,7 @@ public class UpdateActivity extends ActionBarActivity {
                 {
                     studentDetails.setVisibility(View.VISIBLE);
                     if(isStudentID(sid)) {
-                        String[] values=new String[3];
+                        String[] values=new String[4];
                         values[0]=sid;
                         values=displayStudentDetails(values);
                         studentDetailsName.setText(values[1]);
@@ -380,4 +389,3 @@ public class UpdateActivity extends ActionBarActivity {
         startActivity(i);
     }
 }
-

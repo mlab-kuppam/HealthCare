@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.mlab.pes.healthcare.MainActivity">
+
+    <LinearLayout
+        style="@style/horizontal"
+        android:id="@+id/StudentIDLayout"
+        android:background="@drawable/main_activity_shape"
+        android:layout_marginTop="0dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Last Sync occured on:"
+            android:layout_weight=".6"
+            style="@style/studentID"
+            android:textSize="30dp"
+            android:textColor="#fff"
+            android:paddingLeft="0dp"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/studentID"
+            android:textSize="30dp"
+            android:textColor="#fff"
+            android:id="@+id/syncStatus"
+            android:layout_weight=".6"
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/add"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:drawableLeft="@drawable/ic_school_white_36dp"
+        android:onClick="ADD"
+        android:text="Add Student Details"/>
+
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/update"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/add"
+        android:layout_alignStart="@+id/add"
+        android:layout_below="@+id/add"
+        android:layout_marginTop="35dp"
+        android:drawableLeft="@drawable/ic_system_update_alt_white_36dp"
+        android:onClick="UPDATE"
+        android:text="Update Health Details"/>
+
+
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/sync"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/update"
+        android:layout_alignStart="@+id/update"
+        android:layout_below="@+id/update"
+        android:layout_marginTop="35dp"
+        android:drawableLeft="@drawable/ic_cloud_upload_white_36dp"
+        android:onClick="SYNC"
+        android:text="Sync Data"/>
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/retrieve"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/sync"
+        android:layout_alignStart="@+id/sync"
+        android:layout_below="@+id/sync"
+        android:layout_marginTop="35dp"
+        android:drawableLeft="@drawable/ic_cloud_download_white_36dp"
+        android:onClick="RETRIEVE"
+        android:text="Retrieve Data"/>
+
+    <!--
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/emergency"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/retrieve"
+        android:layout_alignStart="@+id/retrieve"
+        android:layout_below="@+id/retrieve"
+        android:layout_marginTop="35dp"
+        android:drawableLeft="@drawable/ic_system_update_alt_white_36dp"
+        android:onClick="emergency"
+        android:text="EMERGENCY!"/>-->
+</RelativeLayout>

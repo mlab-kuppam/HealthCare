@@ -140,7 +140,10 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
                 for(int i=0;i<selected.length;i++){
                     if(selected[i])
                     {
-                      impression=impression+","+i;
+                        if(impression.length()==0)
+                            impression=""+i;
+                        else
+                            impression=impression+","+i;
                     }
                 }
             }

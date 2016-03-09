@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity{
     static SQLiteDatabase db;
     private static MainActivity app;
     static SharedPreferences mPrefs;
-    static String url="http://10.3.32.59/";
+    static String url="http://192.168.100.4/";
     public static boolean connected=false;
     public static ProgressDialog dialog;
     private Handler mHandler = new Handler();
@@ -106,7 +106,7 @@ public class MainActivity extends ActionBarActivity{
     //To Add Schools and Students(Changing Intent to SchoolAdd Activity)
     public void ADD(View view) {
 
-        Intent intent = new Intent(this, StudentDetails.class);
+        Intent intent = new Intent(this, studentDataEntry.class);
         startActivity(intent);
         //Transition Animation
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);

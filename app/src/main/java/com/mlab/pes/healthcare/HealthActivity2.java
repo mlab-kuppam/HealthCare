@@ -157,7 +157,10 @@ public class HealthActivity2 extends ActionBarActivity {
                 for(int i=0;i<selected.length;i++){
                     if(selected[i])
                     {
-                        Impression=Impression+","+i;
+                        if(Impression.length()==0)
+                            Impression=""+i;
+                        else
+                            Impression=Impression+","+i;
                     }
                 }
             }

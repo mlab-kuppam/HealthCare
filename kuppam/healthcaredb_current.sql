@@ -106,7 +106,8 @@ CREATE TABLE `ent` (
 -- Table structure for table `eye`
 --
 
-CREATE TABLE `eye` (
+
+CREATE TABLE `eye1` (
   `child_id` varchar(11) NOT NULL,
   `vt_r_d` varchar(5) NOT NULL,
   `vt_r_n` varchar(5) NOT NULL,
@@ -126,6 +127,12 @@ CREATE TABLE `eye` (
   `rc_l_a_d` varchar(5) NOT NULL,
   `rc_l_a_n` varchar(5) NOT NULL,
   `rc_com` varchar(140) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+  
+CREATE TABLE `eye` (
+  `child_id` varchar(11) NOT NULL,
   `cv_r` tinyint(1) NOT NULL,
   `cv_r_com` varchar(140) DEFAULT NULL,
   `cv_l` tinyint(1) NOT NULL,
@@ -322,6 +329,7 @@ CREATE TABLE `images` (
 
 CREATE TABLE `school` (
   `school_id` varchar(8) NOT NULL,
+  `address` varchar(140) NOT NULL,
   `name` varchar(140) NOT NULL,
   `category` int(1) NOT NULL,
   `type` int(1) NOT NULL,
@@ -329,25 +337,21 @@ CREATE TABLE `school` (
   `landline` float DEFAULT NULL,
   `mobile` varchar(11) NOT NULL,
   `email` varchar(254) DEFAULT NULL,
-  `l_busy_places` tinyint(1) DEFAULT NULL,
-  `l_fencing` tinyint(1) DEFAULT NULL,
-  `l_hygenic` tinyint(1) DEFAULT NULL,
-  `l_playground` tinyint(1) DEFAULT NULL,
-  `l_stories` int(2) DEFAULT NULL,
-  `r_number` int(2) DEFAULT NULL,
-  `r_students` int(3) DEFAULT NULL,
-  `hm_office` tinyint(1) DEFAULT NULL,
-  `r_lab` tinyint(1) DEFAULT NULL,
-  `r_art` tinyint(1) DEFAULT NULL,
-  `r_kitchen` tinyint(1) DEFAULT NULL,
-  `furniture` tinyint(1) DEFAULT NULL,
-  `cross_vent` tinyint(1) DEFAULT NULL,
-  `lighting` tinyint(1) DEFAULT NULL,
-  `water` int(1) DEFAULT NULL,
-  `electricity` tinyint(1) DEFAULT NULL,
-  `t_urinal` int(3) DEFAULT NULL,
-  `t_latrines` int(3) DEFAULT NULL,
-  `t_separate` tinyint(1) DEFAULT NULL,
+  `c_busy_places` tinyint(1) DEFAULT NULL,
+  `c_hygenic` tinyint(1) DEFAULT NULL,
+  `c_fencing` tinyint(1) DEFAULT NULL,
+  `c_playground` tinyint(1) DEFAULT NULL,
+  `c_stories` tinyint(1) DEFAULT NULL,
+  `c_overcrowding` tinyint(1) DEFAULT NULL,
+  `c_lab` tinyint(1) DEFAULT NULL,
+  `c_kitchen` tinyint(1) DEFAULT NULL,
+  `c_furniture` tinyint(1) DEFAULT NULL,
+  `c_cross_vent` tinyint(1) DEFAULT NULL,
+  `c_lighting` tinyint(1) DEFAULT NULL,
+  `c_water` int(1) DEFAULT NULL,
+  `c_electricity` tinyint(1) DEFAULT NULL,
+  `c_latrines` tinyint(1) DEFAULT NULL,
+  `c_l_separate` tinyint(1) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -453,6 +457,9 @@ ALTER TABLE `ent`
 -- Indexes for table `eye`
 --
 ALTER TABLE `eye`
+  ADD PRIMARY KEY (`child_id`,`timestamp`);
+
+ALTER TABLE `eye1`
   ADD PRIMARY KEY (`child_id`,`timestamp`);
 
 --

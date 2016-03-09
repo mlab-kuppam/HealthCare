@@ -301,53 +301,53 @@
     <string name="dos">Dosage</string>
 
     <string-array name="Treatment">
-    <item>Paracetamol 500mg</item>
-    <item>Chlor Pheniramine Maleate 4mg</item>
-    <item>Cetirizine</item>
-    <item>Multivitamin</item>
-    <item>Iron &amp; folic acid 100mg</item>
-    <item>Vitamin C</item>
-    <item>Vit A &amp; D</item>
-    <item>Amoxycillin + Cloxacillin 250mg/Cap Amoxcillin 250mg</item>
-    <item>Cap Amoxycillin + Cloxacillin 500 mg</item>
-    <item>Azithromycin 250 mg</item>
-    <item>Metrogyl 400mg</item>
-    <item>Taxim 100 mg</item>
-    <item>Taxim - O 100 mg</item>
-    <item>Ciplox 500 mg/ 250 mg</item>
-    <item>Levo cetrizine 5 mg</item>
-    <item>Montek LC</item>
-    <item>Sinarest</item>
-    <item>Hatric â€“ 3</item>
-    <item>Rantac 150 mg</item>
-    <item>Cough syrup (Salbutamol/terbutaline +Bromhexine and/or Dextromethophan combination)</item>
-    <item>Syrup Asthalin</item>
-    <item>Syrup Ascoril</item>
-    <item>Syrup Abroxyl â€“ S</item>
-    <item>Ciprofloxacin Eye/Ear drops</item>
-    <item>Paradichloro Benzene Ear drops (DEWAX or equivalent)</item>
-    <item>Chloromycetin applicaps</item>
-    <item>Andriplus eyedrops</item>
-    <item>Acurest eye drops</item>
-    <item>Acurest AH eye drops</item>
-    <item>Winolap Eye drops</item>
-    <item>IF2 Eye drops</item>
-    <item>FML Eye drops</item>
-    <item>Accusol Eye drops </item>
-    <item>Otrivin Nasal drops</item>
-    <item>Candibiotic Ear drops</item>
-    <item>Candid Ear drops</item>
-    <item>Tobramycin Eye drops</item>
-    <item>CIPLOX Eye drops</item>
-    <item>Eye ointment OCCUPOL</item>
-    <item>Liquid Paraffin Bottles</item>
-    <item>Biolene Jelly</item>
-    <item>Permethrin cream 5%</item>
-    <item>Fusidic acid cream</item>
-    <item>Ketoconazole/Miconazole cream</item>
-    <item>AP Gel or Tretinoin cream 0.025/0.05 %</item>
-    <item>Steroid cream (Betamethasone Propionate/Momatasone/Fluticasone</item>
- </string-array>
+        <item>Paracetamol 500mg</item>
+        <item>Chlor Pheniramine Maleate 4mg</item>
+        <item>Cetirizine</item>
+        <item>Multivitamin</item>
+        <item>Iron &amp; folic acid 100mg</item>
+        <item>Vitamin C</item>
+        <item>Vit A &amp; D</item>
+        <item>Amoxycillin + Cloxacillin 250mg/Cap Amoxcillin 250mg</item>
+        <item>Cap Amoxycillin + Cloxacillin 500 mg</item>
+        <item>Azithromycin 250 mg</item>
+        <item>Metrogyl 400mg</item>
+        <item>Taxim 100 mg</item>
+        <item>Taxim - O 100 mg</item>
+        <item>Ciplox 500 mg/ 250 mg</item>
+        <item>Levo cetrizine 5 mg</item>
+        <item>Montek LC</item>
+        <item>Sinarest</item>
+        <item>Hatric â€“ 3</item>
+        <item>Rantac 150 mg</item>
+        <item>Cough syrup (Salbutamol/terbutaline +Bromhexine and/or Dextromethophan combination)</item>
+        <item>Syrup Asthalin</item>
+        <item>Syrup Ascoril</item>
+        <item>Syrup Abroxyl â€“ S</item>
+        <item>Ciprofloxacin Eye/Ear drops</item>
+        <item>Paradichloro Benzene Ear drops (DEWAX or equivalent)</item>
+        <item>Chloromycetin applicaps</item>
+        <item>Andriplus eyedrops</item>
+        <item>Acurest eye drops</item>
+        <item>Acurest AH eye drops</item>
+        <item>Winolap Eye drops</item>
+        <item>IF2 Eye drops</item>
+        <item>FML Eye drops</item>
+        <item>Accusol Eye drops </item>
+        <item>Otrivin Nasal drops</item>
+        <item>Candibiotic Ear drops</item>
+        <item>Candid Ear drops</item>
+        <item>Tobramycin Eye drops</item>
+        <item>CIPLOX Eye drops</item>
+        <item>Eye ointment OCCUPOL</item>
+        <item>Liquid Paraffin Bottles</item>
+        <item>Biolene Jelly</item>
+        <item>Permethrin cream 5%</item>
+        <item>Fusidic acid cream</item>
+        <item>Ketoconazole/Miconazole cream</item>
+        <item>AP Gel or Tretinoin cream 0.025/0.05 %</item>
+        <item>Steroid cream (Betamethasone Propionate/Momatasone/Fluticasone</item>
+    </string-array>
     <string name="abnormal">Abnormal</string>
     <string name="normal">Normal</string>
     <string name="bmi">BMI :</string>
@@ -356,11 +356,54 @@
     <string name="treat">Treatment : </string>
 
 
-
-
     <string name="numberOfRoomsHint">Enter Number of Rooms</string>
     <string name="numberOfHouseholdHint">Enter Number of Households</string>
     <string name="title_activity_student_details">Student Details</string>
+    <string name="title_activity_school_details">School Details</string>
+
+    <string name="address">Address : </string>
+    <string name="schoolName">Name of the School : </string>
+    <string name="category">Category of School: </string>
+    <string name="type">Type of School : </string>
+    <string name="headmasterName">Name of Headmaster/Class teacher : </string>
+    <string name="contact">Contact Details of School : </string>
+    <string-array name="category_array">
+        <item>Select..</item>
+        <item>Primary</item>
+        <item>Higher Primary</item>
+        <item>High School</item>
+    </string-array>
+    <string-array name="type_array">
+        <item>Select..</item>
+        <item>Government</item>
+        <item>Private</item>
+        <item>Zilla Parishath</item>
+        <item>Mandal Parishath</item>
+        <item>Aided</item>
+    </string-array>
+    <string name="email">Email ID : </string>
+    <string name="criteria">Criteria for Healthful School : </string>
+    <string name="busyPlaces">Not near-by Busy Places : </string>
+    <string name="hygenic">Hygenic Surroundings : </string>
+    <string name="fencing">Fencing : </string>
+    <string name="playground">Playground : </string>
+    <string name="multistoreyed">Not Multi-Storeyed : </string>
+    <string name="noOvercrowding">No Overcrowding : </string>
+    <string name="labRoom">Lab/Art Room : </string>
+    <string name="kitchen">Kitchen : </string>
+    <string name="furniture">Furniture : </string>
+    <string name="lighting">Adequate Lighting : </string>
+    <string name="protectedWaterSupply">Protected Water Supply : </string>
+    <string name="electricity">Electricity : </string>
+    <string name="latrines">Latrines : </string>
+    <string name="separate">Separate for Boys and Girls : </string>
+
+
+    <string name="addressHint">Enter Address</string>
+    <string name="nameHint">Enter the Name of the School</string>
+    <string name="hmnameHint">Enter the Name of the Headmaster/Class Teacher</string>
+    <string name="emailHint">Enter Email Address</string>
+    <string name="title_activity_student_data_entry">Student Data Entry</string>
 
 
 </resources>

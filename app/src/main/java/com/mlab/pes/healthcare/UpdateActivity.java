@@ -30,6 +30,7 @@ public class UpdateActivity extends ActionBarActivity {
 
     SQLiteDatabase database;
 
+
     static String schoolId;
 
     TextView schoolID,schoolName;
@@ -94,18 +95,6 @@ public class UpdateActivity extends ActionBarActivity {
             public void afterTextChanged(Editable s) {
                 String school=schoolID.getText().toString();
                 if(school.length()==8){
-                    //change the parameters for checking
-                    boolean mandalCheck=Integer.parseInt(school.substring(0, 1))<=5 && Integer.parseInt(school.substring(0,1))>=0;
-                    boolean panchayatCheck=Integer.parseInt(school.substring(1,3))<=99 && Integer.parseInt(school.substring(1,3))>=0;
-                    boolean thirdCheck=Integer.parseInt(school.substring(3,5))<=99 && Integer.parseInt(school.substring(3,5))>=0;
-                    boolean schoolCheck=Integer.parseInt(school.substring(5))<=999 && Integer.parseInt(school.substring(5))>=0;
-
-                    if(mandalCheck && panchayatCheck && thirdCheck && schoolCheck){
-                        checkSchool= true;
-                    }
-                    else {
-                        checkSchool= false;
-                    }
                     schoolDetails.setVisibility(View.VISIBLE);
 
                     if(isSchoolID(school)) {

@@ -174,12 +174,110 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
                 return;
             }
             else {
-                Intent setIntent = new Intent(this, SocioDemographicDetails.class);
-                startActivity(setIntent);
+                try {
+
+                    int day = dob.getDayOfMonth();
+                    int month =dob.getMonth() + 1;
+                    int year = dob.getYear();
+
+                    String date = year + "-" + month + "-" + day;
+
+
+                    int g = 0, s = 0;
+                    switch (gen) {
+                        case "Male":
+                            g = 1;
+                            break;
+                        case "Female":
+                            g = 2;
+                            break;
+                        case "Other":
+                            g = 3;
+                            break;
+                        default:
+                            g = 0;
+                    }
+                    switch (std) {
+                        case "I":
+                            s = 1;
+                            break;
+                        case "II":
+                            s = 2;
+                            break;
+                        case "III":
+                            s = 3;
+                            break;
+                        case "IV":
+                            s = 4;
+                            break;
+                        case "V":
+                            s = 5;
+                            break;
+                        case "VI":
+                            s = 6;
+                            break;
+                        case "VII":
+                            s = 7;
+                            break;
+                        case "VIII":
+                            s = 8;
+                            break;
+                        case "IX":
+                            s = 9;
+                            break;
+                        case "X":
+                            s = 10;
+                            break;
+                    }
+
+                    //If the required fields are filled then the DB is updated
+                    //creating insertion query
+                    String insert_query = "'" + sid + "'," +
+                            "'" + sid.substring(0,8) + "'," +
+                            "'" + name.getText().toString().trim() + "'," +
+                            "'" + date + "'," +
+                            "'" + g + "'," +
+                            "'" + s + "'," +
+                            "'" + father_name.getText().toString().trim() + "'," +
+                            "'" + mother_name.getText().toString().trim() + "'," +
+                            "'" + guardian_name.getText().toString().trim() + "'," +
+                            "'" + Float.parseFloat(attendance.getText().toString().trim()) + "'," +
+                            "'" + acperf + "'," +
+                            "'" + aadhar.getText().toString().trim() + "'";
+
+                    //inserting into database
+                    database.execSQL("INSERT INTO child VALUES (" + insert_query + ")");
+
+                    insert_query = "'" + sid + "'," +
+                            "'" + name.getText().toString().trim() + "'," +
+                            "'" + gen + "',"+
+                            "'" + father_name.getText().toString().trim() + "'";
+                    database.execSQL("INSERT INTO child_references VALUES (" + insert_query + ")");
+
+                    //sending confirmation that data is inserted
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Success");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent();
+                        }
+                    });
+                    builder.setCancelable(false);
+                    builder.setMessage("Entry Successfully Added!");
+                    builder.show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        finally {
+            database.close();
         }
     }
 
@@ -287,7 +385,7 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
     }
 
     public void Intent() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, studentDataEntry.class);
         startActivity(intent);
     }
 
@@ -326,7 +424,7 @@ public class StudentDetails extends ActionBarActivity implements AdapterView.OnI
 
     //Method to change intent to root MainActivity
     public void backIntent() {
-        Intent back = new Intent(this, MainActivity.class);
+        Intent back = new Intent(this, studentDataEntry.class);
         startActivity(back);
     }
 

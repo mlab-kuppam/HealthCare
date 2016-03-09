@@ -87,11 +87,18 @@ public class syncing {
                 String output= get.execute(new LinkedHashMap[]{linkedHashMap,json_fin}).get();
 
                 if(output!=null) {
-                    if (output.contains("Sync Unsuccessful")) {
+                    if (output.contains("Sync Unsuccessful") || output.length()>60) {
                         MainActivity.showMessage("Failure", "Sync Unsuccessful", MainActivity.get());
                         return;
                     }
+                    if (output.startsWith("Sync Status")) {
+                        MainActivity.syncStatus.setText(output.substring(13,35).replaceFirst(":", "at"));
+                        SharedPreferences.Editor mEditor = MainActivity.mPrefs.edit();
+                        mEditor.putString("status", output.substring(13,35).replaceFirst(":", "at")).commit();
+                    }
+
                 }
+
 
                 String image_output="";
                 String q = "SELECT * FROM images";
@@ -99,6 +106,10 @@ public class syncing {
                 c.moveToFirst();
                 if (c != null && c.getCount() > 0 && !output.contains("Sync Unsuccessful")) {
                     do {
+
+                        connectorCheck connectorCheck=new connectorCheck();
+
+                        connectorCheck.execute();
                         LinkedHashMap image = new LinkedHashMap();
                         ArrayList arrayList=new ArrayList();
                         LinkedHashMap rows = new LinkedHashMap();
@@ -120,7 +131,7 @@ public class syncing {
 
 
 
-            if (!output.contains("Sync Unsuccessful") && !image_output.contains("Sync Unsuccessful")) {
+            if (!(output.contains("Sync Unsuccessful") ||output.length()<=50) && !image_output.contains("Sync Unsuccessful")) {
 /*
                 for (int i = 0; i < tablenames.size(); i++) {
                     if(!tablenames.get(i).equals("child_references") || !tablenames.get(i).equals("school_references"))
@@ -128,7 +139,7 @@ public class syncing {
                 }*/
                 MainActivity.showMessage("Success!", output.substring(35),MainActivity.get());
             } else {
-                MainActivity.showMessage("Failure!", output + ". Try again Later!",MainActivity.get());
+                MainActivity.showMessage("Failure!", "Sync Unsuccessful! Try again Later!",MainActivity.get());
             }
             } catch (InterruptedException e) {
                 System.out.println("Interupted Exception");
@@ -161,7 +172,8 @@ public class syncing {
                 String child_table_query=
                         "  child_id VARCHAR[10] ," +
                                 "  name VARCHAR[140] ," +
-                                "  gender VARCHAR[10]" ;
+                                "  gender VARCHAR[10] ,"+
+                                "  father_name VARCHAR[140]";
                 //creating image table
                 MainActivity.db.execSQL("CREATE TABLE IF NOT EXISTS child_references( " + child_table_query + " )");
 
@@ -182,7 +194,8 @@ public class syncing {
                         }
                         String insert_query = "'" + obj.get("child_id").toString() + "'," +
                                 "'" + obj.get("name").toString() + "'," +
-                                "'" + gender + "'";
+                                "'" + gender + "',"+
+                                "'"+ obj.get("father_name")+"'";
                         System.out.println(insert_query);
                         //inserting into database
                         MainActivity.db.execSQL("INSERT INTO child_references VALUES (" + insert_query + ")");

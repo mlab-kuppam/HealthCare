@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SocioDemographicDetails extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
 
@@ -31,6 +34,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
     int overcrowding=2,crossVentilation=2,adequateLighting=2,kitchenWithSink=2,
             hygenicSurroundings=2,sanitaryLatrine=2;
 
+    String sid;
 
 
     SQLiteDatabase database;
@@ -69,7 +73,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        ((TextView) findViewById(R.id.studentID)).setText(StudentDetails.sid);
+        studentidDialog();
 
         address=(EditText) findViewById(R.id.Address);
         landline=(EditText) findViewById(R.id.landline);
@@ -219,98 +223,10 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         }
     }
 
-
-
-    public void insert() {
-        try {
-
-            int day = StudentDetails.dob.getDayOfMonth();
-            int month = StudentDetails.dob.getMonth() + 1;
-            int year = StudentDetails.dob.getYear();
-
-            String date = year + "-" + month + "-" + day;
-
-            //Have to make if statement efficient attnd appearing on two places
-
-                int g = 0, s = 0;
-                switch (StudentDetails.gen) {
-                    case "Male":
-                        g = 1;
-                        break;
-                    case "Female":
-                        g = 2;
-                        break;
-                    case "Other":
-                        g = 3;
-                        break;
-                    default:
-                        g = 0;
-                }
-                switch (StudentDetails.std) {
-                    case "I":
-                        s = 1;
-                        break;
-                    case "II":
-                        s = 2;
-                        break;
-                    case "III":
-                        s = 3;
-                        break;
-                    case "IV":
-                        s = 4;
-                        break;
-                    case "V":
-                        s = 5;
-                        break;
-                    case "VI":
-                        s = 6;
-                        break;
-                    case "VII":
-                        s = 7;
-                        break;
-                    case "VIII":
-                        s = 8;
-                        break;
-                    case "IX":
-                        s = 9;
-                        break;
-                    case "X":
-                        s = 10;
-                        break;
-                }
-
-                //If the required fields are filled then the DB is updated
-                //creating insertion query
-                String insert_query = "'" + StudentDetails.sid + "'," +
-                        "'" + StudentDetails.sid.substring(0,8) + "'," +
-                        "'" + StudentDetails.name.getText().toString().trim() + "'," +
-                        "'" + date + "'," +
-                        "'" + g + "'," +
-                        "'" + s + "'," +
-                        "'" + StudentDetails.father_name.getText().toString().trim() + "'," +
-                        "'" + StudentDetails.mother_name.getText().toString().trim() + "'," +
-                        "'" + StudentDetails.guardian_name.getText().toString().trim() + "'," +
-                        "'" + Float.parseFloat(StudentDetails.attendance.getText().toString().trim()) + "'," +
-                        "'" + StudentDetails.acperf + "'," +
-                        "'" + StudentDetails.aadhar.getText().toString().trim() + "'";
-
-                //inserting into database
-                database.execSQL("INSERT INTO child VALUES (" + insert_query + ")");
-
-                insert_query = "'" + StudentDetails.sid + "'," +
-                    "'" + StudentDetails.name.getText().toString().trim() + "'," +
-                    "'" + StudentDetails.gen + "'";
-                database.execSQL("INSERT INTO child_references VALUES (" + insert_query + ")");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     //Adding details collected to SQLite
     public void ADD() {
 
 
-        //Have to make if statement efficient attnd appearing on two places
         if (address.getText().toString().trim().length() == 0 ) {
             showMessage("Error", "Please Enter Home Address");
             return;
@@ -390,7 +306,6 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
             //If the required fields are filled then the DB is updated
             //creating insertion query
 
-            insert();
 /*
             int no_rooms=0;
             int no_households=0;
@@ -402,7 +317,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
             }
 */
             try {
-                String insert_query = "'" + StudentDetails.sid + "'," +
+                String insert_query = "'" + sid + "'," +
                         "'" + address.getText().toString().trim() + "'," +
                         "'" + landline.getText().toString().trim() + "'," +
                         "'" + mobile.getText().toString().trim() + "'," +
@@ -453,11 +368,62 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
             }
             finally {
                 //closing database
-              // database.close();
+               database.close();
 
             }
 
         }
+    }
+
+    //Method to create studentId dialog box
+    public void studentidDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter Student ID");
+        // Get the layout inflater
+        builder.setCancelable(false);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.mydialog, null);
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(dialogView);
+        final EditText studentID = (EditText) dialogView.findViewById(R.id.studid);
+        //Validating Student ID
+        UpdateActivity.StudentIDValidation(dialogView);
+
+        //Add action buttons
+
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+
+                sid = studentID.getText().toString().toUpperCase();
+                //System.out.println(skin_sid);
+                if (!UpdateActivity.isStudentID(sid)) {
+                    showError();
+                    studentidDialog();
+                } else {
+                    dialog.dismiss();
+                    ((TextView) findViewById(R.id.studentID)).setText(sid);
+                    //Toast.makeText(getApplicationContext(), "Student ID: " + sid, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                Intent();
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void showError() {
+        Toast.makeText(this, "Enter a Valid Student ID", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -510,7 +476,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
     }
 
     public void Intent() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, studentDataEntry.class);
         startActivity(intent);
     }
 
@@ -561,7 +527,7 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
 
     //Method to change intent to root MainActivity
     public void backIntent() {
-        Intent back = new Intent(this, MainActivity.class);
+        Intent back = new Intent(this, studentDataEntry.class);
         startActivity(back);
     }
 

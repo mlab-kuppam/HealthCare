@@ -1495,6 +1495,127 @@
                             android:background="@drawable/deleteimage"
                             android:onClick="CANCEL"/>
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:layout_below="@id/layout5"
+                        android:id="@+id/layout7">
+
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text06"
+                            android:textSize="30dp"
+                            android:text="6"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="315dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text16"
+                            android:textSize="24dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="107dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text36"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text46"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <Button
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/del6"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/deleteimage"
+                            android:onClick="CANCEL"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:layout_below="@id/layout5"
+                        android:id="@+id/layout8">
+
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text07"
+                            android:textSize="30dp"
+                            android:text="7"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="315dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text17"
+                            android:textSize="24dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="107dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text37"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <View style="@style/Divider1"
+                              android:layout_marginTop="15dp"></View>
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text47"
+                            android:textSize="30dp"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <Button
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:id="@+id/del7"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/deleteimage"
+                            android:onClick="CANCEL"/>
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
 

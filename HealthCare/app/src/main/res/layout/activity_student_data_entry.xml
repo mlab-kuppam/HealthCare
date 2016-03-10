@@ -19,7 +19,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
-        android:drawableLeft="@drawable/ic_cloud_download_white_36dp"
+        android:drawableLeft="@drawable/ic_local_library_white_36dp"
         android:onClick="CHANGE"
         android:text="Add School Details"/>
     <Button

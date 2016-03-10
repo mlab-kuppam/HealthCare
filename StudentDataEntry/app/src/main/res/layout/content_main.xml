@@ -48,8 +48,8 @@
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:drawableLeft="@drawable/ic_cloud_download_white_36dp"
+        android:layout_marginTop="150dp"
+        android:drawableLeft="@drawable/ic_local_library_white_36dp"
         android:onClick="school"
         android:text="Add School Details"/>
     <Button

@@ -1,8 +1,10 @@
 package com.mlab.pes.healthcare;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
@@ -25,21 +27,43 @@ public class EyeActivity1 extends ActionBarActivity {
 	
 	 int distrt=10,nearrt=10,distlt=10,nearlt=10;
 
-    NumberPicker dist_right,dist_left,near_right,near_left;
+    NumberPicker dist_right,dist_left;
 
     int refractCheck=0;
 
     int dist=10,near=10;
     //strings to store the complete values of vision testing
-    public static String vt_d_r,vt_d_l,vt_n_r,vt_n_l;
+    public static String vt_d_r,vt_d_l;
     //string to store the compltete values of spherical refraction and correction
     public static String spherical_dist_right,spherical_dist_left,spherical_near_right,spherical_near_left;
 
     LinearLayout refract;
 
-    TextView eyeStdId,txt_Rt_Dis,txt_Lt_Dis,txt_Rt_Ne,txt_Lt_Ne;
+    TextView eyeStdId,txt_Rt_Dis,txt_Lt_Dis;
 
     String dist_refract,near_refract;
+
+
+    SQLiteDatabase database;
+
+    public String table_query=
+            "  child_id VARCHAR[11]," +
+                    "  vt_r_d VARCHAR[5]," +
+                    "  vt_l_d VARCHAR[5]," +
+                    "  vt_com VARCHAR[140]," +
+                    "  rc_r_s_d VARCHAR[5]," +
+                    "  rc_r_s_n VARCHAR[5]," +
+                    "  rc_r_c_d VARCHAR[5]," +
+                    "  rc_r_c_n VARCHAR[5]," +
+                    "  rc_r_a_d VARCHAR[5]," +
+                    "  rc_r_a_n VARCHAR[5]," +
+                    "  rc_l_s_d VARCHAR[5]," +
+                    "  rc_l_s_n VARCHAR[5]," +
+                    "  rc_l_c_d VARCHAR[5]," +
+                    "  rc_l_c_n VARCHAR[5]," +
+                    "  rc_l_a_d VARCHAR[5]," +
+                    "  rc_l_a_n VARCHAR[5]," +
+                    "  rc_com VARCHAR[140]";
 
     public static EditText Spherical_rt_dist,Spherical_lt_dist,Spherical_lt_near,Spherical_rt_near,Cylinder_rt_dist,Cylinder_lt_dist,Cylinder_rt_near,Cylinder_lt_near,Axis_rt_dist,Axis_lt_dist,
             Axis_rt_near,Axis_lt_near,upper,lower;
@@ -49,7 +73,7 @@ public class EyeActivity1 extends ActionBarActivity {
         return app;
     }
 
-    RelativeLayout numb_dist_right,numb_dist_left,numb_near_right,numb_near_left,six_dist_right,six_dist_left,six_near_right,six_near_left;
+    RelativeLayout numb_dist_right,numb_dist_left,six_dist_right,six_dist_left;
 
 
     @Override
@@ -69,16 +93,10 @@ public class EyeActivity1 extends ActionBarActivity {
 		
         dist_right = (NumberPicker) findViewById(R.id.numberPicker1);
         dist_left = (NumberPicker) findViewById(R.id.numberPicker2);
-        near_right = (NumberPicker) findViewById(R.id.numberPicker3);
-        near_left = (NumberPicker) findViewById(R.id.numberPicker4);
-        numb_dist_right = (RelativeLayout)findViewById(R.id.numb_dist_right);
+       numb_dist_right = (RelativeLayout)findViewById(R.id.numb_dist_right);
         numb_dist_left = (RelativeLayout)findViewById(R.id.numb_dist_left);
-        numb_near_right = (RelativeLayout)findViewById(R.id.numb_near_right);
-        numb_near_left = (RelativeLayout)findViewById(R.id.numb_near_left);
         six_dist_right = (RelativeLayout)findViewById(R.id.six_dist_right);
         six_dist_left = (RelativeLayout)findViewById(R.id.six_dist_left);
-        six_near_right = (RelativeLayout)findViewById(R.id.six_near_right);
-        six_near_left = (RelativeLayout)findViewById(R.id.six_near_left);
 
         Spherical_rt_dist = (EditText)findViewById(R.id.t1);
         Spherical_lt_dist = (EditText)findViewById(R.id.t4);
@@ -98,46 +116,30 @@ public class EyeActivity1 extends ActionBarActivity {
 
         txt_Rt_Dis = (TextView)findViewById(R.id.text_dist_right);
         txt_Lt_Dis = (TextView)findViewById(R.id.text_dist_left);
-        txt_Rt_Ne = (TextView)findViewById(R.id.text_near_right);
-        txt_Lt_Ne= (TextView)findViewById(R.id.text_near_left);
+
+
+        //opening db
+        database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
+        //creating table if doesn't exist
+        database.execSQL("CREATE TABLE IF NOT EXISTS eye1(" + table_query + ")");
+
 
         try {
-            String[] nums1 = new String[7];
-            int[] dist_left_fill = new int[]{6, 9, 12, 18, 24, 26, 60};
+            String[] nums1 = new String[8];
+            int[] dist_left_fill = new int[]{0,6, 9, 12, 18, 24, 36, 60};
             for (int i = 0; i < nums1.length; i++) {
                 nums1[i] = Integer.toString(dist_left_fill[i]);
             }
 
-            dist_right.setMaxValue(6);
+            dist_right.setMaxValue(7);
             dist_right.setMinValue(0);
             dist_right.setWrapSelectorWheel(true);
             dist_right.setDisplayedValues(nums1);
 
-            near_right.setMaxValue(6);
-            near_right.setMinValue(0);
-            near_right.setWrapSelectorWheel(true);
-            near_right.setDisplayedValues(nums1);
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "" + e, Toast.LENGTH_LONG).show();
-        }
-
-
-        try {
-            String[] nums2 = new String[7];
-            int[] near_left_fill = new int[]{5,6,8,12,18,24,36};
-            for (int i = 0; i < nums2.length; i++) {
-                nums2[i] = Integer.toString(near_left_fill[i]);
-            }
-
-            dist_left.setMaxValue(6);
+            dist_left.setMaxValue(7);
             dist_left.setMinValue(0);
             dist_left.setWrapSelectorWheel(true);
-            dist_left.setDisplayedValues(nums2);
-
-            near_left.setMaxValue(6);
-            near_left.setMinValue(0);
-            near_left.setWrapSelectorWheel(true);
-            near_left.setDisplayedValues(nums2);
+            dist_left.setDisplayedValues(nums1);
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "" + e, Toast.LENGTH_LONG).show();
         }
@@ -201,12 +203,6 @@ public class EyeActivity1 extends ActionBarActivity {
             case R.id.text_dist_left:numb_dist_left.setVisibility(View.VISIBLE);
                 six_dist_left.setVisibility(View.GONE);
                 break;
-            case R.id.text_near_right:numb_near_right.setVisibility(View.VISIBLE);
-                six_near_right.setVisibility(View.GONE);
-                break;
-            case R.id.text_near_left:numb_near_left.setVisibility(View.VISIBLE);
-                six_near_left.setVisibility(View.GONE);
-                break;
         }
     }
 
@@ -222,16 +218,6 @@ public class EyeActivity1 extends ActionBarActivity {
                 six_dist_left.setVisibility(View.VISIBLE);
                 layout_val(dist_left, txt_Lt_Dis);
                 numb_dist_left.setVisibility(View.GONE);
-                break;
-            case R.id.numberPicker3:
-                numb_near_right.setVisibility(View.GONE);
-                layout_val(near_right, txt_Rt_Ne);
-                six_near_right.setVisibility(View.VISIBLE);
-                break;
-            case R.id.numberPicker4:
-                numb_near_left.setVisibility(View.GONE);
-                layout_val(near_left, txt_Lt_Ne);
-                six_near_left.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -344,14 +330,64 @@ public class EyeActivity1 extends ActionBarActivity {
 
             vt_d_r = "6/" + txt_Rt_Dis.getText().toString();
             vt_d_l = "6/" + txt_Lt_Dis.getText().toString();
-            vt_n_r = "6/" + txt_Rt_Ne.getText().toString();
-            vt_n_l = "6/" + txt_Lt_Ne.getText().toString();
 
-            Intent intent = new Intent(this, EyeActivity2.class);
-            startActivity(intent);
+
+            try{
+                //creating insertion query
+                String insert_query = "'" +  eye_sid + "'," +
+                        "'" +  vt_d_r + "'," +
+                        "'" +  vt_d_l + "'," +
+                        "'" +  upper.getText().toString().trim() + "'," +
+                        "'" +  spherical_dist_right+ Spherical_rt_dist.getText().toString().trim() + "'," +
+                        "'" +  spherical_near_right+ Spherical_rt_near.getText().toString().trim() + "'," +
+                        "'" +  Cylinder_rt_dist.getText().toString().trim() + "'," +
+                        "'" +  Cylinder_rt_near.getText().toString().trim() + "'," +
+                        "'" +  Axis_rt_dist.getText().toString().trim() + "'," +
+                        "'" +  Axis_rt_near.getText().toString().trim() + "'," +
+                        "'" +  spherical_dist_left+ Spherical_lt_dist.getText().toString().trim() + "'," +
+                        "'" +  spherical_near_left+ Spherical_lt_near.getText().toString().trim() + "'," +
+                        "'" +  Cylinder_lt_dist.getText().toString().trim() + "'," +
+                        "'" +  Cylinder_lt_near.getText().toString().trim() + "'," +
+                        "'" +  Axis_lt_dist.getText().toString().trim() + "'," +
+                        "'" +  Axis_lt_near.getText().toString().trim() + "'," +
+                        "'" +  lower.getText().toString().trim()+ "'";
+                System.out.println("EYE " + insert_query);
+
+                //inserting into database
+                database.execSQL("INSERT INTO eye1 VALUES (" + insert_query + ")");
+
+                //sending confirmation that data is inserted
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Success");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getBack();
+                    }
+                });
+                builder.setCancelable(false);
+                builder.setMessage("Entry Successfully Added!");
+                builder.show();
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            finally {
+                database.close();
+
+            }
         }
     }
 
+
+
+    public void getBack(){
+
+        Intent intent = new Intent(this, UpdateActivity.class);
+        startActivity(intent);
+
+    }
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
@@ -474,8 +510,7 @@ public class EyeActivity1 extends ActionBarActivity {
         }
     }
 
-    public void Refract(View v)
-    {
+    public void Refract(View v) {
 
         if(refractCheck==0)
         {

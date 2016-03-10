@@ -49,17 +49,17 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
     RelativeLayout layout1;
     int index,valid=10;
 
-    LinearLayout layout2,layout3,layout4,layout5,layout6;
+    LinearLayout layout2,layout3,layout4,layout5,layout6,layout7,layout8;
     int i=-1,j=10,check=0;
 
     String treat_text;
     StringBuffer dos_text;
 
     EditText Text2,Text3,Text4;
-    TextView UnitText,no1,no2,no3,no4,no5;
+    TextView UnitText,no1,no2,no3,no4,no5,no6,no7;
     AutoCompleteTextView Text1;
     Button BTN1,BTN2;
-    TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20;
+    TextView text1,text2,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20,text21,text23,text24,text25,text27,text28;
 
     MultiSpinner multiSpinner;
 
@@ -155,6 +155,8 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
         layout4 = (LinearLayout) findViewById(R.id.layout4);
         layout5 = (LinearLayout) findViewById(R.id.layout5);
         layout6 = (LinearLayout) findViewById(R.id.layout6);
+        layout7 = (LinearLayout) findViewById(R.id.layout7);
+        layout8 = (LinearLayout) findViewById(R.id.layout8);
 
         text1 = (TextView)findViewById(R.id.text11);
         text3 = (TextView)findViewById(R.id.text31);
@@ -171,12 +173,20 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
         text17 = (TextView)findViewById(R.id.text15);
         text19 = (TextView)findViewById(R.id.text35);
         text20 = (TextView)findViewById(R.id.text45);
+        text21 = (TextView)findViewById(R.id.text16);
+        text23 = (TextView)findViewById(R.id.text36);
+        text24 = (TextView)findViewById(R.id.text46);
+        text25 = (TextView)findViewById(R.id.text17);
+        text27 = (TextView)findViewById(R.id.text37);
+        text28 = (TextView)findViewById(R.id.text47);
 
         no1 = (TextView)findViewById(R.id.text01);
         no2 = (TextView)findViewById(R.id.text02);
         no3 = (TextView)findViewById(R.id.text03);
         no4 = (TextView)findViewById(R.id.text04);
         no5 = (TextView)findViewById(R.id.text05);
+        no6 = (TextView)findViewById(R.id.text06);
+        no7 = (TextView)findViewById(R.id.text07);
 
         dos_text= new StringBuffer();
 
@@ -321,6 +331,7 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
 
     }
 
+
     public void validate(AutoCompleteTextView Text1, EditText Text2,EditText Text3,EditText Text4, TextView UnitText,Dialog dialog)
     {
 
@@ -363,6 +374,20 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
                     text20.setText(Text3.getText().toString());
                     j = 10;
                     break;
+                case 6:
+                    layout7.setVisibility(View.VISIBLE);
+                    text21.setText(Text1.getText().toString());
+                    text23.setText(Text2.getText().toString() + UnitText.getText());
+                    text24.setText(Text3.getText().toString());
+                    j = 10;
+                    break;
+                case 7:
+                    layout8.setVisibility(View.VISIBLE);
+                    text25.setText(Text1.getText().toString());
+                    text27.setText(Text2.getText().toString() + UnitText.getText());
+                    text28.setText(Text3.getText().toString());
+                    j = 10;
+                    break;
             }
         }
         else {
@@ -384,21 +409,30 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
                     text9.setText(Text1.getText().toString());
                     text11.setText(Text2.getText().toString() + UnitText.getText());
                     text12.setText(Text3.getText().toString());
-                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
                     break;
                 case 3:
                     layout5.setVisibility(View.VISIBLE);
                     text13.setText(Text1.getText().toString());
                     text15.setText(Text2.getText().toString() + UnitText.getText());
                     text16.setText(Text3.getText().toString());
-                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
                     break;
                 case 4:
                     layout6.setVisibility(View.VISIBLE);
                     text17.setText(Text1.getText().toString());
                     text19.setText(Text2.getText().toString() + UnitText.getText());
                     text20.setText(Text3.getText().toString());
-                    Toast.makeText(getApplicationContext(), "" + treat_text, Toast.LENGTH_LONG).show();
+                    break;
+                case 5:
+                    layout7.setVisibility(View.VISIBLE);
+                    text21.setText(Text1.getText().toString());
+                    text23.setText(Text2.getText().toString() + UnitText.getText());
+                    text24.setText(Text3.getText().toString());
+                    break;
+                case 6:
+                    layout8.setVisibility(View.VISIBLE);
+                    text25.setText(Text1.getText().toString());
+                    text27.setText(Text2.getText().toString() + UnitText.getText());
+                    text28.setText(Text3.getText().toString());
                     break;
             }
         }
@@ -407,9 +441,7 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
         dialog.dismiss();
 
     }
-
-    public void showMessage(String title,String message,Dialog dialog)
-    {
+    public void showMessage(String title,String message,Dialog dialog) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
         builder.setTitle(title);
@@ -424,8 +456,7 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
 
     }
 
-    public void CANCEL(View v)
-    {
+    public void CANCEL(View v) {
         switch (v.getId())
         {
             case R.id.del1:
@@ -453,6 +484,16 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
                 text17.setText("");
                 text19.setText("");
                 text20.setText("");j=5;break;
+            case R.id.del6:
+                layout7.setVisibility(View.GONE);
+                text21.setText("");
+                text23.setText("");
+                text24.setText("");j=6;break;
+            case R.id.del7:
+                layout8.setVisibility(View.GONE);
+                text25.setText("");
+                text27.setText("");
+                text28.setText("");j=7;break;
         }
     }
 

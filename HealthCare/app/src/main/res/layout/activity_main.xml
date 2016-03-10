@@ -47,7 +47,7 @@
         android:layout_marginTop="200dp"
         android:drawableLeft="@drawable/ic_school_white_36dp"
         android:onClick="ADD"
-        android:text="Add Student Details"/>
+        android:text="Student Data Entry"/>
 
     <Button
         style="@style/buttonstyle"

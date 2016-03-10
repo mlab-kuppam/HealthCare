@@ -91,11 +91,22 @@
         android:text="EYE"/>
 
     <Button
-        android:id="@+id/ent"
+        android:id="@+id/eyevisionTesting"
         style="@style/buttonstyle"
         android:layout_width="220dp"
         android:layout_height="80dp"
         android:layout_below="@+id/eye"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:drawableLeft="@drawable/ic_visibility_white_36dp"
+        android:onClick="CHANGE"
+        android:text="EYE - Vision Testing"/>
+    <Button
+        android:id="@+id/ent"
+        style="@style/buttonstyle"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/eyevisionTesting"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:drawableLeft="@drawable/ic_hearing_white_36dp"

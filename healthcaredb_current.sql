@@ -110,9 +110,7 @@ CREATE TABLE `ent` (
 CREATE TABLE `eye1` (
   `child_id` varchar(11) NOT NULL,
   `vt_r_d` varchar(5) NOT NULL,
-  `vt_r_n` varchar(5) NOT NULL,
   `vt_l_d` varchar(5) NOT NULL,
-  `vt_l_n` varchar(5) NOT NULL,
   `vt_com` varchar(140) DEFAULT NULL,
   `rc_r_s_d` varchar(5) NOT NULL,
   `rc_r_s_n` varchar(5) NOT NULL,

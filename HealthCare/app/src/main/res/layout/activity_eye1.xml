@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.amogh.geospatialmapping.eye"
+    tools:context="com.mlab.pes.healthcare.EyeActivity1"
     android:background="#fff">
 
     <RelativeLayout
@@ -29,7 +29,6 @@
 
     </RelativeLayout>
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
@@ -52,6 +51,15 @@
                     android:layout_marginLeft="10dp"
                     android:text="Vision Testing"
                     style="@style/h1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="635dp"
+                    android:layout_marginTop="15dp"
+                    android:text="0 - NA"
+                    android:textSize="20dp" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -222,7 +230,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <View style="@style/Separatoreye" />
+                <View style="@style/Separatoreye1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -233,122 +241,32 @@
                     style="@style/h1"/>
 
                 <View
-                    style="@style/Separatoreye"
+                    style="@style/Separatoreye1"
                     android:layout_marginLeft="160dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="185dp"
-                    android:layout_marginTop="15dp"
-                    android:text="6"
-                    android:textSize="60dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="255dp"
                     android:layout_marginTop="15dp"
-                    android:text="/"
-                    android:textSize="60dp" />
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/numb_near_right"
-                    android:visibility="gone">
-
-                    <NumberPicker
-                        android:id="@+id/numberPicker3"
-                        android:layout_width="110dp"
-                        android:layout_height="140dp"
-                        android:layout_marginLeft="305dp"
-                        android:clickable="true"
-                        android:onClick="Num_Click"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/six_near_right"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="335dp"
-                        android:layout_marginTop="15dp"
-                        android:id="@+id/text_near_right"
-                        android:text="6"
-                        android:clickable="true"
-                        android:onClick="Switch_layout"
-                        android:textSize="60dp"
-                        style="@style/h4"
-                        android:autoText="true" />
-
-                </RelativeLayout>
+                    android:text="Normal"
+                    android:textSize="30dp" />
 
 
                 <View
-                    style="@style/Separatoreye"
+                    style="@style/Separatoreye1"
                     android:layout_marginLeft="440dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="475dp"
+                    android:layout_marginLeft="535dp"
                     android:layout_marginTop="15dp"
-                    android:text="6"
-                    android:textSize="60dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="550dp"
-                    android:layout_marginTop="15dp"
-                    android:text="/"
-                    android:textSize="60dp" />
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/numb_near_left"
-                    android:visibility="gone">
-
-                    <NumberPicker
-                        android:id="@+id/numberPicker4"
-                        android:layout_width="110dp"
-                        android:layout_height="140dp"
-                        android:layout_marginLeft="605dp"
-                        android:clickable="true"
-                        android:onClick="Num_Click"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/six_near_left"
-                    android:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="635dp"
-                        android:layout_marginTop="15dp"
-                        android:id="@+id/text_near_left"
-                        android:text="6"
-                        android:clickable="true"
-                        android:onClick="Switch_layout"
-                        android:textSize="60dp"
-                        style="@style/h4"
-                        android:autoText="true" />
-
-                </RelativeLayout>
+                    android:text="Normal"
+                    android:textSize="30dp" />
 
                 <View
-                    style="@style/Separatoreye"
+                    style="@style/Separatoreye1"
                     android:layout_marginLeft="734dp" />
 
             </RelativeLayout>
@@ -379,468 +297,468 @@
                 android:orientation="vertical"
                 android:visibility="gone"
                 android:id="@+id/refract_correct">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="40dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/refract"
-                    style="@style/h1"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="270dp"
-                    android:text="@string/right"
-                    style="@style/h1"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="565dp"
-                    android:text="@string/left"
-                    style="@style/h1"/>
-
-            </RelativeLayout>
-
-            <View
-                style="@style/Divider"
-                android:layout_marginTop="16dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View style="@style/nexto" />
-
-                <View
-                    style="@style/nexto"
-                    android:layout_marginLeft="120dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="130dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/spherical"
-                    style="@style/h1" />
-
-                <View
-                    style="@style/nexto"
-                    android:layout_marginLeft="230dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="245dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/cylinder"
-                    style="@style/h1" />
-
-                <View
-                    style="@style/nexto"
-                    android:layout_marginLeft="340dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="360dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/axis"
-                    style="@style/h1" />
-
-                <View
-                    style="@style/nexto"
-                    android:layout_marginLeft="425dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="435dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/spherical"
-                    style="@style/h1" />
-
-                <View
-                    style="@style/nexto"
-                    android:layout_marginLeft="540dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="555dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/cylinder"
-                    style="@style/h1" />
-
-                <View
-                    style="@style/nexto"
-                    android:layout_marginLeft="650dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="670dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/axis"
-                    style="@style/h1" />
-
-                <View
-                    style="@style/nexto"
-                    android:layout_marginLeft="733dp" />
-
-
-            </RelativeLayout>
-
-            <View style="@style/Divider" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View style="@style/Separator" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Distance"
-                    style="@style/h1" />
-
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="120dp" />
-
-                <RadioGroup
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="120dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="40dp">
 
-                    <RadioButton
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:id="@+id/dist_right_plus"
-                        android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:text="+"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/refract"
+                        style="@style/h1"/>
+                </RelativeLayout>
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:id="@+id/dist_right_minus"
-                        android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:layout_marginLeft="15dp"
-                        android:textStyle="bold"
-                        android:text="-"/>
-
-                </RadioGroup>
-
-                <EditText
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="135dp"
-                    android:longClickable="false"
-                    android:id="@+id/t1"
-                    android:layout_marginTop="60dp"
-                    android:maxLength="5"
-                    android:inputType="numberDecimal"/>
-
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="230dp" />
-
-                <EditText
-                    android:layout_width="80dp"
-                    android:longClickable="false"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="245dp"
-                    android:id="@+id/t2"
-                    android:layout_marginTop="60dp"
-                    android:maxLength="5"
-                    android:inputType="numberDecimal"/>
-
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="340dp" />
-
-                <EditText
-                    android:layout_width="60dp"
-                    android:longClickable="false"
-                    android:layout_height="wrap_content"
-                    android:maxLength="3"
-                    android:layout_marginLeft="352dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t3"
-                    android:inputType="numberDecimal"/>
-
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="425dp" />
-
-                <RadioGroup
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="430dp"
-                    android:orientation="horizontal"
                     android:layout_marginTop="20dp">
 
-                    <RadioButton
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:id="@+id/dist_left_plus"
-                        android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:text="+"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="270dp"
+                        android:text="@string/right"
+                        style="@style/h1"/>
 
-                    <RadioButton
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:id="@+id/dist_left_minus"
-                        android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:layout_marginLeft="15dp"
-                        android:textStyle="bold"
-                        android:text="-"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="565dp"
+                        android:text="@string/left"
+                        style="@style/h1"/>
 
-                </RadioGroup>
-
-
-                <EditText
-                    android:layout_width="80dp"
-                    android:longClickable="false"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="445dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t4"
-                    android:maxLength="5"
-                    android:inputType="numberDecimal"/>
+                </RelativeLayout>
 
                 <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="540dp" />
+                    style="@style/Divider"
+                    android:layout_marginTop="16dp" />
 
-                <EditText
-                    android:layout_width="80dp"
-                    android:longClickable="false"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="555dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t5"
-                    android:maxLength="5"
-                    android:inputType="numberDecimal"/>
-
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="650dp" />
-
-                <EditText
-                    android:layout_width="60dp"
-                    android:longClickable="false"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="662dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t6"
-                    android:maxLength="3"
-                    android:inputType="numberDecimal"/>
-
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="733dp" />
-
-            </RelativeLayout>
-
-            <View style="@style/Divider" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View style="@style/Separator" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Near"
-                    style="@style/h1" />
-
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="120dp" />
-
-                <RadioGroup
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="120dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_height="wrap_content">
 
-                    <RadioButton
+                    <View style="@style/nexto" />
+
+                    <View
+                        style="@style/nexto"
+                        android:layout_marginLeft="120dp" />
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:id="@+id/near_right_plus"
-                        android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:text="+"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="125dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/spherical"
+                        style="@style/h1" />
 
-                    <RadioButton
+                    <View
+                        style="@style/nexto"
+                        android:layout_marginLeft="230dp" />
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:id="@+id/near_right_minus"
-                        android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:layout_marginLeft="15dp"
-                        android:textStyle="bold"
-                        android:text="-"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="245dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/cylinder"
+                        style="@style/h1" />
 
-                </RadioGroup>
+                    <View
+                        style="@style/nexto"
+                        android:layout_marginLeft="340dp" />
 
-                <EditText
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:longClickable="false"
-                    android:layout_marginLeft="135dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t7"
-                    android:maxLength="5"
-                    android:inputType="numberDecimal"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="360dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/axis"
+                        style="@style/h1" />
 
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="230dp" />
+                    <View
+                        style="@style/nexto"
+                        android:layout_marginLeft="425dp" />
 
-                <EditText
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:longClickable="false"
-                    android:layout_marginLeft="245dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t8"
-                    android:maxLength="5"
-                    android:inputType="numberDecimal"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="435dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/spherical"
+                        style="@style/h1" />
 
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="340dp" />
+                    <View
+                        style="@style/nexto"
+                        android:layout_marginLeft="540dp" />
 
-                <EditText
-                    android:layout_width="60dp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="555dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/cylinder"
+                        style="@style/h1" />
 
-                    android:longClickable="false"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="352dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t9"
-                    android:maxLength="3"
-                    android:inputType="numberDecimal"/>
+                    <View
+                        style="@style/nexto"
+                        android:layout_marginLeft="650dp" />
 
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="425dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="670dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/axis"
+                        style="@style/h1" />
 
-                <RadioGroup
+                    <View
+                        style="@style/nexto"
+                        android:layout_marginLeft="733dp" />
+
+
+                </RelativeLayout>
+
+                <View style="@style/Divider" />
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="430dp"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_height="wrap_content">
 
-                    <RadioButton
+                    <View style="@style/Separator" />
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:id="@+id/near_left_plus"
-                        android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:text="+"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Distance"
+                        style="@style/h1" />
 
-                    <RadioButton
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="120dp" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="120dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:id="@+id/dist_right_plus"
+                            android:onClick="onRadioselect"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:text="+"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:id="@+id/dist_right_minus"
+                            android:onClick="onRadioselect"
+                            android:textSize="20dp"
+                            android:layout_marginLeft="15dp"
+                            android:textStyle="bold"
+                            android:text="-"/>
+
+                    </RadioGroup>
+
+                    <EditText
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="135dp"
+                        android:longClickable="false"
+                        android:id="@+id/t1"
+                        android:layout_marginTop="60dp"
+                        android:maxLength="5"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="230dp" />
+
+                    <EditText
+                        android:layout_width="80dp"
+                        android:longClickable="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="245dp"
+                        android:id="@+id/t2"
+                        android:layout_marginTop="60dp"
+                        android:maxLength="5"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="340dp" />
+
+                    <EditText
+                        android:layout_width="60dp"
+                        android:longClickable="false"
+                        android:layout_height="wrap_content"
+                        android:maxLength="3"
+                        android:layout_marginLeft="352dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t3"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="425dp" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="430dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:id="@+id/dist_left_plus"
+                            android:onClick="onRadioselect"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:text="+"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:id="@+id/dist_left_minus"
+                            android:onClick="onRadioselect"
+                            android:textSize="20dp"
+                            android:layout_marginLeft="15dp"
+                            android:textStyle="bold"
+                            android:text="-"/>
+
+                    </RadioGroup>
+
+
+                    <EditText
+                        android:layout_width="80dp"
+                        android:longClickable="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="445dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t4"
+                        android:maxLength="5"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="540dp" />
+
+                    <EditText
+                        android:layout_width="80dp"
+                        android:longClickable="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="555dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t5"
+                        android:maxLength="5"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="650dp" />
+
+                    <EditText
+                        android:layout_width="60dp"
+                        android:longClickable="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="662dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t6"
+                        android:maxLength="3"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="733dp" />
+
+                </RelativeLayout>
+
+                <View style="@style/Divider" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View style="@style/Separator" />
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:id="@+id/near_left_minus"
-                        android:onClick="onRadioselect"
-                        android:textSize="20dp"
-                        android:layout_marginLeft="15dp"
-                        android:textStyle="bold"
-                        android:text="-"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Near"
+                        style="@style/h1" />
 
-                </RadioGroup>
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="120dp" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="120dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:id="@+id/near_right_plus"
+                            android:onClick="onRadioselect"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:text="+"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:id="@+id/near_right_minus"
+                            android:onClick="onRadioselect"
+                            android:textSize="20dp"
+                            android:layout_marginLeft="15dp"
+                            android:textStyle="bold"
+                            android:text="-"/>
+
+                    </RadioGroup>
+
+                    <EditText
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:longClickable="false"
+                        android:layout_marginLeft="135dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t7"
+                        android:maxLength="5"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="230dp" />
+
+                    <EditText
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:longClickable="false"
+                        android:layout_marginLeft="245dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t8"
+                        android:maxLength="5"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="340dp" />
+
+                    <EditText
+                        android:layout_width="60dp"
+
+                        android:longClickable="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="352dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t9"
+                        android:maxLength="3"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="425dp" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="430dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:id="@+id/near_left_plus"
+                            android:onClick="onRadioselect"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:text="+"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:id="@+id/near_left_minus"
+                            android:onClick="onRadioselect"
+                            android:textSize="20dp"
+                            android:layout_marginLeft="15dp"
+                            android:textStyle="bold"
+                            android:text="-"/>
+
+                    </RadioGroup>
+
+                    <EditText
+                        android:longClickable="false"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="445dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t10"
+                        android:maxLength="5"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="540dp" />
+
+                    <EditText
+
+                        android:longClickable="false"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="555dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t11"
+                        android:maxLength="5"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="650dp" />
+
+                    <EditText
+
+                        android:longClickable="false"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="662dp"
+                        android:layout_marginTop="60dp"
+                        android:id="@+id/t12"
+                        android:maxLength="3"
+                        android:inputType="numberDecimal"/>
+
+                    <View
+                        style="@style/Separator"
+                        android:layout_marginLeft="733dp" />
+
+                </RelativeLayout>
+
+                <View style="@style/Divider" />
 
                 <EditText
                     android:longClickable="false"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="445dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t10"
-                    android:maxLength="5"
-                    android:inputType="numberDecimal"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/lowertext"
+                    android:hint="@string/eyehint"
+                    android:layout_marginTop="10dp"/>
 
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="540dp" />
-
-                <EditText
-
-                    android:longClickable="false"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="555dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t11"
-                    android:maxLength="5"
-                    android:inputType="numberDecimal"/>
-
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="650dp" />
-
-                <EditText
-
-                    android:longClickable="false"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="662dp"
-                    android:layout_marginTop="60dp"
-                    android:id="@+id/t12"
-                    android:maxLength="3"
-                    android:inputType="numberDecimal"/>
-
-                <View
-                    style="@style/Separator"
-                    android:layout_marginLeft="733dp" />
-
-            </RelativeLayout>
-
-            <View style="@style/Divider" />
-
-            <EditText
-                android:longClickable="false"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/lowertext"
-                android:hint="@string/eyehint"
-                android:layout_marginTop="10dp"/>
-
-        </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

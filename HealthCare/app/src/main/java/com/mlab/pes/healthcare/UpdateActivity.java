@@ -183,7 +183,7 @@ public class UpdateActivity extends ActionBarActivity {
     public void CHANGE(View view) {
         switch (view.getId()) {
             case R.id.eye:
-                Intent j = new Intent(this, EyeActivity1.class);
+                Intent j = new Intent(this, EyeActivity2.class);
                 startActivity(j);
                 break;
             case R.id.ent:
@@ -197,6 +197,10 @@ public class UpdateActivity extends ActionBarActivity {
             case R.id.health:
                 Intent o = new Intent(this, HealthActivity1.class);
                 startActivity(o);
+                break;
+            case R.id.eyevisionTesting:
+                Intent m = new Intent(this, EyeActivity1.class);
+                startActivity(m);
                 break;
         }
     }

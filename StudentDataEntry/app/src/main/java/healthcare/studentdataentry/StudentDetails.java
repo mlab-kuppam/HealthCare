@@ -50,7 +50,7 @@ public class StudentDetails extends AppCompatActivity implements AdapterView.OnI
                     "  guardian_name VARCHAR[140] ," +
                     "  attendance FLOAT ," +
                     "  academic VARCHAR[2],"+
-                    "  aadhar INTEGER[12]";
+                    "  aadhar VARCHAR[12]";
 
 
     public static StudentDetails get(){
@@ -142,7 +142,6 @@ public class StudentDetails extends AppCompatActivity implements AdapterView.OnI
 
     //Adding details collected to SQLite
     public void ADD() {
-        try {
             if (name.getText().toString().trim().length() == 0) {
                 showMessage("Error", "Please Enter Student Name");
                 return;
@@ -155,10 +154,10 @@ public class StudentDetails extends AppCompatActivity implements AdapterView.OnI
             } else if (father_name.getText().toString().trim().length() == 0 && guardian_name.getText().toString().trim().length() == 0 && mother_name.getText().toString().trim().length() == 0) {
                 showMessage("Error", "Please Enter Father/Mother/Guardian name");
                 return;
-            } else if (Integer.parseInt(attendance.getText().toString().trim()) > 100 || Integer.parseInt(attendance.getText().toString().trim()) < 0) {
+            } else if (attendance.getText().toString().length()<1 || (Float.parseFloat(attendance.getText().toString().trim()) > 100 || Float.parseFloat(attendance.getText().toString().trim()) < 0)) {
                 showMessage("Error", "Please Enter a Valid Percentage for Attendance");
                 return;
-            }else if (academicPerformance.equals("Select..")) {
+            }else if (acperf.equals("Select..")) {
                 showMessage("Error", "Please Select the Standard");
                 return;
             } else if (!(aadhar.getText().toString().trim().length() == 0 || aadhar.getText().toString().trim().length() == 12)) {
@@ -221,6 +220,8 @@ public class StudentDetails extends AppCompatActivity implements AdapterView.OnI
                             break;
                     }
 
+
+                try {
                     //If the required fields are filled then the DB is updated
                     //creating insertion query
                     String insert_query = "'" + sid + "'," +
@@ -258,14 +259,15 @@ public class StudentDetails extends AppCompatActivity implements AdapterView.OnI
                 builder.setCancelable(false);
                 builder.setMessage("Entry Successfully Added!");
                 builder.show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                finally {
+                    database.close();
+                }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        finally {
-            database.close();
-        }
     }
 
     @Override

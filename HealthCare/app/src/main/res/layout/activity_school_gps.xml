@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.mlab.pes.healthcare.SchoolDetails">
+
+    <LinearLayout
+        style="@style/horizontal"
+        android:id="@+id/stud"
+        android:background="@drawable/shape"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/schoolId"
+                android:layout_weight=".4"
+                style="@style/studentID"
+                android:id="@+id/siddisplay"
+                android:layout_gravity="center_vertical"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/studentID"
+                android:id="@+id/gps_std_id"
+                android:layout_weight=".4"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_vertical"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        style="@style/container"
+        android:layout_below="@id/stud"
+        android:id="@+id/locationBox"
+        android:layout_centerHorizontal="true">
+        <LinearLayout
+            style="@style/innershape"
+            android:layout_marginTop="10dp">
+            <TextView
+                style="@style/head"
+                android:text="Latitude : "
+                android:paddingLeft="15dp"/>
+            <EditText
+                style="@style/head"
+                android:layout_weight=".6"
+                android:id="@+id/latitude"
+                android:hint="Latitude"/>
+        </LinearLayout>
+        <LinearLayout
+            style="@style/innershape"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <TextView
+                style="@style/head"
+                android:text="Longitude : "
+                android:paddingLeft="15dp"/>
+            <EditText
+                style="@style/head"
+                android:layout_weight=".6"
+                android:id="@+id/longitude"
+                android:hint="Longitude"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/getCoordinates"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/locationBox"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/ic_my_location_white_36dp"
+        android:onClick="startSearching"
+        android:text="Get GPS Co-ordinates"/>
+
+</RelativeLayout>

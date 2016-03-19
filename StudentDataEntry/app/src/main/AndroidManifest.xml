@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -43,10 +45,22 @@
         <activity
             android:name=".SchoolDetails"
             android:configChanges="keyboardHidden|screenSize|orientation"
+            android:label="@string/title_activity_school_details"
             android:parentActivityName=".StudentDetails"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_school_details"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".getGPSLocation"
+            android:label="@string/title_activity_get_gpslocation"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".schoolGPS"
+            android:label="@string/title_activity_get_gpslocation"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

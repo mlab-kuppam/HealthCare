@@ -56,11 +56,11 @@ public class ENTActivity extends ActionBarActivity {
 
     RadioGroup wax_right,wax_left,tonsilitis,rhinitis,operated;
 
-    EditText Otisleft,Otisright,Asomleft,Asomright,Csomleft,Csomright,Impairleft,Impairright,Epi,
+    EditText Advice,Otisleft,Otisright,Asomleft,Asomright,Csomleft,Csomright,Impairleft,Impairright,Epi,
             Adeno,Phary,Aller,Speech,Others,urti,impression;
 
     int oti_left=10,oti_right=10,asom_left=10,asom_right=10,csom_left=10,csom_right=10,impact_left=10,impact_right=10,impair_left=10,impair_right=10,
-            epi=10,adeno=10,phary=10,aller=10,speech=10,referal=10,URTI=10,cleft=10,operatedOn=10,Impactleft=2,Impactright=2,Tonsilitis=2,Rhinitis=2;
+            epi=10,adeno=10,phary=10,aller=10,speech=10,adviceOthers=10,referal=10,URTI=10,cleft=10,operatedOn=10,Impactleft=2,Impactright=2,Tonsilitis=2,Rhinitis=2;
 
     SQLiteDatabase database;
 
@@ -144,6 +144,8 @@ public class ENTActivity extends ActionBarActivity {
         Others = (EditText)findViewById(R.id.add_text);
         urti = (EditText)findViewById(R.id.urti_text);
 
+        Advice = (EditText) findViewById(R.id.advice_others);
+
 
         Impression="";
         multiSpinner = (MultiSpinner) findViewById(R.id.multi_spinner);
@@ -157,6 +159,17 @@ public class ENTActivity extends ActionBarActivity {
                             Impression=""+i;
                         else
                             Impression=Impression+","+i;
+
+                        if(i==selected.length-1){
+                            Advice.setVisibility(View.VISIBLE);
+                            adviceOthers=1;
+                        }
+                    }
+                    else{
+                        if(i==selected.length-1){
+                            Advice.setVisibility(View.GONE);
+                            adviceOthers=0;
+                        }
                     }
                 }
             }
@@ -261,21 +274,21 @@ public class ENTActivity extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                for (int p = 0; p < 18; p++) {
+                for (int p = 0; p < 22; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("");
                         break;
                     }
 
                 }
-                for (int p = 19; p < 22; p++) {
+                for (int p = 23; p < 26; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("ml");
                         break;
                     }
 
                 }
-                for (int p = 23; p < 37; p++) {
+                for (int p = 27; p < 41; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("\u00b0");
                         break;
@@ -283,7 +296,7 @@ public class ENTActivity extends ActionBarActivity {
 
                 }
 
-                for (int p = 38; p < 45; p++) {
+                for (int p = 42; p < 49; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("");
                         break;
@@ -845,16 +858,24 @@ public class ENTActivity extends ActionBarActivity {
                 showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Cleft Lip/ Cleft Palate - Operated");
                 return;
             }
-            else if (referal == 10 ) {
-                showMessage("Warning", "Please select an option for Referal");
-                return;
-            }
             else if(Impression.equals("")){
                 showMessage("Warning", "Please select an option for Advice");
                 return;
             }
+            else if(adviceOthers==1 && Advice.getText().toString().trim().length()==0){
+                showMessage("Warning", "Please enter Advice");
+                return;
+            }
+            else if (referal == 10 ) {
+                showMessage("Warning", "Please select an option for Referal");
+                return;
+            }
             else
             {
+
+                if(adviceOthers==1)
+                    Impression=Impression+":"+Advice.getText().toString().trim();
+
                 try {
                 //creating insertion query
                 String insert_query = "'" + sid + "'," +

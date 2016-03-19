@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -32,7 +35,9 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
             educationFather,occupationFather,educationMother,occupationMother,totalIncome;
 
     int overcrowding=2,crossVentilation=2,adequateLighting=2,kitchenWithSink=2,
-            hygenicSurroundings=2,sanitaryLatrine=2;
+            hygenicSurroundings=2,sanitaryLatrine=2,availaingNearBy=2;
+
+    private LocationManager locationManager;
 
     String sid;
 
@@ -41,31 +46,32 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
 
     String table_query=
             "  child_id VARCHAR[11] ," +
-                    "  address VARCHAR[140] ," +
-                    "  landline FLOAT[11] ," +
-                    "  mobile FLOAT[10] ," +
-                    "  type INTEGER[1] ," +
-                    "  number_members INTEGER[2] ," +
-                    "  hf_title VARCHAR[20] ," +
-                    "  hf_aadhar INTEGER[12] ," +
-                    "  hf_education VARCHAR[140] ," +
-                    "  hf_occupation VARCHAR[140] ," +
-                    "  f_education VARCHAR[140] ," +
-                    "  f_occupation VARCHAR[140] ," +
-                    "  m_education VARCHAR[140] ," +
-                    "  m_occupation VARCHAR[140] ," +
-                    "  total_income INTEGER[8] ," +
-                    "  socio_economic INTEGER[1] ," +
-                    "  hs_type INTEGER[1] ," +
-                    "  hs_flooring INTEGER[1] ," +
-                    "  r_overcrowding INTEGER[1] ," +
-                    "  cross_ventilation INTEGER[1] ," +
-                    "  lighting INTEGER[1] ," +
-                    "  kitchen INTEGER[1] ," +
-                    "  water INTEGER[1] ," +
-                    "  hygenic_surroundings INTEGER[1] ," +
-                    "  sanitary_latrine INTEGER[1] ," +
-                    "  garbage_disposal INTEGER[1] " ;
+                "  address VARCHAR[140] ," +
+                "  landline VARCHAR[11] ," +
+                "  mobile VARCHAR[11] ," +
+                "  type INTEGER[1] ," +
+                "  number_members INTEGER[2] ," +
+                "  hf_title VARCHAR[20] ," +
+                "  hf_aadhar VARCHAR[12] ," +
+                "  hf_education VARCHAR[140] ," +
+                "  hf_occupation VARCHAR[140] ," +
+                "  f_education VARCHAR[140] ," +
+                "  f_occupation VARCHAR[140] ," +
+                "  m_education VARCHAR[140] ," +
+                "  m_occupation VARCHAR[140] ," +
+                "  total_income INTEGER[8] ," +
+                "  socio_economic INTEGER[1] ," +
+                "  hs_type INTEGER[1] ," +
+                "  hs_flooring INTEGER[1] ," +
+                "  r_overcrowding INTEGER[1] ," +
+                "  cross_ventilation INTEGER[1] ," +
+                "  lighting INTEGER[1] ," +
+                "  kitchen INTEGER[1] ," +
+                "  water INTEGER[1] ," +
+                "  hygenic_surroundings INTEGER[1] ," +
+                "  sanitary_latrine INTEGER[1] ," +
+                "  garbage_disposal INTEGER[1], " +
+                "  availing_health INTEGER[1] ";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,7 +140,10 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
         //creating table if doesn't exist
         database.execSQL("CREATE TABLE IF NOT EXISTS socio_demographic(" + table_query + ")");
+
+
     }
+
 
     //Method to get selected item in the dropdown
     @Override
@@ -220,6 +229,12 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                 break;
             //both parents
 
+            case R.id.healthCareYes:
+                availaingNearBy=1;
+                break;
+            case R.id.healthCareNo:
+                availaingNearBy=0;
+                break;
         }
     }
 
@@ -301,6 +316,9 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
         }else if (GarbageDisposal == -1) {
             showMessage("Error", "Please Select an Option for Garbage Disposal in Housing Standards");
             return;
+        }else if (availaingNearBy == 2) {
+            showMessage("Error", "Please Select an Option for Availing Near-By Health Care Services in Housing Standards");
+            return;
         }
         else {
             //If the required fields are filled then the DB is updated
@@ -342,7 +360,8 @@ public class SocioDemographicDetails extends ActionBarActivity implements Adapte
                         "'" + WaterSupply + "'," +
                         "'" + hygenicSurroundings + "'," +
                         "'" + sanitaryLatrine + "'," +
-                        "'" + GarbageDisposal + "'";
+                        "'" + GarbageDisposal + "',"+
+                        "'" + availaingNearBy + "'";
 
                 //inserting into database
                 database.execSQL("INSERT INTO socio_demographic VALUES (" + insert_query + ")");

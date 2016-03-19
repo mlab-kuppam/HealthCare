@@ -53,21 +53,6 @@
                     android:layout_marginTop="10dp">
                     <TextView
                         style="@style/head"
-                        android:text="@string/frequencyFood"
-                        android:paddingLeft="15dp"/>
-                    <EditText
-                        android:longClickable="false"
-                        style="@style/entryBox"
-                        android:inputType="number"
-                        android:maxLength="1"
-                        android:id="@+id/frequencyFood"
-                        android:hint="@string/frequencyHint"/>
-                </LinearLayout>
-                <LinearLayout
-                    style="@style/innershape"
-                    android:layout_marginTop="10dp">
-                    <TextView
-                        style="@style/head"
                         android:text="@string/frequencyOfSkipping"
                         android:paddingLeft="15dp"/>
                     <EditText

@@ -311,5 +311,7 @@
     <string name="nameHint">Enter the Name of the School</string>
     <string name="hmnameHint">Enter the Name of the Headmaster/Class Teacher</string>
     <string name="emailHint">Enter Email Address</string>
+    <string name="title_activity_get_gpslocation">Get GPS Location</string>
+    <string name="title_activity_school_gps">schoolGPS</string>
 </resources>
 

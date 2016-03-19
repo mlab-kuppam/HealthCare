@@ -26,7 +26,7 @@
     <string name="dental">Dental Caries -</string>
     <string name="fluoro">Fluorosis -</string>
     <string name="gingi">Gingivitis -</string>
-    <string name="oralulcer">Oral Ulcers &amp; Periapical \nAbscess -</string>
+    <string name="oralulcer">Oral Ulcers -</string>
     <string name="development">Developmental Abnormality :</string>
     <string name="add">Others :</string>
     <string name="Sys">Systemic Examination :</string>
@@ -152,6 +152,7 @@
         <item>Use mild soaps like Dove</item>
         <item>Use of Mosquito nets</item>
         <item>Wear full sleeves while sleeping</item>
+        <item>Others</item>
     </string-array>
     <string name="standard">Standard : </string>
     <string-array name="standard_array">
@@ -281,6 +282,7 @@
     <string name="bronchial">Bronchial Asthma : </string>
     <string name="sounds">Adventitious Sounds : </string>
     <string-array name="bronchinal_array">
+        <item>Select..</item>
         <item>None</item>
         <item>Oral</item>
         <item>Inhaler Medications</item>
@@ -318,12 +320,16 @@
         <item>Levo cetrizine 5 mg</item>
         <item>Montek LC</item>
         <item>Sinarest</item>
-        <item>Hatric â€“ 3</item>
+        <item>Hatric - 3</item>
         <item>Rantac 150 mg</item>
+        <item>Albendazole</item>
+        <item>Limcee</item>
+        <item>Hemobest</item>
+        <item>Becosule</item>
         <item>Cough syrup (Salbutamol/terbutaline +Bromhexine and/or Dextromethophan combination)</item>
         <item>Syrup Asthalin</item>
         <item>Syrup Ascoril</item>
-        <item>Syrup Abroxyl â€“ S</item>
+        <item>Syrup Abroxyl - S</item>
         <item>Ciprofloxacin Eye/Ear drops</item>
         <item>Paradichloro Benzene Ear drops (DEWAX or equivalent)</item>
         <item>Chloromycetin applicaps</item>
@@ -404,6 +410,9 @@
     <string name="hmnameHint">Enter the Name of the Headmaster/Class Teacher</string>
     <string name="emailHint">Enter Email Address</string>
     <string name="title_activity_student_data_entry">Student Data Entry</string>
+    <string name="title_activity_get_gpslocation">Get GPS Location</string>
 
+    <string name="gps">Get GPS Location</string>
+    <string name="title_activity_school_gps">schoolGPS</string>
 
 </resources>

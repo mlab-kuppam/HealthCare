@@ -68,9 +68,9 @@
                     style="@style/biig1" />
 
                 <RadioGroup
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
@@ -82,7 +82,7 @@
                         android:layout_marginLeft="40dp"
                         android:layout_weight="1"
                         android:onClick="eyeClick"
-                        android:text="Yes"
+                        android:text="Normal"
                         style="@style/biig"/>
 
                     <RadioButton
@@ -91,7 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="No"
+                        android:text="Abnormal"
                         style="@style/biig" />
 
                 </RadioGroup>
@@ -121,9 +121,9 @@
                     style="@style/biig1" />
 
                 <RadioGroup
-                    android:layout_width="250dp"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="420dp"
+                    android:layout_marginLeft="390dp"
                     android:layout_marginTop="50dp"
                     android:onClick="eyeClick"
                     android:orientation="horizontal">
@@ -135,7 +135,7 @@
                         android:layout_marginLeft="40dp"
                         android:layout_weight="1"
                         android:onClick="eyeClick"
-                        android:text="Yes"
+                        android:text="Normal"
                         style="@style/biig" />
 
                     <RadioButton
@@ -144,7 +144,7 @@
                         android:onClick="eyeClick"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="No"
+                        android:text="Abnormal"
                         style="@style/biig" />
 
                 </RadioGroup>
@@ -1021,6 +1021,16 @@
                         style="@style/biig" />
 
                 </RadioGroup>
+                <EditText
+                    android:id="@+id/fund_left_text"
+                    android:longClickable="false"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
+                    android:visibility="gone" />
 
                 <View
                     style="@style/Delimiter"
@@ -1065,6 +1075,17 @@
                         style="@style/biig" />
 
                 </RadioGroup>
+
+                <EditText
+                    android:id="@+id/fund_right_text"
+                    android:layout_width="350dp"
+                    android:longClickable="false"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="375dp"
+                    android:layout_marginTop="80dp"
+                    style="@style/biig"
+                    android:hint="@string/hint"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -1115,6 +1136,16 @@
                                                       android:layout_marginTop="20dp"
                                                       android:layout_marginLeft="300dp" />
 
+                <EditText
+                    android:layout_width="match_parent"
+                    android:longClickable="false"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="300dp"
+                    android:id="@+id/advice_others"
+                    android:layout_marginTop="60dp"
+                    android:visibility="gone"
+                    android:hint="@string/hint"
+                    style="@style/biig"/>
 
             </RelativeLayout>
             <RelativeLayout

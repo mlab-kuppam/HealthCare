@@ -3,6 +3,7 @@ package healthcare.studentdataentry;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     static SQLiteDatabase db;
     private static MainActivity app;
     static SharedPreferences mPrefs;
-    static String url="http://192.168.100.171/";
+    static String url="";
     public static boolean connected=false;
     public static boolean threadStarted=false;
     public static ProgressDialog dialog;
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         //creating image table
         db.execSQL("CREATE TABLE IF NOT EXISTS school_references( " + school_table_query + " )");
 
+        /*
         String insert_query = "'" + "11111111" + "'," +
                 "'" + "School Name" + "'";
         System.out.println(insert_query);
@@ -96,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 "'" + "Father Name" + "'";
         System.out.println(insert_query);
         //inserting into database
-        MainActivity.db.execSQL("INSERT INTO child_references VALUES (" + insert_query_child + ")");
+        MainActivity.db.execSQL("INSERT INTO child_references VALUES (" + insert_query_child + ")");*/
 
 
         syncStatus=(TextView) findViewById(R.id.syncStatus);
@@ -137,10 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     connectorCheck connectorCheck=new connectorCheck();
 
                     connectorCheck.execute();
-                    int timeout=5000;
-                    if(connected){
-                        timeout=0;
-                    }
+                    int timeout=10500;
                     mHandler.postDelayed(new Runnable() {
                         public void run() {
                             if (connected) {
@@ -154,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
                     }, timeout);
                 }
             });
+
+            connected=false;
         } else {
             showMessage("Check Internet Connection", "Try again", get());
         }
@@ -166,7 +168,65 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
     }
+    public void gps(View view) {
+        selectDialog();
+    }
 
+    int selectedVal=0;
+    public void onRadioClick(View view){
+        switch (view.getId()){
+            case R.id.schoolRadio:
+                selectedVal=1;
+                break;
+            case R.id.childRadio:
+                selectedVal=2;
+                break;
+        }
+    }
+
+    //Method to create studentId dialog box
+    public void selectDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select");
+        // Get the layout inflater
+        builder.setCancelable(false);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.select_gps_dialog, null);
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(dialogView);
+        //Add action buttons
+
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                switch (selectedVal){
+                    case 1:dialog.dismiss();
+                        Intent school=new Intent(MainActivity.this,schoolGPS.class);
+                        startActivity(school);
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                        break;
+                    case 2:dialog.dismiss();
+                        Intent child=new Intent(MainActivity.this,getGPSLocation.class);
+                        startActivity(child);
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                        break;
+                    default:
+                        Toast.makeText(getApplicationContext(), "Please Select an Option ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     //To Sync the details to the Cloud(Pushing Data to the Cloud)
     public void SYNC(View view) {
         boolean check = INTERNER_CHECK();
@@ -182,9 +242,6 @@ public class MainActivity extends AppCompatActivity {
 
                         connectorCheck.execute();
                     int timeout=5000;
-                    if(connected){
-                        timeout=0;
-                    }
                     mHandler.postDelayed(new Runnable() {
                         public void run() {
                             if (connected) {
@@ -198,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+            connected=false;
         } else {
             showMessage("Check Internet Connection", "Try again", get());
         }

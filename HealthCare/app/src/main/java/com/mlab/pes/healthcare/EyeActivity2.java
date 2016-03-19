@@ -32,13 +32,13 @@ public class EyeActivity2 extends ActionBarActivity {
 
     static String eye_sid;
 
-    EditText Cvis_left,Cvis_right,Bitot_left,Bitot_right,Allerconj_left,Allerconj_right,Night,Congp_left,Congp_right,Congd_left,Congd_right,Amb_left,Amb_right,
+    EditText Advice,Cvis_left,Cvis_right,Bitot_left,Bitot_right,Allerconj_left,Allerconj_right,Night,Congp_left,Congp_right,Congd_left,Congd_right,Amb_left,Amb_right,
             Nys_left,Nys_right,Fund_left,Fund_right,Other,impression;
 			
 	TextView eye1StdId;
 
     int cvis_left=10,cvis_right=10,bitot_left=10,bitot_right=10,allconj_left=10,allconj_right=10,night=10,congp_left=10,congp_right=10,congd_left=10,congd_right=10,
-            amb_left=10,amb_right=10,nys_left=10,nys_right=10,fund_left=10,fund_right=10,referal=10;
+            amb_left=10,amb_right=10,nys_left=10,nys_right=10,fund_left=10,fund_right=10,adviceOthers=10,referal=10;
 
     RelativeLayout layout1;
     int index,valid=10;
@@ -92,7 +92,9 @@ public class EyeActivity2 extends ActionBarActivity {
             "  ny_l INTEGER[1]," +
             "  ny_l_com VARCHAR[140]," +
             "  fe_r INTEGER[1]," +
+                    "  fe_r_com VARCHAR[140]," +
             "  fe_l INTEGER[1]," +
+                    "  fe_l_com VARCHAR[140]," +
             "  others VARCHAR[140],"+
             "  impression VARCHAR[140],"+
             "  treatment VARCHAR[1000],"+
@@ -125,6 +127,8 @@ public class EyeActivity2 extends ActionBarActivity {
         Amb_right = (EditText) findViewById(R.id.amb_right_text);
         Nys_left = (EditText) findViewById(R.id.nys_left_text);
         Nys_right = (EditText) findViewById(R.id.nys_right_text);
+        Fund_left = (EditText) findViewById(R.id.fund_left_text);
+        Fund_right = (EditText) findViewById(R.id.fund_right_text);
         Other = (EditText) findViewById(R.id.add_text);
 
 
@@ -140,6 +144,17 @@ public class EyeActivity2 extends ActionBarActivity {
                             Impression=""+i;
                         else
                             Impression=Impression+","+i;
+
+                        if(i==selected.length-1){
+                            Advice.setVisibility(View.VISIBLE);
+                            adviceOthers=1;
+                        }
+                    }
+                    else{
+                        if(i==selected.length-1){
+                            Advice.setVisibility(View.GONE);
+                            adviceOthers=0;
+                        }
                     }
                 }
             }
@@ -255,21 +270,21 @@ public class EyeActivity2 extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                for (int p = 0; p < 18; p++) {
+                for (int p = 0; p < 22; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("");
                         break;
                     }
 
                 }
-                for (int p = 19; p < 22; p++) {
+                for (int p = 23; p < 26; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("ml");
                         break;
                     }
 
                 }
-                for (int p = 23; p < 37; p++) {
+                for (int p = 27; p < 41; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("\u00b0");
                         break;
@@ -277,7 +292,7 @@ public class EyeActivity2 extends ActionBarActivity {
 
                 }
 
-                for (int p = 38; p < 45; p++) {
+                for (int p = 42; p < 49; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("");
                         break;
@@ -686,14 +701,18 @@ public class EyeActivity2 extends ActionBarActivity {
 
             case R.id.fund_left_yes:
                 fund_left=1;
+                Fund_left.setVisibility(view.GONE);
                 break;
             case R.id.fund_right_yes:
+                Fund_right.setVisibility(view.GONE);
                 fund_right=1;
                 break;
             case R.id.fund_left_no:
+                Fund_left.setVisibility(view.VISIBLE);
                 fund_left=0;
                 break;
             case R.id.fund_right_no:
+                Fund_right.setVisibility(view.VISIBLE);
                 fund_right=0;
                 break;
 
@@ -827,17 +846,23 @@ public class EyeActivity2 extends ActionBarActivity {
             showMessage("Warning", "Please select an option for Fundus Examination - Right Eye");
             return;
         }
-        else if (referal == 10 ) {
-            showMessage("Warning", "Please select an option for Referal");
-            return;
-        }
         else if(Impression.equals("")){
             showMessage("Warning", "Please select an option for Advice");
+            return;
+        }
+        else if(adviceOthers==1 && Advice.getText().toString().trim().length()==0){
+            showMessage("Warning", "Please enter Advice");
+            return;
+        }
+        else if (referal == 10 ) {
+            showMessage("Warning", "Please select an option for Referal");
             return;
         }
         else {
 
 
+            if(adviceOthers==1)
+                Impression=Impression+":"+Advice.getText().toString().trim();
             try{
             //creating insertion query
             String insert_query = "'" + eye_sid + "'," +
@@ -872,7 +897,9 @@ public class EyeActivity2 extends ActionBarActivity {
                     "'" + nys_left + "'," +
                     "'" + Nys_left.getText().toString().trim() + "'," +
                     "'" + fund_right + "'," +
+                    "'" + Fund_right.getText().toString().trim() + "'," +
                     "'" + fund_left + "'," +
+                    "'" + Fund_left.getText().toString().trim() + "'," +
                     "'" + Other.getText().toString() + "',"+
                     "'" + Impression + "',"+
                     "'" + treatment + "',"+

@@ -30,7 +30,7 @@ import java.io.File;
 
 public class HealthActivity2 extends ActionBarActivity {
 
-    EditText vit_b_com,vit_c_com,vit_others,gs_others,gsdeform,uti_com,siez_com,muc_others,worm_infest,Acute
+    EditText Advice,vit_b_com,vit_c_com,vit_others,gs_others,gsdeform,uti_com,siez_com,muc_others,worm_infest,Acute
             ,gastro_other,nerve_other,behav_other,Other,MSDeform,ADHD,Bedwetting,impression;
 
     int ac=10,wo=10,msdef=10,se=10,ad=10,uti=10,bed=10,gsdef=10,vitc=10,vitb=10,oth=10,ho=10,referal=10,treatment=10;
@@ -46,7 +46,7 @@ public class HealthActivity2 extends ActionBarActivity {
     //String worm_pass,pruritis_ani,pain_abd,skin_les,past_history,antiepi_drug,dribling,inc_freq,burn_mict,phim,undestes,hypo,congher,bleed,pete,angular,geotong;
     //Amogh! Wouldn't it be better if we stored the value as 1 when the check box is checked rather than storing the string
     int worm_pass=0,pruritis_ani=0,pain_abd=0,skin_les=0,past_history=0,antiepi_drug=0,dribling=0,inc_freq=0,burn_mict=0,phim=0,
-            undestes=0,hypo=0,congher=0,bleed=0,pete=0,angular=0,geotong=0,bowlegs=0,knockedKnees=0,injuryMal=0;
+            undestes=0,hypo=0,congher=0,bleed=0,pete=0,angular=0,geotong=0,adviceOthers=10,bowlegs=0,knockedKnees=0,injuryMal=0;
 
     RelativeLayout layout1;
     int index,valid=10;
@@ -98,12 +98,6 @@ public class HealthActivity2 extends ActionBarActivity {
             "  gus_uti_com VARCHAR[140]," +
             "  gus_bed INTEGER[1]," +
             "  gus_bed_com VARCHAR[140]," +
-            "  gus_def INTEGER[1]," +
-            "  gus_def_ch INTEGER[1] ," +
-            "  gus_def_ut INTEGER[1] ," +
-            "  gus_def_hy INTEGER[1] ," +
-            "  gus_def_ph INTEGER[1] ," +
-            "  gus_def_com VARCHAR[140]," +
             "  gus_others VARCHAR[140]," +
             "  vt_c INTEGER[1]," +
             "  vt_c_bg INTEGER[1] ," +
@@ -135,7 +129,6 @@ public class HealthActivity2 extends ActionBarActivity {
         vit_c_com=(EditText)findViewById(R.id.vitc_text);
         vit_b_com=(EditText)findViewById(R.id.vitb_text);
         gs_others=(EditText)findViewById(R.id.gs_text);
-        gsdeform=(EditText)findViewById(R.id.gsdeform_text);
         uti_com=(EditText)findViewById(R.id.uti_text);
         muc_others=(EditText)findViewById(R.id.musculo_text);
         worm_infest=(EditText)findViewById(R.id.worm_text);
@@ -161,6 +154,17 @@ public class HealthActivity2 extends ActionBarActivity {
                             Impression=""+i;
                         else
                             Impression=Impression+","+i;
+
+                        if(i==selected.length-1){
+                            Advice.setVisibility(View.VISIBLE);
+                            adviceOthers=1;
+                        }
+                    }
+                    else{
+                        if(i==selected.length-1){
+                            Advice.setVisibility(View.GONE);
+                            adviceOthers=0;
+                        }
                     }
                 }
             }
@@ -211,7 +215,6 @@ public class HealthActivity2 extends ActionBarActivity {
 
         Worm = (RelativeLayout)findViewById(R.id.worm);
         UTI = (RelativeLayout)findViewById(R.id.uti);
-        GSDeform = (RelativeLayout)findViewById(R.id.GSdeform);
         VitC = (RelativeLayout)findViewById(R.id.vitc);
         VitB = (RelativeLayout)findViewById(R.id.vitb);
         deformities=(RelativeLayout)findViewById(R.id.deformitiesMus);
@@ -224,10 +227,6 @@ public class HealthActivity2 extends ActionBarActivity {
         Drib = (CheckBox)findViewById(R.id.drib);
         Freq = (CheckBox)findViewById(R.id.freq);
         Burn = (CheckBox)findViewById(R.id.burn);
-        Phim = (CheckBox)findViewById(R.id.phimo);
-        Undestes = (CheckBox)findViewById(R.id.undes_testes);
-        Hypo = (CheckBox)findViewById(R.id.hypo);
-        Cong_her = (CheckBox)findViewById(R.id.cong_hernia);
 
         //opening db
         database = openOrCreateDatabase("healthcare", Context.MODE_PRIVATE,null);
@@ -298,21 +297,21 @@ public class HealthActivity2 extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                for (int p = 0; p < 18; p++) {
+                for (int p = 0; p < 22; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("");
                         break;
                     }
 
                 }
-                for (int p = 19; p < 22; p++) {
+                for (int p = 23; p < 26; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("ml");
                         break;
                     }
 
                 }
-                for (int p = 23; p < 37; p++) {
+                for (int p = 27; p < 41; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("\u00b0");
                         break;
@@ -320,7 +319,7 @@ public class HealthActivity2 extends ActionBarActivity {
 
                 }
 
-                for (int p = 38; p < 45; p++) {
+                for (int p = 42; p < 49; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("");
                         break;
@@ -501,7 +500,6 @@ public class HealthActivity2 extends ActionBarActivity {
             }
         });
         builder.show();
-
     }
 
     public void CANCEL(View v) {
@@ -589,10 +587,6 @@ public class HealthActivity2 extends ActionBarActivity {
             case R.id.bed_no: Bedwetting.setVisibility(v.GONE);bed=0;
                 break;
 
-            case R.id.gsdeform_yes: GSDeform.setVisibility(v.VISIBLE);gsdef=1;
-                break;
-            case R.id.gsdeform_no: GSDeform.setVisibility(v.GONE);gsdef=0;
-                break;
 
             case R.id.vitc_yes: VitC.setVisibility(v.VISIBLE);vitc=1;
                 break;
@@ -644,7 +638,7 @@ public class HealthActivity2 extends ActionBarActivity {
             case R.id.burn:// burn_mict=checkboxnames[8];
                 burn_mict=1;
                 break;
-
+/*
             case R.id.phimo:// phim=checkboxnames[9];
                 phim=1;
                 break;
@@ -657,7 +651,7 @@ public class HealthActivity2 extends ActionBarActivity {
             case R.id.cong_hernia: //congher=checkboxnames[12];
                 congher=1;
                 break;
-
+*/
             case R.id.bleed_gums: //bleed=checkboxnames[13];
                 bleed=1;
                 break;
@@ -746,10 +740,6 @@ public class HealthActivity2 extends ActionBarActivity {
             showMessage("Warning", "Please select an option for Genitourinary System - Bedwetting");
             return;
         }
-        else if (gsdef == 10 ) {
-            showMessage("Warning", "Please select an option for Genitourinary System - Deformities");
-            return;
-        }
         else if (vitc == 10 ) {
             showMessage("Warning", "Please select an option for Vitamin Deficiency - Vitamin C Deficiency");
             return;
@@ -758,16 +748,22 @@ public class HealthActivity2 extends ActionBarActivity {
             showMessage("Warning", "Please select an option for Vitamin Deficiency - Vitamin B Complex Deficiency");
             return;
         }
-        else if (referal == 10 ) {
-            showMessage("Warning", "Please select an option for Referal");
-            return;
-        }
         else if(Impression.equals("")){
             showMessage("Warning", "Please select an option for Advice");
             return;
         }
+        else if(adviceOthers==1 && Advice.getText().toString().trim().length()==0){
+            showMessage("Warning", "Please enter Advice");
+            return;
+        }
+        else if (referal == 10 ) {
+            showMessage("Warning", "Please select an option for Referal");
+            return;
+        }
         else {
 
+            if(adviceOthers==1)
+                Impression=Impression+":"+Advice.getText().toString().trim();
             try{
             String insert_query = "'" + HealthActivity1.health_sid + "'," +
                     "'" + ac + "'," +
@@ -798,12 +794,6 @@ public class HealthActivity2 extends ActionBarActivity {
                     "'" + uti_com.getText().toString().trim() + "'," +
                     "'" + bed + "'," +
                     "'" + Bedwetting.getText().toString().trim() + "'," +
-                    "'" + gsdef + "'," +
-                    "'" + congher + "'," +
-                    "'" + undestes + "'," +
-                    "'" + hypo + "'," +
-                    "'" + phim + "'," +
-                    "'" + gsdeform.getText().toString().trim() + "'," +
                     "'" + gs_others.getText().toString().trim() + "'," +
                     "'" + vitc + "'," +
                     "'" + bleed + "'," +

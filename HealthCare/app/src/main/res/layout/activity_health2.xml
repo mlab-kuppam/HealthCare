@@ -728,7 +728,7 @@ android:layout_below="@id/stud">
 
     </RelativeLayout>
 
-    <RelativeLayout
+<!--    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/layoutshape">
@@ -820,7 +820,7 @@ android:layout_below="@id/stud">
             android:hint="@string/hint"
             android:layout_marginTop="90dp"/>
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -1084,6 +1084,17 @@ android:layout_below="@id/stud">
                                               android:layout_marginTop="20dp"
                                               android:layout_marginLeft="300dp" />
 
+
+        <EditText
+            android:layout_width="match_parent"
+            android:longClickable="false"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:id="@+id/advice_others"
+            android:layout_marginTop="60dp"
+            android:visibility="gone"
+            android:hint="@string/hint"
+            style="@style/biig"/>
 
     </RelativeLayout>
     <RelativeLayout

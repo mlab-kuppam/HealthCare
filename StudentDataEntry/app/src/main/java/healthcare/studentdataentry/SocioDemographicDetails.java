@@ -33,7 +33,7 @@ public class SocioDemographicDetails extends AppCompatActivity implements Adapte
             educationFather,occupationFather,educationMother,occupationMother,totalIncome,frequency;
 
     int overcrowding=2,crossVentilation=2,adequateLighting=2,kitchenWithSink=2,
-            hygenicSurroundings=2,sanitaryLatrine=2,bothParents=2;
+            hygenicSurroundings=2,sanitaryLatrine=2,availaingNearBy=2;
 
 
     String sid;
@@ -43,12 +43,12 @@ public class SocioDemographicDetails extends AppCompatActivity implements Adapte
     String table_query=
             "  child_id VARCHAR[11] ," +
                     "  address VARCHAR[140] ," +
-                    "  landline FLOAT[11] ," +
-                    "  mobile FLOAT[10] ," +
+                    "  landline VARCHAR[11] ," +
+                    "  mobile VARCHAR[11] ," +
                     "  type INTEGER[1] ," +
                     "  number_members INTEGER[2] ," +
                     "  hf_title VARCHAR[20] ," +
-                    "  hf_aadhar INTEGER[12] ," +
+                    "  hf_aadhar VARCHAR[12] ," +
                     "  hf_education VARCHAR[140] ," +
                     "  hf_occupation VARCHAR[140] ," +
                     "  f_education VARCHAR[140] ," +
@@ -66,7 +66,8 @@ public class SocioDemographicDetails extends AppCompatActivity implements Adapte
                     "  water INTEGER[1] ," +
                     "  hygenic_surroundings INTEGER[1] ," +
                     "  sanitary_latrine INTEGER[1] ," +
-                    "  garbage_disposal INTEGER[1] ";
+                    "  garbage_disposal INTEGER[1], " +
+                    "  availing_health INTEGER[1] ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,7 +223,13 @@ public class SocioDemographicDetails extends AppCompatActivity implements Adapte
             case R.id.sanitaryLatrinesNo :
                 sanitaryLatrine=0;
                 break;
-        }
+
+            case R.id.healthCareYes:
+                availaingNearBy=1;
+                break;
+            case R.id.healthCareNo:
+                availaingNearBy=0;
+                break;        }
     }
 
     //Method to create studentId dialog box
@@ -356,6 +363,9 @@ public class SocioDemographicDetails extends AppCompatActivity implements Adapte
         }else if (GarbageDisposal == -1) {
             showMessage("Error", "Please Select an Option for Garbage Disposal in Housing Standards");
             return;
+        }else if (availaingNearBy == 2) {
+            showMessage("Error", "Please Select an Option for Availing Near-By Health Care Services in Housing Standards");
+            return;
         }
         else {
             //If the required fields are filled then the DB is updated
@@ -396,7 +406,8 @@ public class SocioDemographicDetails extends AppCompatActivity implements Adapte
                         "'" + WaterSupply + "'," +
                         "'" + hygenicSurroundings + "'," +
                         "'" + sanitaryLatrine + "'," +
-                        "'" + GarbageDisposal + "'" ;
+                        "'" + GarbageDisposal + "',"+
+                        "'" + availaingNearBy + "'";
 
                 //inserting into database
                 database.execSQL("INSERT INTO socio_demographic VALUES (" + insert_query + ")");

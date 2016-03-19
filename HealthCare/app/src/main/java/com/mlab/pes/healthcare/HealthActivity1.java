@@ -59,7 +59,6 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
     //creating query for declaration of tables
     public String table_query=
             "  child_id VARCHAR[11]," +
-            "  frequency INTEGER[1]," +
             "  frequencyFood INTEGER[1]," +
             "  over_night_food INTEGER[1]," +
             "  both_parents INTEGER[1]," +
@@ -149,7 +148,6 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
         crowdingT=(EditText) findViewById(R.id.crowding_text);
         chronicT = (EditText) findViewById(R.id.chronic_text);
         soundsT = (EditText) findViewById(R.id.sounds_text);
-        frequencyFood = (EditText) findViewById(R.id.frequencyFood);
 
         bmi=(TextView) findViewById(R.id.bmi);
         whratio=(TextView) findViewById(R.id.whratio);
@@ -168,7 +166,7 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
         Anaemia_drop = (Spinner) findViewById(R.id.anaemia_drop);
         overNight = (Spinner) findViewById(R.id.overNightFood);
 
-        String[] symp = new String[]{"No Anaemia","Mild", "Moderate", "Severe"};
+        String[] symp = new String[]{"Select..","No Anaemia","Mild", "Moderate", "Severe"};
         String[] dental = {"Pre-Shedding mobility","Trauma of tooth","Spacing/Crowding","Developmental Abnormailty"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, symp);
         Anaemia_drop.setAdapter(adapter);
@@ -474,9 +472,6 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
             }else if (OverNight == -1) {
                 showMessage("Error", "Please Select an Option for Children Having Over-Night Food in the mornings in Dietary Pattern");
                 return;
-            }else if (frequencyFood.getText().toString().trim().length()==0) {
-                showMessage("Error", "Please Enter Frequency of Food Intake/Day");
-                return;
             }else if (bothParents == 2) {
                 showMessage("Error", "Please Select an Option for Both Parents Working in Dietary Pattern");
                 return;
@@ -528,84 +523,69 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
             else if ( check ==1 && san == 10) {
                 showMessage("Warning", "Please select an option for Personal Hygiene - Age of Menarche - Sanitary Napkin");
                 return;
+            }else if (Anaemia_drop.getSelectedItemPosition() == 0) {
+                showMessage("Warning", "Please select an option for Clinical Anaemia");
+                return;
             }
             else if (dent == 10) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Dental Caries");
+                showMessage("Warning", "Please select an option for Oral Examination - Dental Caries");
                 return;
             }
             else if (flu == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Fluorosis");
+                showMessage("Warning", "Please select an option for Oral Examination - Fluorosis");
                 return;
             }
             else if (ging == 10) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Gingivitis");
+                showMessage("Warning", "Please select an option for Oral Examination - Gingivitis");
                 return;
             }
             else if ( ulc == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Oral Ulcers & Periapical Abscess");
+                showMessage("Warning", "Please select an option for Oral Examination - Oral Ulcers");
                 return;
             }
             else if (trauma == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Trauma of Tooth");
+                showMessage("Warning", "Please select an option for Oral Examination - Trauma of Tooth");
                 return;
             }
             else if (spacing == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Oral Examination - Spacing");
+                showMessage("Warning", "Please select an option for Oral Examination - Spacing");
                 return;
             }
             else if (crowding == 10 ) {
-                showMessage("Warning","Please select an option for Personal Hygiene - Oral Examination - Crowding");
+                showMessage("Warning","Please select an option for Oral Examination - Crowding");
                 return;
             }
             else if (oral_referal == 10 ) {
-                showMessage("Warning","Please select an option for Personal Hygiene - Oral Examination - Referal");
+                showMessage("Warning","Please select an option for Oral Examination - Referal");
                 return;
             }
             else if (chronic == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Chronic Cough");
+                showMessage("Warning", "Please select an option for Respiratory System - Chronic Cough");
                 return;
             }
             else if (bronchial == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Bronchial Asthma");
+                showMessage("Warning", "Please select an option for Respiratory System - Bronchial Asthma");
                 return;
             }
             else if (bronchial == 1 && bronchialAst==-1 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Bronchial Asthma - Medication");
+                showMessage("Warning", "Please select an option for Respiratory System - Bronchial Asthma - Medication");
                 return;
             }
             else if (sounds == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Respiratory System - Adventitious Sounds");
+                showMessage("Warning", "Please select an option for Respiratory System - Adventitious Sounds");
                 return;
             }
             else if (heart == 10 ) {
-                showMessage("Warning", "Please select an option for Personal Hygiene - Cardio-Vascular System - Abnormal Heart Sounds");
+                showMessage("Warning", "Please select an option for Cardio-Vascular System - Abnormal Heart Sounds");
                 return;
             }
             else {
-
-                    switch (Anaemia_drop.getSelectedItemPosition()) {
-                        case 0:
-                            anaemia = 1;
-                            break;
-                        case 1:
-                            anaemia = 2;
-                            break;
-                        case 2:
-                            anaemia = 3;
-                            break;
-                        case 3:
-                            anaemia = 4;
-                            break;
-
-                        default:
-                            anaemia = 0;
-                    }
+                anaemia=Anaemia_drop.getSelectedItemPosition();
 
 
                     try {
                     String insert_query = "'" + health_sid + "'," +
-                            "'" + frequency.getText().toString().trim() + "',"+
-                            "'" + frequencyFood.getText().toString().trim() + "',"+
+                            "'"+ frequency.getText().toString().trim()+"',"+
                             "'" + OverNight + "',"+
                             "'" + bothParents + "',"+
                             "'" + Float.parseFloat(Height.getText().toString().trim()) + "'," +
@@ -652,8 +632,8 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                             "'" + soundsT.getText().toString().trim() + "'," +
                             "'" + Resp_other.getText().toString().trim() + "'," +
                             "'" + heart + "'," +
-                            "'" + Heart.getText().toString().trim() + "'"
-                            + ",'" + cardio.getText().toString().trim() + "'";
+                            "'" + Heart.getText().toString().trim() + "'," +
+                            "'" + cardio.getText().toString().trim() + "'";
 
                     //inserting into database
                     database.execSQL("INSERT INTO health1 VALUES (" + insert_query + ")");
@@ -667,14 +647,12 @@ public class HealthActivity1 extends ActionBarActivity implements AdapterView.On
                         hltStdId.setText("");
 
                 }
-                    catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    finally {
-                        database.close();
-
-
-                    }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                finally {
+                    database.close();
+                }
             }
     }
 

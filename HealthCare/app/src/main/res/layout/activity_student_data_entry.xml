@@ -48,5 +48,16 @@
         android:drawableLeft="@drawable/ic_system_update_alt_white_36dp"
         android:text="Add Socio-demographic Details"/>
 
-
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/gps"
+        android:onClick="CHANGE"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/update"
+        android:layout_alignStart="@+id/update"
+        android:layout_below="@+id/update"
+        android:layout_marginTop="35dp"
+        android:drawableLeft="@drawable/ic_my_location_white_36dp"
+        android:text="Get GPS Location"/>
 </RelativeLayout>

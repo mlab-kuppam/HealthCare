@@ -38,11 +38,11 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
     static String skin_sid;
     String treatment="",impression;
 
-    EditText Scabtext, Pityaltext, Phrynotext, Pedicultext, Pityvertext, Imptext, Paputext, Tintext, Miltext, Viraltext, Other, Xerosis;
+    EditText Advice,Scabtext, Pityaltext, Phrynotext, Pedicultext, Pityvertext, Imptext, Paputext, Tintext, Miltext, Viraltext, Other, Xerosis;
 
 	TextView skinStdId;
 	
-    int scab=10,pital=10,phry=10,pedi=10,pitver=10,imp=10,papu=10,tin=10,mil=10,vir=10,referal=10,xerosis=10;
+    int scab=10,pital=10,phry=10,pedi=10,pitver=10,imp=10,papu=10,tin=10,mil=10,vir=10,referal=10,xerosis=10,adviceOthers=10;
 
     SQLiteDatabase database;
 
@@ -130,6 +130,7 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
         Viraltext = (EditText) findViewById(R.id.viral_text);
         Xerosis=(EditText) findViewById(R.id.xerosis_text);
         Other = (EditText) findViewById(R.id.add_text);
+        Advice = (EditText) findViewById(R.id.advice_others);
 
 
         impression="";
@@ -144,6 +145,17 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
                             impression=""+i;
                         else
                             impression=impression+","+i;
+
+                        if(i==selected.length-1){
+                            Advice.setVisibility(View.VISIBLE);
+                            adviceOthers=1;
+                        }
+                    }
+                    else{
+                        if(i==selected.length-1){
+                            Advice.setVisibility(View.GONE);
+                            adviceOthers=0;
+                        }
                     }
                 }
             }
@@ -250,21 +262,21 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
 
             @Override
             public void afterTextChanged(Editable s) {
-                for (int p = 0; p < 18; p++) {
+                for (int p = 0; p < 22; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("");
                         break;
                     }
 
                 }
-                for (int p = 19; p < 22; p++) {
+                for (int p = 23; p < 26; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("ml");
                         break;
                     }
 
                 }
-                for (int p = 23; p < 37; p++) {
+                for (int p = 27; p < 41; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("\u00b0");
                         break;
@@ -272,7 +284,7 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
 
                 }
 
-                for (int p = 38; p < 45; p++) {
+                for (int p = 42; p < 49; p++) {
                     if (Text1.getText().toString().equals(auto[p])) {
                         UnitText.setText("");
                         break;
@@ -711,15 +723,21 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
                 showMessage("Warning", "Please select an option for Xerosis");
                 return;
             }
-            else if (referal == 10 ) {
-                showMessage("Warning", "Please select an option for Referral");
-                return;
-            }
             else if(impression.equals("")){
                 showMessage("Warning", "Please select an option for Advice");
                 return;
             }
+            else if(adviceOthers==1 && Advice.getText().toString().trim().length()==0){
+                showMessage("Warning", "Please enter Advice");
+                return;
+            }
+            else if (referal == 10 ) {
+                showMessage("Warning", "Please select an option for Referral");
+                return;
+            }
             else {
+                if(adviceOthers==1)
+                    impression=impression+":"+Advice.getText().toString().trim();
 
                 try {
                 String insert_query = "'" + skin_sid + "'," +
@@ -746,7 +764,7 @@ public class SkinActivity extends ActionBarActivity implements AdapterView.OnIte
                         "'" + xerosis + "'," +
                         "'" + Xerosis.getText().toString().trim() + "'," +
                         "'" + Other.getText().toString().trim() + "',"+
-                        "'" + impression + "',"+
+                        "'" + impression+ "',"+
                         "'" + treatment + "',"+
                         "'" + referal + "'";
 

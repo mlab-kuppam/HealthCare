@@ -276,7 +276,7 @@ public class UpdateActivity extends ActionBarActivity {
 
         return null;
     }
-    public static String[] displaySchoolDetails(String[] child_id){
+    public static String[] displaySchoolDetails(String[] child_id) {
         try {
             String q = "SELECT * FROM school_references WHERE school_id='" + child_id[0] + "'";
             Cursor c = MainActivity.db.rawQuery(q, null);
@@ -362,19 +362,6 @@ public class UpdateActivity extends ActionBarActivity {
         };
 
         studentID.addTextChangedListener(inputTextWatcher);
-    }
-    public static boolean isConnectedToServer(String url) {
-        try{
-            URL myUrl = new URL(url);
-            URLConnection connection = myUrl.openConnection();
-            connection.setConnectTimeout(5000);
-            connection.connect();
-            return true;
-        } catch (Exception e) {
-            // Handle your exceptions
-            e.printStackTrace();
-            return false;
-        }
     }
     @Override
     public void onBackPressed() {

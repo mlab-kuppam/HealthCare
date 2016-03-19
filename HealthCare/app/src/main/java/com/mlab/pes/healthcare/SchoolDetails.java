@@ -46,8 +46,8 @@ public class SchoolDetails extends ActionBarActivity implements AdapterView.OnIt
                     "  category INTEGER[1] ," +
                     "  type INTEGER[1] ," +
                     "  hm_name VARCHAR[140] ," +
-                    "  landline FLOAT ," +
-                    "  mobile FLOAT ," +
+                    "  landline VARCHAR[11] ," +
+                    "  mobile VARCHAR[11] ," +
                     "  email VARCHAR[254] ," +
                     "  c_busy_places INTEGER[1] ," +
                     "  c_hygenic INTEGER[1] ," +

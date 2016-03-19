@@ -23,9 +23,6 @@ public class syncing {
     //To Sync the details to the Cloud(Pushing Data to the Cloud)
     public void SYNC() {
 //10.3.32.56
-
-
-
         LinkedHashMap linkedHashMap=new LinkedHashMap();
         linkedHashMap.put("URL", "sync_2.php");
         String t = "";
@@ -98,6 +95,11 @@ public class syncing {
                     }
 
                 }
+                else
+                {
+                    MainActivity.showMessage("Failure", "Could Not Connect To Server", MainActivity.get());
+                    return;
+                }
 
 
                 String image_output="";
@@ -131,7 +133,10 @@ public class syncing {
 
 
 
-            if (!(output.contains("Sync Unsuccessful") ||output.length()<=50) && !image_output.contains("Sync Unsuccessful")) {
+                System.out.println("output "+output);
+                System.out.println("image output "+image_output);
+
+                if (!(output.length()<=50 || output.contains("Sync Unsuccessful") ) && !image_output.contains("Sync Unsuccessful")) {
 /*
                 for (int i = 0; i < tablenames.size(); i++) {
                     if(!tablenames.get(i).equals("child_references") || !tablenames.get(i).equals("school_references"))
@@ -164,7 +169,11 @@ public class syncing {
 
 
             //System.out.println("Child Table "+child_table);
-            if(!(child_table.contains("Connection failed") || child_table.contains("No Entries"))){
+            if(child_table==null){
+                MainActivity.showMessage("Error while Retrieving Child ID's","Could not Connect to Server!",MainActivity.get());
+                return;
+            }
+            else if(!(child_table.contains("Connection failed") || child_table.contains("No Entries"))){
                 JSONObject jsonObject = new JSONObject(child_table);
 
                 //System.out.println("Child Table "+jsonObject.toString());
@@ -201,10 +210,10 @@ public class syncing {
                         MainActivity.db.execSQL("INSERT INTO child_references VALUES (" + insert_query + ")");
                     }
                 }
-                MainActivity.showMessage("Success","Entries Retrieved!",MainActivity.get());
+                MainActivity.showMessage("Success","Child ID's Retrieved!",MainActivity.get());
             }
             else
-                MainActivity.showMessage("Failure","Entries Could not be Retrieved!",MainActivity.get());
+                MainActivity.showMessage("Failure","School ID's Could not be Retrieved!",MainActivity.get());
         }
         catch (InterruptedException e) {
             System.out.println("Interupted Exception");
@@ -228,7 +237,11 @@ public class syncing {
 
 
             //System.out.println("Child Table "+child_table);
-            if(!(school.contains("Connection failed") || school.contains("No Entries"))){
+            if(school==null){
+                MainActivity.showMessage("Error while Retrieving School ID's","Could not Connect to Server!",MainActivity.get());
+                return;
+            }
+            else if(!(school.contains("Connection failed") || school.contains("No Entries"))){
                 JSONObject jsonObject = new JSONObject(school);
 
                 //System.out.println("Child Table "+jsonObject.toString());
@@ -252,10 +265,10 @@ public class syncing {
                         MainActivity.db.execSQL("INSERT INTO school_references VALUES (" + insert_query + ")");
                     }
                 }
-                MainActivity.showMessage("Success","Entries Retrieved!",MainActivity.get());
+                MainActivity.showMessage("Success","School ID's Retrieved!",MainActivity.get());
             }
             else
-                MainActivity.showMessage("Failure","Entries Could not be Retrieved!",MainActivity.get());
+                MainActivity.showMessage("Failure","School ID's Could not be Retrieved!",MainActivity.get());
         }
         catch (InterruptedException e) {
             System.out.println("Interupted Exception");

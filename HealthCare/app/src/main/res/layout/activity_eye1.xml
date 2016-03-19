@@ -224,8 +224,8 @@
 
             </RelativeLayout>
 
-            <View style="@style/Divider" />
 
+<!--            <View style="@style/Divider" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -269,7 +269,7 @@
                     style="@style/Separatoreye1"
                     android:layout_marginLeft="734dp" />
 
-            </RelativeLayout>
+            </RelativeLayout>-->
 
 
             <View style="@style/Divider" />

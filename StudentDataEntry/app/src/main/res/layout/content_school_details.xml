@@ -117,7 +117,7 @@
                 android:layout_marginTop="10dp">
                 <TextView
                     style="@style/head"
-                    android:text="@string/homeContactDetails"
+                    android:text="School Contant Details"
                     android:layout_weight="1"
                     android:textStyle="bold"
                     android:layout_width="match_parent"/>

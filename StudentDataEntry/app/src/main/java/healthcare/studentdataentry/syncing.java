@@ -47,7 +47,7 @@ public class syncing {
                 String q = "SELECT * FROM " + tablenames.get(i);
                 Cursor c = MainActivity.db.rawQuery(q, null);
                 c.moveToFirst();
-                if (c != null && c.getCount() > 0 && !tablenames.get(i).equals("images") && !tablenames.get(i).equals("child_references")&& !tablenames.get(i).equals("android_metadata")) {
+                if (c != null && c.getCount() > 0 && !tablenames.get(i).equals("images") && !tablenames.get(i).equals("child_references")&& !tablenames.get(i).equals("school_references")&& !tablenames.get(i).equals("android_metadata")) {
                     ArrayList array = new ArrayList();
                     do {
                         LinkedHashMap rows = new LinkedHashMap();
@@ -99,6 +99,8 @@ public class syncing {
 
                 }
 
+                System.out.println("Output : "+ output);
+
                 if (!(output.contains("Sync Unsuccessful") || output.length()<=50)) {
 /*
                 for (int i = 0; i < tablenames.size(); i++) {
@@ -132,7 +134,11 @@ public class syncing {
 
 
             //System.out.println("Child Table "+child_table);
-            if(!(child_table.contains("Connection failed") || child_table.contains("No Entries"))){
+            if(child_table==null){
+                MainActivity.showMessage("Error while Retrieving Child ID's","Could not Connect to Server!",MainActivity.get());
+                return;
+            }
+            else if(!(child_table.contains("Connection failed") || child_table.contains("No Entries"))){
                 JSONObject jsonObject = new JSONObject(child_table);
 
                 //System.out.println("Child Table "+jsonObject.toString());
@@ -140,7 +146,8 @@ public class syncing {
                 String child_table_query=
                         "  child_id VARCHAR[10] ," +
                                 "  name VARCHAR[140] ," +
-                                "  gender VARCHAR[10]" ;
+                                "  gender VARCHAR[10] ,"+
+                                "  father_name VARCHAR[140]";
                 //creating image table
                 MainActivity.db.execSQL("CREATE TABLE IF NOT EXISTS child_references( " + child_table_query + " )");
 
@@ -148,7 +155,7 @@ public class syncing {
 
                 while( keys.hasNext() ) {
                     String key = (String)keys.next();
-                    if ( jsonObject.get(key) instanceof JSONObject) {
+                    if ( jsonObject.get(key) instanceof JSONObject ) {
                         String gender="";
                         JSONObject obj=(JSONObject) jsonObject.get(key);
                         switch (Integer.parseInt(obj.get("gender").toString())){
@@ -161,16 +168,17 @@ public class syncing {
                         }
                         String insert_query = "'" + obj.get("child_id").toString() + "'," +
                                 "'" + obj.get("name").toString() + "'," +
-                                "'" + gender + "'";
+                                "'" + gender + "',"+
+                                "'"+ obj.get("father_name")+"'";
                         System.out.println(insert_query);
                         //inserting into database
                         MainActivity.db.execSQL("INSERT INTO child_references VALUES (" + insert_query + ")");
                     }
                 }
-                MainActivity.showMessage("Success","Entries Retrieved!",MainActivity.get());
+                MainActivity.showMessage("Success","Child ID's Retrieved!",MainActivity.get());
             }
             else
-                MainActivity.showMessage("Failure","Entries Could not be Retrieved!",MainActivity.get());
+                MainActivity.showMessage("Failure","School ID's Could not be Retrieved!",MainActivity.get());
         }
         catch (InterruptedException e) {
             System.out.println("Interupted Exception");
@@ -194,7 +202,11 @@ public class syncing {
 
 
             //System.out.println("Child Table "+child_table);
-            if(!(school.contains("Connection failed") || school.contains("No Entries"))){
+            if(school==null){
+                MainActivity.showMessage("Error while Retrieving School ID's","Could not Connect to Server!",MainActivity.get());
+                return;
+            }
+            else if(!(school.contains("Connection failed") || school.contains("No Entries"))){
                 JSONObject jsonObject = new JSONObject(school);
 
                 //System.out.println("Child Table "+jsonObject.toString());
@@ -209,7 +221,7 @@ public class syncing {
 
                 while( keys.hasNext() ) {
                     String key = (String)keys.next();
-                    if ( jsonObject.get(key) instanceof JSONObject) {
+                    if ( jsonObject.get(key) instanceof JSONObject ) {
                         JSONObject obj=(JSONObject) jsonObject.get(key);
                         String insert_query = "'" + obj.get("school_id").toString() + "'," +
                                 "'" + obj.get("name").toString() + "'";
@@ -218,10 +230,10 @@ public class syncing {
                         MainActivity.db.execSQL("INSERT INTO school_references VALUES (" + insert_query + ")");
                     }
                 }
-                MainActivity.showMessage("Success","Entries Retrieved!",MainActivity.get());
+                MainActivity.showMessage("Success","School ID's Retrieved!",MainActivity.get());
             }
             else
-                MainActivity.showMessage("Failure","Entries Could not be Retrieved!",MainActivity.get());
+                MainActivity.showMessage("Failure","School ID's Could not be Retrieved!",MainActivity.get());
         }
         catch (InterruptedException e) {
             System.out.println("Interupted Exception");

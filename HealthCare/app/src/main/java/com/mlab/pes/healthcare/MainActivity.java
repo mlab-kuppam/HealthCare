@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity{
     static SQLiteDatabase db;
     private static MainActivity app;
     static SharedPreferences mPrefs;
-    static String url="http://192.168.100.4/";
+    static String url="";
     public static boolean connected=false;
     public static ProgressDialog dialog;
     private Handler mHandler = new Handler();
@@ -78,6 +78,7 @@ public class MainActivity extends ActionBarActivity{
         //creating image table
         db.execSQL("CREATE TABLE IF NOT EXISTS school_references( " + school_table_query + " )");
 
+        /*
         String insert_query = "'" + "11111111" + "'," +
                 "'" + "School Name" + "'";
         System.out.println(insert_query);
@@ -90,7 +91,7 @@ public class MainActivity extends ActionBarActivity{
                 "'" + "Father Name" + "'";
         System.out.println(insert_query);
         //inserting into database
-        MainActivity.db.execSQL("INSERT INTO child_references VALUES (" + insert_query_child + ")");
+        MainActivity.db.execSQL("INSERT INTO child_references VALUES (" + insert_query_child + ")");*/
 
         syncStatus=(TextView) findViewById(R.id.syncStatus);
 
@@ -120,28 +121,6 @@ public class MainActivity extends ActionBarActivity{
         //Transition Animation
         overridePendingTransition(R.anim.push_left_in, R.anim.push_down_out);
     }
-    public static void startProgressDialog(final String message){
-
-        System.out.println("Started Progress dialog");
-
-        MainActivity.get().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                MainActivity.dialog = ProgressDialog.show(MainActivity.get(), message, "Please Wait... Do not Close the App");
-                System.out.println("PROGRESS DIALOG INITIATED");
-            }
-        });
-
-    }
-    public static void stopProgressDialog(){
-        MainActivity.dialog.dismiss();
-    }
-    Thread connection_checker=new Thread(new Runnable() {
-        @Override
-        public void run() {
-            connected=UpdateActivity.isConnectedToServer(url);
-        }
-    });
     //To Sync the details to the Cloud(Pushing Data to the Cloud)
     public void SYNC(View view) {
         boolean check = INTERNER_CHECK();
@@ -157,10 +136,7 @@ public class MainActivity extends ActionBarActivity{
 
                         connectorCheck.execute();
 
-                    int timeout=5000;
-                    if(connected){
-                        timeout=0;
-                    }
+                    int timeout=10500;
                     mHandler.postDelayed(new Runnable() {
                         public void run() {
                             if (connected) {
@@ -177,6 +153,7 @@ public class MainActivity extends ActionBarActivity{
         } else {
             showMessage("Check Internet Connection", "Try again", get());
         }
+        connected=false;
     }
     public void RETRIEVE(View view) {
         boolean check = INTERNER_CHECK();
@@ -187,10 +164,7 @@ public class MainActivity extends ActionBarActivity{
                         connectorCheck connectorCheck=new connectorCheck();
 
                         connectorCheck.execute();
-                    int timeout=5000;
-                    if(connected){
-                        timeout=0;
-                    }
+                    int timeout=10500;
                     mHandler.postDelayed(new Runnable() {
                         public void run() {
                             if (connected) {
@@ -207,6 +181,8 @@ public class MainActivity extends ActionBarActivity{
         } else {
             showMessage("Check Internet Connection", "Try again", get());
         }
+
+        connected=false;
     }
     /*
     public void emergency(View view) {

@@ -97,7 +97,8 @@
     <string name="impacted">Impacted</string>
     <string name="unimpacted">Unimpacted</string>
 
-    <string name="hint"><i>Enter comment</i></string>
+    <string name="hint"><i>Enter Comment</i></string>
+    <string name="hint1"><i>Enter Advice</i></string>
 
     <string name="eyehint"><i>Additional information</i></string>
 
@@ -413,6 +414,7 @@
     <string name="title_activity_get_gpslocation">Get GPS Location</string>
 
     <string name="gps">Get GPS Location</string>
-    <string name="title_activity_school_gps">schoolGPS</string>
+    <string name="title_activity_school_gps">Get GPS Location</string>
+    <string name="title_activity_syncing_data">Syncing.. Please Wait</string>
 
 </resources>

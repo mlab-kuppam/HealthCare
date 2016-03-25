@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -128,6 +127,25 @@ public class MainActivity extends ActionBarActivity{
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    connectorCheck connectorCheck=new connectorCheck();
+                    connectorCheck.execute();
+
+                    Intent intent = new Intent(MainActivity.this, syncingData.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                }
+            });
+            connected=false;
+        } else {
+            showMessage("Check Internet Connection", "Try again", get());
+        }
+        /*
+        boolean check = INTERNER_CHECK();
+        if (check) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
 
                         //startProgressDialog("Connecting to Server");
                         //stopProgressDialog();
@@ -153,7 +171,7 @@ public class MainActivity extends ActionBarActivity{
         } else {
             showMessage("Check Internet Connection", "Try again", get());
         }
-        connected=false;
+        connected=false;*/
     }
     public void RETRIEVE(View view) {
         boolean check = INTERNER_CHECK();

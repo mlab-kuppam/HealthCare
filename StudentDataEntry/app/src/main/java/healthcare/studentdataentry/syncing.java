@@ -23,9 +23,6 @@ public class syncing {
     //To Sync the details to the Cloud(Pushing Data to the Cloud)
     public void SYNC() {
 //10.3.32.56
-
-
-
         LinkedHashMap linkedHashMap=new LinkedHashMap();
         linkedHashMap.put("URL", "sync_2.php");
         String t = "";
@@ -88,13 +85,15 @@ public class syncing {
 
                 if(output!=null) {
                     if (output.contains("Sync Unsuccessful") || output.length()>60) {
-                        MainActivity.showMessage("Failure", "Sync Unsuccessful", MainActivity.get());
+                        syncingData.displayMessage.setText("Failure : Sync Unsuccessful");
+                        //System.out.println(output);
+                        //MainActivity.showMessage("Failure", "Sync Unsuccessful", MainActivity.get());
                         return;
                     }
                     if (output.startsWith("Sync Status")) {
-                        MainActivity.syncStatus.setText(output.substring(13,35).replaceFirst(":", "at"));
+                        MainActivity.syncStatus.setText(output.substring(12,35).replaceFirst(":", "at"));
                         SharedPreferences.Editor mEditor = MainActivity.mPrefs.edit();
-                        mEditor.putString("status", output.substring(13,35).replaceFirst(":", "at")).commit();
+                        mEditor.putString("status", output.substring(12,35).replaceFirst(":", "at")).commit();
                     }
 
                 }
@@ -107,9 +106,11 @@ public class syncing {
                     if(!tablenames.get(i).equals("child_references") || !tablenames.get(i).equals("school_references"))
                     MainActivity.db.execSQL("DROP TABLE IF EXISTS " + tablenames.get(i));
                 }*/
-                    MainActivity.showMessage("Success!", output.substring(35),MainActivity.get());
+                    syncingData.displayMessage.setText("Success : " + output.substring(35));
+                    //MainActivity.showMessage("Success!", output.substring(35),MainActivity.get());
                 } else {
-                    MainActivity.showMessage("Failure!", "Sync Unsuccessful! Try again Later!",MainActivity.get());
+                    syncingData.displayMessage.setText("Failure! : Sync Unsuccessful! Try again Later!");
+                    //MainActivity.showMessage("Failure!", "Sync Unsuccessful! Try again Later!",MainActivity.get());
                 }
             } catch (InterruptedException e) {
                 System.out.println("Interupted Exception");
@@ -118,7 +119,8 @@ public class syncing {
             }
 
         } else {
-           MainActivity.showMessage("Failure", "No Entries Found",MainActivity.get());
+            syncingData.displayMessage.setText("Failure : No Entries Found");
+            //MainActivity.showMessage("Failure", "No Entries Found",MainActivity.get());
         }
     }
     static String child_table;
@@ -132,16 +134,17 @@ public class syncing {
             GetXMLTask retrieve = new GetXMLTask("Retrieving Child Table Data");
             child_table=retrieve.execute(new LinkedHashMap[]{linkedHashMap}).get();
 
+            System.out.println(child_table.substring(126150));
 
-            //System.out.println("Child Table "+child_table);
+            System.out.println("Child Table " + child_table);
             if(child_table==null){
                 MainActivity.showMessage("Error while Retrieving Child ID's","Could not Connect to Server!",MainActivity.get());
                 return;
             }
-            else if(!(child_table.contains("Connection failed") || child_table.contains("No Entries"))){
+            else if(child_table.length()==0 || !(child_table.contains("Connection failed") || child_table.contains("No Entries"))){
                 JSONObject jsonObject = new JSONObject(child_table);
 
-                //System.out.println("Child Table "+jsonObject.toString());
+                System.out.println("Child Table "+jsonObject.toString());
                 MainActivity.db.execSQL("DROP TABLE IF EXISTS child_references" );
                 String child_table_query=
                         "  child_id VARCHAR[10] ," +
@@ -178,7 +181,7 @@ public class syncing {
                 MainActivity.showMessage("Success","Child ID's Retrieved!",MainActivity.get());
             }
             else
-                MainActivity.showMessage("Failure","School ID's Could not be Retrieved!",MainActivity.get());
+                MainActivity.showMessage("Failure","Child ID's Could not be Retrieved!",MainActivity.get());
         }
         catch (InterruptedException e) {
             System.out.println("Interupted Exception");

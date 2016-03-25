@@ -234,25 +234,27 @@ public class MainActivity extends AppCompatActivity {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
-                        //startProgressDialog("Connecting to Server");
-                        //stopProgressDialog();
-
                         connectorCheck connectorCheck=new connectorCheck();
-
                         connectorCheck.execute();
-                    int timeout=5000;
-                    mHandler.postDelayed(new Runnable() {
+
+                        Intent intent = new Intent(MainActivity.this, syncingData.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+    /*                    int timeout=10500;
+                        mHandler.postDelayed(new Runnable() {
                         public void run() {
                             if (connected) {
-                                syncing a = new syncing();
-                                a.SYNC();
+                                Intent intent=new Intent(MainActivity.this,syncingData.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
                             } else {
                                 showMessage("Warning", "Please check if server is connected to the internet. \nRestart the App and try again", MainActivity.get());
                             }
                         }
                     }, timeout);
-
+        */
                 }
             });
             connected=false;

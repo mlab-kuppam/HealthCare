@@ -131,6 +131,9 @@ public class EyeActivity2 extends ActionBarActivity {
         Fund_right = (EditText) findViewById(R.id.fund_right_text);
         Other = (EditText) findViewById(R.id.add_text);
 
+        Advice = (EditText) findViewById(R.id.advice_others);
+
+
 
         Impression="";
         multiSpinner = (MultiSpinner) findViewById(R.id.multi_spinner);

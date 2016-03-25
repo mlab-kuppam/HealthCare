@@ -23,6 +23,7 @@ public class syncing {
     //To Sync the details to the Cloud(Pushing Data to the Cloud)
     public void SYNC() {
 //10.3.32.56
+        syncingData.addText("Syncing Data");
         LinkedHashMap linkedHashMap=new LinkedHashMap();
         linkedHashMap.put("URL", "sync_2.php");
         String t = "";
@@ -85,19 +86,22 @@ public class syncing {
 
                 if(output!=null) {
                     if (output.contains("Sync Unsuccessful") || output.length()>60) {
-                        MainActivity.showMessage("Failure", "Sync Unsuccessful", MainActivity.get());
+                        syncingData.displayMessage.setText("Failure : Sync Unsuccessful");
+                        //MainActivity.showMessage("Failure", "Sync Unsuccessful", MainActivity.get());
                         return;
                     }
                     if (output.startsWith("Sync Status")) {
-                        MainActivity.syncStatus.setText(output.substring(13,35).replaceFirst(":", "at"));
+                        MainActivity.syncStatus.setText(output.substring(12,35).replaceFirst(":", "at"));
                         SharedPreferences.Editor mEditor = MainActivity.mPrefs.edit();
-                        mEditor.putString("status", output.substring(13,35).replaceFirst(":", "at")).commit();
+                        mEditor.putString("status", output.substring(12,35).replaceFirst(":", "at")).commit();
+                        syncingData.addText("Data Sync Successful");
                     }
 
                 }
                 else
                 {
-                    MainActivity.showMessage("Failure", "Could Not Connect To Server", MainActivity.get());
+                    syncingData.displayMessage.setText("Failure : Could Not Connect To Server");
+                    //MainActivity.showMessage("Failure", "Could Not Connect To Server", MainActivity.get());
                     return;
                 }
 
@@ -106,12 +110,12 @@ public class syncing {
                 String q = "SELECT * FROM images";
                 Cursor c = MainActivity.db.rawQuery(q, null);
                 c.moveToFirst();
+                int p=c.getCount();
+                int l=1;
                 if (c != null && c.getCount() > 0 && !output.contains("Sync Unsuccessful")) {
+                    syncingData.addText("Syncing Images");
                     do {
-
-                        connectorCheck connectorCheck=new connectorCheck();
-
-                        connectorCheck.execute();
+                        syncingData.addText("Syncing Image "+l+" of "+p);
                         LinkedHashMap image = new LinkedHashMap();
                         ArrayList arrayList=new ArrayList();
                         LinkedHashMap rows = new LinkedHashMap();
@@ -127,6 +131,7 @@ public class syncing {
 
                         GetXMLTask get_image = new GetXMLTask("Syncing Images");
                         image_output=get_image.execute(new LinkedHashMap[]{linkedHashMap,image}).get();
+                        l++;
                     } while (c.moveToNext() && image_output!=null && !image_output.contains("Sync Unsuccessful"));
                     c.close();
                 }
@@ -142,9 +147,12 @@ public class syncing {
                     if(!tablenames.get(i).equals("child_references") || !tablenames.get(i).equals("school_references"))
                     MainActivity.db.execSQL("DROP TABLE IF EXISTS " + tablenames.get(i));
                 }*/
-                MainActivity.showMessage("Success!", output.substring(35),MainActivity.get());
+                    syncingData.displayMessage.setText("Success : "+ output.substring(35));
+                    //MainActivity.showMessage("Success!", output.substring(35),MainActivity.get());
             } else {
-                MainActivity.showMessage("Failure!", "Sync Unsuccessful! Try again Later!",MainActivity.get());
+
+                    syncingData.displayMessage.setText("Failure : Sync Unsuccessful! Try again Later!");
+               // MainActivity.showMessage("Failure!", "Sync Unsuccessful! Try again Later!",MainActivity.get());
             }
             } catch (InterruptedException e) {
                 System.out.println("Interupted Exception");
@@ -153,7 +161,9 @@ public class syncing {
             }
 
         } else {
-           MainActivity.showMessage("Failure", "No Entries Found",MainActivity.get());
+
+            syncingData.displayMessage.setText("Failure : No Entries Found");
+            //MainActivity.showMessage("Failure", "No Entries Found",MainActivity.get());
         }
     }
     static String child_table;

@@ -53,14 +53,20 @@
         <activity
             android:name=".getGPSLocation"
             android:label="@string/title_activity_get_gpslocation"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".schoolGPS"
             android:label="@string/title_activity_get_gpslocation"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".syncingData"
+            android:label="@string/title_activity_syncing_data"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

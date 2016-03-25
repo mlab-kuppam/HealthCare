@@ -313,5 +313,6 @@
     <string name="emailHint">Enter Email Address</string>
     <string name="title_activity_get_gpslocation">Get GPS Location</string>
     <string name="title_activity_school_gps">schoolGPS</string>
+    <string name="title_activity_syncing_data">Syncing.. Please Wait</string>
 </resources>
 

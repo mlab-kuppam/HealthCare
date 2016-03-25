@@ -142,6 +142,9 @@ public class HealthActivity2 extends ActionBarActivity {
         Other = (EditText)findViewById(R.id.end_text);
 
 
+        Advice = (EditText) findViewById(R.id.advice_others);
+
+
         Impression="";
         multiSpinner = (MultiSpinner) findViewById(R.id.multi_spinner);
         multiSpinner.setItems(UpdateActivity.list, "Select..", new MultiSpinner.MultiSpinnerListener() {

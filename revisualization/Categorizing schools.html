@@ -1,0 +1,102 @@
+<html>
+<head>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart']});
+    //google.charts.setOnLoadCallback(drawchart3);
+    var cnt_arr=[];
+    var sch_arr=[];
+    var sch_id;
+    var ctr=[];
+    var x,i,query,cnt1=0,cnt2=0,cnt3=0,i,j=0,cnt4=0,cnt5=0,cnt_sch1=0,cnt_sch2=0,cnt_sch3=0,str_arr=[];
+    var school_details=new Array();
+    var arrays=new Array();
+
+function displaymessage()
+    {
+var xhttp;
+    	xhttp= new XMLHttpRequest();
+    	xhttp.onreadystatechange=function(){
+    		if(xhttp.readyState==4 && xhttp.status==200){
+    			sch_arr=JSON.parse(xhttp.responseText);
+    			for(var row in sch_arr)
+    				{
+    					classify(row);
+    					//console.log(sch_arr[0]["school_id"]+" "+classify(row));
+    					if(sch_arr[0].hasOwnProperty("school_id"))
+    						console.log(sch_arr[row]["school_id"]+" "+classify(sch_arr[row]));		    				
+    				}
+    						console.log(str_arr);	
+    		}
+    		//document.getElementById("pie2").innerHTML=JSON.stringify(sch_arr);
+    		google.charts.setOnLoadCallback(drawcolchart2);
+    	};
+
+    	xhttp.open("POST","http://122.252.230.46/query.php",true);
+    	xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    	xhttp.send("s=SELECT distinct school_id, c_busy_places,c_hygenic,c_fencing,c_playground,c_stories,c_overcrowding,c_lab,c_kitchen,c_furniture,c_cross_vent,c_lighting,c_water,c_electricity,c_latrines,c_l_separate from school");
+
+    }
+
+ function classify(row)
+	{
+	 var sum=0,category;
+	 if(row.hasOwnProperty("school_id"))
+	 {
+	 for (var key in row) {
+	   if (row.hasOwnProperty(key) && key.localeCompare("school_id")) 
+	   {
+	       sum=sum+parseInt(row[key]);
+	   }
+	 }
+	 //A-Excellent, B-Normal, C- Poor
+	 if(sum>=0 && sum<=5)
+	   {
+	   	 cnt_sch3++;	   	
+	   	 //category="C";
+	   }
+	 else if(sum>=6 && sum<=10)
+	   {
+	   	cnt_sch2++;
+	   	 //category="B";
+	   }
+	 else if(sum>=11 && sum<=15)
+	   {
+	   	 cnt_sch1++;
+	   	 //category="A";
+	   }
+	   //school_details[row["school_id"]]=categor
+	   //cnt_sch1=0,cnt_sch2=0,cnt_sch3=0;
+	}
+	}
+    
+
+ function drawcolchart2() {
+
+      var data = google.visualization.arrayToDataTable([
+         ['Class', 'No Of. Schools', { role: 'style' }],
+         ['Category A', cnt_sch1, 'green'],           
+         ['Category B', cnt_sch2, 'gold'],            
+         ['Category C', cnt_sch3, 'red'] 
+      ]);
+
+      var option= {'is3D':'true','legend':{position:'none'},'width':1000,'height':500, title:'Classification of schools',vAxis:{title:"Number of Schools"}, hAxis:{title:"Category of schools"}};
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('pie1'));
+      chart.draw(data, option);
+      document.getElementById("but2").disabled=true;
+      cnt_sch1=0,cnt_sch2=0,cnt_sch3=0;
+    }
+
+//document.getElementById("pie1").innerHTML="amogh"
+</script>
+
+<body onload="displaymessage()">
+<p id="pie1">hw</p>
+
+</body>
+</html>
+ 

@@ -1,0 +1,72 @@
+#tooltip
+{
+  position: absolute;
+  height: 50px;
+  widht: 50px;
+  left: 94%;
+  top: 10px;
+  z-index: 5;
+  background-color: yellow;
+  visibility: hidden;
+}
+#map
+{
+  height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+#floating-panel
+{
+  position: absolute;
+  top: 10px;
+  left: 40%;
+  z-index: 5;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

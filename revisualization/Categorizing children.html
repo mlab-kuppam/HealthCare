@@ -1,0 +1,83 @@
+<html>
+<head>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart']});
+    //google.charts.setOnLoadCallback(drawchart3);
+    var cnt_arr=[];
+    var sch_arr=[];
+    var sch_id;
+    var ctr=[];
+    var x,i,query,cnt1=0,cnt2=0,cnt3=0,i,j=0,cnt4=0,cnt5=0,cnt_sch1=0,cnt_sch2=0,cnt_sch3=0,str_arr=[];
+    var school_details=new Array();
+    var arrays=new Array();
+
+function displaymessage()
+    {
+    	//document.getElementById("pie1").innerHTML="am";
+
+    	var xhttp;
+    	xhttp = new XMLHttpRequest();
+    	xhttp.onreadystatechange=function(){
+    		if(xhttp.readyState==4 && xhttp.status==200){
+    			cnt_arr=JSON.parse(xhttp.responseText);
+    			x=cnt_arr.length;
+    			console.log(x);
+    		}
+    	
+    			for(i=0;i<x;i++)
+    			{
+
+    				if(cnt_arr[i]["socio_economic"]==1)
+    					cnt1++;
+    				else if(cnt_arr[i]["socio_economic"]==2)
+    					cnt2++;
+    				else if(cnt_arr[i]["socio_economic"]==3)
+    					cnt3++;
+    				else if(cnt_arr[i]["socio_economic"]==4)
+    					cnt3++;
+    				else if(cnt_arr[i]["socio_economic"]==5)
+    					cnt3++;
+
+    			}
+
+    			document.getElementById("pie1").innerHTML=JSON.stringify(cnt_arr);
+    			//ctr={cnt1,cnt2,cnt3};
+    			console.log(cnt1+" "+cnt2+" "+cnt3+" "+cnt4+" "+cnt5 );
+
+    			//document.getElementById("pie1").innerHTML=JSON.stringify(cnt_arr);
+    			google.charts.setOnLoadCallback(drawChart);
+    		
+    	};
+
+    	xhttp.open("POST","http://122.252.230.46/query.php",true);
+    	xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    	xhttp.send("s=SELECT distinct child_id,socio_economic from socio_demographic");
+    }
+
+ function drawChart() {
+
+      var data = new google.visualization.arrayToDataTable([
+      	['Class','No. Of Students',{role:'style'}],
+      	['Category A',cnt1,'green'],
+      	['Category B',cnt2,'gold'],
+      	['Category C',cnt3,'red']
+      	]);
+
+      var option= {'is3D':'true','width':500,legend:{position:'none'},'height':500, title:'Number of Students', vAxis:{title:"Number of Students"}, hAxis:{title:"Socioeconomic class"}};
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('pie1'));
+      chart.draw(data, option);
+      document.getElementById("but2").disabled=true;
+    }
+
+//document.getElementById("pie1").innerHTML="amogh"
+</script>
+
+<body onload="displaymessage()">
+<p id="pie1">hw</p>
+
+</body>
+</html>

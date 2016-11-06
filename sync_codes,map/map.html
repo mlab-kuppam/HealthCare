@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Kuppam Geospatial Mapping</title>
+    <link type="text/css" rel="stylesheet" href="map/map.css"/>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <script type="text/javascript" src="map/map.js"></script>
+  </head>
+  <body onload="initMap()">
+
+      <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="w3-panel w3-light-grey">
+      <h3 class="w3-text-shadow">QueryBox(Top 20)</h3>
+    </div>
+  <a id='followup' onclick='obj.Query("followup")'># FollowUp Schools</a>
+  <a id='container' onclick='obj.Query("morbid")'># Morbid Schools</a>
+      <div id='solution' style="height:75%;" class="w3-container w3-teal">
+        </div>
+</div>
+
+    <span style="position:absolute; z-index:5; font-size:30px;cursor:pointer"
+     onclick="openNav()">&#9776;</span>
+
+    <div id="floating-panel">
+        <span style="font-size:20px; font-weight:bold">School:</span>
+        <input type="text" id="school" list="schools"/>
+        <datalist id="schools" onmouseover="alert(this.value);">
+            <option value="Gudlanayanipalli hs" />
+            <option value="Varamanuru ps" />
+            <option value="Urlaobanapalli ps" />
+            <option value="Vaddipalli  ps" />
+            <option value="Model colony" />
+            <option value="Cheemanayanapalli  ps" />
+            <option value="Samaguttapalli  ups" />
+            <option value="Daseganuru ps" />
+            <option value="Nayanuru. HS" />
+            <option value="Nsyanuru hs" />
+            <option value="Chandam ps" />
+            <option value="Gullepalli ps" />
+            <option value="Kothapeta ps" />
+            <option value="Animiganipalli ps" />
+            <option value="Gonuguru hs" />
+            <option value="Hamsapuram ps" />
+            <option value="Nadumuru ps" />
+            <option value="Marwada ps" />
+            <option value="Kunjeganaru  psm" />
+            <option value="Peddagopanapalli  hs" />
+            <option value="Diguvamankaladoddi ps" />
+            <option value="Chekkunatham ps" />
+            <option value="Adavimulakalapalli  ps" />
+            <option value="Vasanadu ps" />
+            <option value="Paipalyam ps" />
+            <option value="Vanaguttapalli  ps" />
+            <option value="Chinnaobba  hs" />
+            <option value="Erraguttapalli ps" />
+            <option value="Eraguttachenu ps" />
+            <option value="Gundlamadugu hs" />
+            <option value="A. Kothapalli PS" />
+            <option value="Bandakothur PS" />
+            <option value="Kotapalli PS" />
+            <option value="C. Gollapalli HS" />
+            <option value="Bisanatham UPS" />
+            <option value="Greenvalli pvt PS" />
+            <option value="GudupalliHS" />
+            <option value="GuttarlapalliHS" />
+            <option value="Kanamanapalli PS" />
+            <option value="Kanchibandarlapalli PS" />
+            <option value="Kodathanapalli PS" />
+            <option value="Kotachembagiri PS" />
+            <option value="Gudikothur UPS" />
+            <option value="Pogurupalli PS" />
+            <option value="SanganapalliPS" />
+            <option value="Settipalli PS" />
+            <option value="Sodiganipalli HS" />
+            <option value="Yamiganipalli PS" />
+            <option value="Kutheganipalli hs pvt" />
+            <option value="64 pedduru hs" />
+            <option value="Abakaladoddi UPS" />
+            <option value="Settepalli  hs" />
+            <option value="C. Bandapalli  ups" />
+            <option value="Sogadaballa ps" />
+            <option value="Dandikuppam ps" />
+            <option value="Gunjarlapalli ps" />
+            <option value="Poduru PS" />
+            <option value="Venkatapuram ps" />
+            <option value="Kenamakulapalli  hs" />
+            <option value="Kolamadugu  hs" />
+            <option value="Kolalathimmanapalli  ps" />
+            <option value="K. P. Mitta ps." />
+            <option value="Jalliganipalli PS" />
+            <option value="M. Krishnapuram ps" />
+            <option value="Nadimpalli ps" />
+            <option value="121 pedduru" />
+            <option value="K.t. palli ps" />
+            <option value="Nallapareddiyuru ps" />
+            <option value="Nanjampeta ps" />
+            <option value="Thumsi HS" />
+            <option value="Mpups" />
+            <option value="Konganapalli Mpups" />
+            <option value="Mppschool" />
+            <option value="Cheldiganipalli Mppschool" />
+            <option value="Mpps" />
+            <option value="Rajupeta Mpps" />
+            <option value="Baiparedlapalli Mpps" />
+            <option value="Shanthinikethan EMHS" />
+            <option value="A.p.modelschool" />
+            <option value="Ap model school" />
+            <option value="Zphs" />
+            <option value="Gorivimakulapalli Zphs" />
+            <option value="Pallikuppam Mpps" />
+            <option value="Getnipalli Mpps" />
+            <option value="Maneendram Mpups" />
+            <option value="Muddanapalli Mpps" />
+            <option value="Bala oban palli Mpps" />
+            <option value="Kenchanaballa Mpups" />
+            <option value="Balla Mpps" />
+            <option value="MornapalliMPPS" />
+            <option value="D.M.Palli UPS" />
+            <option value="Nakkana palli" />
+            <option value="NakkanapalliZPHS" />
+            <option value="Ramapuram MPPS" />
+            <option value="RamapuramMPPS" />
+            <option value="Nerni palli MPPS" />
+            <option value="Govindnagar MPPS" />
+            <option value="V Kota Zphs(girls)" />
+            <option value="Vanitallent high school" />
+            <option value="Doddipalli PS" />
+            <option value="GonumakulapalliMPPS" />
+            <option value="BalendrapalliMPUPS" />
+            <option value="Yerrinagepalli MPUP" />
+            <option value="EduchutlakotaMPPS" />
+            <option value="NadamanthramZPHS" />
+            <option value="AlwaripalliMPPS" />
+            <option value="Govindapuram ZPHS" />
+            <option value="JangamgurivepalliMPPS" />
+            <option value="PadigalakuppamMPPS" />
+            <option value="Kothachinnepalli" />
+            <option value="S.bandapalliMPPS" />
+            <option value="RamanadhapuramMPPS" />
+        </datalist>
+        <button id="go" onclick='obj.Map()'><b>GO</b></button>
+    </div>
+
+    <span id="tooltip" class="w3-badge w3-xlarge w3-red w3-padding w3-animate-opacity"
+    ></span>
+
+    <div id="map"></div>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXZF4GY-9AglwK4tQ_87lrvjfzscQFlF0&libraries=visualization">
+    </script>
+  </body>
+</html>

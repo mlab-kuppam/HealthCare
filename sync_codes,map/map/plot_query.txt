@@ -1,0 +1,83 @@
+SELECT DISTINCT lat, lon
+FROM  `loc`
+WHERE child_id
+IN (
+
+SELECT child_id
+FROM  `health1`
+WHERE oe_referal =1
+AND child_id
+IN (
+
+SELECT DISTINCT child_id
+FROM  `child`
+WHERE school_id = (
+SELECT DISTINCT school_id
+FROM  `school`
+WHERE name =  '$school' )
+)
+
+UNION ALL
+
+SELECT child_id
+FROM  `health2`
+WHERE referal =1
+AND child_id
+IN (
+
+SELECT DISTINCT child_id
+FROM  `child`
+WHERE school_id = (
+SELECT DISTINCT school_id
+FROM  `school`
+WHERE name =  '$school' )
+)
+
+UNION ALL
+
+SELECT child_id
+FROM  `eye`
+WHERE referal =1
+AND child_id
+IN (
+
+SELECT DISTINCT child_id
+FROM  `child`
+WHERE school_id = (
+SELECT DISTINCT school_id
+FROM  `school`
+WHERE name =  '$school' )
+)
+
+UNION ALL
+
+SELECT child_id
+FROM  `skin`
+WHERE referal =1
+AND child_id
+IN (
+
+SELECT DISTINCT child_id
+FROM  `child`
+WHERE school_id = (
+SELECT DISTINCT school_id
+FROM  `school`
+WHERE name =  '$school' )
+)
+
+UNION ALL
+
+SELECT child_id
+FROM  `ent`
+WHERE referal =1
+AND child_id
+IN (
+
+SELECT DISTINCT child_id
+FROM  `child`
+WHERE school_id = (
+SELECT DISTINCT school_id
+FROM  `school`
+WHERE name =  '$school' )
+)
+);

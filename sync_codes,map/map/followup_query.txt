@@ -1,0 +1,33 @@
+SELECT DISTINCT school.name
+FROM
+(
+SELECT school_id, COUNT(DISTINCT child_id) as Yolo
+FROM child
+WHERE child_id
+IN (
+SELECT DISTINCT child_id
+FROM  `health1`
+WHERE oe_referal =1
+UNION ALL
+SELECT DISTINCT child_id
+FROM  `health2`
+WHERE referal =1
+UNION ALL
+SELECT DISTINCT child_id
+FROM  `eye`
+WHERE referal =1
+UNION ALL
+SELECT DISTINCT child_id
+FROM  `skin`
+WHERE referal =1
+UNION ALL
+SELECT DISTINCT child_id
+FROM  `ent`
+WHERE referal =1
+)
+GROUP BY school_id
+ORDER BY COUNT(DISTINCT child_id) DESC
+)AS Debra
+INNER JOIN school
+ON Debra.school_id = school.school_id
+LIMIT 20;
